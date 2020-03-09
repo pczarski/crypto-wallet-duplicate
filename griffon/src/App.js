@@ -5,7 +5,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>hello world</p>
+        <h1>cryptocurrency wallet</h1>
+        <button type="button" class="btn btn-primary">Create a new wallet</button><button type="button" class="btn btn-primary">Recover wallet from seed phrase</button>
       </header>
     </div>
   );
