@@ -1,14 +1,22 @@
 import React from 'react';
-import './App.css';
+import './styles/App.css';
+import Splash from './screens/splash';
+import Wallet from './screens/Wallet';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import CreateNew from './screens/createnew';
+import Nav from './components/Nav';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>cryptocurrency wallet</h1>
-        <button type="button" class="btn btn-primary">Create a new wallet</button><button type="button" class="btn btn-primary">Recover wallet from seed phrase</button>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+      <Switch>
+        <Route path="/" exact component={Nav}/>
+        <Route path="/Wallet" component={Wallet}/>
+        <Route path="/createnew" component={CreateNew}/>
+      </Switch>
+      </div>
+    </Router>
   );
 }
 
