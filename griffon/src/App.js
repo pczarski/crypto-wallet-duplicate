@@ -11,7 +11,7 @@ function App() {
     <Router>
       <div className="App">
       <Switch>
-        <Route path="/" exact component={Nav}/>
+        <Route path="/" exact component={Splash}/>
         <Route path="/Wallet" component={Wallet}/>
         <Route path="/createnew" component={CreateNew}/>
       </Switch>
