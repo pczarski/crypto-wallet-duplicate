@@ -15,7 +15,8 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 1366, 
-        height: 768});
+        height: 768,
+        name: "griffon"});
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -48,6 +49,10 @@ app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
         app.quit()
     }
+});
+
+app.on('browser-window-created',function(e,window) {
+    window.setMenu(null);
 });
 
 app.on('activate', function () {

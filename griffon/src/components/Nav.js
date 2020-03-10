@@ -1,32 +1,34 @@
 import React from 'react';
-import '../styles/App.css';
+import '../styles/App.scss';
+import Balance from '../components/Balance';
+
 import {Link} from 'react-router-dom';
 
 function Nav() {
   return (
-    <div className="wrapper">
     <nav id="sidebar">
         <div className="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
+            <Balance />
         </div>
         <ul className="list-unstyled components">
-            <li>
+            <li className="listElement">
                 Wallet
             </li>
             <li>
                 Exchange
             </li>
-            <li>
-                Settings
-            </li>
-            <li>
-                Help
-            </li>
+            <div className="dropdown-divider"></div>
+            <div className="bottomMenu">
+                <li>
+                    Settings
+                </li>
+                <li>
+                    Help
+                </li>
+            </div>
         </ul>
-
     </nav>
     
-    </div>
   );
 }
 
