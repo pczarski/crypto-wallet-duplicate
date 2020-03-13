@@ -1,24 +1,34 @@
 import React from 'react';
 import './styles/App.scss';
+
 import Splash from './screens/splash';
-import Wallet from './screens/Wallet';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Wallet from './screens/wallet';
 import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-      <Switch>
-        <Route path="/" exact component={Wallet}/>
-        <Route path="/Wallet" component={Wallet}/>
-        <Route path="/createnew" component={CreateNew}/>
-        <Route path="/recover" component={Recover}/>
-      </Switch>
-      </div>
-    </Router>
-  );
-}
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Exchange from './screens/exchange';
 
-export default App;
+
+
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+        <Switch>
+          {
+            localStorage.getItem('hasWallet') === "true" ? <Route path="/" component={Wallet}/> : <Route path="/" exact component={Splash}/>
+          }          
+          <Route path="/splash" exact component={Splash}/>
+          <Route path="/wallet" component={Wallet}/>
+          <Route path="/createnew" component={CreateNew}/>
+          <Route path="/recover" component={Recover}/>
+          <Route path="/exchange" component={Exchange}/>
+        </Switch>
+        </div>
+      </Router>
+    );
+  }
+}

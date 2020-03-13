@@ -1,23 +1,57 @@
 import React from 'react';
 import '../styles/App.scss';
 
-function Balance() {
-  return (
+import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Dropdown } from "reactstrap"
+
+
+class Balance extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+  }
+  
+  state = {
+    currency: 'BTC',
+    dropDownOpen: '',
+    dropDownValue: ''
+ }
+ 
+ toggle = () => {
+     this.setState({
+        dropDownOpen: !this.state.dropDownOpen,
+     })
+ }
+ 
+ handleChange = (code) => {
+     this.setState({
+         currency: code
+     })
+ }
+
+  render () {
+    return (
     <div className="balance">
         <h1>Griffon</h1>
-        <p>Balance: 54545 </p>
-        <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button className="dropdown-item" type="button">Action</button>
-                <button className="dropdown-item" type="button">Another action</button>
-                <button className="dropdown-item" type="button">Something else here</button>
-            </div>
+        <div className="currSel">
+          <p>Balance: 5000</p>
+          <ButtonDropdown >
+          <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle} >
+              <DropdownToggle color="primary" caret className="dropdown-toggle">
+                  {this.state.currency}
+              </DropdownToggle>
+              <DropdownMenu className="currency-dropdown">
+                      <DropdownItem onClick={() => this.handleChange('USD')} dropDownValue="USD">USD</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('EUR')} dropDownValue="EUR">EUR</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('INR')} dropDownValue="INR">INR</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('AFT')} dropDownValue="AFT">AFT</DropdownItem>
+                  </DropdownMenu>
+              </Dropdown>
+          </ButtonDropdown>
         </div>
     </div>
-  );
+    )
+  }
 }
 
 export default Balance;

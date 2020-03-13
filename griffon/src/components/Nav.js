@@ -12,10 +12,14 @@ function Nav() {
         </div>
         <ul className="list-unstyled components">
             <li className="listElement">
-                Wallet
+                <Link to="/wallet">
+                    Wallet
+                </Link>
             </li>
             <li>
-                Exchange
+                <Link to="/exchange">
+                    Exchange
+                </Link>
             </li>
             <div className="dropdown-divider"></div>
             <div className="bottomMenu">
