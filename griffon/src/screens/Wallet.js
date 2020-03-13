@@ -7,9 +7,22 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 
 
-import { Button, Alert } from 'reactstrap';
+import { Button, Alert, FormGroup, Input } from 'reactstrap';
 
 export default class Wallet extends React.Component {
+
+  addMoney(curr) {
+    if (localStorage.getItem('balance') === null) {
+        localStorage.setItem('balance', curr);  
+    }
+    else {
+        var temp_bal = parseInt(localStorage.getItem('balance'),10);
+        var temp_bal1 = temp_bal + curr;
+        alert(temp_bal1);
+        localStorage.setItem('balance', temp_bal1);  
+    }
+  } 
+
   render () {
     return (
       <div className="wrapper">

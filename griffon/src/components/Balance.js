@@ -30,11 +30,12 @@ class Balance extends React.Component {
  }
 
   render () {
+
     return (
     <div className="balance">
         <h1>Griffon</h1>
         <div className="currSel">
-          <p>Balance: 5000</p>
+    {/* <p>Balance: {localStorage.getItem(balance)}</p> */}
           <ButtonDropdown >
           <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle} >
               <DropdownToggle color="primary" caret className="dropdown-toggle">
