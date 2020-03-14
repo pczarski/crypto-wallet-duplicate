@@ -26,7 +26,7 @@ export default class Wallet extends React.Component {
 
   render () {
 
-      const currency = getRequest("currency", "name", "Litecoin");
+      const currency = getRequest("currency", "name", "Bitcoin");
       console.log(currency);
 
     return (
