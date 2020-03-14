@@ -13,8 +13,8 @@ class Balance extends React.Component {
   
   state = {
     currency: 'BTC',
-    dropDownOpen: '',
-    dropDownValue: ''
+    dropDownOpen: false,
+    dropdownvalue: ''
  }
  
  toggle = () => {
@@ -35,17 +35,16 @@ class Balance extends React.Component {
     <div className="balance">
         <h1>Griffon</h1>
         <div className="currSel">
-    {/* <p>Balance: {localStorage.getItem(balance)}</p> */}
           <ButtonDropdown >
           <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle} >
               <DropdownToggle color="primary" caret className="dropdown-toggle">
                   {this.state.currency}
               </DropdownToggle>
               <DropdownMenu className="currency-dropdown">
-                      <DropdownItem onClick={() => this.handleChange('USD')} dropDownValue="USD">USD</DropdownItem>
-                      <DropdownItem onClick={() => this.handleChange('EUR')} dropDownValue="EUR">EUR</DropdownItem>
-                      <DropdownItem onClick={() => this.handleChange('INR')} dropDownValue="INR">INR</DropdownItem>
-                      <DropdownItem onClick={() => this.handleChange('AFT')} dropDownValue="AFT">AFT</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('USD')} dropdownvalue=''>USD</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('EUR')} dropdownvalue="EUR">EUR</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('INR')} dropdownvalue="INR">INR</DropdownItem>
+                      <DropdownItem onClick={() => this.handleChange('AFT')} dropdownvalue="AFT">AFT</DropdownItem>
                   </DropdownMenu>
               </Dropdown>
           </ButtonDropdown>
