@@ -18,10 +18,7 @@ export default class App extends React.Component {
       <Router>
         <div className="App">
         <Switch>
-          {
-            localStorage.getItem('hasWallet') === "true" ? <Route path="/" component={Wallet}/> : <Route path="/" exact component={Splash}/>
-          }          
-          <Route path="/splash" exact component={Splash}/>
+          <Route path="/" exact component={Splash}/>
           <Route path="/wallet" component={Wallet}/>
           <Route path="/createnew" component={CreateNew}/>
           <Route path="/recover" component={Recover}/>

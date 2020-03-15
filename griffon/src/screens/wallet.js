@@ -8,7 +8,7 @@ import '../styles/bal.scss';
 import {getRequest} from '../lib/backendHandler.js';
 
 
-import { Button, Alert, FormGroup, Input } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 
 export default class Wallet extends React.Component {
 
@@ -22,18 +22,10 @@ export default class Wallet extends React.Component {
       <div className="wrapper">
         <Nav />
         <div className="content">
-          <Alert color="primary">We are on the Wallet page</Alert>
+          <h1>Wallet</h1>
           <Link to="/">
             <Button type="button" className="btn btn-primary">Go back</Button>
           </Link>
-
-            <div>
-                <h5>
-                    <br/>
-                    {currency['name']}
-                </h5>
-                <p>balance: {currency['balance']}</p>
-            </div>
 
           </div>
       </div>
