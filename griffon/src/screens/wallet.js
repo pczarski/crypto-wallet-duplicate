@@ -7,7 +7,6 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import {getRequest} from '../lib/backendHandler.js';
 
-
 import { Button, Alert } from 'reactstrap';
 
 export default class Wallet extends React.Component {

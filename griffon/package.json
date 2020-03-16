@@ -8,13 +8,14 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "electron-store": "^5.1.1",
+    "jquery": "latest",
+    "keytar": "^5.4.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "reactstrap": "^8.4.1",
-    "jquery": "latest"
+    "reactstrap": "^8.4.1"
   },
   "main": "src/main.js",
   "homepage": "./",
