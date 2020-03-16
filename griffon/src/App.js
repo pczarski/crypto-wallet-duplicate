@@ -14,6 +14,10 @@ import Exchange from './screens/exchange';
 
 export default class App extends React.Component {
   render() {
+
+    localStorage.setItem('name', null)
+    localStorage.setItem('balance', null)
+    
     return (
       <Router>
         <div className="App">

@@ -8,7 +8,6 @@ import { ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Dropdown } 
 
 
 class Balance extends React.Component {
-
   
   constructor(props) {
     super(props);
@@ -17,25 +16,20 @@ class Balance extends React.Component {
       code: ['BTC', 'ETH', 'XRP', 'GBP', 'USD', 'EUR'],
       name: ['Bitcoin', 'Ethereum', 'Ripple', 'Pound Sterling', 'United States Dollar', 'Euro']
     }
-
+    let req = getRequest("currency", "name", "Bitcoin");
+    console.log(req.balance, req.currency)
     this.state = {
-      currencyCode: this.supp.code[0],
-      balance: null,
+      currencyCode: req.name,
+      balance: req.balance,
       dropDownOpen: false,
       dropdownvalue: null
     }
-    
-    let req = getRequest("currency", "name", "Bitcoin");
-    console.log(req)
-    this.reqToState(req)
  }
 
  reqToState(req){
     console.log(req.balance)
-    this.setState({
-      currencyCode: req.name,
-      balance: req.balance
-    });
+    this.state = {
+    }
     console.log(this.state.balance)
  }
 
@@ -60,13 +54,13 @@ class Balance extends React.Component {
           <h5>
             <br/>
           </h5>
-          <p>{this.state.balance}</p>
+          <p>{this.state.currency}</p>
         </div>
         <div className="currSel">
           <ButtonDropdown >
           <Dropdown isOpen={this.state.dropDownOpen} toggle={this.toggle} >
               <DropdownToggle color="primary" caret className="dropdown-toggle">
-                {this.state.currencyCode}
+                {this.supp.code[0]}
               </DropdownToggle>
               <DropdownMenu className="currency-dropdown">
                 <DropdownItem onClick={() => this.handleChange(this.supp.code[0])} dropdownvalue={this.supp.code[0]}>{this.supp.code[0]}</DropdownItem>

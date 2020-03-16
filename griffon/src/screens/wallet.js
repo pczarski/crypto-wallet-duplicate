@@ -22,11 +22,14 @@ export default class Wallet extends React.Component {
         <Nav />
         <div className="content">
           <h1>Wallet</h1>
-          <Link to="/">
-            <Button type="button" className="btn btn-primary">Go back</Button>
-          </Link>
-
+          <div className='d-flex flex-row justify-content-around'>
+            <Button className="btn btn-primary" size="lg">Send</Button>
+            <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
           </div>
+            <Link to="/">
+              <Button className="btn btn-primary" size="lg" block>Go back</Button>
+            </Link>
+        </div>
       </div>
     );
   }
