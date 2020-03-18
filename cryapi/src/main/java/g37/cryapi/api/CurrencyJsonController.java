@@ -1,4 +1,4 @@
-package g37.cryapi;
+package g37.cryapi.api;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.CrossOrigin;

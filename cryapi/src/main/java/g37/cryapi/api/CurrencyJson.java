@@ -1,4 +1,4 @@
-package g37.cryapi;
+package g37.cryapi.api;
 
 // class that is used to create an JSON object sent with the GET requests
 public class CurrencyJson {

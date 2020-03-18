@@ -1,4 +1,4 @@
-package g37.cryapi;
+package g37.cryapi.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
