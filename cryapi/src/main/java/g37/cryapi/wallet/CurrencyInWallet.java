@@ -1,5 +1,7 @@
 package g37.cryapi.wallet;
 
+import java.util.Collection;
+
 public abstract class CurrencyInWallet {
 
 	private double balance;
@@ -13,11 +15,6 @@ public abstract class CurrencyInWallet {
 
 	public abstract void updateBalance();
 
-	/**
-	 * 
-	 * @param address
-	 * @param amount
-	 */
 	public abstract void send(String address, double amount);
 
 	public Collection<KeyPair> getKeyPairs() {
