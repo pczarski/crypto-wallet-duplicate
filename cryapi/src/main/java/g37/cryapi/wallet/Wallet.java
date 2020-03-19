@@ -3,12 +3,16 @@ import java.util.Collection;
 
 public class Wallet {
 
-	private Wallet instance;
+	private static final Wallet instance = new Wallet();
 	private String recoveryPhrase;
 
 	private Wallet() {
 		// TODO - implement Wallet.Wallet
-		throw new UnsupportedOperationException();
+	}
+
+	private static String generateRecoveryPhrase() {
+		// todo call a function from the library
+        return "";
 	}
 
 	private void updateBalances() {
@@ -17,7 +21,7 @@ public class Wallet {
 	}
 
 	public Wallet getInstance() {
-		return this.instance;
+		return instance;
 	}
 
 	public void changePassword(String newPassword) {
