@@ -5,7 +5,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class KeyGeneratorTest {
+    private static final int SEED_LIST_LEN = 2048;
+    private static final int SEED_LEN = 12;
 
     @Before
     public void setUp() {
@@ -21,5 +25,10 @@ public class KeyGeneratorTest {
         String randomKey = KeyGenerator.generateKey(length);
         System.out.println(randomKey);
         assertEquals(length, randomKey.length());
+    }
+
+    @Test
+    public void testGenerateSeed() throws IOException {
+        System.out.println(KeyGenerator.generateSeed());
     }
 }

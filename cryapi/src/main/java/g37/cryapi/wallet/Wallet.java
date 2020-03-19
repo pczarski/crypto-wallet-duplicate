@@ -1,4 +1,7 @@
 package g37.cryapi.wallet;
+import cry.lib.KeyGenerator;
+
+import java.io.IOException;
 import java.util.Collection;
 
 public class Wallet {
@@ -8,11 +11,14 @@ public class Wallet {
 
 	private Wallet() {
 		// TODO - implement Wallet.Wallet
-	}
+		try {
+			recoveryPhrase = KeyGenerator.generateSeed();
+		}
+		catch (IOException e) {
+			System.out.println("Failed to generate a Key");
+			recoveryPhrase = "random seed phrase this is just cuz why not this seed cat";
+		}
 
-	private static String generateRecoveryPhrase() {
-		// todo call a function from the library
-        return "";
 	}
 
 	private void updateBalances() {
