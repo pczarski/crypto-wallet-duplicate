@@ -13,7 +13,7 @@ public class Bitcoin extends CurrencyInWallet {
 
     @Override
     public double getPrice() {
-        return 23.11;
+        return 9000.11;
     }
 
 
