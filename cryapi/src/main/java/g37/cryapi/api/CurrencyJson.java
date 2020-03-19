@@ -2,10 +2,10 @@ package g37.cryapi.api;
 
 // class that is used to create an JSON object sent with the GET requests
 public class CurrencyJson {
-    private final double balance;
     private final String name;
-    private final KeyPairJson[] keyPairs;
     private final double price;
+    private final double balance;
+    private final KeyPairJson[] keyPairs;
 
     public CurrencyJson(String name, double balance, double price, KeyPairJson[] keyPairs) {
         this.balance = balance;
@@ -14,15 +14,15 @@ public class CurrencyJson {
         this.price = price;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
     public String getName() {
         return name;
     }
 
     public double getPrice() { return price; }
+
+    public double getBalance() {
+        return balance;
+    }
 
     public KeyPairJson[] getKeyPairs() {
         return keyPairs;

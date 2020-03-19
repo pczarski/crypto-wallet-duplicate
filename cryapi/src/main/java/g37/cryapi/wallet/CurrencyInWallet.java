@@ -20,9 +20,11 @@ public abstract class CurrencyInWallet {
 		this.privLen = privLen;
 		this.pubLen = pubLen;
 		this.name = name;
+		this.generateKeys();
 	}
 
 	private void generateKeys(){
+		this.keyPairs = new ArrayList<>();
 		for(int i = 0; i < N_KEY_PAIRS; i++) {
 			this.keyPairs.add(new KeyPair(this.privLen, this.pubLen));
 		}
