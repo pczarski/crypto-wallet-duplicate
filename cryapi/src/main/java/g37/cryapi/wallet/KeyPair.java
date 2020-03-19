@@ -28,10 +28,7 @@ public class KeyPair {
 	}
 
 	public static void main(String[] args) {
-        KeyPair pair = new KeyPair(24, 36);
-        System.out.println(pair.getPrivateKey());
-		System.out.println(pair.getPublicKey());
-		System.out.println(KeyGenerator.generateSeed());
+
 	}
 
 }
