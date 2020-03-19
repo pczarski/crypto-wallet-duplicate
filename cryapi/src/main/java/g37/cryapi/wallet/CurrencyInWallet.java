@@ -1,5 +1,4 @@
 package g37.cryapi.wallet;
-
 import java.util.Collection;
 
 public abstract class CurrencyInWallet {
@@ -22,10 +21,6 @@ public abstract class CurrencyInWallet {
 		throw new UnsupportedOperationException();
 	}
 
-	public Collection<TransactionRecord> getTransactionRecords() {
-		// TODO - implement CurrencyInWallet.getTransactionRecords
-		throw new UnsupportedOperationException();
-	}
 
 	public CryptoCurrency getName() {
 		// TODO - implement CurrencyInWallet.getName
