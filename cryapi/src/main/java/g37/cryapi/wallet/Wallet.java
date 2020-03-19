@@ -10,15 +10,25 @@ public class Wallet {
 	private String recoveryPhrase;
 
 	private Wallet() {
-		// TODO - implement Wallet.Wallet
+		// TODO - implement Wallet.Walle
+	}
+
+	public void setUpNew(){
+		this.assignRecoveryPhrase();
+	}
+
+	private void assignRecoveryPhrase(){
 		try {
-			recoveryPhrase = KeyGenerator.generateSeed();
+			this.recoveryPhrase = KeyGenerator.generateSeed();
 		}
 		catch (IOException e) {
 			System.out.println("Failed to generate a Key");
-			recoveryPhrase = "random seed phrase this is just cuz why not this seed cat";
+			this.recoveryPhrase = "test test test test test test test test test test test test";
 		}
+	}
 
+	public void recoverWallet(String recoverPhrase) {
+		this.recoveryPhrase = recoverPhrase;
 	}
 
 	private void updateBalances() {
@@ -26,7 +36,7 @@ public class Wallet {
 		throw new UnsupportedOperationException();
 	}
 
-	public Wallet getInstance() {
+	public static Wallet getInstance() {
 		return instance;
 	}
 
@@ -39,10 +49,6 @@ public class Wallet {
 		return this.recoveryPhrase;
 	}
 
-	public void recoverWallet(String recoverPhrase) {
-		// TODO - implement Wallet.recoverWallet
-		throw new UnsupportedOperationException();
-	}
 
 	public void activateCurrency(CryptoCurrency currency) {
 		// TODO - implement Wallet.activateCurrency
