@@ -29,6 +29,9 @@ public class KeyGeneratorTest {
 
     @Test
     public void testGenerateSeed() throws IOException {
-        System.out.println(KeyGenerator.generateSeed());
+        String seed1 = KeyGenerator.generateSeed();
+        String seed2 = KeyGenerator.generateSeed();
+        assertNotEquals(seed1, seed2);
+        System.out.println(seed1 + " " + seed2);
     }
 }
