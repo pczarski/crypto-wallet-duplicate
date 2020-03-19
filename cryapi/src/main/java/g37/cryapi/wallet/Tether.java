@@ -2,6 +2,13 @@ package g37.cryapi.wallet;
 
 public class Tether extends CurrencyInWallet {
 
+    private static final int privLen = 24;
+    private static final int pubLen = 32;
+
+    public Tether() {
+        super(privLen, pubLen);
+    }
+
     @Override
     public double getPrice() {
         return 0;

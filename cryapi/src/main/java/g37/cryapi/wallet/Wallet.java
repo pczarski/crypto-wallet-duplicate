@@ -2,12 +2,14 @@ package g37.cryapi.wallet;
 import cry.lib.KeyGenerator;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Wallet {
 
 	private static final Wallet instance = new Wallet();
 	private String recoveryPhrase;
+	private ArrayList<CurrencyInWallet> currencyInWallets;
 
 	private Wallet() {
 		// TODO - implement Wallet.Walle
@@ -15,6 +17,15 @@ public class Wallet {
 
 	public void setUpNew(){
 		this.assignRecoveryPhrase();
+		this.setUpCurrencies();
+	}
+
+	private void setUpCurrencies(){
+		currencyInWallets.add(new Bitcoin());
+		currencyInWallets.add(new Ethereum());
+		currencyInWallets.add(new Litecoin());
+		currencyInWallets.add(new Tether());
+		currencyInWallets.add(new Dash());
 	}
 
 	private void assignRecoveryPhrase(){
