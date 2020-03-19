@@ -27,8 +27,4 @@ public class KeyPair {
 		return this.amount;
 	}
 
-	public static void main(String[] args) {
-        System.out.println(KeyGenerator.generateSeed());
-	}
-
 }
