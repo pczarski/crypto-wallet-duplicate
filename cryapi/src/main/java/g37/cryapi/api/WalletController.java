@@ -41,4 +41,4 @@ public class WalletController {
     }
 }
 
-// accessed through: http://localhost:8080/new-wallet?type=new {or pass existing seed as argument}
+// accessed through: http://localhost:8080/new-wallet?type=new {or pass existing seed as argument, as opposed to "new"}
