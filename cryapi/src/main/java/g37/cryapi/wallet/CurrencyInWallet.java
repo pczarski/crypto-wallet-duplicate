@@ -1,4 +1,6 @@
 package g37.cryapi.wallet;
+import g37.cryapi.common.CryptoCurrency;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,12 +11,15 @@ public abstract class CurrencyInWallet {
 
 	private final int privLen;
 	private final int pubLen;
+	private final CryptoCurrency name;
+
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
 
-	public CurrencyInWallet(int privLen, int pubLen) {
+	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
 		this.privLen = privLen;
 		this.pubLen = pubLen;
+		this.name = name;
 	}
 
 	private void generateKeys(){
@@ -23,23 +28,36 @@ public abstract class CurrencyInWallet {
 		}
 	}
 
+	public String getCurrentPublicKey() {
+
+		// the one at index 0 will always be the current
+		if (keyPairs.size() == 0){
+			return "No key for this currency";
+		}
+		return keyPairs.get(0).getPublicKey();
+	};
+
+	public double getBalance() {
+		this.updateBalance();
+		return this.balance;
+	};
+
+	public ArrayList<KeyPair> getKeyPairs() {
+		return this.keyPairs;
+	}
+
+	protected void setBalance(double balance){
+		this.balance = balance;
+	}
+
 	public abstract double getPrice();
-
-	public abstract String getCurrentPublicKey();
-
-	public abstract double getBalance();
 
 	public abstract void updateBalance();
 
 	public abstract void send(String address, double amount);
 
-	public Collection<KeyPair> getKeyPairs() {
-		return this.keyPairs;
-	}
-
 	public CryptoCurrency getName() {
-		// TODO - implement CurrencyInWallet.getName
-		throw new UnsupportedOperationException();
+		return this.name;
 	}
 
 }
