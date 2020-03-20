@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import {Link} from 'react-router-dom';
 import '../styles/nav.scss';
 import '../styles/App.scss';
+import Popup from '.components/passwordPopup';
 
 import { Button } from 'reactstrap';
 
@@ -18,6 +19,7 @@ function Wallet() {
         </Link>
       <h1>hdsad</h1>
         </div>
+        <Popup/>
     </div>
   );
 }
