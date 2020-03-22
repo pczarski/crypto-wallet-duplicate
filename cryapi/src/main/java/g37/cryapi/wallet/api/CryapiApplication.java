@@ -1,4 +1,4 @@
-package g37.cryapi.api;
+package g37.cryapi.wallet.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

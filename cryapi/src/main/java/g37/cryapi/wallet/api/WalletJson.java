@@ -1,4 +1,4 @@
-package g37.cryapi.api;
+package g37.cryapi.wallet.api;
 
 public class WalletJson {
     private final String seedPhrase;
