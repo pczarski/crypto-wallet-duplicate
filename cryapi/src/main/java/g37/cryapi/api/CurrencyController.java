@@ -1,15 +1,13 @@
 package g37.cryapi.api;
 
-import g37.cryapi.wallet.Bitcoin;
-import g37.cryapi.wallet.CurrencyInWallet;
-import g37.cryapi.wallet.KeyPair;
-import g37.cryapi.wallet.Wallet;
+import g37.cryapi.wallet.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import g37.cryapi.common.CryptoCurrency;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -61,6 +59,8 @@ public class CurrencyController {
         }
     } // accessed through: http://localhost:8080/currency?name=CurrencyName
 
+
+
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/send") // setting up the url location
     public TextResponse sendCoins(@RequestParam(value = "name", defaultValue = "Bitcoin") String name,
@@ -83,4 +83,22 @@ public class CurrencyController {
             return new TextResponse("Invalid currency name", -1);
         }
     } // accessed through: http://localhost:8080/send?name=Bitcoin&amount=0.5&address=xxxxxxxxxxx
+
+
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/records") // setting up the url location
+    public RecordsJson getRecords(@RequestParam(value = "name", defaultValue = "Bitcoin") String name) {
+        // todo temporary "hacks" to avoid null pointers
+        this.runHelpers();
+        try {
+            CurrencyInWallet currency = Wallet.getInstance().getCurrencyInWallet(CryptoCurrency.valueOf(name));
+            ArrayList<TransactionRecord> transactions = new ArrayList<>();
+            return new RecordsJson(currency.getTransactionRecords(), name);
+
+        } catch (IllegalArgumentException e) {
+            return new RecordsJson(null, "Invalid Name");
+        }
+    } // accessed through: http://localhost:8080/records?name=Bitcoin
+
 }

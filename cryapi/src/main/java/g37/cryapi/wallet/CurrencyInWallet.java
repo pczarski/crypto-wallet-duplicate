@@ -3,6 +3,8 @@ import g37.cryapi.common.CryptoCurrency;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class CurrencyInWallet {
 
@@ -15,6 +17,7 @@ public abstract class CurrencyInWallet {
 
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
+	private final AtomicLong counter = new AtomicLong();
 
 	// TODO: temporary variable for prototype
 	protected int isSet;
@@ -23,6 +26,7 @@ public abstract class CurrencyInWallet {
 		this.privLen = privLen;
 		this.pubLen = pubLen;
 		this.name = name;
+		this.keyPairs = new ArrayList<>();
 		this.generateKeys();
 
 		//todo: temporary
@@ -77,16 +81,37 @@ public abstract class CurrencyInWallet {
 			if(pair.getAmount() > amount) {
 				this.performSend(pair, address, amount);
 				pair.setAmount(pair.getAmount() - amount);
+
+				pair.addTransaction(new TransactionRecord(
+						counter.incrementAndGet(), new Date().toString(),
+						amount, address, pair.getPublicKey(), TransactionType.SEND
+						));
+
 				return true;
 			}
 			else {
 				this.performSend(pair, address, pair.getAmount());
 				amount -= pair.getAmount();
+
+				pair.addTransaction(new TransactionRecord(
+						counter.incrementAndGet(), new Date().toString(),
+						pair.getAmount(), address, pair.getPublicKey(), TransactionType.SEND
+				));
+
 				pair.setAmount(0.0);
+
 			}
 		}
 		return true;
 	};
+
+	public ArrayList<TransactionRecord> getTransactionRecords() {
+		ArrayList<TransactionRecord> transactionRecords = new ArrayList<>();
+		for (KeyPair pair: this.keyPairs) {
+			transactionRecords.addAll(pair.getTransactions());
+		}
+		return transactionRecords;
+	}
 
 	// a method that actually posts the sending on the block-chain
 	protected abstract void performSend(KeyPair keys, String addressTo, double amount);
