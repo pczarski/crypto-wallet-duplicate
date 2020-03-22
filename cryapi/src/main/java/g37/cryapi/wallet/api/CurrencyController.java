@@ -1,4 +1,4 @@
-package g37.cryapi.api;
+package g37.cryapi.wallet.api;
 
 import g37.cryapi.wallet.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import g37.cryapi.common.CryptoCurrency;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,6 +18,7 @@ public class CurrencyController {
 
     private final AtomicLong counter = new AtomicLong();
 
+    // todo temporary helpers for testing
     private void runHelpers() {
         if (!Wallet.getInstance().getIsSetUp()) {
             Wallet.getInstance().setUpNew();
@@ -42,7 +42,7 @@ public class CurrencyController {
 
         Wallet wallet = Wallet.getInstance();
 
-        // todo temporary "hacks" to avoid null pointers
+        // todo temporary "hacks" to avoid null pointers for testing
         this.runHelpers();
 
         try {
