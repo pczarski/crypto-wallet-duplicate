@@ -16,11 +16,17 @@ public abstract class CurrencyInWallet {
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
 
+	// TODO: temporary variable for prototype
+	protected int isSet;
+
 	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
 		this.privLen = privLen;
 		this.pubLen = pubLen;
 		this.name = name;
 		this.generateKeys();
+
+		//todo: temporary
+		this.isSet = 0;
 	}
 
 	private void generateKeys(){
@@ -48,10 +54,6 @@ public abstract class CurrencyInWallet {
 		return this.keyPairs;
 	}
 
-	protected void setBalance(double balance){
-		this.balance = balance;
-	}
-
 	public abstract double getPrice();
 
 	public void updateBalance() {
@@ -65,7 +67,29 @@ public abstract class CurrencyInWallet {
 
 	protected abstract void updateKeyBalance(KeyPair key);
 
-	public abstract void send(String address, double amount);
+	public boolean send(String address, double amount) {
+		this.updateBalance();
+		if (this.balance < amount) {
+			return false;
+		}
+		for (int i = 0; i < this.keyPairs.size(); i++){
+			KeyPair pair = this.keyPairs.get(i);
+			if(pair.getAmount() > amount) {
+				this.performSend(pair, address, amount);
+				pair.setAmount(pair.getAmount() - amount);
+				return true;
+			}
+			else {
+				this.performSend(pair, address, pair.getAmount());
+				amount -= pair.getAmount();
+				pair.setAmount(0.0);
+			}
+		}
+		return true;
+	};
+
+	// a method that actually posts the sending on the block-chain
+	protected abstract void performSend(KeyPair keys, String addressTo, double amount);
 
 	public CryptoCurrency getName() {
 		return this.name;

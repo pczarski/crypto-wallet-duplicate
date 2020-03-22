@@ -13,6 +13,7 @@ public class KeyPair {
 	public KeyPair(int privLen, int pubLen) {
 		this.privateKey = KeyGenerator.generateKey(privLen);
 		this.publicKey = KeyGenerator.generateKey(pubLen);
+		this.amount = 0.0;
 	}
 
 	public String getPrivateKey() {
@@ -26,8 +27,6 @@ public class KeyPair {
 	public double getAmount() {
 		return this.amount;
 	}
-
-	public void updateAmount() { }
 
 	protected void setAmount(double amount) {
 		this.amount = amount;
