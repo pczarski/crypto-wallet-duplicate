@@ -14,16 +14,21 @@ public class Litecoin extends CurrencyInWallet {
 
     @Override
     public double getPrice() {
-        return 50.1;
+        return 50.1 + Math.random();
     }
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-        key.setAmount(Math.random() * 7);
+
+        //todo: temporary
+        if(this.isSet < 6) {
+            key.setAmount(Math.random() * 8);
+            this.isSet++;
+        }
     }
 
     @Override
-    public void send(String address, double amount) {
+    protected void performSend(KeyPair pair, String addressTo, double amount) {
 
     }
 }

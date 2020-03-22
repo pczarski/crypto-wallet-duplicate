@@ -18,11 +18,16 @@ public class Ethereum extends CurrencyInWallet {
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-        key.setAmount(Math.random() * 5);
+
+        //todo: temporary
+        if(this.isSet < 16) {
+            key.setAmount(Math.random() * 4);
+            this.isSet++;
+        }
     }
 
     @Override
-    public void send(String address, double amount) {
+    protected void performSend(KeyPair pair, String addressTo, double amount) {
 
     }
 }

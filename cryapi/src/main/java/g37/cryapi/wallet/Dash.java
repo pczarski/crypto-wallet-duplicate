@@ -19,11 +19,16 @@ public class Dash extends CurrencyInWallet {
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-        key.setAmount(Math.random() * 3);
+
+        //todo: temporary
+        if(this.isSet < 10) {
+            key.setAmount(Math.random() * 3);
+            this.isSet++;
+        }
     }
 
     @Override
-    public void send(String address, double amount) {
+    protected void performSend(KeyPair pair, String addressTo, double amount) {
 
     }
 }

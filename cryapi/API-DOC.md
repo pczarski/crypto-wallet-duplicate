@@ -26,3 +26,22 @@
 `http://localhost:8080/currency?name={any unsoppurted name}`
 #####Example reply:
 `{"name":"Invalid name","price":-1.0,"balance":-1.0,"keyPairs":null}`
+
+
+### Sending coins:
+#### successful:
+##### Example Call:
+`http://localhost:8080/send?name=Bitcoin&amount=0.5&address=xxxxxxxxxxx`
+##### Example reply:
+`{"response":"success","id":3}`  //successful id > 0
+
+#### unsuccessful:
+##### Example Call:
+`http://localhost:8080/send?name=Bitcoin&amount=10003.2&address=xxxxx`
+##### Example reply:
+`{"response":"Insufficient balance","id":0}`
+
+#####also:
+`http://localhost:8080/send?name=Bitjjcoin&amount=10003.2&address=xxxxx`
+######
+`{"response":"Invalid currency name","id":-1}`

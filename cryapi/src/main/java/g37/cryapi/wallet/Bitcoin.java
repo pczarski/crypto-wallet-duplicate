@@ -20,11 +20,17 @@ public class Bitcoin extends CurrencyInWallet {
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-        key.setAmount(Math.random() * 2);
+
+        // todo temporary
+        if (this.isSet < 12){
+            key.setAmount(Math.random() * 2);
+            this.isSet++;
+        }
     }
 
     @Override
-    public void send(String address, double amount) {
+    protected void performSend(KeyPair pair, String addressTo, double amount) {
 
     }
+
 }

@@ -18,11 +18,16 @@ public class Tether extends CurrencyInWallet {
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-        key.setAmount(Math.random() * 8);
+
+        //todo: temporary
+        if(this.isSet < 5) {
+            key.setAmount(Math.random() * 6);
+            this.isSet++;
+        }
     }
 
     @Override
-    public void send(String address, double amount) {
+    protected void performSend(KeyPair pair, String addressTo, double amount) {
 
     }
 }
