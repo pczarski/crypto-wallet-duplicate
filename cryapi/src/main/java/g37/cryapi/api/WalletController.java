@@ -39,6 +39,6 @@ public class WalletController {
         return new WalletJson(wallet.getRecoveryPhrase());
 
     }
-}
+} // http://localhost:8080/new-wallet?type=new
 
-// accessed through: http://localhost:8080/new-wallet?type=new {or pass existing seed as argument, as opposed to "new"}
+// accessed through:  {or pass existing seed as argument, as opposed to "new"}
