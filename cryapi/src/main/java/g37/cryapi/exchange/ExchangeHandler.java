@@ -34,8 +34,13 @@ public class ExchangeHandler {
 	}
 
 	public ExchangeAccess getExchange(ExchangeName name) {
-		// TODO - implement ExchangeHandler.getExchange
-		throw new UnsupportedOperationException();
+		for(int i = 0; i < exchanges.size(); i++) {
+			ExchangeAccess exchangeAccess = exchanges.get(i);
+			if(name == exchangeAccess.getName()) {
+				return exchangeAccess;
+			}
+		}
+		throw new IllegalArgumentException();
 	}
 
 	public void getOrder(String id, ExchangeName exchangeName) {
