@@ -13,3 +13,12 @@ export function getRequest(location, argumentName, argumentValue) {
     req.send(null);
     return JSON.parse(req.responseText);
 }
+
+export function makeWallet(){
+    const url = "http://localhost:8080/new-wallet?type=new";
+
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
