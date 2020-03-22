@@ -4,28 +4,24 @@ import java.util.ArrayList;
 
 public class ExchangeHandler {
 
-	private static ExchangeHandler instance = new ExchangeHandler();
-	private ArrayList<ExchangeAccess> exchanges;
+	private static ExchangeHandler instance;
 
 	private ExchangeHandler() {
-         this.exchanges = new ArrayList<>();
+		// TODO - implement ExchangeHandler.ExchangeHandler
+		throw new UnsupportedOperationException();
 	}
 
 	public static ExchangeHandler getInstance() {
 		return instance;
 	}
 
-	public void addExchange(String apiKey, ExchangeName exchangeName) {
-		switch(exchangeName) {
-			case Binance:
-				exchanges.add(new Binance(apiKey));
-				break;
-			case Coinbase:
-				exchanges.add(new Coinbase(apiKey));
-				break;
-			default:
-				throw new IllegalArgumentException();
-		}
+	/**
+	 * 
+	 * @param apiKey
+	 */
+	public void addExchange(String apiKey) {
+		// TODO - implement ExchangeHandler.addExchange
+		throw new UnsupportedOperationException();
 	}
 
 	public ArrayList<Order> getOrderHistory() {
@@ -33,16 +29,20 @@ public class ExchangeHandler {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public ExchangeAccess getExchange(ExchangeName name) {
-		for(int i = 0; i < exchanges.size(); i++) {
-			ExchangeAccess exchangeAccess = exchanges.get(i);
-			if(name == exchangeAccess.getName()) {
-				return exchangeAccess;
-			}
-		}
-		throw new IllegalArgumentException();
+		// TODO - implement ExchangeHandler.getExchange
+		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @param exchangeName
+	 */
 	public void getOrder(String id, ExchangeName exchangeName) {
 		// TODO - implement ExchangeHandler.getOrder
 		throw new UnsupportedOperationException();

@@ -13,7 +13,7 @@ export default class CreateNew extends React.Component {
   };
 
   componentDidMount() {
-    
+
   }
   makeWallet() {
 
@@ -26,19 +26,19 @@ export default class CreateNew extends React.Component {
 
     console.log(wallet)
 
-    // 
+    //
   }
 
   render () {
     return (
       <div className="wrapper">
         <div className="container">
-          <h1>create new Wallet</h1>
+          <h1>Create New Wallet</h1>
             <Link to="/wallet">
-              <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>
+              <Button type="button" className="btn btn-primary bt3" onClick={this.handleClick}>Create new wallet</Button>
           </Link>
           <Link to="/">
-              <Button type="button" className="btn btn-primary">Go back</Button>
+              <Button type="button" className="btn btn-primary bt4">Go back</Button>
           </Link>
         </div>
       </div>

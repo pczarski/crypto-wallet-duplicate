@@ -6,21 +6,16 @@ import java.util.ArrayList;
 
 public abstract class ExchangeAccess {
 
+	private int APIkey;
 
-	private String ApiKey;
-	private ExchangeName name;
-
-	public String getApiKey() {
-		return ApiKey;
-	}
-
-	public ExchangeName getName() {
-		return name;
-	}
-
-	public ExchangeAccess(String apiKey, ExchangeName name) {
-		this.ApiKey = apiKey;
-		this.name = name;
+	/**
+	 * 
+	 * @param apiKey
+	 * @param name
+	 */
+	public void Exchange(String apiKey, ExchangeName name) {
+		// TODO - implement ExchangeAccess.Exchange
+		throw new UnsupportedOperationException();
 	}
 
 	public ArrayList<Order> getOrders() {

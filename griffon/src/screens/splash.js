@@ -12,7 +12,7 @@ export default class Splash extends React.Component {
     return (
       <div className="wrapper">
         <div className="container">
-            <h1>griffon</h1>
+            <h1>Griffon</h1>
             <div className='d-flex flex-row justify-content-around'>
               <Link to="/createnew">
                   <Button type="button" size="lg" className="btn btn-primary">Create a new wallet</Button>

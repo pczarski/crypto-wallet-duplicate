@@ -54,17 +54,3 @@
 ##### Example reply:
 `{"currencyName":"Bitcoin","records":[{"time":"Sun Mar 22 14:51:02 GMT 2020","destinationAddress":"xxxxx","originAddress":"UqS4lznYHH0WdSGzoCLx3PZUTol4dZk6U","id":1,"type":"SEND","transactionAmount":0.2}, {"time":"Sun Mar 22 15:16:34 GMT 2020","destinationAddress":"tad0t7eFWLRsZfMWbylF6su290cUGnVj3","originAddress":"xxxTHExxSYSTEMxxx","id":2,"type":"RECEIVE","transactionAmount":0.9905082941082037}, ...]}`
 ##
-
-#Exchange
-
-## Adding exchange
-
-####call
-`http://localhost:8080/add-exchange?name=Coinbase&key=XXXKEYXXX`
-####response: 
-`{"exchangeName":"Coinbase","apiKey":"XXXKEYXXX"}`
-
-####call
-`http://localhost:8080/add-exchange?name=Bitconnect&key=XXXKEYXXX`
-####response: 
-`{"exchangeName":"Not Supported","apiKey":null}`
