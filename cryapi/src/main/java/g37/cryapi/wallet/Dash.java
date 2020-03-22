@@ -9,6 +9,7 @@ public class Dash extends CurrencyInWallet {
 
     public Dash() {
         super(privLen, pubLen, CryptoCurrency.Dash);
+        this.addTestReceive(9, 10);
     }
 
     @Override
@@ -20,11 +21,6 @@ public class Dash extends CurrencyInWallet {
     @Override
     protected void updateKeyBalance(KeyPair key) {
 
-        //todo: temporary
-        if(this.isSet < 10) {
-            key.setAmount(Math.random() * 3);
-            this.isSet++;
-        }
     }
 
     @Override

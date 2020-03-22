@@ -11,6 +11,9 @@ public class Bitcoin extends CurrencyInWallet {
 
     public Bitcoin() {
         super(privLen, pubLen, CryptoCurrency.Bitcoin);
+
+        // todo temporary for tests
+        this.addTestReceive(12, 2);
     }
 
     @Override
@@ -20,12 +23,6 @@ public class Bitcoin extends CurrencyInWallet {
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
-
-        // todo temporary
-        if (this.isSet < 12){
-            key.setAmount(Math.random() * 2);
-            this.isSet++;
-        }
     }
 
     @Override

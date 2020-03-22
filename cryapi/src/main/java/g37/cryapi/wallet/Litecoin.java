@@ -9,6 +9,7 @@ public class Litecoin extends CurrencyInWallet {
 
     public Litecoin() {
         super(privLen, pubLen, CryptoCurrency.Litecoin);
+        this.addTestReceive(3, 20);
     }
 
 
@@ -20,11 +21,6 @@ public class Litecoin extends CurrencyInWallet {
     @Override
     protected void updateKeyBalance(KeyPair key) {
 
-        //todo: temporary
-        if(this.isSet < 6) {
-            key.setAmount(Math.random() * 8);
-            this.isSet++;
-        }
     }
 
     @Override

@@ -116,6 +116,24 @@ public abstract class CurrencyInWallet {
 	// a method that actually posts the sending on the block-chain
 	protected abstract void performSend(KeyPair keys, String addressTo, double amount);
 
+	protected void addReceiveRecord(KeyPair keys, String addressFrom, double amount) {
+		keys.addTransaction(new TransactionRecord(
+				this.counter.incrementAndGet(), new Date().toString(),
+				amount, keys.getPublicKey(), addressFrom, TransactionType.RECEIVE
+				));
+	}
+
+
+	//todo: temporary function that adds random transactions
+	protected void addTestReceive(int nAddresses, double factor) {
+		for (int i = 0; i < nAddresses; i++) {
+			KeyPair pair = this.keyPairs.get(i);
+			double addAmount = Math.random() * factor;
+			pair.setAmount(pair.getAmount() + addAmount);
+			this.addReceiveRecord(pair, "xxxTHExxSYSTEMxxx", addAmount);
+		}
+	}
+
 	public CryptoCurrency getName() {
 		return this.name;
 	}
