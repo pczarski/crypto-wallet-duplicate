@@ -6,7 +6,7 @@ public class Binance extends ExchangeAccess {
 
     @Override
     public void depositCurrency(CryptoCurrency currency, double amount) {
-        
+
     }
 
     @Override
