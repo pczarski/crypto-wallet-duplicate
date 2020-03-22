@@ -45,3 +45,11 @@
 `http://localhost:8080/send?name=Bitjjcoin&amount=10003.2&address=xxxxx`
 ######
 `{"response":"Invalid currency name","id":-1}`
+
+
+### Get Records:
+#### successful:
+##### Example Call:
+`http://localhost:8080/send?name=Bitcoin&amount=10003.2&address=xxxxx`
+##### Example reply:
+`{"currencyName":"Bitcoin","records":[{"time":"Sun Mar 22 14:51:02 GMT 2020","destinationAddress":"xxxxx","originAddress":"UqS4lznYHH0WdSGzoCLx3PZUTol4dZk6U","id":1,"type":"SEND","transactionAmount":0.2},...]}`
