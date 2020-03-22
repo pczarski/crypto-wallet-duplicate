@@ -9,6 +9,7 @@ public class Ethereum extends CurrencyInWallet {
 
     public Ethereum() {
         super(privLen, pubLen, CryptoCurrency.Ethereum);
+        this.addTestReceive(12, 8);
     }
 
     @Override
@@ -19,11 +20,6 @@ public class Ethereum extends CurrencyInWallet {
     @Override
     protected void updateKeyBalance(KeyPair key) {
 
-        //todo: temporary
-        if(this.isSet < 16) {
-            key.setAmount(Math.random() * 4);
-            this.isSet++;
-        }
     }
 
     @Override
