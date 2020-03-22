@@ -5,7 +5,7 @@ import g37.cryapi.common.CryptoCurrency;
 public class Ethereum extends CurrencyInWallet {
 
     private static final int privLen = 24;
-    private static final int pubLen = 32;
+    private static final int pubLen = 33;
 
     public Ethereum() {
         super(privLen, pubLen, CryptoCurrency.Ethereum);
@@ -17,8 +17,8 @@ public class Ethereum extends CurrencyInWallet {
     }
 
     @Override
-    public void updateBalance(){
-        this.setBalance(23.3);
+    protected void updateKeyBalance(KeyPair key) {
+        key.setAmount(Math.random() * 5);
     }
 
     @Override

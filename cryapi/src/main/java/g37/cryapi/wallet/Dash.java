@@ -5,7 +5,7 @@ import g37.cryapi.common.CryptoCurrency;
 public class Dash extends CurrencyInWallet {
 
     private static final int privLen = 24;
-    private static final int pubLen = 32;
+    private static final int pubLen = 33;
 
     public Dash() {
         super(privLen, pubLen, CryptoCurrency.Dash);
@@ -16,9 +16,10 @@ public class Dash extends CurrencyInWallet {
         return 103.2;
     }
 
+
     @Override
-    public void updateBalance(){
-        this.setBalance(12.33);
+    protected void updateKeyBalance(KeyPair key) {
+        key.setAmount(Math.random() * 3);
     }
 
     @Override

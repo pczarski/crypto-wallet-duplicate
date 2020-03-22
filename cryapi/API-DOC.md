@@ -18,7 +18,7 @@
 ##### `http://localhost:8080/currency?name=Bitcoin`
 ####
 #####Example reply:
-###### `{"name":"Bitcoin","price":9000.11,"balance":99.11,"keyPairs":[{"privateKey":"lotkydQ8249XBxFqMNZnEP3V","publicKey":"XnMvgmr5N9zGsFsA3nYLPpY1KD9MKxYq"},{"privateKey":"NrhNNEo2gF15FAyRd9uNkFu5","publicKey":"lMNGmVRnl4DAzqKl5zkMivMRu4Lhbosl"}, ...]}`
+###### `{"name":"Bitcoin","price":9000.11,"balance":11.635996202010295,"currentPublicKey":"fqSCGfR1S2vLK3h9mEyEMPQp1qg7Y1amV","keyPairs":[{"privateKey":"ZOG8cgxc2DLelVIZfzWBfmz1","publicKey":"fqSCGfR1S2vLK3h9mEyEMPQp1qg7Y1amV","balance":0.36231410355174454},{"privateKey":"mVqqyUzASMivBQdiQMfH86bR","publicKey":"5mEm9VbOpLd8QLFjBN5DonarfitViMLh8","balance":0.2889623081611379}, ...`
 ##### TODO: there will also be a balance attached to each keypair soon
 
 #### not successful:

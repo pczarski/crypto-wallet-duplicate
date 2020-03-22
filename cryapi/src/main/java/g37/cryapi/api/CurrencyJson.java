@@ -5,11 +5,13 @@ public class CurrencyJson {
     private final String name;
     private final double price;
     private final double balance;
+    private final String currentPublicKey;
     private final KeyPairJson[] keyPairs;
 
-    public CurrencyJson(String name, double balance, double price, KeyPairJson[] keyPairs) {
+    public CurrencyJson(String name, double balance, double price, String currentPublicKey, KeyPairJson[] keyPairs) {
         this.balance = balance;
         this.name = name;
+        this.currentPublicKey = currentPublicKey;
         this.keyPairs = keyPairs;
         this.price = price;
     }
@@ -24,6 +26,8 @@ public class CurrencyJson {
         return balance;
     }
 
+    public String getCurrentPublicKey() { return currentPublicKey; }
+
     public KeyPairJson[] getKeyPairs() {
         return keyPairs;
     }
@@ -34,10 +38,12 @@ class KeyPairJson {
 
     private final String privateKey;
     private final String publicKey;
+    private final double balance;
 
-    public KeyPairJson(String privateKey, String publicKey) {
+    public KeyPairJson(String privateKey, String publicKey, double balance) {
         this.privateKey = privateKey;
         this.publicKey = publicKey;
+        this.balance = balance;
     }
 
     public String getPrivateKey() {
@@ -47,4 +53,6 @@ class KeyPairJson {
     public String getPublicKey() {
         return this.publicKey;
     }
+
+    public double getBalance() { return this.balance; }
 }

@@ -27,4 +27,10 @@ public class KeyPair {
 		return this.amount;
 	}
 
+	public void updateAmount() { }
+
+	protected void setAmount(double amount) {
+		this.amount = amount;
+	}
+
 }

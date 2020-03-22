@@ -54,7 +54,16 @@ public abstract class CurrencyInWallet {
 
 	public abstract double getPrice();
 
-	public abstract void updateBalance();
+	public void updateBalance() {
+		double _balance = 0;
+		for (int i = 0; i < this.keyPairs.size(); i++) {
+			this.updateKeyBalance(this.keyPairs.get(i));
+			_balance += this.keyPairs.get(i).getAmount();
+		}
+		this.balance = _balance;
+	};
+
+	protected abstract void updateKeyBalance(KeyPair key);
 
 	public abstract void send(String address, double amount);
 

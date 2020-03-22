@@ -16,12 +16,12 @@ import java.util.List;
 // Controller that handles the GET request and returns an appropriate object (factory design pattern)
 // it will return all the getParameter() functions to the json object
 @RestController
-public class CurrencyJsonController {
+public class CurrencyController {
 
     private KeyPairJson[] convertToKeyPairJson(List<KeyPair> keyPairs) {
         KeyPairJson[] outKeys = new KeyPairJson[keyPairs.size()];
         for(int i = 0; i < keyPairs.size(); i++) {
-            outKeys[i] = new KeyPairJson(keyPairs.get(i).getPrivateKey(), keyPairs.get(i).getPublicKey());
+            outKeys[i] = new KeyPairJson(keyPairs.get(i).getPrivateKey(), keyPairs.get(i).getPublicKey(), keyPairs.get(i).getAmount());
         }
         return outKeys;
     }
@@ -42,11 +42,12 @@ public class CurrencyJsonController {
                     currency.getName().getName(),
                     currency.getBalance(),
                     currency.getPrice(),
+                    currency.getCurrentPublicKey(),
                     this.convertToKeyPairJson(currency.getKeyPairs())
             );
         }
         catch (IllegalArgumentException e) {
-            return new CurrencyJson("Invalid name", -1, -1, null);
+            return new CurrencyJson("Invalid name", -1, -1, null, null);
         }
     }
 }
