@@ -1,8 +1,8 @@
 # Api calls:
 
-##Wallet
+#Wallet
 
-### Wallet creation:
+## Wallet creation:
 
 ##### Example Call:
 ###### `http://localhost:8080/new-wallet?type=new`
@@ -12,7 +12,7 @@
 
 ###### `{"seedPhrase":"[thank, original, sick, spice, fuel, column, city, blast, rain, used, tray, input]"}`
 
-### Getting currency:
+## Getting currency:
 #### successful:
 ##### Example Call:
 ##### `http://localhost:8080/currency?name=Bitcoin`
@@ -28,7 +28,7 @@
 `{"name":"Invalid name","price":-1.0,"balance":-1.0,"keyPairs":null}`
 
 
-### Sending coins:
+## Sending coins:
 #### successful:
 ##### Example Call:
 `http://localhost:8080/send?name=Bitcoin&amount=0.5&address=xxxxxxxxxxx`
@@ -47,9 +47,10 @@
 `{"response":"Invalid currency name","id":-1}`
 
 
-### Get Records:
+## Get Records:
 #### successful:
 ##### Example Call:
 `http://localhost:8080/send?name=Bitcoin&amount=10003.2&address=xxxxx`
 ##### Example reply:
-`{"currencyName":"Bitcoin","records":[{"time":"Sun Mar 22 14:51:02 GMT 2020","destinationAddress":"xxxxx","originAddress":"UqS4lznYHH0WdSGzoCLx3PZUTol4dZk6U","id":1,"type":"SEND","transactionAmount":0.2},...]}`
+`{"currencyName":"Bitcoin","records":[{"time":"Sun Mar 22 14:51:02 GMT 2020","destinationAddress":"xxxxx","originAddress":"UqS4lznYHH0WdSGzoCLx3PZUTol4dZk6U","id":1,"type":"SEND","transactionAmount":0.2}, {"time":"Sun Mar 22 15:16:34 GMT 2020","destinationAddress":"tad0t7eFWLRsZfMWbylF6su290cUGnVj3","originAddress":"xxxTHExxSYSTEMxxx","id":2,"type":"RECEIVE","transactionAmount":0.9905082941082037}, ...]}`
+##

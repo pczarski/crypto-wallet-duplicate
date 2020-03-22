@@ -9,6 +9,7 @@ public class Tether extends CurrencyInWallet {
 
     public Tether() {
         super(privLen, pubLen, CryptoCurrency.Tether);
+        this.addTestReceive(4, 30);
     }
 
     @Override
@@ -19,11 +20,6 @@ public class Tether extends CurrencyInWallet {
     @Override
     protected void updateKeyBalance(KeyPair key) {
 
-        //todo: temporary
-        if(this.isSet < 5) {
-            key.setAmount(Math.random() * 6);
-            this.isSet++;
-        }
     }
 
     @Override
