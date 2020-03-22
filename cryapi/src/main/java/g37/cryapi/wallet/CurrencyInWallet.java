@@ -48,10 +48,6 @@ public abstract class CurrencyInWallet {
 		return this.keyPairs;
 	}
 
-	protected void setBalance(double balance){
-		this.balance = balance;
-	}
-
 	public abstract double getPrice();
 
 	public void updateBalance() {
@@ -65,7 +61,26 @@ public abstract class CurrencyInWallet {
 
 	protected abstract void updateKeyBalance(KeyPair key);
 
-	public abstract void send(String address, double amount);
+	public boolean send(String address, double amount) {
+		this.updateBalance();
+		if (this.balance < amount) {
+			return false;
+		}
+		for (int i = 0; i < this.keyPairs.size(); i++){
+			KeyPair pair = this.keyPairs.get(i);
+			if(pair.getAmount() > amount) {
+				pair.setAmount(pair.getAmount() - amount);
+				return true;
+			}
+			else {
+				amount -= pair.getAmount();
+				pair.setAmount(0.0);
+			}
+		}
+		return true;
+	};
+
+	protected abstract void performSend();
 
 	public CryptoCurrency getName() {
 		return this.name;
