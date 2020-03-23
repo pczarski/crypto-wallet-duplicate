@@ -12,21 +12,12 @@ export default class CreateNew extends React.Component {
     data: []
   };
 
-  componentDidMount() {
-    
-  }
-  makeWallet() {
 
-  }
-  async handleClick(e) {
-    e.preventDefault();
+  async handleClick() {
     console.log('wallet made');
     localStorage.setItem('hasWallet', true);
     const wallet = makeWallet();
-
     console.log(wallet)
-
-    // 
   }
 
   render () {

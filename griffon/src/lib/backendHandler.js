@@ -14,9 +14,13 @@ export function getRequest(location, argumentName, argumentValue) {
     return JSON.parse(req.responseText);
 }
 
-export function makeWallet(){
-    const url = "http://localhost:8080/new-wallet?type=new";
-
+export function makeWallet(seed){
+    let url;
+    if (seed === null) {
+        url = "http://localhost:8080/new-wallet?type=new";
+    } else {
+        url = "http://localhost:8080/new-wallet?type=" + seed;
+    }
     let req = new XMLHttpRequest();
     req.open('GET', url, false);
     req.send(null);
