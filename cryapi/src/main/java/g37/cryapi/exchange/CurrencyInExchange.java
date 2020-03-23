@@ -1,17 +1,19 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.common.Currency;
 
-public interface CurrencyInExchange {
+public abstract class CurrencyInExchange extends Currency {
 
-	double getAmount();
+	public CurrencyInExchange(CryptoCurrency name) {
+		super(name);
+	}
 
-	double getMarketPrice();
+	public abstract void updateMarketPrice();
+	abstract double getMarketPrice();
 
-	CryptoCurrency getCurrencyName();
+	@Override
+	public abstract String getCurrentPublicKey();
 
-	String getPublicKey();
-
-	void updateMarketPrice();
 
 }
