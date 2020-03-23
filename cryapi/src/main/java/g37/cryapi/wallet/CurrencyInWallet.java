@@ -1,19 +1,17 @@
 package g37.cryapi.wallet;
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.common.Currency;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class CurrencyInWallet {
+public abstract class CurrencyInWallet extends Currency {
 
 	private double balance;
-	private boolean active;
-
 	private final int privLen;
 	private final int pubLen;
-	private final CryptoCurrency name;
 
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
@@ -23,9 +21,9 @@ public abstract class CurrencyInWallet {
 	protected int isSet;
 
 	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
+		super(name);
 		this.privLen = privLen;
 		this.pubLen = pubLen;
-		this.name = name;
 		this.keyPairs = new ArrayList<>();
 		this.generateKeys();
 
@@ -132,10 +130,6 @@ public abstract class CurrencyInWallet {
 			pair.setAmount(pair.getAmount() + addAmount);
 			this.addReceiveRecord(pair, "xxxTHExxSYSTEMxxx", addAmount);
 		}
-	}
-
-	public CryptoCurrency getName() {
-		return this.name;
 	}
 
 }

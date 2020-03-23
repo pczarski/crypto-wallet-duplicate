@@ -2,11 +2,16 @@ package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
 
-public class CurrencyInCoinbase implements CurrencyInExchange {
-    @Override
-    public double getAmount() {
-        return 0;
+public class CurrencyInCoinbase extends CurrencyInExchange {
+    public CurrencyInCoinbase(CryptoCurrency name) {
+        super(name);
     }
+
+    @Override
+    public void updateMarketPrice() {
+
+    }
+
 
     @Override
     public double getMarketPrice() {
@@ -14,17 +19,22 @@ public class CurrencyInCoinbase implements CurrencyInExchange {
     }
 
     @Override
+    public String getCurrentPublicKey() {
+        return null;
+    }
+
+    @Override
+    public void updateBalance() {
+
+    }
+
+    @Override
+    public boolean send(String address, double amount) {
+        return false;
+    }
+
     public CryptoCurrency getCurrencyName() {
         return null;
     }
 
-    @Override
-    public String getPublicKey() {
-        return null;
-    }
-
-    @Override
-    public void updateMarketPrice() {
-
-    }
 }
