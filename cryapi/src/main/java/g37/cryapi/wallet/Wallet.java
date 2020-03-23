@@ -1,6 +1,6 @@
 package g37.cryapi.wallet;
-import cry.lib.KeyGenerator;
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.lib.KeyGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;

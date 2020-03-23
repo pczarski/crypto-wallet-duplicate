@@ -2,7 +2,7 @@ package g37.cryapi.wallet;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import cry.lib.KeyGenerator;
+import g37.cryapi.lib.KeyGenerator;
 
 public class KeyPair {
 
