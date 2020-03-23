@@ -12,21 +12,12 @@ export default class CreateNew extends React.Component {
     data: []
   };
 
-  componentDidMount() {
-    
-  }
-  makeWallet() {
 
-  }
-  async handleClick(e) {
-    e.preventDefault();
+  async handleClick() {
     console.log('wallet made');
     localStorage.setItem('hasWallet', true);
-    const wallet = makeWallet("currency", "name", "Bitcoin");
-
+    const wallet = makeWallet();
     console.log(wallet)
-
-    // 
   }
 
   render () {
@@ -34,12 +25,14 @@ export default class CreateNew extends React.Component {
       <div className="wrapper">
         <div className="container">
           <h1>create new Wallet</h1>
+          <div className='d-flex flex-row justify-content-around'>
             <Link to="/wallet">
-              <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>
-          </Link>
-          <Link to="/">
-              <Button type="button" className="btn btn-primary">Go back</Button>
-          </Link>
+                <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>
+            </Link>
+            <Link to="/">
+                <Button type="button" className="btn btn-primary">Go back</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
