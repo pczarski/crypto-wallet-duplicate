@@ -68,3 +68,10 @@
 `http://localhost:8080/add-exchange?name=Bitconnect&key=XXXKEYXXX`
 ####response: 
 `{"exchangeName":"Not Supported","apiKey":null}`
+
+## Get currency in exchange
+
+####call
+`http://localhost:8080/exchange-currency?exchange=Binance&currency=Bitcoin`
+####response: 
+`{"name":"Bitcoin","exchangeName":"Binance","publicAddress":"Bitcoin_TEST_KEY_XX","balance":100.0,"marketValue":0.0}`

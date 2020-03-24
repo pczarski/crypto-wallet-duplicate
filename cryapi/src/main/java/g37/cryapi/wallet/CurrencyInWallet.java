@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class CurrencyInWallet extends Currency {
 
-	private double balance;
 	private final int privLen;
 	private final int pubLen;
 
@@ -47,11 +46,6 @@ public abstract class CurrencyInWallet extends Currency {
 		return keyPairs.get(0).getPublicKey();
 	};
 
-	public double getBalance() {
-		this.updateBalance();
-		return this.balance;
-	};
-
 	public ArrayList<KeyPair> getKeyPairs() {
 		return this.keyPairs;
 	}
@@ -64,14 +58,14 @@ public abstract class CurrencyInWallet extends Currency {
 			this.updateKeyBalance(this.keyPairs.get(i));
 			_balance += this.keyPairs.get(i).getAmount();
 		}
-		this.balance = _balance;
+		this.setBalance(_balance);
 	};
 
 	protected abstract void updateKeyBalance(KeyPair key);
 
 	public boolean send(String address, double amount) {
 		this.updateBalance();
-		if (this.balance < amount) {
+		if (this.getBalance() < amount) {
 			return false;
 		}
 		for (int i = 0; i < this.keyPairs.size(); i++){

@@ -9,18 +9,13 @@ public class CurrencyInBinance extends CurrencyInExchange {
     }
 
     @Override
-    public double getMarketPrice() {
-        return 0;
-    }
-
-    @Override
     public String getCurrentPublicKey() {
-        return null;
+        return this.getName().getName() + "_TEST_KEY_XX";
     }
 
     @Override
     public void updateBalance() {
-
+        this.setBalance(100.0);
     }
 
     @Override
@@ -31,6 +26,6 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     @Override
     public void updateMarketPrice() {
-
+        this.setMarketPrice(100.0);
     }
 }

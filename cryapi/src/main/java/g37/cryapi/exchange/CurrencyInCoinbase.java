@@ -8,24 +8,13 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
     }
 
     @Override
-    public void updateMarketPrice() {
-
-    }
-
-
-    @Override
-    public double getMarketPrice() {
-        return 0;
-    }
-
-    @Override
     public String getCurrentPublicKey() {
-        return null;
+        return this.getName().getName() + "_TEST_KEY_XX";
     }
 
     @Override
     public void updateBalance() {
-
+        this.setBalance(100.0);
     }
 
     @Override
@@ -33,8 +22,10 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
         return false;
     }
 
-    public CryptoCurrency getCurrencyName() {
-        return null;
+
+    @Override
+    public void updateMarketPrice() {
+        this.setMarketPrice(100.0);
     }
 
 }
