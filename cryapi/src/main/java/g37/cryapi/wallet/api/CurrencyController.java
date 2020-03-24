@@ -1,5 +1,6 @@
 package g37.cryapi.wallet.api;
 
+import g37.cryapi.common.TextResponse;
 import g37.cryapi.wallet.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,8 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.wallet.CurrencyInWallet;
+import g37.cryapi.wallet.Wallet;
 
 import java.util.ArrayList;
 
@@ -56,12 +58,7 @@ public abstract class ExchangeAccess {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param currency
-	 * @param amount
-	 */
-	public abstract void depositCurrency(CryptoCurrency currency, double amount);
+
 
 	public ArrayList<CurrencyInExchange> getCurrenciesInExchange() {
 		return this.currencies;

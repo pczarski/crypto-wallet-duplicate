@@ -6,6 +6,7 @@ public abstract class Currency {
 
     public Currency(CryptoCurrency name) {
         this.name = name;
+        this.balance = 0;
     }
 
     public abstract String getCurrentPublicKey();
