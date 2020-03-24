@@ -9,6 +9,7 @@ public abstract class ExchangeAccess {
 
 	private String ApiKey;
 	private ExchangeName name;
+	private ArrayList<CurrencyInExchange> currencies;
 
 	public String getApiKey() {
 		return ApiKey;
@@ -21,6 +22,24 @@ public abstract class ExchangeAccess {
 	public ExchangeAccess(String apiKey, ExchangeName name) {
 		this.ApiKey = apiKey;
 		this.name = name;
+		currencies = new ArrayList<>();
+		this.addSupportedCurrencies();
+	}
+
+	//todo: should we do factory here?? - it's kinda like built in factory now
+	private void addSupportedCurrencies() {
+		for(CryptoCurrency currency: CryptoCurrency.values()) {
+			switch (this.name) {
+				case Binance:
+					this.currencies.add(new CurrencyInBinance(currency));
+					break;
+				case Coinbase:
+					this.currencies.add(new CurrencyInCoinbase(currency));
+					break;
+				default:
+					throw new IllegalArgumentException();
+			}
+		}
 	}
 
 	public ArrayList<Order> getOrders() {
@@ -44,9 +63,18 @@ public abstract class ExchangeAccess {
 	 */
 	public abstract void depositCurrency(CryptoCurrency currency, double amount);
 
-	public CurrencyInExchange getCurrenciesInExchange() {
-		// TODO - implement ExchangeAccess.getCurrenciesInExchange
-		throw new UnsupportedOperationException();
+	public ArrayList<CurrencyInExchange> getCurrenciesInExchange() {
+		return this.currencies;
+	}
+
+	public CurrencyInExchange getCurrencyInExchange(CryptoCurrency currency) {
+		for(int i = 0; i < this.currencies.size(); i++) {
+			CurrencyInExchange current = this.currencies.get(i);
+			if (current.getName() == currency) {
+				return current;
+			}
+		}
+		throw new IllegalArgumentException();
 	}
 
 	/**
@@ -83,5 +111,11 @@ public abstract class ExchangeAccess {
 	 * @param amount
 	 */
 	public abstract Order makeExchangeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount);
+
+
+	//TODO for tests
+	public void addTestCurrencies() {
+
+	}
 
 }

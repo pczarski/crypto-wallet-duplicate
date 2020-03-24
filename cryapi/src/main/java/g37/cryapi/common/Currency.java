@@ -21,4 +21,8 @@ public abstract class Currency {
     public CryptoCurrency getName() {
         return this.name;
     }
+
+    protected void setBalance(double value) {
+        this.balance = value;
+    }
 }
