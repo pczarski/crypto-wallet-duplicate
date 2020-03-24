@@ -2,6 +2,8 @@ package g37.cryapi.exchange;
 
 import java.util.ArrayList;
 
+///todo: we should probably make an interface that handles the communication between the wallet and the exchange  //will it be related to Adopter design pattern?
+
 public class ExchangeHandler {
 
 	private static ExchangeHandler instance = new ExchangeHandler();

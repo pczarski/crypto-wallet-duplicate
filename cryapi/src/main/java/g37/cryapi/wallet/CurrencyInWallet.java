@@ -126,4 +126,11 @@ public abstract class CurrencyInWallet extends Currency {
 		}
 	}
 
+	//todo: temporary for testing
+	public void testReceive(double amount, String origin) {
+		KeyPair pair = this.keyPairs.get(0);
+		pair.setAmount(pair.getAmount() + amount);
+		this.addReceiveRecord(pair, origin, amount);
+	}
+
 }

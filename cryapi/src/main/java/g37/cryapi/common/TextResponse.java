@@ -1,4 +1,4 @@
-package g37.cryapi.wallet.api;
+package g37.cryapi.common;
 
 public class TextResponse {
     private final String response;

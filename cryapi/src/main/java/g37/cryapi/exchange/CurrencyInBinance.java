@@ -15,14 +15,13 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     @Override
     public void updateBalance() {
-        this.setBalance(100.0);
+
     }
 
     @Override
-    public boolean send(String address, double amount) {
-        return false;
-    }
+    protected void performSend(String address, double amount) {
 
+    }
 
     @Override
     public void updateMarketPrice() {

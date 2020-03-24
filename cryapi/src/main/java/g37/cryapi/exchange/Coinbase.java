@@ -8,10 +8,6 @@ public class Coinbase extends ExchangeAccess {
         super(apiKey, ExchangeName.Coinbase);
     }
 
-    @Override
-    public void depositCurrency(CryptoCurrency currency, double amount) {
-
-    }
 
     @Override
     public void withdrawCurrency(CryptoCurrency currency, double amount) {
