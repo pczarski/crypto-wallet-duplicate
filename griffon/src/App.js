@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/App.scss';
 
+
 import Splash from './screens/splash';
 import Wallet from './screens/wallet';
 import CreateNew from './screens/createnew';
@@ -17,7 +18,7 @@ export default class App extends React.Component {
 
     localStorage.setItem('name', null)
     localStorage.setItem('balance', null)
-    
+
     return (
       <Router>
         <div className="App">
