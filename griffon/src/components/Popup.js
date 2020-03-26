@@ -30,7 +30,6 @@ class Popup extends React.Component {
   render() {
     return (
       <div className="component">
-      <h2>Pop-up:</h2>
         <button onClick={() => this.togglePopup()}>Authentication</button>
 
         {this.state.ShowPopup ? <Pop text='Password:'closePop={() => this.togglePopup()}/> : null}
