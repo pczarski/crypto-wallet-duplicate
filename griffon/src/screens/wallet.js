@@ -11,6 +11,7 @@ import {getRequest} from '../lib/backendHandler.js';
 import bitcoinLogo from '../assets/bitcoinLogo.png';
 import ethLogo from '../assets/ethereum.png';
 import dashLogo from '../assets/Dash.png';
+import liteLogo from '../assets/litecoin.png';
 //---------
 import { Button } from 'reactstrap';
 
@@ -34,11 +35,34 @@ export default class Wallet extends React.Component {
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
 
             </div>
-                 <h3> list of currencies</h3>
 
-                  <img src={bitcoinLogo} alt= "Bitcoin"></img>
-                  <img src={ethLogo} alt="Ethereum"></img>
-                  <img src={dashLogo} alt = "Dash"></img>
+                 <h3> list of currencies</h3>
+            <div class = "row">
+                    <div class = "bitcoin-container">
+                        <img src={bitcoinLogo} alt= "Bitcoin"></img>
+                        <div class ="bitcoin-overlay">
+                            <div class="bitcoin-price">insert bitcoin balance here</div>
+                        </div>
+                    </div>
+                    <div class ="ethereum-container">
+                        <img src={ethLogo} alt="Ethereum"></img>
+                        <div class ="ethereum-overlay">
+                            <div class ="ethereum-price"> insert ethereum balance here</div>
+                        </div>
+                     </div>
+                    <div class ="dash-container">
+                        <img src={dashLogo} alt = "Dash"></img>
+                        <div class = "dash-overlay">
+                            <div class ="dash-price"> insert dash balance here</div>
+                         </div>
+                     </div>
+                    <div class ="litecoin-container">
+                        <img src={liteLogo} alt = "LiteCoin"></img>
+                        <div class = "litecoin-overlay">
+                            <div class ="litecoin-price"> insert litecoin balance here</div>
+                        </div>
+                    </div>
+             </div>
 
 
               <Link to="/">
