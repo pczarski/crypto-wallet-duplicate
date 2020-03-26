@@ -1,4 +1,7 @@
-# cryptowallet
+## For the app to work first start the backend host and then start the react app, instructions for the back end in the cryapi folder
+
+
+# cryptowallet - front end
 
 npm install
 

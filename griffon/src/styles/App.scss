@@ -1,18 +1,11 @@
 body {
-  margin: 0px;
-  overflow-x: hidden;
-
   .wrapper {
     text-align: center;
     background-color: #cfc9c9;
-    height: 100%;
-
+    height: 100vh;
+    display: flex;
   }
-  .balance {
-    background: inherit;
+  .content {
+    width: 75vw;
   }
-
-}
-* {
-  box-sizing: border-box;
 }
