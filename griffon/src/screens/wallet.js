@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from '../components/Nav';
-
+import Popup from '../components/Popup';
 import {Link} from 'react-router-dom';
 import '../styles/App.scss';
 import '../styles/nav.scss';
@@ -26,6 +26,7 @@ export default class Wallet extends React.Component {
             <div className='d-flex flex-row justify-content-around'>
               <Button className="btn btn-primary" size="lg">Send</Button>
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
+              <Popup/>
             </div>
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>

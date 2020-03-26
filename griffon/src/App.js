@@ -17,7 +17,7 @@ export default class App extends React.Component {
 
     localStorage.setItem('name', null)
     localStorage.setItem('balance', null)
-    
+
     return (
       <Router>
         <div className="App">

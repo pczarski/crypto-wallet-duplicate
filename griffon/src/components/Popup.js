@@ -4,9 +4,10 @@ class Pop extends React.Component {
   render() {
     return (
       <div className='popup'>
-        <div className='inside_pop'>
-          <h1>{this.props.text}</h1>
-          <input type="password" name="passwordVerfiry"/>
+        <div className='inside_popup'>
+          <p>Please enter your password for verification</p>
+          <h2>{this.props.text}</h2>
+          <input type="password" name="passwordV"/>
         <button onClick={this.props.closePop}>Verify</button>
         </div>
       </div>
@@ -14,6 +15,7 @@ class Pop extends React.Component {
   }
 }
 class Popup extends React.Component {
+
   constructor() {
     super();
     this.state = {
@@ -21,21 +23,19 @@ class Popup extends React.Component {
     };
   }
   togglePopup() {
-    this.setState({
-      ShowPopup: !this.state.ShowPopup
-    });
+    this.setState(
+      {ShowPopup: !this.state.ShowPopup}
+    );
   }
   render() {
     return (
-      <div>
-        <button onClick={this.togglePopup.bind(this)}>Authentication</button>
+      <div className="component">
+      <h2>Pop-up:</h2>
+        <button onClick={() => this.togglePopup()}>Authentication</button>
 
-        {this.state.ShowPopup ? <Pop text='Password:'closePop={this.togglePopup.bind(this)}/> : null}
+        {this.state.ShowPopup ? <Pop text='Password:'closePop={() => this.togglePopup()}/> : null}
       </div>
     );
   }
 };
-
-
-
 export default Popup;
