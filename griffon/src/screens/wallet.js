@@ -6,16 +6,14 @@ import '../styles/App.scss';
 import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
+
 import {getRequest, getCurr} from '../lib/backendHandler.js';
+import {roundTo2} from '../components/helper.js';
 
-//---import images for each currency---
-
-import bitcoinLogo from '../assets/bitcoinLogo.png';
-import ethLogo from '../assets/ethereum.png';
-import dashLogo from '../assets/Dash.png';
-import liteLogo from '../assets/litecoin.png';
-
-//---------
+import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
+import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
+import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
+import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
 
 import { Button } from 'reactstrap';
 
@@ -24,12 +22,14 @@ export default class Wallet extends React.Component {
 
   componentDidMount() {
     const currency = getRequest("currency", "name", "Bitcoin");
-    console.log(currency);
+    console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
+    // also, ideally round all of the prices
+    
   }
 
   render () {
     return (
-      <div className="wrapper">
+      <div className="wrapper">  
       <Nav />
         <div className="container">
           <div className="content">
@@ -38,30 +38,41 @@ export default class Wallet extends React.Component {
               <Button className="btn btn-primary" size="lg">Send</Button>
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
             </div>
-            <h3> list of currencies</h3>
-            <div class = "row">
-                    <div class = "bitcoin-container">
+            <div className = "row">
+                    <div className = "bitcoin-container">
                         <img src={bitcoinLogo} alt= "Bitcoin"></img>
-                        <div class ="bitcoin-overlay">
-                          <div class="bitcoin-price">{getCurr("Bitcoin").price}</div>
+                        <div className ="bitcoin-overlay">
+                          <div className="bitcoin-price">
+                              <b>Price</b> {roundTo2(getCurr("Bitcoin").price)} <br />
+                              <b>Balance</b> {roundTo2(getCurr("Bitcoin").balance)}
+                          </div>
                         </div>
                     </div>
-                    <div class ="ethereum-container">
+                    <div className ="ethereum-container">
                         <img src={ethLogo} alt="Ethereum"></img>
-                        <div class ="ethereum-overlay">
-                            <div class ="ethereum-price">{getCurr("Ethereum").price}</div>
+                        <div className ="ethereum-overlay">
+                            <div className ="ethereum-price">
+                              <b>Price</b> {roundTo2(getCurr("Ethereum").price)} <br />
+                              <b>Balance</b> {roundTo2(getCurr("Ethereum").balance)}
+                            </div>
                         </div>
                      </div>
-                    <div class ="dash-container">
+                    <div className ="dash-container">
                         <img src={dashLogo} alt = "Dash"></img>
-                        <div class = "dash-overlay">
-                            <div class ="dash-price">{getCurr("Dash").price}</div>
+                        <div className = "dash-overlay">
+                            <div className ="dash-price">
+                              <b>Price</b> {roundTo2(getCurr("Dash").price)} <br />
+                              <b>Balance</b> {roundTo2(getCurr("Dash").balance)}
+                            </div>
                          </div>
                      </div>
-                    <div class ="litecoin-container">
+                    <div className ="litecoin-container">
                         <img src={liteLogo} alt = "LiteCoin"></img>
-                        <div class = "litecoin-overlay">
-                            <div class ="litecoin-price">{getCurr("Litecoin").price}</div>
+                        <div className = "litecoin-overlay">
+                            <div className ="litecoin-price">
+                              <b>Price</b> {roundTo2(getCurr("Litecoin").price)} <br />
+                              <b>Balance</b> {roundTo2(getCurr("Litecoin").balance)}
+                            </div>
                         </div>
                     </div>
              </div>
