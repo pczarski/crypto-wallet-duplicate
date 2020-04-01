@@ -19,29 +19,28 @@ export default class CreateNew extends React.Component {
   }
   makeWallet() {
 
-  }
-  async handleClick(e) {
-    e.preventDefault();
+  async handleClick() {
     console.log('wallet made');
     localStorage.setItem('hasWallet', true);
-    const wallet = makeWallet("currency", "name", "Bitcoin");
-
+    const wallet = makeWallet();
     console.log(wallet)
-
-    //
   }
 
   render () {
     return (
-      <body>
-
-
-    <header id="header">
-      <div class="d-flex flex-column">
-
-        <div class="profile">
-          <img src={Griffon} alt="" class="img-fluid rounded-circle"/>
-          <h1 class="text-light"><a href="index.html">Griffon</a></h1>
+      <div className="wrapper">
+        <img src={Griffon} alt="" class="img-fluid rounded-circle"/>
+        <h1 class="text-light"><a href="index.html">Griffon</a></h1>
+        <div className="container">
+          <h1>create new Wallet</h1>
+          <div className='d-flex flex-row justify-content-around'>
+            <Link to="/wallet">
+                <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>
+            </Link>
+            <Link to="/">
+                <Button type="button" className="btn btn-primary">Go back</Button>
+            </Link>
+          </div>
 
         </div>
 
@@ -69,12 +68,6 @@ export default class CreateNew extends React.Component {
       </div>
     </section>
 
-
-
-
-
-
-  </body>
     );
   }
 }

@@ -4,12 +4,16 @@ import '../styles/recover.scss';
 import Griffon from '../griffin.jpg'
 import Typical from 'react-typical'
 import {Link} from 'react-router-dom';
+import {makeWallet} from "../lib/backendHandler.js";
 
-function Recover() {
+import {Input} from 'reactstrap';
+// to fix :
+// onclick, recover wallet
+// some css
+export default class Recover extends React.Component {
+
+  render () {
   return (
-    <body>
-
-
   <header id="header">
     <div class="d-flex flex-column">
 
@@ -46,13 +50,6 @@ function Recover() {
     </div>
   </section>
 
-
-
-
-
-
-</body>
   );
+  }
 }
-
-export default Recover;

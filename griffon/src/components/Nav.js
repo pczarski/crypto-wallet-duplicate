@@ -24,15 +24,20 @@ function Nav() {
             <div className="dropdown-divider"></div>
             <div className="bottomMenu">
                 <li>
+                <Link to="/settings">
                     Settings
+                    </Link>
                 </li>
+
                 <li>
+                <Link to="/help">
                     Help
+                    </Link>
                 </li>
             </div>
         </ul>
     </nav>
-    
+
   );
 }
 

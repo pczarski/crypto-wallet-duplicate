@@ -1,19 +1,16 @@
 package g37.cryapi.wallet;
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.common.Currency;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class CurrencyInWallet {
-
-	private double balance;
-	private boolean active;
+public abstract class CurrencyInWallet extends Currency {
 
 	private final int privLen;
 	private final int pubLen;
-	private final CryptoCurrency name;
 
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
@@ -23,9 +20,9 @@ public abstract class CurrencyInWallet {
 	protected int isSet;
 
 	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
+		super(name);
 		this.privLen = privLen;
 		this.pubLen = pubLen;
-		this.name = name;
 		this.keyPairs = new ArrayList<>();
 		this.generateKeys();
 
@@ -49,11 +46,6 @@ public abstract class CurrencyInWallet {
 		return keyPairs.get(0).getPublicKey();
 	};
 
-	public double getBalance() {
-		this.updateBalance();
-		return this.balance;
-	};
-
 	public ArrayList<KeyPair> getKeyPairs() {
 		return this.keyPairs;
 	}
@@ -66,14 +58,14 @@ public abstract class CurrencyInWallet {
 			this.updateKeyBalance(this.keyPairs.get(i));
 			_balance += this.keyPairs.get(i).getAmount();
 		}
-		this.balance = _balance;
+		this.setBalance(_balance);
 	};
 
 	protected abstract void updateKeyBalance(KeyPair key);
 
 	public boolean send(String address, double amount) {
 		this.updateBalance();
-		if (this.balance < amount) {
+		if (this.getBalance() < amount) {
 			return false;
 		}
 		for (int i = 0; i < this.keyPairs.size(); i++){
@@ -134,8 +126,11 @@ public abstract class CurrencyInWallet {
 		}
 	}
 
-	public CryptoCurrency getName() {
-		return this.name;
+	//todo: temporary for testing
+	public void testReceive(double amount, String origin) {
+		KeyPair pair = this.keyPairs.get(0);
+		pair.setAmount(pair.getAmount() + amount);
+		this.addReceiveRecord(pair, origin, amount);
 	}
 
 }

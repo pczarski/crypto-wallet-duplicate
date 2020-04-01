@@ -2,6 +2,8 @@ package g37.cryapi.exchange;
 
 import java.util.ArrayList;
 
+///todo: we should probably make an interface that handles the communication between the wallet and the exchange  //will it be related to Adopter design pattern?
+
 public class ExchangeHandler {
 
 	private static ExchangeHandler instance;
@@ -46,6 +48,16 @@ public class ExchangeHandler {
 	public void getOrder(String id, ExchangeName exchangeName) {
 		// TODO - implement ExchangeHandler.getOrder
 		throw new UnsupportedOperationException();
+	}
+
+	//TOdo for tests
+	public void addTestExchanges() {
+		this.exchanges.add(new Binance("XX_TEST_BINANCE_KEY_XX"));
+		this.exchanges.add(new Coinbase("XX_TEST_COINBASE_KEY_XX"));
+	}
+
+	public ArrayList<ExchangeAccess> getExchanges() {
+		return this.exchanges;
 	}
 
 }

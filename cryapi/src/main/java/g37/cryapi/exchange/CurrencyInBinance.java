@@ -2,29 +2,29 @@ package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
 
-public class CurrencyInBinance implements CurrencyInExchange {
-    @Override
-    public double getAmount() {
-        return 0;
+public class CurrencyInBinance extends CurrencyInExchange {
+
+    public CurrencyInBinance(CryptoCurrency name) {
+        super(name);
     }
 
     @Override
-    public double getMarketPrice() {
-        return 0;
+    public String getCurrentPublicKey() {
+        return this.getName().getName() + "_TEST_KEY_XX";
     }
 
     @Override
-    public CryptoCurrency getCurrencyName() {
-        return null;
+    public void updateBalance() {
+
     }
 
     @Override
-    public String getPublicKey() {
-        return null;
+    protected void performSend(String address, double amount) {
+
     }
 
     @Override
     public void updateMarketPrice() {
-
+        this.setMarketPrice(100.0);
     }
 }
