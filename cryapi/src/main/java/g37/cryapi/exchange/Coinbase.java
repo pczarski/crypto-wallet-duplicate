@@ -4,6 +4,7 @@ import g37.cryapi.common.CryptoCurrency;
 
 public class Coinbase extends ExchangeAccess {
 
+
     public Coinbase(String apiKey) {
         super(apiKey, ExchangeName.Coinbase);
     }

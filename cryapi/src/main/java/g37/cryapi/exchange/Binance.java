@@ -4,10 +4,6 @@ import g37.cryapi.common.CryptoCurrency;
 
 public class Binance extends ExchangeAccess {
 
-    public Binance(String apiKey) {
-        super(apiKey, ExchangeName.Binance);
-    }
-
     @Override
     public void withdrawCurrency(CryptoCurrency currency, double amount) {
 

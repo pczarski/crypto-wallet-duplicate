@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/App.scss';
 
+
 import Splash from './screens/splash';
 import Wallet from './screens/wallet';
 import CreateNew from './screens/createnew';

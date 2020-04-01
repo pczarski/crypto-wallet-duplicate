@@ -4,7 +4,8 @@ import './styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import 'boxicons/css/boxicons.min.css';
+import Typical from 'react-typical'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
