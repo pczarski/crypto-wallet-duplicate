@@ -5,7 +5,8 @@ import Splash from './screens/splash';
 import Wallet from './screens/wallet';
 import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
-
+import Help from './screens/help';
+import Settings from './screens/settings';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Exchange from './screens/exchange';
 
@@ -17,7 +18,7 @@ export default class App extends React.Component {
 
     localStorage.setItem('name', null)
     localStorage.setItem('balance', null)
-    
+
     return (
       <Router>
         <div className="App">
@@ -27,6 +28,8 @@ export default class App extends React.Component {
           <Route path="/createnew" component={CreateNew}/>
           <Route path="/recover" component={Recover}/>
           <Route path="/exchange" component={Exchange}/>
+          <Route path="/help" component={Help}/>
+          <Route path="/settings" component={Settings}/>
         </Switch>
         </div>
       </Router>
