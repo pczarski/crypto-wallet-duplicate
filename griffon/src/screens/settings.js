@@ -15,20 +15,42 @@ export default class Settings extends React.Component {
     return (
 
       <div className="wrapper">
-       <Nav/>
-       <nav class="navbar ">
-       <h1>Settings</h1>
-		<ul id="nav1">
-    <Link to="/">
-			<li ><a href="#">Home</a></li></Link>
-			<li><a href="#">Change Password</a></li>
-			<li><a href="#">Private Keys</a></li>
+          <Nav/>
+          <nav class="navbar ">
+          <h1>Settings</h1>
+           <ul id="nav1">
+       <Link to="/">
+               <li ><a href="#">Home</a></li></Link>
+               <li><a href="#">Change Password</a></li>
+               <li><a href="#">Public Keys</a></li>
 
-		</ul>
-        </nav>
+           </ul>
+           </nav>
+           <div className="extra">
+         <form>
+
+         <h1>Change Password</h1>
+         <div>
+         <p>Enter your current Password:</p>
+         <input type='text' name="password" placeholder="Current password"/>
+         </div>
+         <div>
+         <p>Enter your new Password:</p>
+         <input type='text' name="password" placeholder="New password"/>
+         </div>
+         <div>
+         <p>Confirm your new Password:</p>
+         <input type='text' name="password" placeholder="Confirm password"/>
+
+         </div>
+         <div className="password">
+         <Button type="button" size="md" className="btn btn-primary">Change Password</Button>
+         </div>
+         </form>
+           </div>
 
 
-      </div>
+         </div>
     );
   }
 }
