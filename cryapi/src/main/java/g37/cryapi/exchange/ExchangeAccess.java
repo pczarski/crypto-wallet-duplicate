@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public abstract class ExchangeAccess {
 
-	private int APIkey;
 
 	private String ApiKey;
 	private ExchangeName name;

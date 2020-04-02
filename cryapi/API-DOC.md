@@ -82,3 +82,4 @@
 `http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=2.5`
 ####response: 
 `{"response":"success","id":1}`
+
