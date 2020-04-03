@@ -10,7 +10,7 @@ public class ExchangeHandler {
 	private ArrayList<ExchangeAccess> exchanges;
 
 	private ExchangeHandler() {
-         this.exchanges = new ArrayList<>();
+		this.exchanges = new ArrayList<>();
 	}
 
 	public static ExchangeHandler getInstance() {

@@ -50,7 +50,7 @@ public abstract class ExchangeAccess {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 */
 	public Order getOrder(String id) {
@@ -75,7 +75,7 @@ public abstract class ExchangeAccess {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param currency
 	 * @param amount
 	 */
@@ -84,7 +84,7 @@ public abstract class ExchangeAccess {
 	public abstract void withdrawAll();
 
 	/**
-	 * 
+	 *
 	 * @param currency1
 	 * @param currency2
 	 * @param amount
@@ -93,7 +93,7 @@ public abstract class ExchangeAccess {
 	public abstract Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price);
 
 	/**
-	 * 
+	 *
 	 * @param currency1
 	 * @param currency2
 	 * @param amount
@@ -102,7 +102,7 @@ public abstract class ExchangeAccess {
 	public abstract Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price);
 
 	/**
-	 * 
+	 *
 	 * @param currency1
 	 * @param currency2
 	 * @param amount
