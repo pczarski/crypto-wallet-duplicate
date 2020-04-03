@@ -16,7 +16,7 @@ export default class Settings extends React.Component {
 
       <div className="wrapper">
           <Nav/>
-          <nav class="navbar ">
+          <nav class="navbar 1">
           <h1>Settings</h1>
            <ul id="nav1">
        <Link to="/">

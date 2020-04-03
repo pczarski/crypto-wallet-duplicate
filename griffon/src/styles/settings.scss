@@ -6,17 +6,32 @@
 .navbar{
     width: 100%;
     height: 13vh;
+    line-height: 15vh;
      background: #242424;
     color: #adadad;
 
 
 }
-
+#nav1 li a{
+  color: #adadad;
+  text-decoration: none;
+}
 #nav1 li{
-    display: inline;
+
+
+    height:100%;
+    display: inline-block;
     margin-left: 7em;
+    list-style-type: none;
+        color: #adadad;
 
-
+}
+#nav1 li:hover {
+	background: #333333;
+	transition: all ease-in-out 0.45s;
+}
+#active{
+	background: #1684bb;
 }
 .extra{
   position: absolute;
