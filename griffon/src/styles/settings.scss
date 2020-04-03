@@ -24,6 +24,7 @@
     margin-left: 7em;
     list-style-type: none;
         color: #adadad;
+        padding: 0em 1em 0em 1em;
 
 }
 #nav1 li:hover {
@@ -31,7 +32,7 @@
 	transition: all ease-in-out 0.45s;
 }
 #active{
-	background: #1684bb;
+	background: #333333;
 }
 .extra{
   position: absolute;
@@ -61,5 +62,26 @@ input{
     outline: none;
     box-shadow: 0px 0px 12px 4px black;
   }
+
+}
+.extra1{
+  font-size: 1em;
+  position: absolute;
+  background-color:#242424;
+  color: #adadad;
+  top: 10em;
+  right: 4em;
+  left: 7em;
+  margin:auto;
+  padding: 2em;
+
+  width: 60%;
+  height: 70%;
+
+}
+.rules {
+  float: left;
+
+  display:inline-grid;
 
 }

@@ -24,12 +24,12 @@ export default class Wallet extends React.Component {
     const currency = getRequest("currency", "name", "Bitcoin");
     console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
     // also, ideally round all of the prices
-    
+
   }
 
   render () {
     return (
-      <div className="wrapper">  
+      <div className="wrapper">
       <Nav />
         <div className="container">
           <div className="content">
