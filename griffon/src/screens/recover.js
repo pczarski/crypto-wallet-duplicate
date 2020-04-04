@@ -25,6 +25,7 @@ export default class Recover extends React.Component {
   handleSubmit(e) {
     // submit should pass this to a new wallet, and make it
     e.preventDefault();
+    console.log(hashPassword(this.state.seed, null))
   }
 
   render () {
