@@ -76,9 +76,19 @@
 #### response: 
 `{"name":"Bitcoin","exchangeName":"Binance","publicAddress":"Bitcoin_TEST_KEY_XX","balance":100.0,"marketValue":0.0}`
 
-## Withdraw from wallet to exchange
+## Withdraw from an exchange to the wallet
 
 #### call
 `http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=2.5`
 #### response: 
 `{"response":"success","id":1}`
+
+## Deposit from the wallet to an exchange
+
+#### call
+`http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5`
+
+#### response:
+`{"response":"success","id":1}`
+
+####

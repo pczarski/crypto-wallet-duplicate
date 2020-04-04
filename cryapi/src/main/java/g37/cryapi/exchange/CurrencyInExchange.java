@@ -32,6 +32,7 @@ public abstract class CurrencyInExchange extends Currency {
 	public abstract String getCurrentPublicKey();
 
 	public double getMarketPrice() {
+		this.updateMarketPrice();
 		return this.marketPrice;
 	};
 
