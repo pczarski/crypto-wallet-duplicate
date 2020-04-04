@@ -19,7 +19,7 @@ const initialState ={
   confirmError:""
 
 }
-const userpass="hello";
+const userpass="Password123";
 export default class Settings extends React.Component {
 
   state=initialState;
