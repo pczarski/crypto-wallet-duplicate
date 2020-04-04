@@ -11,13 +11,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Exchange from './screens/exchange';
 
 
-
-
-export default class App extends React.Component {
+export default class App extends React.Component { 
   render() {
-
-    localStorage.setItem('name', null)
-    localStorage.setItem('balance', null)
 
     return (
       <Router>
