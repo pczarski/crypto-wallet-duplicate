@@ -77,29 +77,6 @@ public class ExchangeController {
         try {
             ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
             CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
-            if(selectedCurrency.depositCurrency(amount)) {
-                return new TextResponse("success", 1); //todo the id thing, smth is missing here
-            };
-            return new TextResponse("insufficient balance", 0);
-        }
-        catch (IllegalArgumentException e) {
-            return new TextResponse("Exchange or currency not found", -1);
-        }
-
-    } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
-
-    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
-    @GetMapping("/deposit") // setting up the url location
-    public TextResponse depositCurrency(
-            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
-            @RequestParam(value = "currency", defaultValue = "Bitcoin") String currency,
-            @RequestParam(value = "amount", defaultValue = "0.0") double amount
-    ) {
-        this.runHelpers();
-        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
-        try {
-            ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
-            CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
             if(selectedCurrency.withdrawCurrency(amount)) {
                 return new TextResponse("success", 1); //todo the id thing, smth is missing here
             };
@@ -109,6 +86,6 @@ public class ExchangeController {
             return new TextResponse("Exchange or currency not found", -1);
         }
 
-    } // http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5
+    } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
 
 }
