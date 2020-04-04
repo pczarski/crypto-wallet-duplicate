@@ -7,8 +7,9 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 import Help from './screens/help';
 import Settings from './screens/settings';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Exchange from './screens/exchange';
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
 export default class App extends React.Component { 

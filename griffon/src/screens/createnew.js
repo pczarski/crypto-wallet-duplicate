@@ -8,8 +8,6 @@ import {Button} from 'reactstrap';
 import {makeWallet} from "../lib/backendHandler.js"
 
 
-const { ipcRenderer } = window.require('electron') // ipc rendered used to set password
-
 export default class CreateNew extends React.Component {
   state = {
     data: [],
@@ -24,11 +22,7 @@ export default class CreateNew extends React.Component {
     // this.setState({wallet: wallet})
     console.log(wallet)
   }
-  async getPass() {
-    ipcRenderer.send('get-password', "user").then((result) => {
-      console.log(result)
-    })
-  }
+ 
 
   render () {
     return (
@@ -42,7 +36,7 @@ export default class CreateNew extends React.Component {
             <Link to="/">
                 <Button type="button" className="btn btn-primary">Go back</Button>
             </Link>
-            <Button type="button" className="btn btn-primary" onClick={this.getPass()}>Get Password</Button>
+            <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Get Password</Button>
 
           </div>
         </div>

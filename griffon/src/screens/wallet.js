@@ -8,7 +8,7 @@ import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
 import {getRequest, getCurr} from '../lib/backendHandler.js';
-import {roundTo2} from '../components/helper.js';
+import {roundTo2} from '../lib/helper.js';
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
 import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
