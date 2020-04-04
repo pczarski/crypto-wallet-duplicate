@@ -4,6 +4,7 @@ import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.Currency;
 import g37.cryapi.wallet.CurrencyInWallet;
 import g37.cryapi.wallet.Wallet;
+import org.springframework.web.client.RestTemplate;
 
 // todo: optional: make actual test receive
 
@@ -14,11 +15,18 @@ public abstract class CurrencyInExchange extends Currency {
 
 	private double marketPrice;
 
+	private RestTemplate restTemplate;
+
 	public CurrencyInExchange(CryptoCurrency name) {
 		super(name);
+		restTemplate = new RestTemplate();
 
 		//todo temporary for test
 		this.addTestBalance(100.0);
+	}
+
+	protected RestTemplate getRestTemplate() {
+		return restTemplate;
 	}
 
 	public abstract void updateMarketPrice();

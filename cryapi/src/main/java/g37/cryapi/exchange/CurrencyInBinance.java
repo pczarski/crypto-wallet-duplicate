@@ -1,23 +1,16 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
-import g37.cryapi.exchange.api.Post;
-import g37.cryapi.exchange.api.RestService;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class CurrencyInBinance extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.binance.com/api/v3/ticker/price?symbol=";
-    private RestService restService;
 
     public CurrencyInBinance(CryptoCurrency name) {
         super(name);
-        restService = new RestService(new RestTemplateBuilder());
     }
 
     @Override
@@ -38,20 +31,20 @@ public class CurrencyInBinance extends CurrencyInExchange {
     @Override
     public void updateMarketPrice() {
         try {
-            RestTemplate restTemplate = new RestTemplate();
-            MarketPrice marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName()+"USDT", MarketPrice.class);
+            RestTemplate restTemplate = this.getRestTemplate();
+            MarketPriceBinance marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName()+"USDT", MarketPriceBinance.class);
             System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
             this.setMarketPrice(marketPrice.getPrice());
 
         } catch (Exception e) {
             System.out.println(e.toString());
-            this.setMarketPrice(-1.0);
+            this.setMarketPrice(1.0);
         }
     }
 }
 // https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
 
-class MarketPrice implements Serializable {
+class MarketPriceBinance implements Serializable {
     private String symbol;
     private double price;
 

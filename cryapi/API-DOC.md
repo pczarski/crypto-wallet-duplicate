@@ -1,10 +1,12 @@
 ## Supported currencies and names:
-	BTC ("Bitcoin")
-	DASH ("Dash")
-	DOGE ("Doge")
-	ETH ("Ethereun")
-	LTC ("Litecoin")
-	USDT ("Thether")
+	BTC (Bitcoin)
+	DASH (Dash)
+	ETH (Ethereun)
+	LTC (Litecoin)
+	USDT (Thether)
+	
+	
+### Price is by default in USDT ("Theter")
 
 # Api calls:
 
