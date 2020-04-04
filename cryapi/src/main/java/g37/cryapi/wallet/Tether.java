@@ -13,7 +13,7 @@ public class Tether extends CurrencyInWallet {
     }
 
     @Override
-    public double getPrice() {
+    public Double getPrice() {
         return 1.01;
     }
 

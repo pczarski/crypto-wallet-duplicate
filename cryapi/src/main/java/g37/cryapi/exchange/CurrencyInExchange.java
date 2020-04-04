@@ -13,7 +13,7 @@ public abstract class CurrencyInExchange extends Currency {
 	//todo temporary for tests
 	public boolean isSet;
 
-	private double marketPrice;
+	private Double marketPrice;
 
 	private RestTemplate restTemplate;
 
@@ -39,12 +39,12 @@ public abstract class CurrencyInExchange extends Currency {
 	@Override
 	public abstract String getCurrentPublicKey();
 
-	public double getMarketPrice() {
+	public Double getMarketPrice() {
 		this.updateMarketPrice();
 		return this.marketPrice;
 	};
 
-	protected void setMarketPrice(double value) {
+	protected void setMarketPrice(Double value) {
 		this.marketPrice = value;
 	}
 
