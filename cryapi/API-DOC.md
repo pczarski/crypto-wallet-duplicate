@@ -6,7 +6,7 @@
 	USDT (Thether)
 	
 	
-### Price is by default in USDT ("Theter")
+### Price is by default in USD
 
 # Api calls:
 
