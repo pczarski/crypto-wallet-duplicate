@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.scss';
 
-import {getRequest} from '../lib/backendHandler.js';
+import {getRequest, getBalance} from '../lib/backendHandler.js';
 
 
 // import { Convert } from "easy-currencies";
@@ -16,15 +16,14 @@ export default class Balance extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
     this.state = {
-      currency: null,
+      supportedCurr: ["BTC", "ETH", "LTC", "Dash"],
+      currency: null, // currency name (bitcoin, litecoin, etc. btc by default)
       balance: null,
-      dropdownOpen: false,
-      value: "GBP"
+      totalBal: null,
+      dropdownOpen: false
     }
 
   }
-
-
 
   componentDidMount () {
   
@@ -34,8 +33,16 @@ export default class Balance extends React.Component {
       balance: req.balance,
       currency: req.name
     })
-  }
 
+  }
+  getTotalBal (curr) {
+    let totalBal = 0;
+    for (let i of this.state.supportedCurr) {
+      // getBalance, convert to target CURR
+      totalBal+= getBalance(i)
+    }
+
+  }
   toggle(e) {
     e.preventDefault();
     this.setState({
@@ -46,7 +53,7 @@ export default class Balance extends React.Component {
   select(e) {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
-      value: e.target.innerText
+      currency: e.target.innerText
     });
   }
 
@@ -63,7 +70,7 @@ export default class Balance extends React.Component {
         <div className="currSel">
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <DropdownToggle caret>
-            {this.state.value}
+            {this.state.currency}
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={this.select}>BTC</DropdownItem>

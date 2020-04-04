@@ -43,6 +43,7 @@ export default class Wallet extends React.Component {
                         <img src={bitcoinLogo} alt= "Bitcoin"></img>
                         <div className ="bitcoin-overlay">
                           <div className="bitcoin-price">
+                              <b>Bitcoin</b> <br /> <br />
                               <b>Price</b> {roundTo2(getCurr("Bitcoin").price)} <br />
                               <b>Balance</b> {roundTo2(getCurr("Bitcoin").balance)}
                           </div>
@@ -52,6 +53,7 @@ export default class Wallet extends React.Component {
                         <img src={ethLogo} alt="Ethereum"></img>
                         <div className ="ethereum-overlay">
                             <div className ="ethereum-price">
+                              <b>Ethereum</b> <br /> <br />
                               <b>Price</b> {roundTo2(getCurr("Ethereum").price)} <br />
                               <b>Balance</b> {roundTo2(getCurr("Ethereum").balance)}
                             </div>
@@ -61,6 +63,7 @@ export default class Wallet extends React.Component {
                         <img src={dashLogo} alt = "Dash"></img>
                         <div className = "dash-overlay">
                             <div className ="dash-price">
+                              <b>Dash</b> <br /> <br />
                               <b>Price</b> {roundTo2(getCurr("Dash").price)} <br />
                               <b>Balance</b> {roundTo2(getCurr("Dash").balance)}
                             </div>
@@ -70,6 +73,7 @@ export default class Wallet extends React.Component {
                         <img src={liteLogo} alt = "LiteCoin"></img>
                         <div className = "litecoin-overlay">
                             <div className ="litecoin-price">
+                            <b>Litecoin</b> <br /> <br />
                               <b>Price</b> {roundTo2(getCurr("Litecoin").price)} <br />
                               <b>Balance</b> {roundTo2(getCurr("Litecoin").balance)}
                             </div>

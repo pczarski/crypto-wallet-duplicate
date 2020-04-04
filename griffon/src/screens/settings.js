@@ -19,8 +19,9 @@ export default class Settings extends React.Component {
        <nav class="navbar ">
        <h1>Settings</h1>
 		<ul id="nav1">
-    <Link to="/">
-			<li ><a href="#">Home</a></li></Link>
+    <Link to="/wallet">
+			<li ><a href="#">Home</a></li>
+    </Link>
 			<li><a href="#">Change Password</a></li>
 			<li><a href="#">Private Keys</a></li>
 

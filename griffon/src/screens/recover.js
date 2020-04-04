@@ -3,9 +3,12 @@ import '../styles/App.scss';
 import {Link} from 'react-router-dom';
 import {makeWallet} from "../lib/backendHandler.js";
 
+import validator from 'validator';
+
 import {hashPassword, verifyPassword} from "../lib/hash.js"
 
 import {Input} from 'reactstrap';
+
 // to fix :
 // , recover wallet, validation, check 12 words
 // some css
@@ -25,9 +28,8 @@ export default class Recover extends React.Component {
   handleSubmit(e) {
     // submit should pass this to a new wallet, and make it
     e.preventDefault();
-    console.log(hashPassword(this.state.seed, null))
-  }
 
+  }
   render () {
   return (
     <div className="wrapper">
