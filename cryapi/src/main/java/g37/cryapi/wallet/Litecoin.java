@@ -8,7 +8,7 @@ public class Litecoin extends CurrencyInWallet {
     private static final int pubLen = 33;
 
     public Litecoin() {
-        super(privLen, pubLen, CryptoCurrency.Litecoin);
+        super(privLen, pubLen, CryptoCurrency.LTC);
         this.addTestReceive(3, 20);
     }
 

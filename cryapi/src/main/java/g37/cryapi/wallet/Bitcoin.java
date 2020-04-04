@@ -2,15 +2,13 @@ package g37.cryapi.wallet;
 
 import g37.cryapi.common.CryptoCurrency;
 
-import java.util.Random;
-
 public class Bitcoin extends CurrencyInWallet {
 
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
     public Bitcoin() {
-        super(privLen, pubLen, CryptoCurrency.Bitcoin);
+        super(privLen, pubLen, CryptoCurrency.BTC);
 
         // todo temporary for tests
         this.addTestReceive(12, 2);
