@@ -1,12 +1,12 @@
 package g37.cryapi.common;
 
 public enum CryptoCurrency {
-	BTC("Bitcoin"),
-	DASH("Dash"),
-	DOGE("Doge"),
-	ETH("Ethereun"),
-	LTC("Litecoin"),
-	USDT("Thether");
+	Bitcoin("Bitcoin"),
+	Dash("Dash"),
+	Doge("Doge"),
+	Ethereum("Ethereun"),
+	Litecoin("Litecoin"),
+	Tether("Thether");
 
 	private final String name;
 
