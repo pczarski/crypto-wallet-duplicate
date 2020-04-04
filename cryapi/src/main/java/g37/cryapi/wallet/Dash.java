@@ -13,12 +13,6 @@ public class Dash extends CurrencyInWallet {
     }
 
     @Override
-    public double getPrice() {
-        return 103.2;
-    }
-
-
-    @Override
     protected void updateKeyBalance(KeyPair key) {
 
     }

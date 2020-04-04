@@ -15,11 +15,6 @@ public class Bitcoin extends CurrencyInWallet {
     }
 
     @Override
-    public double getPrice() {
-        return 9000.11;
-    }
-
-    @Override
     protected void updateKeyBalance(KeyPair key) {
     }
 

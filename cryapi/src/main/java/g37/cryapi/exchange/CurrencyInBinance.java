@@ -37,8 +37,10 @@ public class CurrencyInBinance extends CurrencyInExchange {
             this.setMarketPrice(marketPrice.getPrice());
 
         } catch (Exception e) {
+            if (this.getMarketPrice() == null) {
+                this.setMarketPrice(1.0);
+            }
             System.out.println(e.toString());
-            this.setMarketPrice(1.0);
         }
     }
 }

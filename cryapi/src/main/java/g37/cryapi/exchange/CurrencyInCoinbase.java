@@ -37,13 +37,16 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
             RestTemplate restTemplate = this.getRestTemplate();
 //            ResponseEntity<String> response = restTemplate.getForEntity(PRICE_URL_BASE + this.getName() + "-USD/spot", String.class);
 //            System.out.println(response.toString());
-            String url = PRICE_URL_BASE + this.getName() + "-USD/spot";
+            String url = PRICE_URL_BASE + this.getName() + "-USD/buy";
             MarketPriceCoinbase marketPrice = restTemplate.getForObject(url, MarketPriceCoinbase.class);
             double value = Double.parseDouble(marketPrice.getData().get("amount"));
             this.setMarketPrice(value);
         } catch (Exception e) {
+            // todo updating price has common behaviour, consider moving to superclass
+            if(this.getMarketPrice() == null) {
+                this.setMarketPrice(1.0);
+            }
             System.out.println(e.toString());
-            this.setMarketPrice(1.0);
         }
     }
 } //https://api.coinbase.com/v2/prices/BTC-USD/spot

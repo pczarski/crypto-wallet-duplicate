@@ -12,12 +12,6 @@ public class Litecoin extends CurrencyInWallet {
         this.addTestReceive(3, 20);
     }
 
-
-    @Override
-    public double getPrice() {
-        return 50.1 + Math.random();
-    }
-
     @Override
     protected void updateKeyBalance(KeyPair key) {
 

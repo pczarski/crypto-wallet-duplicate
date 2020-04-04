@@ -13,11 +13,6 @@ public class Ethereum extends CurrencyInWallet {
     }
 
     @Override
-    public double getPrice() {
-        return 359.99;
-    }
-
-    @Override
     protected void updateKeyBalance(KeyPair key) {
 
     }
