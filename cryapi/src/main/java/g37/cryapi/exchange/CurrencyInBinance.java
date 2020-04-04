@@ -38,24 +38,22 @@ public class CurrencyInBinance extends CurrencyInExchange {
     @Override
     public void updateMarketPrice() {
         try {
-//            MarketPrice[] response = (MarketPrice[]) restService.getPostsAsObject(PRICE_URL_BASE+"BTC"+"USDT");
-//            System.out.println(Arrays.toString(response));
-            //todo
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> response = restTemplate.getForEntity(PRICE_URL_BASE + "BTCUSDT", String.class);
-            System.out.println(response.toString());
+            MarketPrice marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName()+"USDT", MarketPrice.class);
+            System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
+            this.setMarketPrice(marketPrice.getPrice());
 
         } catch (Exception e) {
             System.out.println(e.toString());
+            this.setMarketPrice(-1.0);
         }
-        this.setMarketPrice(100.0);
     }
 }
 // https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT
 
-class MarketPrice extends Post {
+class MarketPrice implements Serializable {
     private String symbol;
-    private String price;
+    private double price;
 
     public String getSymbol() {
         return symbol;
@@ -65,16 +63,11 @@ class MarketPrice extends Post {
         this.symbol = symbol;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public MarketPrice(String symbol, String price) {
-        this.symbol = symbol;
+    public void setPrice(double price) {
         this.price = price;
     }
 }
