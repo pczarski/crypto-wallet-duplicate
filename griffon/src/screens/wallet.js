@@ -7,8 +7,12 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
+// accordion
+import Accordion from "../components/Accordion.js";
+
 import {getRequest, getCurr} from '../lib/backendHandler.js';
 import {roundTo2} from '../components/helper.js';
+
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
 import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
@@ -20,12 +24,19 @@ import { Button } from 'reactstrap';
 
 export default class Wallet extends React.Component {
 
+
+  
+
+
+
+
   componentDidMount() {
     const currency = getRequest("currency", "name", "Bitcoin");
     console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
     // also, ideally round all of the prices
     
   }
+
 
   render () {
     return (
@@ -38,7 +49,9 @@ export default class Wallet extends React.Component {
               <Button className="btn btn-primary" size="lg">Send</Button>
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
             </div>
-            <div className = "row">
+
+            <Accordion></Accordion>
+{/*             <div className = "row">
                     <div className = "bitcoin-container">
                         <img src={bitcoinLogo} alt= "Bitcoin"></img>
                         <div className ="bitcoin-overlay">
@@ -75,7 +88,7 @@ export default class Wallet extends React.Component {
                             </div>
                         </div>
                     </div>
-             </div>
+             </div> */}
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>
               </Link>
