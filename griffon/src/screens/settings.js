@@ -8,8 +8,6 @@ import '../styles/bal.scss';
 import '../styles/settings.scss';
 
 
-import { Button, Alert } from 'reactstrap';
-
 export default class Settings extends React.Component {
   render () {
     return (
@@ -20,11 +18,22 @@ export default class Settings extends React.Component {
        <h1>Settings</h1>
 		<ul id="nav1">
     <Link to="/wallet">
-			<li ><a href="#">Home</a></li>
+			<li >
+        {/* <a href="#"> */}
+          Home
+        {/* </a> */}
+        </li>
     </Link>
-			<li><a href="#">Change Password</a></li>
-			<li><a href="#">Private Keys</a></li>
-
+			<li>
+        {/* <a href="#"> */}
+          Change Password
+          {/* </a> */}
+      </li>
+			<li>
+        {/* <a href="#"> */}
+          Private Keys
+        {/* </a> */}
+        </li>
 		</ul>
         </nav>
 

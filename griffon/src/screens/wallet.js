@@ -19,12 +19,34 @@ import { Button } from 'reactstrap';
 
 
 export default class Wallet extends React.Component {
+  constructor(props){
+    super(props);
+    this.state= {
+      supportedCurr: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
+      currency: [{name: "dummy", balance: "dick"}]
+    }
+    console.log(this.state.supportedCurr)
+  }
+
+  getCurrencies () {
+    for (let i of this.state.supportedCurr) {
+      let req = getCurr(i)
+      // console.log(req)
+      let curr = {
+        name: req.name,
+        balance: req.balance
+      }
+      this.setState(prevState => ({
+        currency: [...prevState.currency, curr]
+      }))
+    }
+  }
 
   componentDidMount() {
-    const currency = getRequest("currency", "name", "Bitcoin");
-    console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
+    // we don't "NEED" all of the calls. we can just call once and store into state
     // also, ideally round all of the prices
-    
+    this.getCurrencies()
+    console.log(this.state.currency)
   }
 
   render () {

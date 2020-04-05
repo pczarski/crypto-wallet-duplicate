@@ -17,6 +17,7 @@ export function getRequest(location, argumentName, argumentValue) {
 export function getCurr(currency) {
     const baseUrl = "http://localhost:8080/currency?name=";
     const url = baseUrl + currency;
+    // console.log(url); // example url: http://localhost:8080/currency?name=Bitcoin
 
     // get request
     let req = new XMLHttpRequest();
@@ -38,10 +39,3 @@ export function makeWallet(seed){
     return JSON.parse(req.responseText);
 }
 
-export function getBalance(curr){
-    let url = "http://localhost:8080/currency?name=" + curr;
-    let req = new XMLHttpRequest();
-    req.open('GET', url, false);
-    req.send(null);
-    return JSON.parse(req.responseText.balance);
-}

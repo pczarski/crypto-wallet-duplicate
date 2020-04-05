@@ -1,14 +1,13 @@
 import React from 'react';
 import Nav from '../components/Nav';
 
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
+
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/help.scss';
 
-
-import { Button, Alert } from 'reactstrap';
 
 export default class Help extends React.Component {
   render () {

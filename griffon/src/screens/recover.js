@@ -1,11 +1,12 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import '../styles/App.scss';
 import {Link} from 'react-router-dom';
-import {makeWallet} from "../lib/backendHandler.js";
 
-import validator from 'validator';
+// import {makeWallet} from "../lib/backendHandler.js";
 
-import {hashPassword, verifyPassword} from "../lib/hash.js"
+// import validator from 'validator';
+
+// import {hashPassword, verifyPassword} from "../lib/hash.js"
 
 import {Input} from 'reactstrap';
 

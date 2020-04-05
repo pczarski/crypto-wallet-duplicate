@@ -1,11 +1,14 @@
 import React from 'react';
 import '../styles/App.scss';
 
-import {getRequest, getBalance} from '../lib/backendHandler.js';
+import {getRequest, getCurr} from '../lib/backendHandler.js';
 
+import { Converter } from "easy-currencies";
 
-// import { Convert } from "easy-currencies";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+
+import { roundTo2 } from '../lib/helper.js';
+
 
 
 export default class Balance extends React.Component {
@@ -17,31 +20,34 @@ export default class Balance extends React.Component {
     this.select = this.select.bind(this);
     this.state = {
       supportedCurr: ["BTC", "ETH", "LTC", "Dash"],
+      supportedCurrNames: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
       currency: null, // currency name (bitcoin, litecoin, etc. btc by default)
       balance: null,
-      totalBal: null,
+      totalBal: null, 
       dropdownOpen: false
     }
-
+    
+    this.getTotalBal("BTC")
   }
-
   componentDidMount () {
-  
     let req = getRequest("currency", "name", "Bitcoin");
-    console.log(req)
     this.setState({
-      balance: req.balance,
-      currency: req.name
+      currency: "BTC",
+      balance: req.balance
     })
-
   }
-  getTotalBal (curr) {
-    let totalBal = 0;
-    for (let i of this.state.supportedCurr) {
-      // getBalance, convert to target CURR
-      totalBal+= getBalance(i)
-    }
 
+  async getTotalBal (curr) {
+    let converter = new Converter("AlphaVantage", "5FNUAE4662ZHQRRF");
+    let totalBal = 0;
+    for (let i = 0; i<this.state.supportedCurr.length; i++) {
+      let req = await getCurr(this.state.supportedCurrNames[i])
+      let value = await converter.convert(req.balance, this.state.supportedCurr[i], curr);
+      // console.log(req, value, totalBal)
+      totalBal += value
+    }
+    this.setState({totalBal: totalBal})
+    // TO DO: WAIT FOR RESPONSE
   }
   toggle(e) {
     e.preventDefault();
@@ -51,6 +57,7 @@ export default class Balance extends React.Component {
   }
 
   select(e) {
+    console.log(e.target.innerText)
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
       currency: e.target.innerText
@@ -65,7 +72,7 @@ export default class Balance extends React.Component {
           <h5>
             <br/>
           </h5>
-          <p>{Math.floor(this.state.balance * 100) / 100 }</p>
+          <p>{roundTo2(this.state.totalBal) + ""}</p>
         </div>
         <div className="currSel">
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -73,9 +80,9 @@ export default class Balance extends React.Component {
             {this.state.currency}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.select}>BTC</DropdownItem>
-            <DropdownItem onClick={this.select}>ETH</DropdownItem>
-            <DropdownItem onClick={this.select}>LTC</DropdownItem>
+            <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
+            <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
+            <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
             <DropdownItem onClick={this.select}>GBP</DropdownItem>
             <DropdownItem onClick={this.select}>USD</DropdownItem>
           </DropdownMenu>
