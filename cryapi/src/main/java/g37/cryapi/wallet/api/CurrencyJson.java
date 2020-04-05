@@ -2,19 +2,23 @@ package g37.cryapi.wallet.api;
 
 // class that is used to create an JSON object sent with the GET requests
 public class CurrencyJson {
+    private final String code;
     private final String name;
     private final double price;
     private final double balance;
     private final String currentPublicKey;
     private final KeyPairJson[] keyPairs;
 
-    public CurrencyJson(String name, double balance, double price, String currentPublicKey, KeyPairJson[] keyPairs) {
+    public CurrencyJson(String code, String name, double balance, double price, String currentPublicKey, KeyPairJson[] keyPairs) {
         this.balance = balance;
         this.name = name;
         this.currentPublicKey = currentPublicKey;
         this.keyPairs = keyPairs;
         this.price = price;
+        this.code = code;
     }
+
+    public String getCode() { return code; }
 
     public String getName() {
         return name;

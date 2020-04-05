@@ -9,8 +9,9 @@ public class BinanceOrder extends Order {
      * @param amount
      * @param price
      */
-    public BinanceOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-        super(currency1, currency2, amount, price);
+    public BinanceOrder(long orderID, OrderType type, CryptoCurrency currency1,
+                        CryptoCurrency currency2, double amount, double price) {
+        super(orderID, type, currency1, currency2, amount, price);
     }
 
     @Override
@@ -18,8 +19,8 @@ public class BinanceOrder extends Order {
 
     }
 
-    @Override
-    public void updateProgress() {
-
-    }
+//    @Override
+//    public void updateProgress() {
+//
+//    }
 }
