@@ -31,9 +31,9 @@ export default class Help extends React.Component {
                  <p>Using our app provides an extra layer of security, as it is a desktop app which can be accessed while offline.
 
 
-                 This means that we do not know anything about your password, 12-word recovery phrase, private keys, or even your public addresses.Your wallet is your own personal crypto-bank - you have the keys to the front door, and the combination to the vault.
+                 This means that we do not know anything about your password, 12-word recovery phrase, private keys, or even your public addresses.
 
-                 With the power of controlling your own bank, comes the added responsibility of protecting your bank. The topics in this article will teach you how to protect your new “crypto-bank” and strengthen your security profile. As you wouldn’t want your actual bank to be a place where anyone could just walk in and take whatever they want, you shouldn’t let your wallet and computer be like that either: </p>
+                 With the power of controlling your own bank, comes the added responsibility of protecting your bank. The following procedures will teach you how to protect your new “crypto-bank” and strengthen your security profile. As you wouldn’t want your actual bank to be a place where anyone could just walk in and take whatever they want, you shouldn’t let your wallet and computer be like that either: </p>
                  <ul className="rules">
                  <li>Write down your 12 word recovery phrase on paper</li>
                  <li>Print your recovery phrases on your home printer</li>
