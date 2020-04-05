@@ -4,19 +4,29 @@ import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.Currency;
 import g37.cryapi.wallet.CurrencyInWallet;
 import g37.cryapi.wallet.Wallet;
+import org.springframework.web.client.RestTemplate;
+
+// todo: optional: make actual test receive
 
 public abstract class CurrencyInExchange extends Currency {
 
 	//todo temporary for tests
 	public boolean isSet;
 
-	private double marketPrice;
+	private Double marketPrice;
+
+	private RestTemplate restTemplate;
 
 	public CurrencyInExchange(CryptoCurrency name) {
 		super(name);
+		restTemplate = new RestTemplate();
 
 		//todo temporary for test
 		this.addTestBalance(100.0);
+	}
+
+	protected RestTemplate getRestTemplate() {
+		return restTemplate;
 	}
 
 	public abstract void updateMarketPrice();
@@ -29,23 +39,33 @@ public abstract class CurrencyInExchange extends Currency {
 	@Override
 	public abstract String getCurrentPublicKey();
 
-	public double getMarketPrice() {
+	public Double getMarketPrice() {
+		this.updateMarketPrice();
 		return this.marketPrice;
 	};
 
-	protected void setMarketPrice(double value) {
+	protected void setMarketPrice(Double value) {
 		this.marketPrice = value;
 	}
 
 	public boolean depositCurrency(double amount) {
-		return false;
+		Wallet wallet = Wallet.getInstance();
+		CurrencyInWallet currencyInWallet = wallet.getCurrencyInWallet(this.getName());
+		String address = this.getCurrentPublicKey();
+		boolean result = currencyInWallet.send(address, amount);
+
+		//todo: this is only for the test
+		if(result) {
+			this.addTestBalance(amount);
+		}
+		return result;
 	};
 
 	public boolean withdrawCurrency(double amount){
 		Wallet wallet = Wallet.getInstance();
 		CurrencyInWallet currencyInWallet = wallet.getCurrencyInWallet(this.getName()); // todo can be shortened after test
 		String address = currencyInWallet.getCurrentPublicKey();
-		boolean result = this.send(address, amount); //todo after testing stage is done this
+		boolean result = this.send(address, amount); //todo after testing stage, should be done here
 		// ...should just be return this...
 
 		//todo: below is only for test purposes

@@ -1,0 +1,27 @@
+.nav2{
+    background-color: black;
+    width: 100%;
+    height: 20vh;
+}
+.navbar{
+    width: 100%;
+    height: 13vh;
+     background: #242424;
+    color: #adadad;
+
+}
+
+#nav1 li{
+    display: inline;
+    margin-left: 7em;
+    flex:end;
+
+}
+.wrapper{
+    display: flex;
+
+}
+.content1{
+    flex:-2;
+    order:3;
+}

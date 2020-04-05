@@ -8,12 +8,12 @@ public class Tether extends CurrencyInWallet {
     private static final int pubLen = 33;
 
     public Tether() {
-        super(privLen, pubLen, CryptoCurrency.Tether);
+        super(privLen, pubLen, CryptoCurrency.USDT);
         this.addTestReceive(4, 30);
     }
 
     @Override
-    public double getPrice() {
+    public Double getPrice() {
         return 1.01;
     }
 
