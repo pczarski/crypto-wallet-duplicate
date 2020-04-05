@@ -22,6 +22,7 @@ public abstract class ExchangeAccess {
 	public ExchangeName getName() {
 		return name;
 	}
+	private OrderHandler orderHandler;
 
 	public ExchangeAccess(String apiKey, ExchangeName name) {
 		this.ApiKey = apiKey;
@@ -103,11 +104,17 @@ public abstract class ExchangeAccess {
 	 * @param amount
 	 * @param price
 	 */
-//	public Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-//		CurrencyInExchange toBuy = this.getCurrencyInExchange(currency1);
-//		CurrencyInExchange toSell = this.getCurrencyInExchange(currency2);
-//		Order order = new Order(currency1, currency2, amount, price);
-//	};
+	public Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
+		CurrencyInExchange toBuy = this.getCurrencyInExchange(currency1);
+		CurrencyInExchange toSell = this.getCurrencyInExchange(currency2);
+		//Order order = new Order(currency1, currency2, amount, price);
+		return null;
+	};
+
+	protected void changeCurrencyAmount(CryptoCurrency c1, double amount) {
+		CurrencyInExchange currency1 = this.getCurrencyInExchange(c1);
+		currency1.changeBalance(amount);
+	}
 
 	private Order makeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price, OrderType type) {
 		return null;

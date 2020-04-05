@@ -85,6 +85,13 @@ public abstract class CurrencyInExchange extends Currency {
 		return true;
 	};
 
+	public void changeBalance(double amount) {
+		if(-amount > this.getBalance()) {
+			throw new IllegalArgumentException("Balance cannot end up being negative");
+		}
+		this.setBalance(this.getBalance() + amount);
+	}
+
 	//todo for tests
 
 	public void addTestBalance(double amount) {

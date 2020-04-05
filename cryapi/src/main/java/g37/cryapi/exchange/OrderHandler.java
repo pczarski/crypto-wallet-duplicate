@@ -22,11 +22,37 @@ public class OrderHandler implements Runnable {
         this.orders.remove(order);
     }
 
+    private void removeOrder(int index) {
+        this.orders.remove(index);
+    }
+
     private void generateFulfil(Order order) {
         // todo: this is very just whatever
         double amountTOFulfil = 4 + new Random().nextDouble() * order.getInitialAmount();
         order.fulFilAmount(amountTOFulfil);
     };
+
+    private void handleOrders() {
+        for (int i = 0; i < orders.size(); i++) {
+            Order order = orders.get(i);
+
+            //check if the order has been cancelled
+            if(order.isCancelled()) {
+                removeOrder(i);
+                if(i != 0) {
+                    i--;
+                }
+                continue;
+            }
+            generateFulfil(order);
+            if(order.isComplete()) {
+                removeOrder(order);
+                if(i != 0) {
+                    i--;
+                }
+            }
+        }
+    }
 
     public synchronized void waitForOrder() throws InterruptedException {
         while(orders.isEmpty()) {
@@ -36,9 +62,12 @@ public class OrderHandler implements Runnable {
 
     @Override
     public void run() {
-        try {
-            this.waitForOrder();
-        } catch (InterruptedException e) {};
-
+        while (!Thread.interrupted()) {
+            try {
+                this.waitForOrder();
+            } catch (InterruptedException e) {
+                break;
+            }
+        }
     }
 }

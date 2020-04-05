@@ -23,7 +23,7 @@ public class Binance extends ExchangeAccess {
     public Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
         CurrencyInExchange toSell = this.getCurrencyInExchange(currency1);
         CurrencyInExchange toBuy = this.getCurrencyInExchange(currency2);
-        BinanceOrder order = new BinanceOrder(currency1, currency2, amount, price);
+       // BinanceOrder order = new BinanceOrder(currency1, currency2, amount, price);
         return null;
     }
 

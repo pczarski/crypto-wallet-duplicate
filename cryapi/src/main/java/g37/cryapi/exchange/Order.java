@@ -1,13 +1,11 @@
 package g37.cryapi.exchange;
-
-import com.sun.xml.internal.ws.util.CompletedFuture;
 import g37.cryapi.common.CryptoCurrency;
 
 import java.util.Date;
 
 import static g37.cryapi.exchange.OrderStatus.*;
 
-public abstract class Order {
+public class Order {
 
 	private long orderID;
 	private CryptoCurrency currency1;
@@ -19,6 +17,7 @@ public abstract class Order {
 	private OrderStatus status;
 	private Date date;
 	private OrderHandler orderHandler;
+	private ExchangeAccess exchangeAccess;
 
 	public Order(long orderID, OrderType type, CryptoCurrency currency1,
 				 CryptoCurrency currency2, double amount, double price) { //todo the long is for prototyping
@@ -32,12 +31,31 @@ public abstract class Order {
 		this.unitPrice = price;
 		this.date = new Date();
 	}
-
-	public void fulFilAmount(double amount) {
+	public synchronized void fulFilAmount(double amount) {
 		amountComplete = (amountComplete <= amount) ? initialAmount : amountComplete - amount;
+
+		//todo: this seems little bit not like proper OOP
+		if (type == OrderType.Buy) {
+			exchangeAccess.changeCurrencyAmount(currency1, Math.min(amount, initialAmount));
+			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * -unitPrice);
+		} else {
+			// exchange and sell are treated the same here
+			exchangeAccess.changeCurrencyAmount(currency1, -1 * Math.min(amount, initialAmount));
+			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * unitPrice);
+		}
+
+
 	}
 
-	public boolean equals(Order other) {
+	public void setExchangeAccess(ExchangeAccess exchangeAccess) {
+		this.exchangeAccess = exchangeAccess;
+	}
+
+	public ExchangeAccess getExchangeAccess() {
+		return exchangeAccess;
+	}
+
+	public synchronized boolean equals(Order other) {
 		return this.orderID == other.orderID;
 	}
 
@@ -45,7 +63,7 @@ public abstract class Order {
 		//this.orderHandler
 	}
 
-	protected abstract void performCancel();
+	protected void performCancel(){};
 
 	public void cancelOrder() {
 		this.performCancel();
@@ -55,15 +73,21 @@ public abstract class Order {
 		this.status = CANCELED;
 	};
 
-	protected abstract void performUpdate();
-
-	public void updateProgress() {
-		this.performUpdate();
+	public synchronized OrderStatus updateProgress() {
 		this.status = (this.initialAmount == this.amountComplete) ? COMPLETE : IN_PROGRESS;
+		return this.status;
 	};
 
 	public long getOrderID() {
 		return this.orderID;
+	}
+
+	public boolean isCancelled() {
+		return this.status == CANCELED;
+	}
+
+	public boolean isComplete() {
+		return amountComplete >= initialAmount; // because doubles aren't precise
 	}
 
 	public Date getDate() {
@@ -82,7 +106,7 @@ public abstract class Order {
 		return this.initialAmount;
 	}
 
-	public double getAmountComplete() {
+	public synchronized double getAmountComplete() {
 		return this.amountComplete;
 	}
 
