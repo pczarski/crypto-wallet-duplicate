@@ -1,28 +1,73 @@
 package g37.cryapi.exchange;
 
+import com.sun.xml.internal.ws.util.CompletedFuture;
 import g37.cryapi.common.CryptoCurrency;
+
+import java.util.Date;
+
+import static g37.cryapi.exchange.OrderStatus.*;
 
 public abstract class Order {
 
-	private String orderID;
-	private String dateCreated;
+	private long orderID;
 	private CryptoCurrency currency1;
 	private CryptoCurrency currency2;
 	private double initialAmount;
 	private double amountComplete;
-	private int value;
+	private double unitPrice;
+	private OrderType type;
+	private OrderStatus status;
+	private Date date;
+	private OrderHandler orderHandler;
 
-	public abstract void cancelOrder();
+	public Order(long orderID, OrderType type, CryptoCurrency currency1,
+				 CryptoCurrency currency2, double amount, double price) { //todo the long is for prototyping
+		this.orderID = orderID;
+		this.type = type;
+		this.currency1 = currency1;
+		this.currency2 = currency2;
+		this.initialAmount = amount;
+		this.amountComplete = 0;
+		this.status = NEW;
+		this.unitPrice = price;
+		this.date = new Date();
+	}
 
-	public abstract void updateProgress();
+	public void fulFilAmount(double amount) {
+		amountComplete = (amountComplete <= amount) ? initialAmount : amountComplete - amount;
+	}
 
-	public String getOrderID() {
+	public boolean equals(Order other) {
+		return this.orderID == other.orderID;
+	}
+
+	protected void placeOrder(){
+		//this.orderHandler
+	}
+
+	protected abstract void performCancel();
+
+	public void cancelOrder() {
+		this.performCancel();
+		if(this.status != COMPLETE){
+			this.status = CANCELED;
+		}
+		this.status = CANCELED;
+	};
+
+	protected abstract void performUpdate();
+
+	public void updateProgress() {
+		this.performUpdate();
+		this.status = (this.initialAmount == this.amountComplete) ? COMPLETE : IN_PROGRESS;
+	};
+
+	public long getOrderID() {
 		return this.orderID;
 	}
 
-	public String getDate() {
-		// TODO - implement Order.getDate
-		throw new UnsupportedOperationException();
+	public Date getDate() {
+		return this.date;
 	}
 
 	public CryptoCurrency getCurrency1() {
@@ -34,29 +79,15 @@ public abstract class Order {
 	}
 
 	public double getInitialAmount() {
-		// TODO - implement Order.getInitialAmount
-		throw new UnsupportedOperationException();
+		return this.initialAmount;
 	}
 
 	public double getAmountComplete() {
 		return this.amountComplete;
 	}
 
-	/**
-	 * 
-	 * @param currency1
-	 * @param currency2
-	 * @param amount
-	 * @param price
-	 */
-	public Order(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-		// TODO - implement Order.Order
-		throw new UnsupportedOperationException();
-	}
-
-	public double getValue() {
-		// TODO - implement Order.getValue
-		throw new UnsupportedOperationException();
+	public double getUnitPrice() {
+		return this.unitPrice;
 	}
 
 }

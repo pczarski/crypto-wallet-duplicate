@@ -5,6 +5,7 @@ import g37.cryapi.wallet.CurrencyInWallet;
 import g37.cryapi.wallet.Wallet;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class ExchangeAccess {
 
@@ -12,6 +13,7 @@ public abstract class ExchangeAccess {
 	private String ApiKey;
 	private ExchangeName name;
 	private ArrayList<CurrencyInExchange> currencies;
+	private ArrayList<Order> orders;
 
 	public String getApiKey() {
 		return ApiKey;
@@ -26,6 +28,7 @@ public abstract class ExchangeAccess {
 		this.name = name;
 		currencies = new ArrayList<>();
 		this.addSupportedCurrencies();
+		this.orders = new ArrayList<>();
 	}
 
 	//todo: should we do factory here?? - it's kinda like built in factory now
@@ -45,8 +48,7 @@ public abstract class ExchangeAccess {
 	}
 
 	public ArrayList<Order> getOrders() {
-		// TODO - implement ExchangeAccess.getOrders
-		throw new UnsupportedOperationException();
+		return this.orders;
 	}
 
 	/**
@@ -92,6 +94,8 @@ public abstract class ExchangeAccess {
 	 */
 	public abstract Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price);
 
+
+
 	/**
 	 *
 	 * @param currency1
@@ -99,7 +103,17 @@ public abstract class ExchangeAccess {
 	 * @param amount
 	 * @param price
 	 */
-	public abstract Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price);
+//	public Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
+//		CurrencyInExchange toBuy = this.getCurrencyInExchange(currency1);
+//		CurrencyInExchange toSell = this.getCurrencyInExchange(currency2);
+//		Order order = new Order(currency1, currency2, amount, price);
+//	};
+
+	private Order makeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price, OrderType type) {
+		return null;
+	}
+
+	//protected abstract void performOrder(CurrencyInExchange toBuy);
 
 	/**
 	 *
