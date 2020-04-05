@@ -16,7 +16,6 @@ public class CoinbaseOrder extends Order {
 
     @Override
     public void cancelOrder() {
-// test
     }
 
 }
