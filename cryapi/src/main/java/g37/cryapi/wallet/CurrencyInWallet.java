@@ -1,17 +1,13 @@
 package g37.cryapi.wallet;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.Currency;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class CurrencyInWallet extends Currency {
-
-	private static final String PRICE_BASE_URL = "https://api.coinbase.com/v2/prices/";
 
 	private final int privLen;
 	private final int pubLen;
@@ -19,13 +15,6 @@ public abstract class CurrencyInWallet extends Currency {
 	private final static int N_KEY_PAIRS = 16;
 	private ArrayList<KeyPair> keyPairs;
 	private final AtomicLong counter = new AtomicLong();
-	private RestTemplate restTemplate;
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	private Double price;
 
 	// TODO: temporary variable for prototype
 	protected int isSet;
@@ -36,8 +25,6 @@ public abstract class CurrencyInWallet extends Currency {
 		this.pubLen = pubLen;
 		this.keyPairs = new ArrayList<>();
 		this.generateKeys();
-		this.restTemplate = new RestTemplate();
-		this.updatePrice();
 
 		//todo: temporary
 		this.isSet = 0;
@@ -63,24 +50,7 @@ public abstract class CurrencyInWallet extends Currency {
 		return this.keyPairs;
 	}
 
-	public Double getPrice() {
-		this.updatePrice();
-		return this.price;
-	};
-
-	private void updatePrice() {
-		try {
-			String url = PRICE_BASE_URL + this.getName() + "-USD/spot";
-			MarketPrice marketPrice = restTemplate.getForObject(url, MarketPrice.class);
-			double value = Double.parseDouble(marketPrice.getData().get("amount"));
-			this.setPrice(value);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-			if(this.price == null) {
-				this.setPrice(1.0);
-			}
-		}
-	}
+	public abstract double getPrice();
 
 	public void updateBalance() {
 		double _balance = 0;
@@ -163,17 +133,4 @@ public abstract class CurrencyInWallet extends Currency {
 		this.addReceiveRecord(pair, origin, amount);
 	}
 
-}// JUST A MARKER TO SEE CHANGES
-
-class MarketPrice implements Serializable {
-
-	public Map<String, String> getData() {
-		return data;
-	}
-
-	public void setData(Map<String, String> data) {
-		this.data = data;
-	}
-
-	private Map<String, String> data;
 }
