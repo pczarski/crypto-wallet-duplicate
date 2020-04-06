@@ -29,8 +29,6 @@ public abstract class CurrencyInExchange extends Currency {
 		return restTemplate;
 	}
 
-	public abstract void updateMarketPrice();
-
 	protected abstract void performSend(String address, double amount);
 
 	@Override
@@ -91,6 +89,10 @@ public abstract class CurrencyInExchange extends Currency {
 		}
 		this.setBalance(this.getBalance() + amount);
 	}
+
+	public abstract void updateMarketPrice();
+
+	public abstract double getMarketPriceIn(CryptoCurrency currencyIn);
 
 	//todo for tests
 

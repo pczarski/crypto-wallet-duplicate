@@ -1,5 +1,5 @@
 package g37.cryapi.common;
-
+//test change
 public enum CryptoCurrency {
 	BTC("Bitcoin"),
 	DASH("Dash"),

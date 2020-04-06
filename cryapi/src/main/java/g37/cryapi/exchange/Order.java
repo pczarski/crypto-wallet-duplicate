@@ -45,6 +45,8 @@ public class Order {
 			exchangeAccess.changeCurrencyAmount(currency1, -1 * Math.min(amount, initialAmount));
 			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * unitPrice);
 		}
+
+		this.updateProgress();
 	}
 
 	public void setExchangeAccess(ExchangeAccess exchangeAccess) {

@@ -1,5 +1,6 @@
 package g37.cryapi.exchange;
 
+import com.sun.org.apache.regexp.internal.RE;
 import g37.cryapi.common.CryptoCurrency;
 
 // todo: perhaps all these exchanges should use Singleton??
@@ -15,9 +16,21 @@ public class Binance extends ExchangeAccess {
     }
 
     @Override
+    protected void addSupportedCurrencies() {
+        for(CryptoCurrency currency: CryptoCurrency.values()) {
+            this.addCurrency(new CurrencyInBinance(currency));
+        }
+    }
+
+    @Override
     public void withdrawAll() {
 
     }
+
+//    @Override
+//    public double valueInCurrency(CryptoCurrency currency, CryptoCurrency inCurrency) {
+//        return this.getCurrencyInExchange(currency).getMarketPriceIn(inCurrency);
+//    }
 
 //    @Override
 //    public Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
