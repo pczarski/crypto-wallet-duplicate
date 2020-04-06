@@ -18,4 +18,4 @@ public class CoinbaseOrder extends Order {
     public void cancelOrder() {
     }
 
-}// JUST A MARKER TO SEE CHANGES
+}

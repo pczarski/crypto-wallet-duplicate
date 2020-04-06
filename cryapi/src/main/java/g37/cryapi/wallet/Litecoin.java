@@ -8,8 +8,14 @@ public class Litecoin extends CurrencyInWallet {
     private static final int pubLen = 33;
 
     public Litecoin() {
-        super(privLen, pubLen, CryptoCurrency.LTC);
+        super(privLen, pubLen, CryptoCurrency.Litecoin);
         this.addTestReceive(3, 20);
+    }
+
+
+    @Override
+    public double getPrice() {
+        return 50.1 + Math.random();
     }
 
     @Override

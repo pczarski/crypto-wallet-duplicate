@@ -8,9 +8,15 @@ public class Dash extends CurrencyInWallet {
     private static final int pubLen = 33;
 
     public Dash() {
-        super(privLen, pubLen, CryptoCurrency.DASH);
+        super(privLen, pubLen, CryptoCurrency.Dash);
         this.addTestReceive(9, 10);
     }
+
+    @Override
+    public double getPrice() {
+        return 103.2;
+    }
+
 
     @Override
     protected void updateKeyBalance(KeyPair key) {
