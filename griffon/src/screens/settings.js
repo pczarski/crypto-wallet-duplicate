@@ -14,7 +14,7 @@ export default class Settings extends React.Component {
 
       <div className="wrapper">
        <Nav/>
-       <nav class="navbar ">
+       <nav className="navbar ">
        <h1>Settings</h1>
 		<ul id="nav1">
     <Link to="/wallet">
