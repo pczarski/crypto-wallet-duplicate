@@ -109,7 +109,7 @@ public class ExchangeController {
             return new TextResponse("Exchange or currency not found", -1);
         }
 
-    } // http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5
+    } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
 
 
     /* orders */
