@@ -7,7 +7,7 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
-import {getRequest, getCurr} from '../lib/backendHandler.js';
+import {getCurr} from '../lib/backendHandler.js';
 import {roundTo2} from '../lib/helper.js';
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
@@ -23,30 +23,34 @@ export default class Wallet extends React.Component {
     super(props);
     this.state= {
       supportedCurr: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
-      currency: [{name: "dummy", balance: "dick"}]
+      currency: []
     }
     console.log(this.state.supportedCurr)
   }
-
   getCurrencies () {
-    for (let i of this.state.supportedCurr) {
-      let req = getCurr(i)
-      // console.log(req)
-      let curr = {
-        name: req.name,
-        balance: req.balance
-      }
-      this.setState(prevState => ({
-        currency: [...prevState.currency, curr]
-      }))
-    }
+    let currencies = [];
+    let supported = this.state.supportedCurr;
+    let getCurs = supported.map((i) => {
+      return new Promise((resolve, reject) => {
+        let req = getCurr(i)
+        currencies.push({
+          name: req.name,
+          balance: req.balance
+        }); 
+        resolve(true);
+      });
+    })
+    Promise.all(getCurs).then((d) => {
+      console.log(currencies)
+      this.setState({
+        currency: [...this.state.currency, ...currencies]
+      })
+    })
   }
 
   componentDidMount() {
-    // we don't "NEED" all of the calls. we can just call once and store into state
-    // also, ideally round all of the prices
     this.getCurrencies()
-    console.log(this.state.currency)
+    console.log(this.state.currency, "after get")
   }
 
   render () {

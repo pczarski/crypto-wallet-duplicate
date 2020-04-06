@@ -29,6 +29,7 @@ export default class Balance extends React.Component {
     
     this.getTotalBal("BTC")
   }
+  
   componentDidMount () {
     let req = getRequest("currency", "name", "Bitcoin");
     this.setState({
@@ -42,8 +43,8 @@ export default class Balance extends React.Component {
     let totalBal = 0;
     for (let i = 0; i<this.state.supportedCurr.length; i++) {
       let req = await getCurr(this.state.supportedCurrNames[i])
-      let value = await converter.convert(req.balance, this.state.supportedCurr[i], curr);
-      // console.log(req, value, totalBal)
+      let value = await converter.convert(req.balance, this.state.supportedCurr[i], curr);  
+      // console.log(req, value, totalBal) 
       totalBal += value
     }
     this.setState({totalBal: totalBal})
