@@ -16,11 +16,10 @@ public class Order {
 	private OrderType type;
 	private OrderStatus status;
 	private Date date;
-	private OrderHandler orderHandler;
 	private ExchangeAccess exchangeAccess;
 
 	public Order(long orderID, OrderType type, CryptoCurrency currency1,
-				 CryptoCurrency currency2, double amount, double price) { //todo the long is for prototyping
+				 CryptoCurrency currency2, double amount, double price, ExchangeAccess exchange) { //todo the long is for prototyping
 		this.orderID = orderID;
 		this.type = type;
 		this.currency1 = currency1;
@@ -29,8 +28,11 @@ public class Order {
 		this.amountComplete = 0;
 		this.status = NEW;
 		this.unitPrice = price;
+		this.exchangeAccess = exchange;
 		this.date = new Date();
 	}
+
+
 	public synchronized void fulFilAmount(double amount) {
 		amountComplete = (amountComplete <= amount) ? initialAmount : amountComplete - amount;
 
@@ -43,8 +45,6 @@ public class Order {
 			exchangeAccess.changeCurrencyAmount(currency1, -1 * Math.min(amount, initialAmount));
 			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * unitPrice);
 		}
-
-
 	}
 
 	public void setExchangeAccess(ExchangeAccess exchangeAccess) {
@@ -112,6 +112,14 @@ public class Order {
 
 	public double getUnitPrice() {
 		return this.unitPrice;
+	}
+
+	public OrderType getType() {
+		return this.type;
+	}
+
+	public OrderStatus getStatus() {
+		return this.status;
 	}
 
 }

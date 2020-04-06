@@ -1,14 +1,11 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
-import g37.cryapi.wallet.CurrencyInWallet;
-import g37.cryapi.wallet.Wallet;
 
+import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class ExchangeAccess {
-
 
 	private String ApiKey;
 	private ExchangeName name;
@@ -56,12 +53,14 @@ public abstract class ExchangeAccess {
 	 *
 	 * @param id
 	 */
-	public Order getOrder(String id) {
-		// TODO - implement ExchangeAccess.getOrder
-		throw new UnsupportedOperationException();
+	public Order getOrder(long id) throws NoSuchObjectException {
+		for(Order order: orders) {
+			if(order.getOrderID() == id) {
+				return  order;
+			}
+		}
+		throw new NoSuchObjectException("no order with id: "+ id +" found");
 	}
-
-
 
 	public ArrayList<CurrencyInExchange> getCurrenciesInExchange() {
 		return this.currencies;
@@ -93,42 +92,46 @@ public abstract class ExchangeAccess {
 	 * @param amount
 	 * @param price
 	 */
-	public abstract Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price);
-
-
-
-	/**
-	 *
-	 * @param currency1
-	 * @param currency2
-	 * @param amount
-	 * @param price
-	 */
-	public Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-		CurrencyInExchange toBuy = this.getCurrencyInExchange(currency1);
-		CurrencyInExchange toSell = this.getCurrencyInExchange(currency2);
-		//Order order = new Order(currency1, currency2, amount, price);
-		return null;
+	public Order makeSellOrder(long id, CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
+		if(this.getCurrencyInExchange(currency1).getBalance() < amount) {
+			throw new IllegalStateException();
+		}
+		Order order = new Order(id, OrderType.Sell, currency1, currency2, amount, price, this);
+		createOrder(order);
+		return order;
 	};
+
+	public Order makeExchangeOrder(long id, CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
+		if(this.getCurrencyInExchange(currency1).getBalance() < amount) {
+			throw new IllegalStateException();
+		}
+		Order order = new Order(id, OrderType.Exchange, currency1, currency2, amount, price, this);
+		createOrder(order);
+		return order;
+	};
+
+	public Order makeBuyOrder(long id, CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
+		if(this.getCurrencyInExchange(currency2).getBalance() < amount * price){
+			throw new IllegalStateException();
+		}
+		Order order = new Order(id, OrderType.Buy, currency1, currency2, amount, price, this);
+        createOrder(order);
+		return order;
+	};
+
+	private void createOrder(Order order) {
+		orders.add(order);
+		orderHandler.placeOrder(order);
+	}
 
 	protected void changeCurrencyAmount(CryptoCurrency c1, double amount) {
 		CurrencyInExchange currency1 = this.getCurrencyInExchange(c1);
 		currency1.changeBalance(amount);
 	}
 
-	private Order makeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price, OrderType type) {
+	public Order makeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price, OrderType type) {
 		return null;
 	}
-
-	//protected abstract void performOrder(CurrencyInExchange toBuy);
-
-	/**
-	 *
-	 * @param currency1
-	 * @param currency2
-	 * @param amount
-	 */
-	public abstract Order makeExchangeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount);
 
 
 	//TODO for tests
