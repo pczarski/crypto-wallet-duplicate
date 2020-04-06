@@ -13,7 +13,7 @@ public class OrderHandler implements Runnable {
         this.orders = new ArrayList<>();
     }
 
-    private void addOrder(Order order) {
+    public void placeOrder(Order order) {
         this.orders.add(order);
         notifyAll();
     }
@@ -68,6 +68,7 @@ public class OrderHandler implements Runnable {
             } catch (InterruptedException e) {
                 break;
             }
+            this.handleOrders();
         }
     }
 }

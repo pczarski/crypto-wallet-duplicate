@@ -12,6 +12,13 @@
 
 ###### `{"seedPhrase":"[thank, original, sick, spice, fuel, column, city, blast, rain, used, tray, input]"}`
 
+##### Get wallet:
+###### `http://localhost:8080/seed`
+##### Example reply:
+
+###### `{"seedPhrase":"[thank, original, sick, spice, fuel, column, city, blast, rain, used, tray, input]"}`
+
+
 ## Getting currency:
 #### successful:
 ##### Example Call:

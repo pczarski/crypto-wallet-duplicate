@@ -2,11 +2,7 @@ package g37.cryapi.exchange.api;
 
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
-import g37.cryapi.exchange.CurrencyInExchange;
-import g37.cryapi.exchange.ExchangeAccess;
-import g37.cryapi.exchange.ExchangeHandler;
-import g37.cryapi.exchange.ExchangeName;
-import g37.cryapi.wallet.Wallet;
+import g37.cryapi.exchange.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -87,5 +83,41 @@ public class ExchangeController {
         }
 
     } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
+
+
+    /* orders */
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/order") // setting up the url location
+    public OrderJson makeOrder(
+            @RequestParam(value = "type") String type,
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "currency1") String currency1,
+            @RequestParam(value = "currency2") String currency2,
+            @RequestParam(value = "amount") double amount,
+            @RequestParam(value = "price") double price
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.placeOrder(
+                    ExchangeName.valueOf(exchange), OrderType.valueOf(type),
+                    CryptoCurrency.valueOf(currency1), CryptoCurrency.valueOf(currency2),
+                    amount, price
+                    );
+            return new OrderJson(
+                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+                    );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (IllegalStateException e) {
+            return new OrderJson(0, "Insufficient Balance", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/order?&type=Sellexchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
 
 }

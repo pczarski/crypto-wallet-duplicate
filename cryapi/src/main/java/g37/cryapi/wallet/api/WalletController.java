@@ -36,7 +36,21 @@ public class WalletController {
         wallet.recoverWallet(name);
         return new WalletJson(wallet.getRecoveryPhrase());
 
+    }// http://localhost:8080/new-wallet?type=new
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/seed") // setting up the url location
+    public WalletJson getWallet() {
+
+        if (!Wallet.getInstance().getIsSetUp()) {
+            Wallet.getInstance().setUpNew();
+        }
+        // get wallet instance
+        Wallet wallet = Wallet.getInstance();
+        return new WalletJson(wallet.getRecoveryPhrase());
     }
-} // http://localhost:8080/new-wallet?type=new
+}
+
+
 
 // accessed through:  {or pass existing seed as argument, as opposed to "new"}
