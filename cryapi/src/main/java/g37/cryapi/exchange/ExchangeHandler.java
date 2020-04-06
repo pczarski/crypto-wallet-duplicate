@@ -83,5 +83,5 @@ public class ExchangeHandler {
 		this.exchanges.add(new Binance("XX_TEST_BINANCE_KEY_XX"));
 		this.exchanges.add(new Coinbase("XX_TEST_COINBASE_KEY_XX"));
 	}
-
+// JUST A MARKER TO SEE CHANGES
 }

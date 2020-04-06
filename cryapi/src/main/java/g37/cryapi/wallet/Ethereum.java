@@ -8,13 +8,8 @@ public class Ethereum extends CurrencyInWallet {
     private static final int pubLen = 33;
 
     public Ethereum() {
-        super(privLen, pubLen, CryptoCurrency.Ethereum);
+        super(privLen, pubLen, CryptoCurrency.ETH);
         this.addTestReceive(12, 8);
-    }
-
-    @Override
-    public double getPrice() {
-        return 359.99;
     }
 
     @Override
