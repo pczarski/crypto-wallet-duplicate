@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.scss';
 
-import {getRequest, getCurr} from '../lib/backendHandler.js';
+import {getCurr} from '../lib/backendHandler.js';
 
 import { Converter } from "easy-currencies";
 

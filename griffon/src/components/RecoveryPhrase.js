@@ -13,6 +13,7 @@ export default class RecoveryPhrase extends React.Component {
     super(props);    
 
     this.select = this.select.bind(this);
+    this.toggle = this.toggle.bind(this);
 
     this.state = {
       start: false,
@@ -30,16 +31,21 @@ export default class RecoveryPhrase extends React.Component {
     console.log(this.state)
     if (this.state.showSeed === false) {
       this.setState({start : true, showSeed: true})
-    } else {
-
     }
   }
   timerDone(){
     this.setState({start: false, showSeed : false})
   }
 
-  toggle = () => this.setState({modal: !this.state.modal})
+  // toggle = () => this.setState({modal: !this.state.modal})
+  toggle() {
+    if (this.state.showSeed === false) {
+    this.setState({modal: !this.state.modal})
+    } else {
 
+      this.timerDone()
+    }
+  }
   render () {
   const Stopwatch = () => (
     <ReactStopwatch
@@ -73,6 +79,7 @@ export default class RecoveryPhrase extends React.Component {
       <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
       <ModalBody>
         Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
+        It will only display for 3 minutes before requiring authentification again.
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={this.select}>Continue</Button>{' '}
