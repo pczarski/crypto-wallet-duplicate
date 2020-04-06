@@ -14,7 +14,7 @@ import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
 import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
 import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
 import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
-
+import thetherLogo from "../../node_modules/cryptocurrency-icons/svg/color/usdt.svg";
 import { Button } from 'reactstrap';
 
 
@@ -22,7 +22,7 @@ export default class Wallet extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      supportedCurr: ["Bitcoin", "Ethereum", "Dash", "Litecoin"],
+      supportedCurr: ["BTC", "ETH", "DASH", "LTC", 	"USDT"],
       currency: [],
       seed: null
     }
@@ -112,6 +112,20 @@ export default class Wallet extends React.Component {
                       <b>{this.state.currency[3].name}</b> <br /> <br />
                       <b>Price</b> {roundTo2(this.state.currency[3].price)} <br />
                       <b>Balance</b> {roundTo2(this.state.currency[3].balance)}
+                    </div>
+                  }
+                </div>
+              </div> 
+              {/* change to thether */}
+              <div className ="litecoin-container">
+                <img src={thetherLogo} alt = "LiteCoin"></img>
+                <div className = "litecoin-overlay">
+                  {
+                    this.state.currency && this.state.currency[2] &&
+                    <div className ="litecoin-price">
+                      <b>{this.state.currency[4].name}</b> <br /> <br />
+                      <b>Price</b> {roundTo2(this.state.currency[4].price)} <br />
+                      <b>Balance</b> {roundTo2(this.state.currency[4].balance)}
                     </div>
                   }
                 </div>

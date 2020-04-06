@@ -21,14 +21,10 @@ export default class RecoveryPhrase extends React.Component {
       seed: getRequest('seed', null, null).seedPhrase,
       modal: false
     }
-    console.log(this.state.seed)
-
   }
-
 
   select(e) {
     this.toggle()
-    console.log(this.state)
     if (this.state.showSeed === false) {
       this.setState({start : true, showSeed: true})
     }
@@ -37,34 +33,41 @@ export default class RecoveryPhrase extends React.Component {
     this.setState({start: false, showSeed : false})
   }
 
-  // toggle = () => this.setState({modal: !this.state.modal})
   toggle() {
     if (this.state.showSeed === false) {
-    this.setState({modal: !this.state.modal})
+      this.setState({modal: !this.state.modal})
     } else {
-
       this.timerDone()
     }
   }
+  
+  toHHMMSS (time) {
+    var sec_num = parseInt(time, 10); // don't forget the second param
+    var minutes = Math.floor((sec_num) / 60);
+    var seconds = sec_num - (minutes * 60);
+
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return minutes+':'+seconds;
+}
+
   render () {
+
   const Stopwatch = () => (
     <ReactStopwatch
       seconds={0}
       minutes={0}
       hours={0}
       autoStart={this.state.start}
-      limit="00:00:05"
-
-      onChange={({ hours, minutes, seconds }) => {
-      }}
+      limit="00:03:00"
 
       onCallback={() => this.timerDone()}
 
-      render={({ formatted, hours, minutes, seconds }) => {
+      render={({ seconds, minutes }) => {
         return (
           <div>
             <p>
-              Formatted: { formatted }
+              Time left: {this.toHHMMSS(180 - seconds + (60 * minutes)) }
             </p>
           </div>
         );
@@ -73,7 +76,7 @@ export default class RecoveryPhrase extends React.Component {
   );
 
     return (
-    <div className="">
+    <div>
       <div>
     <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
       <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
@@ -82,7 +85,7 @@ export default class RecoveryPhrase extends React.Component {
         It will only display for 3 minutes before requiring authentification again.
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={this.select}>Continue</Button>{' '}
+        <Button color="primary" onClick={this.select}>Continue</Button>
         <Button color="secondary" onClick={this.toggle}>Cancel</Button>
       </ModalFooter>
     </Modal>
@@ -91,7 +94,6 @@ export default class RecoveryPhrase extends React.Component {
       <Stopwatch/>
       {this.state.showSeed && 
       <p>
-        
         {this.state.seed}
       </p>
       }
