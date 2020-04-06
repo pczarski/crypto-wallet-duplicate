@@ -1,5 +1,5 @@
 
 /griffon/.idea
 .idea
-
-/cryapi/.gradle
+*.lock
+*.bin
