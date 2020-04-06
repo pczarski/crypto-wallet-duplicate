@@ -163,7 +163,7 @@ public abstract class CurrencyInWallet extends Currency {
 		this.addReceiveRecord(pair, origin, amount);
 	}
 
-}
+}// JUST A MARKER TO SEE CHANGES
 
 class MarketPrice implements Serializable {
 

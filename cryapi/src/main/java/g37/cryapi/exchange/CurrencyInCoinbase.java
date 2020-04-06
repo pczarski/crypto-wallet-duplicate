@@ -1,5 +1,5 @@
 package g37.cryapi.exchange;
-
+// JUST A MARKER TO SEE CHANGES
 import g37.cryapi.common.CryptoCurrency;
 //import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -30,7 +30,7 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     }
 
-
+    // JUST A MARKER TO SEE CHANGES
     @Override
     public void updateMarketPrice() {
         try {

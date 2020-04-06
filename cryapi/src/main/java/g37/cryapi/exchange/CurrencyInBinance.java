@@ -26,7 +26,7 @@ public class CurrencyInBinance extends CurrencyInExchange {
     @Override
     protected void performSend(String address, double amount) {
 
-    }
+    }// JUST A MARKER TO SEE CHANGES
 
     @Override
     public void updateMarketPrice() {
@@ -66,3 +66,4 @@ class MarketPriceBinance implements Serializable {
         this.price = price;
     }
 }
+// JUST A MARKER TO SEE CHANGES
