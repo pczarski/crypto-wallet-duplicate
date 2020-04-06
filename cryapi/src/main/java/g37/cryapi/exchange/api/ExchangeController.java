@@ -3,6 +3,7 @@ package g37.cryapi.exchange.api;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
 import g37.cryapi.exchange.*;
+import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +13,9 @@ public class ExchangeController {
     private void runHelpers() {
         if(ExchangeHandler.getInstance().getExchanges().size() == 0) {
             ExchangeHandler.getInstance().addTestExchanges();
+        }
+        if(!Wallet.getInstance().getIsSetUp()) {
+            Wallet.getInstance().setUpNew();
         }
     }
 
@@ -84,6 +88,29 @@ public class ExchangeController {
 
     } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
 
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/deposit") // setting up the url location
+    public TextResponse depositCurrency(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "currency", defaultValue = "Bitcoin") String currency,
+            @RequestParam(value = "amount", defaultValue = "0.0") double amount
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
+            CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
+            if(selectedCurrency.depositCurrency(amount)) {
+                return new TextResponse("success", 1); //todo the id thing, smth is missing here
+            };
+            return new TextResponse("insufficient balance", 0);
+        }
+        catch (IllegalArgumentException e) {
+            return new TextResponse("Exchange or currency not found", -1);
+        }
+
+    } // http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5
+
 
     /* orders */
 
@@ -118,6 +145,6 @@ public class ExchangeController {
                     -1, -1, null, null, null);
         }
 
-    } // http://localhost:8080/order?&type=Sellexchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+    } // http://localhost:8080/order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
 
 }
