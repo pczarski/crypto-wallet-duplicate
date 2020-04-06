@@ -10,13 +10,13 @@
 
 ##### Example reply:
 
-###### `{"seedPhrase":"[thank, original, sick, spice, fuel, column, city, blast, rain, used, tray, input]"}`
+###### `{"seedPhrase":"joke curious express sunset grow tray hello explain wasp dinner ridge bench"}`
 
 ##### Get wallet:
 ###### `http://localhost:8080/seed`
 ##### Example reply:
 
-###### `{"seedPhrase":"[thank, original, sick, spice, fuel, column, city, blast, rain, used, tray, input]"}`
+###### `{"seedPhrase":"joke curious express sunset grow tray hello explain wasp dinner ridge bench"}`
 
 
 ## Getting currency:
