@@ -49,6 +49,15 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
             System.out.println(e.toString());
         }
     }
+
+    @Override
+    public double getMarketPriceIn(CryptoCurrency currencyIn) {
+            RestTemplate restTemplate = this.getRestTemplate();
+            String url = PRICE_URL_BASE + this.getName() + "-" + currencyIn.toString() + "/buy";
+            MarketPriceCoinbase marketPrice = restTemplate.getForObject(url, MarketPriceCoinbase.class);
+            return Double.parseDouble(marketPrice.getData().get("amount"));
+    }
+
 } //https://api.coinbase.com/v2/prices/BTC-USD/spot
 
 class MarketPriceCoinbase implements Serializable {

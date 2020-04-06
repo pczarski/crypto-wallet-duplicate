@@ -15,6 +15,13 @@ public class Coinbase extends ExchangeAccess {
     }
 
     @Override
+    protected void addSupportedCurrencies() {
+        for(CryptoCurrency currency: CryptoCurrency.values()) {
+            this.addCurrency(new CurrencyInCoinbase(currency));
+        }
+    }
+
+    @Override
     public void withdrawAll() {
 
     }

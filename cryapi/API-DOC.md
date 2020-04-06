@@ -109,3 +109,16 @@
 `{"response":"success","id":1}`
 
 ####
+
+## Make Orders
+
+#### call
+    types include: Sell, Buy
+
+`http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4`
+
+### reply:
+
+`{"id":1,"currency1":"BTC","currency2":"ETH","initialAmount":5.0,"amountComplete":0.0,"unitPrice":10.0,"type":"Sell","status":"NEW","percentComplete":0.0,"date":"Mon Apr 06 18:55:59 BST 2020"}`
+
+## Get Order
