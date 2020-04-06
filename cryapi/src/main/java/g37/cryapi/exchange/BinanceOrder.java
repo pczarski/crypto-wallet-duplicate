@@ -10,8 +10,8 @@ public class BinanceOrder extends Order {
      * @param price
      */
     public BinanceOrder(long orderID, OrderType type, CryptoCurrency currency1,
-                        CryptoCurrency currency2, double amount, double price) {
-        super(orderID, type, currency1, currency2, amount, price);
+                        CryptoCurrency currency2, double amount, double price, ExchangeAccess exchange) {
+        super(orderID, type, currency1, currency2, amount, price, exchange);
     }
 
     @Override
