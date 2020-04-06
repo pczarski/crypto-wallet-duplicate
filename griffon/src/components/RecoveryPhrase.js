@@ -2,7 +2,10 @@ import React from 'react';
 import '../styles/App.scss';
 import ReactStopwatch from 'react-stopwatch';
  
-import {Button} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+import {getRequest} from '../lib/backendHandler'
+
 
 export default class RecoveryPhrase extends React.Component {
   
@@ -14,21 +17,30 @@ export default class RecoveryPhrase extends React.Component {
     this.state = {
       start: false,
       showSeed: false,
-      seed: null
+      seed: getRequest('seed', null, null).seedPhrase,
+      modal: false
     }
+    console.log(this.state.seed)
 
   }
 
 
   select(e) {
-    this.setState({start : true, showSeed: true})
+    this.toggle()
+    console.log(this.state)
+    if (this.state.showSeed === false) {
+      this.setState({start : true, showSeed: true})
+    } else {
+
+    }
   }
   timerDone(){
     this.setState({start: false, showSeed : false})
   }
 
-  render () {
+  toggle = () => this.setState({modal: !this.state.modal})
 
+  render () {
   const Stopwatch = () => (
     <ReactStopwatch
       seconds={0}
@@ -53,16 +65,30 @@ export default class RecoveryPhrase extends React.Component {
       }}
     />
   );
+
     return (
     <div className="">
+      <div>
+    <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
+      <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
+      <ModalBody>
+        Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={this.select}>Continue</Button>{' '}
+        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+      </ModalFooter>
+    </Modal>
+    </div>
       <h1>Your RecoveryPhrase</h1>
       <Stopwatch/>
       {this.state.showSeed && 
       <p>
-        extra dice power cupboard doctor kangaroo deal palm viable force mercy mutual
+        
+        {this.state.seed}
       </p>
       }
-      <Button className="btn btn-primary" size="lg" block onClick={this.select}>Start</Button>
+      <Button className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
     </div>
     )
   }
