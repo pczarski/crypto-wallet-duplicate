@@ -31,6 +31,8 @@ public class Order {
 		this.exchangeAccess = exchange;
 		this.date = new Date();
 	}
+
+
 	public synchronized void fulFilAmount(double amount) {
 		amountComplete = (amountComplete <= amount) ? initialAmount : amountComplete - amount;
 

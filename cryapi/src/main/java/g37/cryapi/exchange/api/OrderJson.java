@@ -25,8 +25,8 @@ public class OrderJson {
         this.initialAmount = initialAmount;
         this.amountComplete = amountComplete;
         this.unitPrice = unitPrice;
-        this.type = type;
         this.status = status;
+        this.type = type;
         this.percentComplete = amountComplete / initialAmount * 100;
         this.date = date;
     }
