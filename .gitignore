@@ -1,5 +1,7 @@
 
 /griffon/.idea
 .idea
+.gradle
 *.lock
 *.bin
+

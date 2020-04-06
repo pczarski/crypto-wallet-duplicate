@@ -31,17 +31,25 @@ public class CurrencyInBinance extends CurrencyInExchange {
     @Override
     public void updateMarketPrice() {
         try {
-            RestTemplate restTemplate = this.getRestTemplate();
-            MarketPriceBinance marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName()+"USDT", MarketPriceBinance.class);
-            System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
-            this.setMarketPrice(marketPrice.getPrice());
+//            RestTemplate restTemplate = this.getRestTemplate();
+//            MarketPriceBinance marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName()+"USDT", MarketPriceBinance.class);
+//            System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
+            this.setMarketPrice(getMarketPriceIn(CryptoCurrency.USDT));
 
         } catch (Exception e) {
             if (this.getMarketPrice() == null) {
                 this.setMarketPrice(1.0);
             }
             System.out.println(e.toString());
+            System.out.println("from currency: " + this.getName().toString());
         }
+    }
+
+    @Override
+    public double getMarketPriceIn(CryptoCurrency currencyIn) {
+            RestTemplate restTemplate = this.getRestTemplate();
+            MarketPriceBinance marketPrice = restTemplate.getForObject(PRICE_URL_BASE + this.getName() + currencyIn.toString(), MarketPriceBinance.class);
+            return marketPrice.getPrice();
     }
 }
 // https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT

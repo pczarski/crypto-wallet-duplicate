@@ -6,6 +6,8 @@ import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
 
+import java.rmi.NoSuchObjectException;
+
 @RestController
 public class ExchangeController {
 
@@ -115,7 +117,7 @@ public class ExchangeController {
     /* orders */
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
-    @GetMapping("/order") // setting up the url location
+    @GetMapping("/new-order") // setting up the url location
     public OrderJson makeOrder(
             @RequestParam(value = "type") String type,
             @RequestParam(value = "exchange") String exchange,
@@ -145,6 +147,31 @@ public class ExchangeController {
                     -1, -1, null, null, null);
         }
 
-    } // http://localhost:8080/order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+    } // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/get-order") // setting up the url location
+    public OrderJson getOrder(
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "id") long id
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.getOrder(id, ExchangeName.valueOf(exchange));
+            return new OrderJson(
+                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (NoSuchObjectException e) {
+            return new OrderJson(0, "Order not found", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/get-order?&exchange=Binance&id=1
 
 }
