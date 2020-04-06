@@ -1,4 +1,0 @@
-rootProject.name = 'cryapi'
-include 'crylib'
-include 'crylib'
-
