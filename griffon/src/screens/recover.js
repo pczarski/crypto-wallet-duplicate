@@ -1,8 +1,8 @@
 import React from 'react';
 import '../styles/App.scss';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
-// import {makeWallet} from "../lib/backendHandler.js";
+import {makeWallet} from "../lib/backendHandler.js";
 
 // import validator from 'validator';
 
@@ -17,7 +17,8 @@ export default class Recover extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      seed: ''
+      seed: '',
+      walletMade: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,19 +27,23 @@ export default class Recover extends React.Component {
     this.setState({seed: e.target.value});
   }
 
-  handleSubmit(e) {
-    // submit should pass this to a new wallet, and make it
+  async handleSubmit(e) {
     e.preventDefault();
-
+    const wallet = await makeWallet(this.state.seed)
+    console.log(wallet)
+    this.setState({walletMade: true})
   }
   render () {
+    if (this.state.walletMade === true) {
+    return <Redirect to='/wallet' />
+  }
   return (
     <div className="wrapper">
       <div className="container">
         <h1>recover Wallet</h1>
         <form className="needs-validation" onSubmit={this.handleSubmit}>
           <Input type="textarea" name="text" id="seed"  value={this.state.seed} onChange={this.handleChange}/>
-          <button type="submit" className="btn btn-primary" >Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <Link to="/">
           <button type="button" className="btn btn-primary">Go back</button>

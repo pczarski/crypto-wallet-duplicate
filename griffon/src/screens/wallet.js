@@ -7,7 +7,7 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
-import {getRequest, getCurr} from '../lib/backendHandler.js';
+import {getCurr} from '../lib/backendHandler.js';
 import {roundTo2} from '../lib/helper.js';
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
@@ -22,31 +22,33 @@ export default class Wallet extends React.Component {
   constructor(props){
     super(props);
     this.state= {
-      supportedCurr: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
-      currency: [{name: "dummy", balance: "dick"}]
+      supportedCurr: ["Bitcoin", "Ethereum", "Dash", "Litecoin"],
+      currency: []
     }
-    console.log(this.state.supportedCurr)
   }
-
+  
   getCurrencies () {
-    for (let i of this.state.supportedCurr) {
-      let req = getCurr(i)
-      // console.log(req)
-      let curr = {
-        name: req.name,
-        balance: req.balance
-      }
-      this.setState(prevState => ({
-        currency: [...prevState.currency, curr]
-      }))
-    }
+    let currencies = [];
+    let getCurs = this.state.supportedCurr.map((i) => {
+      return new Promise((resolve, reject) => {
+        let req = getCurr(i)
+        currencies.push({
+          name: req.name,
+          price: req.price,
+          balance: req.balance
+        }); 
+        resolve(true);
+      });
+    })
+    Promise.all(getCurs).then((d) => {
+      this.setState({
+        currency: [...this.state.currency, ...currencies] // <<<<
+      })
+    })
   }
 
-  componentDidMount() {
-    // we don't "NEED" all of the calls. we can just call once and store into state
-    // also, ideally round all of the prices
-    this.getCurrencies()
-    console.log(this.state.currency)
+  async componentDidMount() {
+    await this.getCurrencies()
   }
 
   render () {
@@ -57,54 +59,66 @@ export default class Wallet extends React.Component {
           <div className="content">
             <h1>Wallet</h1>
             <div className='d-flex flex-row justify-content-around'>
-              <Button className="btn btn-primary" size="lg">Send</Button>
+              <Button className="btn btn-primary" size="lg">Send</Button> 
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
             </div>
             <div className = "row">
-                    <div className = "bitcoin-container">
-                        <img src={bitcoinLogo} alt= "Bitcoin"></img>
-                        <div className ="bitcoin-overlay">
-                          <div className="bitcoin-price">
-                              <b>Bitcoin</b> <br /> <br />
-                              <b>Price</b> {roundTo2(getCurr("Bitcoin").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Bitcoin").balance)}
-                          </div>
-                        </div>
+              <div className = "bitcoin-container">
+                <img src={bitcoinLogo} alt= "Bitcoin"></img>
+                <div className ="bitcoin-overlay">
+                  {
+                  this.state.currency && this.state.currency[0] &&
+                    <div className="bitcoin-price">
+                      <b>{this.state.currency[0].name}</b> <br /> <br />
+                      <b>Price</b> {roundTo2(this.state.currency[0].price)} <br />
+                      <b>Balance</b> {roundTo2(this.state.currency[0].balance)}
                     </div>
-                    <div className ="ethereum-container">
-                        <img src={ethLogo} alt="Ethereum"></img>
-                        <div className ="ethereum-overlay">
-                            <div className ="ethereum-price">
-                              <b>Ethereum</b> <br /> <br />
-                              <b>Price</b> {roundTo2(getCurr("Ethereum").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Ethereum").balance)}
-                            </div>
-                        </div>
-                     </div>
-                    <div className ="dash-container">
-                        <img src={dashLogo} alt = "Dash"></img>
-                        <div className = "dash-overlay">
-                            <div className ="dash-price">
-                              <b>Dash</b> <br /> <br />
-                              <b>Price</b> {roundTo2(getCurr("Dash").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Dash").balance)}
-                            </div>
-                         </div>
-                     </div>
-                    <div className ="litecoin-container">
-                        <img src={liteLogo} alt = "LiteCoin"></img>
-                        <div className = "litecoin-overlay">
-                            <div className ="litecoin-price">
-                            <b>Litecoin</b> <br /> <br />
-                              <b>Price</b> {roundTo2(getCurr("Litecoin").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Litecoin").balance)}
-                            </div>
-                        </div>
+                  }
+                </div>
+              </div>
+              <div className ="ethereum-container">
+                <img src={ethLogo} alt="Ethereum"></img>
+                <div className ="ethereum-overlay">
+                  {
+                    this.state.currency && this.state.currency[1] &&
+                    <div className ="ethereum-price">
+                      <b>{this.state.currency[1].name}</b> <br /> <br />
+                      <b>Price</b> {roundTo2(this.state.currency[1].price)} <br />
+                      <b>Balance</b> {roundTo2(this.state.currency[1].balance)}
                     </div>
-             </div>
-              <Link to="/">
-                <Button className="btn btn-primary" size="lg" block>Go back</Button>
-              </Link>
+                  }
+                </div>
+              </div>
+              <div className ="dash-container">
+                <img src={dashLogo} alt = "Dash"></img>
+                <div className = "dash-overlay">
+                  {
+                    this.state.currency && this.state.currency[2] &&
+                    <div className ="dash-price">
+                      <b>{this.state.currency[2].name}</b> <br /> <br />
+                      <b>Price</b> {roundTo2(this.state.currency[2].price)} <br />
+                      <b>Balance</b> {roundTo2(this.state.currency[2].balance)}
+                    </div>
+                  }
+                </div>
+              </div>
+              <div className ="litecoin-container">
+                <img src={liteLogo} alt = "LiteCoin"></img>
+                <div className = "litecoin-overlay">
+                  {
+                    this.state.currency && this.state.currency[2] &&
+                    <div className ="litecoin-price">
+                      <b>{this.state.currency[3].name}</b> <br /> <br />
+                      <b>Price</b> {roundTo2(this.state.currency[3].price)} <br />
+                      <b>Balance</b> {roundTo2(this.state.currency[3].balance)}
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+            <Link to="/">
+              <Button className="btn btn-primary" size="lg" block>Go back</Button>
+            </Link>
           </div>
         </div>
       </div>
