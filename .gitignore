@@ -1,3 +1,5 @@
 
 /griffon/.idea
 .idea
+*.lock
+*.bin
