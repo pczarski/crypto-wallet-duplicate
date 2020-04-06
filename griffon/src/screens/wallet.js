@@ -23,7 +23,8 @@ export default class Wallet extends React.Component {
     super(props);
     this.state= {
       supportedCurr: ["Bitcoin", "Ethereum", "Dash", "Litecoin"],
-      currency: []
+      currency: [],
+      seed: null
     }
   }
   

@@ -9,17 +9,17 @@ import {makeWallet} from "../lib/backendHandler.js"
 
 
 export default class CreateNew extends React.Component {
-  state = {
-    data: [],
-    wallet: null
-  };
-
+  constructor(props){
+    super(props);
+    this.state = {
+      data: [],
+      seed: null
+    };
+    }
 
   async handleClick() {
-    console.log('wallet made');
-    localStorage.setItem('hasWallet', true);
     const wallet = await makeWallet("");
-    console.log(wallet)
+    console.log('wallet made', wallet);
   }
  
 
