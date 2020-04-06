@@ -11,6 +11,7 @@ public abstract class ExchangeAccess {
 	private ExchangeName name;
 	private ArrayList<CurrencyInExchange> currencies;
 	private ArrayList<Order> orders;
+	private Thread orderThread;
 
 	public String getApiKey() {
 		return ApiKey;
@@ -21,12 +22,15 @@ public abstract class ExchangeAccess {
 	}
 	private OrderHandler orderHandler;
 
-	public ExchangeAccess(String apiKey, ExchangeName name) {
+	public ExchangeAccess(String apiKey, ExchangeName name, OrderHandler orderHandler) {
 		this.ApiKey = apiKey;
 		this.name = name;
 		currencies = new ArrayList<>();
 		this.addSupportedCurrencies();
 		this.orders = new ArrayList<>();
+		this.orderHandler = orderHandler;
+		this.orderThread = new Thread(orderHandler);
+		this.orderThread.start();
 	}
 
 	//todo: should we do factory here?? - it's kinda like built in factory now

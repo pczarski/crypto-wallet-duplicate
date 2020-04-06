@@ -6,7 +6,7 @@ import g37.cryapi.common.CryptoCurrency;
 public class Binance extends ExchangeAccess {
 
     public Binance(String apiKey) {
-        super(apiKey, ExchangeName.Binance);
+        super(apiKey, ExchangeName.Binance, new BinanceOrderHandler());
     }
 
     @Override
