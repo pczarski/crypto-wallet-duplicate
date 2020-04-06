@@ -20,12 +20,12 @@ export default class App extends React.Component {
         <div className="App">
         <Switch>
           <Route path="/" exact component={Splash}/>
-          <Route path="/wallet" component={Wallet}/>
-          <Route path="/createnew" component={CreateNew}/>
-          <Route path="/recover" component={Recover}/>
-          <Route path="/exchange" component={Exchange}/>
-          <Route path="/help" component={Help}/>
-          <Route path="/settings" component={Settings}/>
+          <Route path="/wallet" render={(props) => <Wallet {...props} />}/>
+          <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
+          <Route path="/recover" render={(props) => <Recover {...props} />}/>
+          <Route path="/exchange" render={(props) => <Exchange {...props} />}/>
+          <Route path="/help" render={(props) => <Help {...props} />}/>
+          <Route path="/settings" render={(props) => <Settings {...props} />}/>
         </Switch>
         </div>
       </Router>
