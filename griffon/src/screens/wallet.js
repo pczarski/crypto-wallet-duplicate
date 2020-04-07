@@ -17,6 +17,8 @@ import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.s
 import thetherLogo from "../../node_modules/cryptocurrency-icons/svg/color/usdt.svg";
 import { Button } from 'reactstrap';
 
+import {receiver } from "../lib/helper"
+const {ipcRenderer} = window.require("electron")
 
 export default class Wallet extends React.Component {
   constructor(props){
@@ -26,6 +28,14 @@ export default class Wallet extends React.Component {
       currency: [],
       seed: null
     }
+
+    console.log(ipcRenderer)
+
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+      console.log(arg) // prints "pong"
+    })
+    ipcRenderer.send('asynchronous-message', 'ping')
+
   }
   
   getCurrencies () {
@@ -53,6 +63,7 @@ export default class Wallet extends React.Component {
   }
 
   render () {
+    
     return (
       <div className="wrapper">  
       <Nav />
