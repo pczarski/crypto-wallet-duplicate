@@ -1,8 +1,20 @@
 import React from 'react';
 import '../styles/App.scss';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
-import {Input} from 'reactstrap';
+// import getIcons from '../components/Icons';
+
+
+import ETH from "../../node_modules/cryptocurrency-icons/svg/icon/eth.svg";
+import DASH from "../../node_modules/cryptocurrency-icons/svg/icon/dash.svg";
+import LTC from "../../node_modules/cryptocurrency-icons/svg/icon/ltc.svg";
+import BTC from "../../node_modules/cryptocurrency-icons/svg/icon/btc.svg";
+import USDT from "../../node_modules/cryptocurrency-icons/svg/icon/usdt.svg";
+
+import Receive from '../components/Receive';
+import Send from '../components/Send';
+import Nav from '../components/Nav';
 
 export default class Transfer extends React.Component {
   constructor(props) {
@@ -12,16 +24,23 @@ export default class Transfer extends React.Component {
 
     this.state = {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
+      images: [],
+      // icons: [ETH, DASH, LTC, BTC, USDT],
       dropdownOpen: false,
-      selected: supportedCurr[0]
+      selected: "BTC",
+      change: false
     }
 
   }
-
-  send(e) {
+  componentDidMount() {
+    // this.setState({images: getIcons()})
   }
 
-  receive(e) {
+  send() {
+  }
+
+  receive() {
+
   }
   
   toggle(e) {
@@ -34,35 +53,54 @@ export default class Transfer extends React.Component {
   select(e) {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
-      selected: e.target.innerText
+      selected: e.target.innerText,
+      change: true
       });
+  }
+  renderIcon() {
+    switch(this.state.selected) {
+      case "BTC":
+        return BTC;
+      case "ETH":
+        return ETH;
+      case "USDT":
+        return USDT;
+      case "LTC":
+        return LTC;
+      case "DASH":
+        return DASH;      
+      default:
+        return null;
     }
   }
 
   render () {
-    if (this.state.walletMade === true) {
-    return <Redirect to='/wallet' />
-  }
+  const DropdownList = () => (
+    <div>
+      {this.state.supportedCurr.map(curr => 
+      <DropdownItem onClick={this.select} key={curr}> {curr} </DropdownItem>
+      )}
+    </div>
+  );
   return (
     <div className="wrapper">
+    <Nav/>
       <div className="container">
-        <h1>Send or Receive from Wallet</h1>
+        <h2>Send or Receive from Wallet</h2>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <img src={this.renderIcon()} alt=""/>
           <DropdownToggle caret>
-            {this.state.currency}
+            {this.state.selected}
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
-            <DropdownItem onClick={this.select}>GBP</DropdownItem>
-            <DropdownItem onClick={this.select}>USD</DropdownItem>
+            <DropdownList/>
           </DropdownMenu>
         </Dropdown>
-        <form className="needs-validation" onSubmit={this.handleSubmit}>
-          <Input type="textarea" name="text" id="seed"  value={this.state.seed} onChange={this.handleChange}/>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        <Button className="btn btn-primary" size="lg" onClick={
+    this.send()}>Send Currency</Button> 
+        <Button className="btn btn-primary" size="lg">Receive Currency</Button> 
+        <Send/>
+        <Receive curr={this.state.selected} />
         <Link to="/">
           <button type="button" className="btn btn-primary">Go back</button>
         </Link>

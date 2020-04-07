@@ -60,8 +60,9 @@ export default class Wallet extends React.Component {
           <div className="content">
             <h1>Wallet</h1>
             <div className='d-flex flex-row justify-content-around'>
-              <Button className="btn btn-primary" size="lg">Send</Button> 
-              <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
+            <Link to="/transfer">
+              <Button className="btn btn-primary" size="lg">Send or Receive Currency</Button> 
+            </Link>
             </div>
             <div className = "row">
               <div className = "bitcoin-container">
