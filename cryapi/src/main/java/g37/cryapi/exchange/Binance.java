@@ -1,6 +1,4 @@
 package g37.cryapi.exchange;
-
-// import com.sun.org.apache.regexp.internal.RE;
 import g37.cryapi.common.CryptoCurrency;
 
 // todo: perhaps all these exchanges should use Singleton??
