@@ -16,9 +16,9 @@ export default class CreateNew extends React.Component {
       seed: null
     };
     }
-
+    // TO DO: MODAL TO SHOW SEED PHRASE, THEN CONTINUE
   async handleClick() {
-    const wallet = await makeWallet("");
+    const wallet = await makeWallet(""); 
     console.log('wallet made', wallet);
   }
  
