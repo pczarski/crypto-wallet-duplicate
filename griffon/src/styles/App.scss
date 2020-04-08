@@ -8,7 +8,7 @@ body {
   .content {
     width: 75vw;
   }
-  .popup {
+  .popup, .ManageWalletDisplay {
   z-index: 99 !important;
   position: fixed;
   width: 100%;
@@ -20,7 +20,7 @@ body {
   margin: auto;
   background-color: rgba(0,0,0, 0.5);
 }
-.inside_popup {
+.inside_popup, .inside_manageWallet {
 
   position: absolute ;
   left: 25%;
@@ -32,7 +32,7 @@ body {
   background-color: #cfc9c9;
   border-radius: 0.5em;
 }
-.popup_contents{
+.popup_contents, .manageWallet_contents{
   padding-top:16%;
 }
 

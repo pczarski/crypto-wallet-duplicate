@@ -39,7 +39,7 @@ export default class Wallet extends React.Component {
             <div className='d-flex flex-row justify-content-around'>
               <Button className="btn btn-primary" size="lg">Send</Button>
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
-              <Button type="button" className="btn btn-primary" size="lg">Manage Wallet</Button>
+              <ManageWallet/>
               <Popup/>
             </div>
             <div className = "row">
