@@ -8,7 +8,7 @@ import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
 // accordion
-import Accordion from "../components/Accordion.js";
+import Bitcoin from '../components/walletComponents/Bitcoin.js';
 
 import {getRequest, getCurr} from '../lib/backendHandler.js';
 import {roundTo2} from '../components/helper.js';
@@ -46,11 +46,11 @@ export default class Wallet extends React.Component {
           <div className="content">
             <h1>Wallet</h1>
             <div className='d-flex flex-row justify-content-around'>
-              <Button className="btn btn-primary" size="lg">Send</Button>
-              <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
+{/*               <Button className="btn btn-primary" size="lg">Send</Button>
+              <Button type="button" className="btn btn-primary" size="lg">Receive</Button> */}
             </div>
 
-            <Accordion></Accordion>
+              <Bitcoin></Bitcoin>
 {/*             <div className = "row">
                     <div className = "bitcoin-container">
                         <img src={bitcoinLogo} alt= "Bitcoin"></img>
