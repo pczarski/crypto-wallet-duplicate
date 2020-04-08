@@ -45,7 +45,7 @@ public class KeyGenerator {
         for(int i = 0; i < SEED_LENGTH; i++){
             seed[i] = words[new Random().nextInt(N_SEED_WORDS)];
         }
-        return Arrays.toString(seed);
+        return ForStrings.arrayToSpaceString(seed);
     }
 
     private static String[] txtToArray(String path, int length) throws IOException {

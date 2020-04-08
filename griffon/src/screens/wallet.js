@@ -7,88 +7,79 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
-// accordion
 import Bitcoin from '../components/walletComponents/Coins.js';
 
-import {getRequest, getCurr} from '../lib/backendHandler.js';
-import {roundTo2} from '../components/helper.js';
-
+import {getCurr} from '../lib/backendHandler.js';
+import {roundTo2} from '../lib/helper.js
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
 import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
 import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
 import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
+import thetherLogo from "../../node_modules/cryptocurrency-icons/svg/color/usdt.svg";
 
 import { Button } from 'reactstrap';
 
+import {receiver } from "../lib/helper"
+const {ipcRenderer} = window.require("electron")
 
 export default class Wallet extends React.Component {
+  constructor(props){
+    super(props);
+    this.state= {
+      supportedCurr: ["BTC", "ETH", "DASH", "LTC", 	"USDT"],
+      currency: [],
+      seed: null
+    }
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
+      console.log(arg) // prints "pong"
+    })
+    ipcRenderer.send('asynchronous-message', 'ping')
 
-
+  }
   
+  getCurrencies () {
+    let currencies = [];
+    let getCurs = this.state.supportedCurr.map((i) => {
+      return new Promise((resolve, reject) => {
+        let req = getCurr(i)
+        currencies.push({
+          name: req.name,
+          price: req.price,
+          balance: req.balance
+        }); 
+        resolve(true);
+      });
+    })
+    Promise.all(getCurs).then((d) => {
+      this.setState({
+        currency: [...this.state.currency, ...currencies] // <<<<
+      })
+    })
+  }
 
-
-
-
-  componentDidMount() {
-    const currency = getRequest("currency", "name", "Bitcoin");
-    console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
-    // also, ideally round all of the prices
-    
+  async componentDidMount() {
+    await this.getCurrencies()
   }
 
 
   render () {
+    
     return (
-      <div className="wrapper">  
+      <div className="wrapper">
       <Nav />
         <div className="container">
           <div className="content">
             <h1>Wallet</h1>
             <div className='d-flex flex-row justify-content-around'>
-{/*               <Button className="btn btn-primary" size="lg">Send</Button>
-              <Button type="button" className="btn btn-primary" size="lg">Receive</Button> */}
+              <Button className="btn btn-primary" size="lg">Send</Button>
+              <Button type="button" className="btn btn-primary" size="lg">Receive</Button> 
             </div>
-
               <Bitcoin></Bitcoin>
-{/*             <div className = "row">
-                    <div className = "bitcoin-container">
-                        <img src={bitcoinLogo} alt= "Bitcoin"></img>
-                        <div className ="bitcoin-overlay">
-                          <div className="bitcoin-price">
-                              <b>Price</b> {roundTo2(getCurr("Bitcoin").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Bitcoin").balance)}
-                          </div>
-                        </div>
-                    </div>
-                    <div className ="ethereum-container">
-                        <img src={ethLogo} alt="Ethereum"></img>
-                        <div className ="ethereum-overlay">
-                            <div className ="ethereum-price">
-                              <b>Price</b> {roundTo2(getCurr("Ethereum").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Ethereum").balance)}
-                            </div>
-                        </div>
-                     </div>
-                    <div className ="dash-container">
-                        <img src={dashLogo} alt = "Dash"></img>
-                        <div className = "dash-overlay">
-                            <div className ="dash-price">
-                              <b>Price</b> {roundTo2(getCurr("Dash").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Dash").balance)}
-                            </div>
-                         </div>
-                     </div>
-                    <div className ="litecoin-container">
-                        <img src={liteLogo} alt = "LiteCoin"></img>
-                        <div className = "litecoin-overlay">
-                            <div className ="litecoin-price">
-                              <b>Price</b> {roundTo2(getCurr("Litecoin").price)} <br />
-                              <b>Balance</b> {roundTo2(getCurr("Litecoin").balance)}
-                            </div>
-                        </div>
-                    </div>
-             </div> */}
+
+            <Link to="/transfer">
+              <Button className="btn btn-primary" size="lg">Send or Receive Currency</Button> 
+            </Link>
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>
               </Link>

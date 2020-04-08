@@ -1,6 +1,10 @@
 package g37.cryapi.exchange;
 
+import g37.cryapi.common.CryptoCurrency;
+
+import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 ///todo: we should probably make an interface that handles the communication between the wallet and the exchange  //will it be related to Adopter design pattern?
 
@@ -8,9 +12,11 @@ public class ExchangeHandler {
 
 	private static ExchangeHandler instance = new ExchangeHandler();
 	private ArrayList<ExchangeAccess> exchanges;
+	private AtomicLong idCreator;
 
 	private ExchangeHandler() {
 		this.exchanges = new ArrayList<>();
+		this.idCreator = new AtomicLong();
 	}
 
 	public static ExchangeHandler getInstance() {
@@ -45,9 +51,31 @@ public class ExchangeHandler {
 		throw new IllegalArgumentException();
 	}
 
-	public void getOrder(String id, ExchangeName exchangeName) {
-		// TODO - implement ExchangeHandler.getOrder
-		throw new UnsupportedOperationException();
+	public ArrayList<ExchangeAccess> getExchanges() {
+		return this.exchanges;
+	}
+
+	public Order getOrder(long id, ExchangeName exchangeName) throws NoSuchObjectException {
+		return this.getExchange(exchangeName).getOrder(id);
+	}
+
+	public Order placeOrder(ExchangeName exchangeName, OrderType type, CryptoCurrency c1, CryptoCurrency c2, double amount, double unitPrice) {
+		ExchangeAccess exchange = this.getExchange(exchangeName);
+		Order order;
+		switch (type) {
+			case Buy:
+				order = exchange.makeBuyOrder(idCreator.incrementAndGet(), c1, c2, amount, unitPrice);
+				break;
+			case Sell:
+				order = exchange.makeSellOrder(idCreator.incrementAndGet(), c1, c2, amount, unitPrice);
+			break;
+			case Exchange:
+				order = exchange.makeExchangeOrder(idCreator.incrementAndGet(), c1, c2, amount, unitPrice);
+				break;
+			default:
+				throw new IllegalArgumentException("unsupported operation");
+		}
+		return order;
 	}
 
 	//TOdo for tests
@@ -55,9 +83,5 @@ public class ExchangeHandler {
 		this.exchanges.add(new Binance("XX_TEST_BINANCE_KEY_XX"));
 		this.exchanges.add(new Coinbase("XX_TEST_COINBASE_KEY_XX"));
 	}
-
-	public ArrayList<ExchangeAccess> getExchanges() {
-		return this.exchanges;
-	}
-
+// JUST A MARKER TO SEE CHANGES
 }

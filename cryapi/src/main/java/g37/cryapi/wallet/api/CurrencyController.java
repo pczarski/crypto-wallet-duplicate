@@ -49,6 +49,7 @@ public class CurrencyController {
         try {
             CurrencyInWallet currency = wallet.getCurrencyInWallet(CryptoCurrency.valueOf(name));
             return new CurrencyJson(
+                    currency.getName().toString(),
                     currency.getName().getName(),
                     currency.getBalance(),
                     currency.getPrice(),
@@ -56,7 +57,7 @@ public class CurrencyController {
                     this.convertToKeyPairJson(currency.getKeyPairs())
             );
         } catch (IllegalArgumentException e) {
-            return new CurrencyJson("Invalid name", -1, -1, null, null);
+            return new CurrencyJson("Invalid name", null, -1, -1, null, null);
         }
     } // accessed through: http://localhost:8080/currency?name=CurrencyName
 

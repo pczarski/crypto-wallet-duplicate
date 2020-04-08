@@ -7,29 +7,29 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 import Help from './screens/help';
 import Settings from './screens/settings';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import PubKey from './screens/pubkeys
 import Exchange from './screens/exchange';
+import Transfer from './screens/transfer';
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-
-
-export default class App extends React.Component {
+export default class App extends React.Component { 
   render() {
-
-    localStorage.setItem('name', null)
-    localStorage.setItem('balance', null)
 
     return (
       <Router>
         <div className="App">
         <Switch>
           <Route path="/" exact component={Splash}/>
-          <Route path="/wallet" component={Wallet}/>
-          <Route path="/createnew" component={CreateNew}/>
-          <Route path="/recover" component={Recover}/>
-          <Route path="/exchange" component={Exchange}/>
-          <Route path="/help" component={Help}/>
-          <Route path="/settings" component={Settings}/>
+          <Route path="/wallet" render={(props) => <Wallet {...props} />}/>
+          <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
+          <Route path="/recover" render={(props) => <Recover {...props} />}/>
+          <Route path="/exchange" render={(props) => <Exchange {...props} />}/>
+          <Route path="/help" render={(props) => <Help {...props} />}/>
+          <Route path="/settings" render={(props) => <Settings {...props} />}/>
+          <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
+          <Route path="/pubkeys" render={(props) => <PubKey {...props} />}/>
         </Switch>
         </div>
       </Router>

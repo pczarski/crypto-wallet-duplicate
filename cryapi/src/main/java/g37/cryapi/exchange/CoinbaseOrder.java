@@ -10,17 +10,12 @@ public class CoinbaseOrder extends Order {
      * @param amount
      * @param price
      */
-    public CoinbaseOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-        super(currency1, currency2, amount, price);
+    public CoinbaseOrder(long orderID, OrderType type, CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price, ExchangeAccess exchange) {
+        super(orderID, type, currency1, currency2, amount, price, exchange);
     }
 
     @Override
     public void cancelOrder() {
-
     }
 
-    @Override
-    public void updateProgress() {
-
-    }
-}
+}// JUST A MARKER TO SEE CHANGES

@@ -5,7 +5,7 @@ import g37.cryapi.common.CryptoCurrency;
 public class Coinbase extends ExchangeAccess {
 
     public Coinbase(String apiKey) {
-        super(apiKey, ExchangeName.Coinbase);
+        super(apiKey, ExchangeName.Coinbase, new CoinbaseOrderHandler());
     }
 
 
@@ -15,22 +15,14 @@ public class Coinbase extends ExchangeAccess {
     }
 
     @Override
+    protected void addSupportedCurrencies() {
+        for(CryptoCurrency currency: CryptoCurrency.values()) {
+            this.addCurrency(new CurrencyInCoinbase(currency));
+        }
+    }
+
+    @Override
     public void withdrawAll() {
 
-    }
-
-    @Override
-    public Order makeSellOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-        return null;
-    }
-
-    @Override
-    public Order makeBuyOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-        return null;
-    }
-
-    @Override
-    public Order makeExchangeOrder(CryptoCurrency currency1, CryptoCurrency currency2, double amount) {
-        return null;
     }
 }

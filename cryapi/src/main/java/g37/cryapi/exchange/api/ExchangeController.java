@@ -2,12 +2,11 @@ package g37.cryapi.exchange.api;
 
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
-import g37.cryapi.exchange.CurrencyInExchange;
-import g37.cryapi.exchange.ExchangeAccess;
-import g37.cryapi.exchange.ExchangeHandler;
-import g37.cryapi.exchange.ExchangeName;
+import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
+
+import java.rmi.NoSuchObjectException;
 
 @RestController
 public class ExchangeController {
@@ -16,6 +15,9 @@ public class ExchangeController {
     private void runHelpers() {
         if(ExchangeHandler.getInstance().getExchanges().size() == 0) {
             ExchangeHandler.getInstance().addTestExchanges();
+        }
+        if(!Wallet.getInstance().getIsSetUp()) {
+            Wallet.getInstance().setUpNew();
         }
     }
 
@@ -87,5 +89,89 @@ public class ExchangeController {
         }
 
     } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/deposit") // setting up the url location
+    public TextResponse depositCurrency(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "currency", defaultValue = "Bitcoin") String currency,
+            @RequestParam(value = "amount", defaultValue = "0.0") double amount
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
+            CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
+            if(selectedCurrency.depositCurrency(amount)) {
+                return new TextResponse("success", 1); //todo the id thing, smth is missing here
+            };
+            return new TextResponse("insufficient balance", 0);
+        }
+        catch (IllegalArgumentException e) {
+            return new TextResponse("Exchange or currency not found", -1);
+        }
+
+    } // http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5
+
+
+    /* orders */
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/new-order") // setting up the url location
+    public OrderJson makeOrder(
+            @RequestParam(value = "type") String type,
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "currency1") String currency1,
+            @RequestParam(value = "currency2") String currency2,
+            @RequestParam(value = "amount") double amount,
+            @RequestParam(value = "price") double price
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.placeOrder(
+                    ExchangeName.valueOf(exchange), OrderType.valueOf(type),
+                    CryptoCurrency.valueOf(currency1), CryptoCurrency.valueOf(currency2),
+                    amount, price
+                    );
+            return new OrderJson(
+                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+                    );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (IllegalStateException e) {
+            return new OrderJson(0, "Insufficient Balance", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/get-order") // setting up the url location
+    public OrderJson getOrder(
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "id") long id
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.getOrder(id, ExchangeName.valueOf(exchange));
+            return new OrderJson(
+                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (NoSuchObjectException e) {
+            return new OrderJson(0, "Order not found", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/get-order?&exchange=Binance&id=1
 
 }
