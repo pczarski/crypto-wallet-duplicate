@@ -5,6 +5,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const { ipcMain } = require('electron')
+const keytar = require('keytar')
 const path = require('path');
 const url = require('url');
 
@@ -40,6 +41,14 @@ function createWindow() {
         mainWindow = null
     })
 }
+
+ipcMain.on('get-password', (event, user) => {
+    event.returnValue = keytar.getPassword('ServiceName', user);
+});
+
+ipcMain.on('set-password', (event, user, pass) => {
+    event.returnValue = keytar.replacePassword('ServiceName', user, pass);
+});
 
 
 // This method will be called when Electron has finished

@@ -132,7 +132,7 @@ public abstract class ExchangeAccess {
 	public double valueInCurrency(CryptoCurrency currency, CryptoCurrency inCurrency){
 		return this.getCurrencyInExchange(currency).getMarketPriceIn(inCurrency);
 	};
-		
+
 	//TODO for tests
 	public void addTestCurrencies() {
 
