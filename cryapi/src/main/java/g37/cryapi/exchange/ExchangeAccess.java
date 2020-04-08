@@ -3,6 +3,7 @@ import g37.cryapi.common.CryptoCurrency;
 
 import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class ExchangeAccess {
 
@@ -132,6 +133,10 @@ public abstract class ExchangeAccess {
 	public double valueInCurrency(CryptoCurrency currency, CryptoCurrency inCurrency){
 		return this.getCurrencyInExchange(currency).getMarketPriceIn(inCurrency);
 	};
+
+	public List<Order> getOrder() {
+		return this.orders;
+	}
 
 	//TODO for tests
 	public void addTestCurrencies() {
