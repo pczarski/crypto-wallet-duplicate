@@ -29,6 +29,7 @@ export default class Wallet extends React.Component {
       seed: null
     }
 
+
     console.log(ipcRenderer)
 
     ipcRenderer.on('asynchronous-reply', (event, arg) => {
@@ -65,7 +66,7 @@ export default class Wallet extends React.Component {
   render () {
     
     return (
-      <div className="wrapper">  
+      <div className="wrapper">
       <Nav />
         <div className="container">
           <div className="content">

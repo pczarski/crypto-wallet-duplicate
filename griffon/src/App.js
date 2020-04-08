@@ -7,8 +7,8 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 import Help from './screens/help';
 import Settings from './screens/settings';
+import PubKey from './screens/pubkeys
 import Exchange from './screens/exchange';
-
 import Transfer from './screens/transfer';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -29,6 +29,7 @@ export default class App extends React.Component {
           <Route path="/help" render={(props) => <Help {...props} />}/>
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
+          <Route path="/pubkeys" render={(props) => <PubKey {...props} />}/>
         </Switch>
         </div>
       </Router>
