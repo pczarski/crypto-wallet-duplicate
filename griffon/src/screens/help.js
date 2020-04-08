@@ -35,7 +35,7 @@ export default class Help extends React.Component {
                  <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 16 characters, use a range of cases, numbers and special characters.</li>
                  </ul> </p>
                  </div>
-               </div
+               </div>
     );
   }
 }

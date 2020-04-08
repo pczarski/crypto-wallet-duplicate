@@ -6,8 +6,11 @@ import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/settings.scss';
+
 import RecoveryPhrase from '../components/RecoveryPhrase';
 
+
+import {Link} from 'react-router-dom';
 
 import { Button, Alert } from 'reactstrap';
 

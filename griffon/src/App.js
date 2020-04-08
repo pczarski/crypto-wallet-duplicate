@@ -7,7 +7,7 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 import Help from './screens/help';
 import Settings from './screens/settings';
-import PubKey from './screens/pubkeys
+import PubKey from './screens/pubkeys';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
 

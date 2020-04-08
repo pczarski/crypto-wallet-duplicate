@@ -10,7 +10,7 @@ import '../styles/coinLogos.css';
 import Bitcoin from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
-import {roundTo2} from '../lib/helper.js
+import {roundTo2} from '../lib/helper.js';
 
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
 import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
@@ -71,14 +71,11 @@ export default class Wallet extends React.Component {
         <div className="container">
           <div className="content">
             <h1>Wallet</h1>
-            <div className='d-flex flex-row justify-content-around'>
-              <Button className="btn btn-primary" size="lg">Send</Button>
-              <Button type="button" className="btn btn-primary" size="lg">Receive</Button> 
-            </div>
+
               <Bitcoin></Bitcoin>
 
             <Link to="/transfer">
-              <Button className="btn btn-primary" size="lg">Send or Receive Currency</Button> 
+              <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button> 
             </Link>
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>
