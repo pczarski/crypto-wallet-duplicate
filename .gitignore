@@ -1,3 +1,26 @@
 
 /griffon/.idea
 .idea
+.gradle
+*.lock
+*.bin
+
+.vscode/settings.json
+cryapi/.gradle/6.2.2/executionHistory/executionHistory.bin
+cryapi/.gradle/6.2.2/executionHistory/executionHistory.lock
+cryapi/.gradle/6.2.2/fileContent/fileContent.lock
+cryapi/.gradle/6.2.2/fileHashes/fileHashes.bin
+cryapi/.gradle/6.2.2/fileHashes/fileHashes.lock
+cryapi/.gradle/6.2.2/javaCompile/javaCompile.lock
+cryapi/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+cryapi/.gradle/buildOutputCleanup/outputFiles.bin
+cryapi/.gradle/checksums/checksums.lock
+cryapi/.gradle/6.2.2/executionHistory/executionHistory.bin
+cryapi/.gradle/6.2.2/executionHistory/executionHistory.lock
+cryapi/.gradle/6.2.2/fileContent/fileContent.lock
+cryapi/.gradle/6.2.2/fileHashes/fileHashes.bin
+cryapi/.gradle/6.2.2/fileHashes/fileHashes.lock
+cryapi/.gradle/6.2.2/javaCompile/javaCompile.lock
+cryapi/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+cryapi/.gradle/buildOutputCleanup/outputFiles.bin
+cryapi/.gradle/checksums/checksums.lock

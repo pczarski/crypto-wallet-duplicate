@@ -2,7 +2,8 @@ package g37.cryapi.exchange;
 
 public enum OrderStatus {
 	COMPLETE,
-	PARTIAL,
-	WITHDRAWN,
-	NOT_PLACED
+	IN_PROGRESS,
+	CANCELED,
+	NEW;
 }
+// JUST A MARKER TO SEE CHANGES

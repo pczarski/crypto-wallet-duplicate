@@ -24,7 +24,7 @@ public class Wallet {
 	}
 
 	private void setUpCurrencies(){
-		currencyInWallets = new ArrayList<CurrencyInWallet>();
+		currencyInWallets = new ArrayList<>();
 		currencyInWallets.add(new Bitcoin());
 		currencyInWallets.add(new Ethereum());
 		currencyInWallets.add(new Litecoin());

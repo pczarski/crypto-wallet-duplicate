@@ -2,18 +2,16 @@ import React from 'react';
 import Nav from '../components/Nav';
 
 import {Link} from 'react-router-dom';
+
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/help.scss';
 import '../styles/settings.scss';
 
-import { Button, Alert } from 'reactstrap';
-
 export default class Help extends React.Component {
   render () {
     return (
-
             <div className="wrapper">
                 <Nav/>
                 <nav class="navbar 1">
@@ -22,8 +20,6 @@ export default class Help extends React.Component {
              <Link to="/">
                      <li ><a href="#">Home</a></li></Link>
                      <li id="active"><a href="#">Security Guidelines</a></li>
-
-
                  </ul>
                  </nav>
                  <div className="extra1">
@@ -38,14 +34,8 @@ export default class Help extends React.Component {
                  <li>Keep your recovery phrase in a safe and reliable place, where only you know</li>
                  <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 16 characters, use a range of cases, numbers and special characters.</li>
                  </ul> </p>
-
-
-
-
                  </div>
-
-
-               </div>
+               </div
     );
   }
 }
