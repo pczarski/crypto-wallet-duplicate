@@ -69,13 +69,15 @@ public class ExchangeHandler {
 			case Sell:
 				order = exchange.makeSellOrder(idCreator.incrementAndGet(), c1, c2, amount, unitPrice);
 			break;
-			case Exchange:
-				order = exchange.makeExchangeOrder(idCreator.incrementAndGet(), c1, c2, amount, unitPrice);
-				break;
 			default:
 				throw new IllegalArgumentException("unsupported operation");
 		}
 		return order;
+	}
+
+	public Order placeSwapOrder(ExchangeName exchangeName, CryptoCurrency c1, CryptoCurrency c2, double amount) {
+		ExchangeAccess exchangeAccess = this.getExchange(exchangeName);
+		return exchangeAccess.makeExchangeOrder(idCreator.incrementAndGet(), c1, c2, amount);
 	}
 
 	//TOdo for tests
