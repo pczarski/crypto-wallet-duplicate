@@ -8,7 +8,7 @@ import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
 // accordion
-import Bitcoin from '../components/walletComponents/Bitcoin.js';
+import Bitcoin from '../components/walletComponents/Coins.js';
 
 import {getRequest, getCurr} from '../lib/backendHandler.js';
 import {roundTo2} from '../components/helper.js';

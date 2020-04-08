@@ -4,7 +4,7 @@ import Logos from "./Logos";
 
 import Accordion from "./Accordion.js"
 function Coins(){
-
+    //creating array of coins
     const [coins,setCoins] = useState([
 
         {
@@ -48,7 +48,7 @@ function Coins(){
 
 
     ]);
-
+    //checks to see if coins are open in order to actually make the accordion work
     const toggleCoins = index=> {
         setCoins(coins.map((coin,i) =>{
             if (i ===index) {
@@ -60,6 +60,7 @@ function Coins(){
             return coin;
         }))
     }
+    //maps coins to coin object and passes them to Accordion.js so that it can handle the formatting and rendering
     return(
             <div className="coins">
                 {coins.map((coin,i) => (
