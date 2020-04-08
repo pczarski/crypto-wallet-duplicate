@@ -34,16 +34,22 @@ public class Order {
 
 
 	public synchronized void fulFilAmount(double amount) {
-		amountComplete = (amountComplete <= amount) ? initialAmount : amountComplete - amount;
+		double toUpdate;
+		if(amount + amountComplete > initialAmount) {
+			toUpdate = initialAmount - amountComplete;
+		} else {
+			toUpdate = amount;
+		} if (toUpdate < 0) { throw new IllegalStateException(); }
+		amountComplete += toUpdate;
 
 		//todo: this seems little bit not like proper OOP
 		if (type == OrderType.Buy) {
-			exchangeAccess.changeCurrencyAmount(currency1, Math.min(amount, initialAmount));
-			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * -unitPrice);
+			exchangeAccess.changeCurrencyAmount(currency1, toUpdate);
+			exchangeAccess.changeCurrencyAmount(currency2, toUpdate * -unitPrice);
 		} else {
 			// exchange and sell are treated the same here
-			exchangeAccess.changeCurrencyAmount(currency1, -1 * Math.min(amount, initialAmount));
-			exchangeAccess.changeCurrencyAmount(currency2, Math.min(amount, initialAmount) * unitPrice);
+			exchangeAccess.changeCurrencyAmount(currency1, -1 * toUpdate);
+			exchangeAccess.changeCurrencyAmount(currency2, toUpdate * unitPrice);
 		}
 
 		this.updateProgress();
@@ -76,7 +82,7 @@ public class Order {
 	};
 
 	public synchronized OrderStatus updateProgress() {
-		this.status = (this.initialAmount == this.amountComplete) ? COMPLETE : IN_PROGRESS;
+		this.status = (this.initialAmount <= this.amountComplete) ? COMPLETE : IN_PROGRESS;
 		return this.status;
 	};
 

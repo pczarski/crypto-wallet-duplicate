@@ -95,12 +95,13 @@ public abstract class ExchangeAccess {
 		return order;
 	};
 
-	public Order makeExchangeOrder(long id, CryptoCurrency currency1, CryptoCurrency currency2, double amount, double price) {
-
+	public Order makeExchangeOrder(long id, CryptoCurrency currency1, CryptoCurrency currency2, double amount) {
+		CurrencyInExchange currency = this.getCurrencyInExchange(currency1);
+		double price = currency.getMarketPriceIn(currency2);
 		if(this.getCurrencyInExchange(currency1).getBalance() < amount) {
 			throw new IllegalStateException();
 		}
-		Order order = new Order(id, OrderType.Exchange, currency1, currency2, amount, price, this);
+		Order order = new Order(id, OrderType.Sell, currency1, currency2, amount, price, this);
 		createOrder(order);
 		return order;
 	};

@@ -150,6 +150,36 @@ public class ExchangeController {
     } // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/swap") // setting up the url location
+    public OrderJson makeSwapOrder(
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "currency1") String currency1,
+            @RequestParam(value = "currency2") String currency2,
+            @RequestParam(value = "amount") double amount
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.placeSwapOrder(
+                    ExchangeName.valueOf(exchange), CryptoCurrency.valueOf(currency1),
+                    CryptoCurrency.valueOf(currency2), amount
+            );
+            return new OrderJson(
+                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (IllegalStateException e) {
+            return new OrderJson(0, "Insufficient Balance", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/swap?exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/get-order") // setting up the url location
     public OrderJson getOrder(
             @RequestParam(value = "exchange") String exchange,

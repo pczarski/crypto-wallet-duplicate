@@ -52,10 +52,11 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     @Override
     public double getMarketPriceIn(CryptoCurrency currencyIn) {
-            RestTemplate restTemplate = this.getRestTemplate();
-            String url = PRICE_URL_BASE + this.getName() + "-" + currencyIn.toString() + "/buy";
-            MarketPriceCoinbase marketPrice = restTemplate.getForObject(url, MarketPriceCoinbase.class);
-            return Double.parseDouble(marketPrice.getData().get("amount"));
+        CurrencyInExchange inCurrency = ExchangeHandler.getInstance().getExchange(ExchangeName.Coinbase).getCurrencyInExchange(currencyIn);
+        inCurrency.updateMarketPrice();
+        double inCurrencyPrice = inCurrency.getMarketPrice();
+        this.updateMarketPrice();
+        return this.getMarketPrice() / inCurrencyPrice;
     }
 
 } //https://api.coinbase.com/v2/prices/BTC-USD/spot
