@@ -1,6 +1,8 @@
 import React from 'react';
 import Nav from '../components/Nav';
 import Popup from '../components/Popup';
+import ManageWallet from '../components/ManageWallet';
+
 import {Link} from 'react-router-dom';
 import '../styles/App.scss';
 import '../styles/nav.scss';
@@ -24,12 +26,12 @@ export default class Wallet extends React.Component {
     const currency = getRequest("currency", "name", "Bitcoin");
     console.log(currency); // we don't "NEED" all of the calls. we can just call once and store into state
     // also, ideally round all of the prices
-    
+
   }
 
   render () {
     return (
-      <div className="wrapper">  
+      <div className="wrapper">
       <Nav />
         <div className="container">
           <div className="content">
@@ -37,6 +39,7 @@ export default class Wallet extends React.Component {
             <div className='d-flex flex-row justify-content-around'>
               <Button className="btn btn-primary" size="lg">Send</Button>
               <Button type="button" className="btn btn-primary" size="lg">Receive</Button>
+              <Button type="button" className="btn btn-primary" size="lg">Manage Wallet</Button>
               <Popup/>
             </div>
             <div className = "row">
