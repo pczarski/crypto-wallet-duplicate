@@ -34,11 +34,9 @@ public class CurrencyController {
         return outKeys;
     }
 
-
-    // send currency
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/currency") // setting up the url location
-    public CurrencyJson getCurrency(@RequestParam(value = "name", defaultValue = "Bitcoin") String name) {
+    public CurrencyJson getCurrency(@RequestParam(value = "name", defaultValue = "BTC") String name) {
 
 
         Wallet wallet = Wallet.getInstance();
@@ -60,6 +58,31 @@ public class CurrencyController {
             return new CurrencyJson("Invalid name", null, -1, -1, null, null);
         }
     } // accessed through: http://localhost:8080/currency?name=CurrencyName
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/all-coins")
+    public CurrencyJson[] getCurrencies() {
+        Wallet wallet = Wallet.getInstance();
+        // todo temporary "hacks" to avoid null pointers for testing
+        this.runHelpers();
+        return this.toCurrencyJsonArray(wallet.getCurrenciesInWallet());
+    } // accessed through: http://localhost:8080/all-coins
+
+    private CurrencyJson[] toCurrencyJsonArray(List<CurrencyInWallet> currencyInWallets) {
+        CurrencyJson[] out = new CurrencyJson[currencyInWallets.size()];
+        for (int i = 0; i < out.length; i ++) {
+            CurrencyInWallet currency = currencyInWallets.get(i);
+            out[i] = new CurrencyJson(
+                    currency.getName().toString(),
+                    currency.getName().getName(),
+                    currency.getBalance(),
+                    currency.getPrice(),
+                    currency.getCurrentPublicKey(),
+                    this.convertToKeyPairJson(currency.getKeyPairs())
+            );
+        }
+        return out;
+    }
 
 
 

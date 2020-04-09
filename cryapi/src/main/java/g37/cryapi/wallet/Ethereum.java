@@ -9,7 +9,7 @@ public class Ethereum extends CurrencyInWallet {
 
     public Ethereum() {
         super(privLen, pubLen, CryptoCurrency.ETH);
-        this.addTestReceive(12, 8);
+        this.addTestReceive(12, 280);
     }
 
     @Override

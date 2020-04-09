@@ -13,8 +13,8 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.binance.com/api/v3/ticker/price?symbol=";
 
-    public CurrencyInBinance(CryptoCurrency name) {
-        super(name);
+    public CurrencyInBinance(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     private void SetupSymbolList() {

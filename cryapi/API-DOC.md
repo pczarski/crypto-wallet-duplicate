@@ -29,6 +29,11 @@
 
 
 ## Getting currency:
+
+### Get all currency:
+    accessed through: http://localhost:8080/all-coins
+##### Reply: array of currencies in wallet
+
 #### successful:
 ##### Example Call:
     http://localhost:8080/currency?name=BTC
@@ -98,6 +103,11 @@
     http://localhost:8080/withdraw?exchange=Binance&currency=BTC&amount=2.5
 #### response: 
     {"response":"success","id":1}
+    
+### get all currency from exchange
+    http://localhost:8080/exchange-currencies?exchange=Binance
+    
+    -returns an array of currencies in exchange
 
 ## Deposit from the wallet to an exchange
 
@@ -138,3 +148,8 @@
     
 ##### ex. reply:
     [{"id":1,"exchange":"Binance","currency1":"BTC","currency2":"DASH","initialAmount":10.0,"amountComplete":10.0,"unitPrice":10.0,"type":"Buy","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:14 BST 2020"},{"id":2,"exchange":"Binance","currency1":"LTC","currency2":"ETH","initialAmount":20.0,"amountComplete":20.0,"unitPrice":3.2,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:22 BST 2020"}]
+    
+## Cancel Order
+    http://localhost:8080/cancel?exchange=Binance&id=1
+    
+    return: the order that was cancelled
