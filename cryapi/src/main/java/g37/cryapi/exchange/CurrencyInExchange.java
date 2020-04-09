@@ -17,19 +17,24 @@ public abstract class CurrencyInExchange extends Currency {
 
 	private RestTemplate restTemplate;
 
-	public CurrencyInExchange(CryptoCurrency name) {
+	private ExchangeAccess exchangeAccess;
+
+	public CurrencyInExchange(CryptoCurrency name, ExchangeAccess exchangeAccess) {
 		super(name);
 		restTemplate = new RestTemplate();
+		this.exchangeAccess = exchangeAccess;
 
 		//todo temporary for test
 		this.addTestBalance(100.0);
 	}
 
+	public ExchangeAccess getExchangeAccess() {
+		return exchangeAccess;
+	}
+
 	protected RestTemplate getRestTemplate() {
 		return restTemplate;
 	}
-
-	public abstract void updateMarketPrice();
 
 	protected abstract void performSend(String address, double amount);
 
@@ -81,6 +86,7 @@ public abstract class CurrencyInExchange extends Currency {
 		if (this.getBalance() < amount) {
 			return false;
 		}
+		this.performSend(address, amount);
 		this.setBalance(this.getBalance() - amount);
 		return true;
 	};
@@ -91,6 +97,10 @@ public abstract class CurrencyInExchange extends Currency {
 		}
 		this.setBalance(this.getBalance() + amount);
 	}
+
+	public abstract void updateMarketPrice();
+
+	public abstract double getMarketPriceIn(CryptoCurrency currencyIn);
 
 	//todo for tests
 

@@ -11,8 +11,8 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.coinbase.com/v2/prices/";
 
-    public CurrencyInCoinbase(CryptoCurrency name) {
-        super(name);
+    public CurrencyInCoinbase(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     @Override
@@ -49,6 +49,16 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
             System.out.println(e.toString());
         }
     }
+
+    @Override
+    public double getMarketPriceIn(CryptoCurrency currencyIn) {
+        CurrencyInExchange inCurrency = ExchangeHandler.getInstance().getExchange(ExchangeName.Coinbase).getCurrencyInExchange(currencyIn);
+        inCurrency.updateMarketPrice();
+        double inCurrencyPrice = inCurrency.getMarketPrice();
+        this.updateMarketPrice();
+        return this.getMarketPrice() / inCurrencyPrice;
+    }
+
 } //https://api.coinbase.com/v2/prices/BTC-USD/spot
 
 class MarketPriceCoinbase implements Serializable {

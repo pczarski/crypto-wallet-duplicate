@@ -9,7 +9,7 @@ public class Dash extends CurrencyInWallet {
 
     public Dash() {
         super(privLen, pubLen, CryptoCurrency.DASH);
-        this.addTestReceive(9, 10);
+        this.addTestReceive(9, 50);
     }
 
     @Override

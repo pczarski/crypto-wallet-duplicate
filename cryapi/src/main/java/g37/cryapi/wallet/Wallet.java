@@ -14,7 +14,6 @@ public class Wallet {
 	private Boolean isSetup = false;
 
 	private Wallet() {
-		// TODO - implement Wallet.Walle
 	}
 
 	public void setUpNew(){
@@ -71,12 +70,6 @@ public class Wallet {
 		return this.isSetup;
 	}
 
-
-	public void sendCoins(String publicKey, double Amount, CurrencyInWallet currency) {
-		// TODO - implement Wallet.sendCoins
-		throw new UnsupportedOperationException();
-	}
-
 	public CurrencyInWallet getCurrencyInWallet(CryptoCurrency currency) {
 		for (int i = 0; i < this.currencyInWallets.size(); i++) {
 			CurrencyInWallet currencyInWallet = this.currencyInWallets.get(i);
@@ -85,6 +78,10 @@ public class Wallet {
 			}
 		}
 		throw new IllegalStateException();
+	}
+
+	public ArrayList<CurrencyInWallet> getCurrenciesInWallet() {
+		return this.currencyInWallets;
 	}
 
 	public double getTotalBalance(CryptoCurrency displayCurrency) {

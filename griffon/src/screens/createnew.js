@@ -7,18 +7,21 @@ import {Button} from 'reactstrap';
 
 import {makeWallet} from "../lib/backendHandler.js"
 
-export default class CreateNew extends React.Component {
-  state = {
-    data: []
-  };
 
+export default class CreateNew extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      data: [],
+      seed: null
+    };
+    }
 
   async handleClick() {
-    console.log('wallet made');
-    localStorage.setItem('hasWallet', true);
-    const wallet = makeWallet();
-    console.log(wallet)
+    const wallet = await makeWallet("");
+    console.log('wallet made', wallet);
   }
+ 
 
   render () {
     return (
@@ -32,6 +35,7 @@ export default class CreateNew extends React.Component {
             <Link to="/">
                 <Button type="button" className="btn btn-primary">Go back</Button>
             </Link>
+            <Button type="button" className="btn btn-primary" onClick={this.handleClick}>Get Password</Button>
           </div>
         </div>
       </div>

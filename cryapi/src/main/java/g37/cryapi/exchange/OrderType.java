@@ -3,6 +3,6 @@ package g37.cryapi.exchange;
 public enum OrderType {
 	Buy,
 	Sell,
-	Exchange
+	Swap
 }
 // JUST A MARKER TO SEE CHANGES
