@@ -18,8 +18,8 @@ export default class Help extends React.Component {
                 <h1>Help</h1>
                  <ul id="nav1">
              <Link to="/">
-                     <li ><a href="#">Home</a></li></Link>
-                     <li id="active"><a href="#">Security Guidelines</a></li>
+                     <li >Home</li></Link>
+                     <li id="active">Security Guidelines</li>
                  </ul>
                  </nav>
                  <div className="extra1">

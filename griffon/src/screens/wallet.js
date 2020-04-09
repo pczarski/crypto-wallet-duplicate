@@ -7,20 +7,15 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
-import Bitcoin from '../components/walletComponents/Coins.js';
+import Crypto from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
-import {roundTo2} from '../lib/helper.js';
+// import {roundTo2} from '../lib/helper.js';
 
-import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
-import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
-import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
-import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
-import thetherLogo from "../../node_modules/cryptocurrency-icons/svg/color/usdt.svg";
 
 import { Button } from 'reactstrap';
 
-import {receiver } from "../lib/helper"
+
 const {ipcRenderer} = window.require("electron")
 
 export default class Wallet extends React.Component {
@@ -72,7 +67,7 @@ export default class Wallet extends React.Component {
           <div className="content">
             <h1>Wallet</h1>
 
-              <Bitcoin></Bitcoin>
+              <Crypto/>
 
             <Link to="/transfer">
               <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button> 

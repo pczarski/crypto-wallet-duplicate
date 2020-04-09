@@ -1,18 +1,18 @@
 import React from 'react';
 import Nav from '../components/Nav';
 
-import {Link} from 'react-router-dom';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/exchange.scss';
+
 import ethLogo from "../../node_modules/cryptocurrency-icons/svg/color/eth.svg";
-import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
-import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
+// import dashLogo from "../../node_modules/cryptocurrency-icons/svg/color/dash.svg";
+// import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
 import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
 
 
-import { Button, Alert } from 'reactstrap';
+// import { Button, Alert } from 'reactstrap';
 
 export default class Exchange extends React.Component {
   render () {
@@ -22,9 +22,8 @@ export default class Exchange extends React.Component {
                       <nav class="navbar 1">
                       <h1>Exchange</h1>
                        <ul id="nav1">
-
-                           <li id="active"><a href="#">Instant Exchange</a></li>
-                           <li ><a href="#">Order History</a></li>
+                           <li id="active">Instant Exchange</li>
+                           <li>Order History</li>
                        </ul>
                        </nav>
                        <div className="extra1">

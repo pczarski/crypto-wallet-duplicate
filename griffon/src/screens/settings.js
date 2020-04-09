@@ -7,12 +7,11 @@ import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/settings.scss';
 
-import RecoveryPhrase from '../components/RecoveryPhrase';
-
+// import RecoveryPhrase from '../components/RecoveryPhrase';
 
 import {Link} from 'react-router-dom';
 
-import { Button, Alert } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 const initialState ={
   current:"",
@@ -37,7 +36,7 @@ export default class Settings extends React.Component {
    });
  };
   validate=()=>{
-    var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+    // var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
     let password1= userpass;
     let currentError="";
     let newError="";
@@ -45,13 +44,13 @@ export default class Settings extends React.Component {
     if(!this.state.current.includes(password1)){
       currentError="Password is not correct!";
     }
-    if(this.state.confirm!=""){
-    if(this.state.confirm != this.state.new){
+    if(this.state.confirm!==""){
+    if(this.state.confirm !== this.state.new){
       confirmError="Please make sure your passwords match!";
 
     }
     }
-    if(this.state.new =="" || this.state.new.length <8){
+    if(this.state.new === "" || this.state.new.length <8){
       newError="Password should contain atleast 8 characters, one capital letter and one digit";
   }
 
@@ -75,14 +74,16 @@ export default class Settings extends React.Component {
     return (
       <div className="wrapper">
           <Nav/>
-          <nav class="navbar 1">
+          <nav className="navbar 1">
           <h1>Settings</h1>
            <ul id="nav1">
-       <Link to="/">
-               <li ><a href="#">Home</a></li></Link>
-               <li id="active"><a href="#">Change Password</a></li>
+          <Link to="/">
+               <li >Home</li>
+          </Link>
+               <li id="active">Change Password</li>
                <Link to="/pubkeys">
-               <li><a href="#">Public Keys</a></li></Link>
+                <li>>Public Keys</li>
+               </Link>
 
            </ul>
            </nav>

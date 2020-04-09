@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 
 import "../../styles/Accordion.css";
-import { Table, Row, Col } from "reactstrap";
+// import { Table, Row, Col } from "reactstrap";
 //This function renders the coins 
 function Accordion({coin,index,toggleCoins}){
     //performs a check to see whether coin tab is open.
@@ -12,12 +12,10 @@ function Accordion({coin,index,toggleCoins}){
                 <table>
                     <tbody>
                         <tr>
-                            
-                            <td className ="logo">{coin.logo}</td><td className="name">{coin.name}</td> <td className = "balance">{coin.balance}</td><td className= "address">{coin.address}</td>
+                            <td className ="logo">{coin.logo}</td><td className="name">{coin.name}</td><td className = "balance">{coin.balance}</td><td className= "address">{coin.address}</td>
                         </tr>
                     </tbody>
                 </table>
-                
             </div>
             <div className="properties">
                 {coin.properties}

@@ -8,7 +8,7 @@ import '../styles/bal.scss';
 import '../styles/settings.scss';
 
 
-import { Button, Alert } from 'reactstrap';
+// import { Button, Alert } from 'reactstrap';
 
 export default class PubKey extends React.Component {
   render () {
@@ -20,17 +20,14 @@ export default class PubKey extends React.Component {
           <h1>Settings</h1>
            <ul id="nav1">
        <Link to="/">
-               <li ><a href="#">Home</a></li></Link>
+               <li >Home</li></Link>
                 <Link to="/settings">
-               <li ><a href="#">Change Password</a></li></Link>
-               <li id="active"><a href="#">Public Keys</a></li>
-
+               <li >Change Password</li></Link>
+               <li id="active">Public Keys</li>
            </ul>
            </nav>
            <div className="extra">
            </div>
-
-
          </div>
     );
   }
