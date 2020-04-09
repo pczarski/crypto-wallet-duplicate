@@ -71,6 +71,38 @@ public class ExchangeController {
     } // http://localhost:8080/exchange-currency?exchange=Binance&currency=Bitcoin
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-currencies") // setting up the url location
+    public CurrencyInExchangeJson[] getExchangeCurrencies(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+
+        try {
+            ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
+            return this.toCurrencyInExchangeJsonArray(selectedExchange.getCurrenciesInExchange());
+        }
+        catch (IllegalArgumentException e) {
+            CurrencyInExchangeJson[] error = {new CurrencyInExchangeJson("Exchange not found", null, null, -1, -1)};
+            return error;
+        }
+
+    } // http://localhost:8080/exchange-currencies?exchange=Binance
+
+    private CurrencyInExchangeJson[] toCurrencyInExchangeJsonArray(List<CurrencyInExchange> currencies) {
+        CurrencyInExchangeJson[] out = new CurrencyInExchangeJson[currencies.size()];
+        for (int i = 0; i < out.length; i++){
+            CurrencyInExchange currency = currencies.get(i);
+            out[i] = new CurrencyInExchangeJson(
+                    currency.getName().toString(),
+                    currency.getExchangeAccess().getName().getName(),
+                    currency.getCurrentPublicKey(),
+                    currency.getBalance(),
+                    currency.getMarketPrice());
+        }
+        return out;
+    }
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/withdraw") // setting up the url location
     public TextResponse withdrawCurrency(
             @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,

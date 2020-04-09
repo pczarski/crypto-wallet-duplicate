@@ -29,6 +29,11 @@
 
 
 ## Getting currency:
+
+### Get all currency:
+    accessed through: http://localhost:8080/all-coins
+##### Reply: array of currencies in wallet
+
 #### successful:
 ##### Example Call:
     http://localhost:8080/currency?name=BTC
@@ -98,6 +103,11 @@
     http://localhost:8080/withdraw?exchange=Binance&currency=BTC&amount=2.5
 #### response: 
     {"response":"success","id":1}
+    
+### get all currency from exchange
+    http://localhost:8080/exchange-currencies?exchange=Binance
+    
+    -returns an array of currencies in exchange
 
 ## Deposit from the wallet to an exchange
 

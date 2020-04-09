@@ -11,8 +11,8 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.coinbase.com/v2/prices/";
 
-    public CurrencyInCoinbase(CryptoCurrency name) {
-        super(name);
+    public CurrencyInCoinbase(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Tether extends CurrencyInWallet {
 
     public Tether() {
         super(privLen, pubLen, CryptoCurrency.USDT);
-        this.addTestReceive(4, 30);
+        this.addTestReceive(4, 3000);
     }
 
     @Override
