@@ -278,6 +278,32 @@ public class ExchangeController {
         return toRet;
     }
 
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/cancel") // setting up the url location
+    public OrderJson cancelOrder(@RequestParam(value = "exchange") String exchange, @RequestParam(value = "id") long id) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.getOrder(id, ExchangeName.valueOf(exchange));
+            order.cancelOrder();
+            return new OrderJson(
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, null, "Unsupported/Invalid exchange", null, -1,
+                    -1, -1, null, null, null);
+        } catch (NoSuchObjectException e) {
+            return new OrderJson(-1, null, "Order doesn't exist", null, -1,
+                    -1, -1, null, null, null);
+        }
+    } // http://localhost:8080/cancel?exchange=Binance&id=1
+
+
+
 
 
 }

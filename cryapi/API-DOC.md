@@ -148,3 +148,8 @@
     
 ##### ex. reply:
     [{"id":1,"exchange":"Binance","currency1":"BTC","currency2":"DASH","initialAmount":10.0,"amountComplete":10.0,"unitPrice":10.0,"type":"Buy","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:14 BST 2020"},{"id":2,"exchange":"Binance","currency1":"LTC","currency2":"ETH","initialAmount":20.0,"amountComplete":20.0,"unitPrice":3.2,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:22 BST 2020"}]
+    
+## Cancel Order
+    http://localhost:8080/cancel?exchange=Binance&id=1
+    
+    return: the order that was cancelled
