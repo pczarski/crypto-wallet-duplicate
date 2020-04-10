@@ -84,7 +84,7 @@ export default class Transfer extends React.Component {
   );
   return (
     <div className="wrapper">
-    <Nav/>
+    
       <div className="container">
         <h2>Send or Receive from Wallet</h2>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

@@ -4,7 +4,7 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const keytar = require('keytar')
+//const keytar = require('keytar')
 const path = require('path');
 const url = require('url');
 

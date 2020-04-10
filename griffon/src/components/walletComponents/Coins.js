@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import Properties from "../../screens/transfer.js"
 import Logos from "./Logos";
 
 import Accordion from "./Accordion.js"
@@ -12,7 +12,7 @@ function Coins(){
 
         {
             name:"Bitcoin",
-            properties:'send / receive and other things',
+            properties:<Properties/>,
             open:true,
             logo:<img src = {Logos[0].logo} alt = {"bitcoin"}></img>,
             balance:roundTo2(getCurr("BTC").balance),
