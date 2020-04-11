@@ -38,4 +38,3 @@ export function makeWallet(seed){
     req.send(null);
     return JSON.parse(req.responseText);
 }
-

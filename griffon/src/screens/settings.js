@@ -81,9 +81,12 @@ export default class Settings extends React.Component {
                <li >Home</li>
           </Link>
                <li id="active">Change Password</li>
-               <Link to="/pubkeys">
+          <Link to="/pubkeys">
                 <li>>Public Keys</li>
-               </Link>
+          </Link>
+          <Link to="/privkeys">
+                <li>>Private Keys</li>
+          </Link>
 
            </ul>
            </nav>
