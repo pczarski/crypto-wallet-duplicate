@@ -3,8 +3,6 @@ import '../styles/App.scss';
 import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
-// import getIcons from '../components/Icons';
-
 
 import ETH from "../../node_modules/cryptocurrency-icons/svg/icon/eth.svg";
 import DASH from "../../node_modules/cryptocurrency-icons/svg/icon/dash.svg";
@@ -21,14 +19,16 @@ export default class Transfer extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
+    
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
       images: [],
-      // icons: [ETH, DASH, LTC, BTC, USDT],
       dropdownOpen: false,
       selected: "BTC",
-      change: false
+      change: false,
+      choice: 0
     }
 
   }
@@ -36,11 +36,11 @@ export default class Transfer extends React.Component {
     // this.setState({images: getIcons()})
   }
 
-  send() {
-  }
-
-  receive() {
-
+  handleClick(e) {
+    console.log(e.target.value)
+    this.setState({
+      choice: e.target.value
+    });
   }
   
   toggle(e) {
@@ -57,6 +57,7 @@ export default class Transfer extends React.Component {
       change: true
       });
   }
+
   renderIcon() {
     switch(this.state.selected) {
       case "BTC":
@@ -82,6 +83,16 @@ export default class Transfer extends React.Component {
       )}
     </div>
   );
+
+  let component;
+  if (this.state.choice == 1) {
+    component = <Send curr={this.state.selected}/>;
+  } else  if (this.state.choice == 2) {
+    component = <Receive curr={this.state.selected} />
+  } else {
+    component = null;
+  }
+
   return (
     <div className="wrapper">
     <Nav/>
@@ -96,14 +107,10 @@ export default class Transfer extends React.Component {
             <DropdownList/>
           </DropdownMenu>
         </Dropdown>
-        <Button className="btn btn-primary" size="lg" onClick={
-    this.send()}>Send Currency</Button> 
-        <Button className="btn btn-primary" size="lg">Receive Currency</Button> 
-        <Send/>
-        <Receive curr={this.state.selected} />
-        <Link to="/">
-          <button type="button" className="btn btn-primary">Go back</button>
-        </Link>
+        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1">Send Currency</Button> 
+        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2">Receive Currency</Button> 
+        {component}
+        <Button type="button" className="btn btn-primary"onClick={this.handleClick}  value="0">Go back</Button>
       </div>
     </div>
   );

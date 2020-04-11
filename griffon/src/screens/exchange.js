@@ -19,7 +19,7 @@ export default class Exchange extends React.Component {
     return (
                   <div className="wrapper">
                       <Nav/>
-                      <nav class="navbar 1">
+                      <nav className="navbar 1">
                       <h1>Exchange</h1>
                        <ul id="nav1">
                            <li id="active">Instant Exchange</li>
