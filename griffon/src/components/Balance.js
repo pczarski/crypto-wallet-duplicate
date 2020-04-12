@@ -19,8 +19,7 @@ export default class Balance extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
     this.state = {
-      supportedCurr: ["BTC", "ETH", "LTC", "Dash"],
-      supportedCurrNames: ["Bitcoin", "Ethereum", "Litecoin", "Dash"],
+      supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
       currency: "Select a currency", // currency name (bitcoin, litecoin, etc. btc by default)
       balance: null,
       totalBal: null, 
@@ -41,7 +40,7 @@ export default class Balance extends React.Component {
     } else {
       for (let i = 0; i<this.state.supportedCurr.length; i++) {
         let value;
-        let req = await getCurr(this.state.supportedCurrNames[i])
+        let req = await getCurr(this.state.supportedCurr[i])
         if (curr === this.state.supportedCurr[i]) { value = req.balance
         } else {
           value = await converter.convert(req.balance, this.state.supportedCurr[i], curr);  

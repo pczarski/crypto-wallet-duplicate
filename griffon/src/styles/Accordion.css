@@ -1,0 +1,21 @@
+.names{
+    background-color:#36454F;
+    width: 100%;
+    position: relative;
+    font-size: 20px;
+    padding-right: 80px;
+    transition: all 0.4s ease;
+}
+.properties{
+    position: relative;
+    max-height: 0;
+    opacity: 0;
+    overflow-y: hidden;
+    transition: all 0.4s ease;
+    background-color: white;
+}
+
+.coin.open .properties{
+    max-height: 1000px;
+    opacity:1;
+}

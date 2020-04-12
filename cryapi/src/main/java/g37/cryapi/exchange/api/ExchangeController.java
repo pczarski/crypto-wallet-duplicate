@@ -1,10 +1,15 @@
 package g37.cryapi.exchange.api;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
 import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
+
+import java.rmi.NoSuchObjectException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class ExchangeController {
@@ -115,7 +120,7 @@ public class ExchangeController {
     /* orders */
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
-    @GetMapping("/order") // setting up the url location
+    @GetMapping("/new-order") // setting up the url location
     public OrderJson makeOrder(
             @RequestParam(value = "type") String type,
             @RequestParam(value = "exchange") String exchange,
@@ -133,18 +138,114 @@ public class ExchangeController {
                     amount, price
                     );
             return new OrderJson(
-                    order.getOrderID(), order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
                     order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
                     order.getType(), order.getStatus(), order.getDate().toString()
                     );
         } catch (IllegalArgumentException e) {
-            return new OrderJson(-1, "Unsupported exchange or currency", null, -1,
+            return new OrderJson(-1, null, "Unsupported exchange or currency", null, -1,
                     -1, -1, null, null, null);
         } catch (IllegalStateException e) {
-            return new OrderJson(0, "Insufficient Balance", null, -1,
+            return new OrderJson(0, null, "Insufficient Balance", null, -1,
                     -1, -1, null, null, null);
         }
 
-    } // http://localhost:8080/order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+    } // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/swap") // setting up the url location
+    public OrderJson makeSwapOrder(
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "currency1") String currency1,
+            @RequestParam(value = "currency2") String currency2,
+            @RequestParam(value = "amount") double amount
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.placeSwapOrder(
+                    ExchangeName.valueOf(exchange), CryptoCurrency.valueOf(currency1),
+                    CryptoCurrency.valueOf(currency2), amount
+            );
+            return new OrderJson(
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, null, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (IllegalStateException e) {
+            return new OrderJson(0, null, "Insufficient Balance", null, -1,
+                    -1, -1, null, null, null);
+        }
+
+    } // http://localhost:8080/swap?exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/get-order") // setting up the url location
+    public OrderJson getOrder(
+            @RequestParam(value = "exchange") String exchange,
+            @RequestParam(value = "id") long id
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.getOrder(id, ExchangeName.valueOf(exchange));
+            return new OrderJson(
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, null, "Unsupported exchange or currency", null, -1,
+                    -1, -1, null, null, null);
+        } catch (NoSuchObjectException e) {
+            return new OrderJson(0, null, "Order not found", null, -1,
+                    -1, -1, null, null, null);
+        }
+    } // http://localhost:8080/get-order?&exchange=Binance&id=1
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/all-orders") // setting up the url location
+    public OrderJson[] getOrders() {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        return this.getOrderList(exchangeHandler.getFullOrderHistory());
+    } // http://localhost:8080/all-orders
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/orders") // setting up the url location
+    public OrderJson[] getExchangeOrders(@RequestParam(value = "exchange") String exchange) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            return this.getOrderList(exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).getOrders());
+        } catch (IllegalArgumentException e) {
+            OrderJson[] toRet = {new OrderJson(-1, null, "Unsupported/Invalid exchange", null, -1,
+                    -1, -1, null, null, null)};
+            return toRet;
+        }
+    } // http://localhost:8080/orders?exchange=Binance
+
+
+    private OrderJson[] getOrderList(List<Order> orderList) {
+        OrderJson[] toRet = new OrderJson[orderList.size()];
+        for(int i = 0; i < toRet.length; i++) {
+            Order order = orderList.get(i);
+            toRet[i] = new OrderJson(
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+        }
+        return toRet;
+    }
+
+
 
 }

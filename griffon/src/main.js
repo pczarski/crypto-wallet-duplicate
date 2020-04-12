@@ -4,10 +4,11 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const { ipcMain } = require('electron')
-const keytar = require('keytar')
+// const keytar = require('keytar')
 const path = require('path');
 const url = require('url');
+
+const {ipcMain} = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -32,7 +33,7 @@ function createWindow() {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
 
-  
+ 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
@@ -42,13 +43,23 @@ function createWindow() {
     })
 }
 
-ipcMain.on('get-password', (event, user) => {
-    event.returnValue = keytar.getPassword('ServiceName', user);
-});
+ipcMain.on('asynchronous-message', (event, arg) => {
+    console.log(arg) // prints "ping"
+    mainWindow.webContents.send('asynchronous-reply', 'pong')
+  })
+  
+//   ipcMain.on('synchronous-message', (event, arg) => {
+//     console.log(arg) // prints "ping"
+//     event.returnValue = 'pong'
+//   })
 
-ipcMain.on('set-password', (event, user, pass) => {
-    event.returnValue = keytar.replacePassword('ServiceName', user, pass);
-});
+// ipcMain.on('get-password', (event, user) => {
+//     event.returnValue = keytar.getPassword('ServiceName', user);
+// });
+
+// ipcMain.on('set-password', (event, user, pass) => {
+//     event.returnValue = keytar.replacePassword('ServiceName', user, pass);
+// });
 
 
 // This method will be called when Electron has finished

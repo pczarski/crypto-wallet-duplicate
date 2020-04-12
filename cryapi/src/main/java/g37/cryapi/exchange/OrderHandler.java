@@ -13,7 +13,7 @@ public class OrderHandler implements Runnable {
         this.orders = new ArrayList<>();
     }
 
-    public void placeOrder(Order order) {
+    public synchronized void placeOrder(Order order) {
         this.orders.add(order);
         notifyAll();
     }

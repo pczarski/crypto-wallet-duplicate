@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class OrderJson {
     private final long id;
+        private final String exchange;
     private final String currency1;
     private final String currency2;
     private final double initialAmount;
@@ -17,9 +18,10 @@ public class OrderJson {
     private final OrderStatus status;
     private final double percentComplete;
 
-    public OrderJson(long id, String currency1, String currency2, double initialAmount,
+    public OrderJson(long id, String exchange, String currency1, String currency2, double initialAmount,
                      double amountComplete, double unitPrice, OrderType type, OrderStatus status, String date) {
         this.id = id;
+        this.exchange = exchange;
         this.currency1 = currency1;
         this.currency2 = currency2;
         this.initialAmount = initialAmount;
@@ -35,6 +37,10 @@ public class OrderJson {
 
     public long getId() {
         return id;
+    }
+
+    public String getExchange() {
+        return exchange;
     }
 
     public String getCurrency1() {
