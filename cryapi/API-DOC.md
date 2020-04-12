@@ -47,8 +47,22 @@
     http://localhost:8080/currency?name={any unsoppurted name}
 ##### Example reply:
     {"name":"Invalid name","price":-1.0,"balance":-1.0,"keyPairs":null}
+    
+## get value in
+    http://localhost:8080/price-in?base=BTC&in=ETH
+    
+    respnse
+    
+    {"response":"BTC in ETH","value":43.48870962813579}
 
-
+## get total wallet value in
+##### if not specified, in=BTC
+    http://localhost:8080/total-balance?in=USDT
+    
+    response:
+    
+    {"response":"Total balance in USDT","value":1243210.8439695442}
+    
 ## Sending coins:
 #### successful:
 ##### Example Call:
@@ -118,6 +132,15 @@
     {"response":"success","id":1}
 
 ####
+
+## Get exchange value in another currency
+
+#### call
+    http://localhost:8080/exchange-price-in?exchange=Binance&base=BTC&in=ETH
+    
+    resonpnse:
+    
+    {"response":"BTC in ETH","value":43.5464204842362}
 
 ## Make Orders
 

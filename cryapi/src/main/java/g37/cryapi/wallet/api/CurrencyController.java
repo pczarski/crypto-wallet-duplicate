@@ -1,6 +1,7 @@
 package g37.cryapi.wallet.api;
 
 import g37.cryapi.common.TextResponse;
+import g37.cryapi.common.ValueResponse;
 import g37.cryapi.wallet.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -113,7 +114,7 @@ public class CurrencyController {
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/records") // setting up the url location
-    public RecordsJson getRecords(@RequestParam(value = "name", defaultValue = "Bitcoin") String name) {
+    public RecordsJson getRecords(@RequestParam(value = "name", defaultValue = "BTC") String name) {
         // todo temporary "hacks" to avoid null pointers
         this.runHelpers();
         try {
@@ -125,5 +126,37 @@ public class CurrencyController {
             return new RecordsJson(null, "Invalid Name");
         }
     } // accessed through: http://localhost:8080/records?name=Bitcoin
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/price-in") // setting up the url location
+    public ValueResponse getPriceIn(
+            @RequestParam(value = "base", defaultValue = "BTC") String c1,
+            @RequestParam(value = "in", defaultValue = "ETH") String c2
+    ) {
+        this.runHelpers();
+        // get wallet instance
+        Wallet wallet = Wallet.getInstance();
+        try {
+            double value = wallet.valueIn(CryptoCurrency.valueOf(c1), CryptoCurrency.valueOf(c2));
+            return new ValueResponse(c1 + " in " + c2, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies", -1);
+        }
+    } // http://localhost:8080/price-in?base=BTC&in=ETH
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/total-balance") // setting up the url location
+    public ValueResponse getTotalBalance(
+            @RequestParam(value = "in", defaultValue = "BTC") String currency
+    ) {
+        this.runHelpers();
+        Wallet wallet = Wallet.getInstance();
+        try {
+            double value = wallet.getTotalBalance(CryptoCurrency.valueOf(currency));
+            return new ValueResponse("Total balance in "+currency, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies", -1);
+        }
+    } // http://localhost:8080/total-balance?in=BTC
 
 }
