@@ -81,7 +81,6 @@ rows(element,i){
     {console.log("RENDER"+this.state.gotKeys)}
     console.log(this.state.privatekeys,this)
     return this.state.privatekeys.map((element,i)=>{
-      //const {id,prk,pubk} = element
       return(
         <tr  key={i}>
           <td>{i}</td>
@@ -131,7 +130,8 @@ rows(element,i){
                </Dropdown>
                </div>
                <div>
-               {this.state.gotKeys === true? <Table id="simple-board" className="striped bordered hover">
+               {this.state.gotKeys === true? <
+                 Table id="simple-board" size="sm" className="striped bordered hover">
 
                  <thead>
                  <tr>
