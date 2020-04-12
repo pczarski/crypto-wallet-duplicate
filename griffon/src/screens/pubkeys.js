@@ -39,13 +39,14 @@ export default class PubKey extends React.Component {
         privk.push(keypairs[i].privateKey)
         pubk.push(keypairs[i].publicKey)
       }
-      console.log(privk)
+      //console.log("go"+privk )
       this.setState(
         {
           gotKeys: true,
           publickeys:pubk,
           privatekeys:privk,
       })
+      console.log("gotLEMWO"+this.state.gotKeys )
       //console.log(privk)
     }
 
@@ -68,37 +69,30 @@ export default class PubKey extends React.Component {
       this.getkeys(prev, e.target.innerText)
     }
   }
-
+rows(element,i){
+  console.log("rows")
+  return(<tr  key={i}>
+    <td>{i}</td>
+     <td >{this.state.publickeys[i]}</td>
+     <td >{this.state.privatekeys[i]}</td>
+  </tr>)
+}
   getTable(){
-    return (<Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+    {console.log("RENDER"+this.state.gotKeys)}
+    console.log(this.state.privatekeys,this)
+    return this.state.privatekeys.map((element,i)=>{
+      //const {id,prk,pubk} = element
+      return(
+        <tr  key={i}>
+          <td>{i}</td>
+           <td >{this.state.publickeys[i]}</td>
+           <td >{this.state.privatekeys[i]}</td>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-  </Table>)
+
+      )
+    }
+  )
+
 
   }
 
@@ -137,8 +131,17 @@ export default class PubKey extends React.Component {
                </Dropdown>
                </div>
                <div>
-               {console.log("RENDER"+this.gotKeys)}
-               {this.gotKeys === true? this.getTable():null}
+               {this.state.gotKeys === true? <Table id="simple-board" className="striped bordered hover">
+
+                 <thead>
+                 <tr>
+                  <th>#</th>
+                  <th>Private Keys</th>
+                  <th>Public Keys</th>
+                 </tr>
+                 </thead>
+                 <tbody>{this.getTable()}</tbody>
+                 </Table>:null}
 
             </div>
            </div>
