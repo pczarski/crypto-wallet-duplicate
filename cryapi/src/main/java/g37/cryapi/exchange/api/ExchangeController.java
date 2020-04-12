@@ -3,6 +3,7 @@ package g37.cryapi.exchange.api;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
+import g37.cryapi.common.ValueResponse;
 import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
@@ -301,6 +302,24 @@ public class ExchangeController {
                     -1, -1, null, null, null);
         }
     } // http://localhost:8080/cancel?exchange=Binance&id=1
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-price-in") // setting up the url location
+    public ValueResponse getPriceIn(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "base", defaultValue = "BTC") String c1,
+            @RequestParam(value = "in", defaultValue = "ETH") String c2
+    ) {
+        this.runHelpers();
+        // get wallet instance
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            double value = exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).valueInCurrency(CryptoCurrency.valueOf(c1), CryptoCurrency.valueOf(c2));
+            return new ValueResponse(c1 + " in " + c2, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies or the exchange", -1);
+        }
+    } // http://localhost:8080/exchange-price-in?exchange=Binance&base=BTC&in=ETH
 
 
 
