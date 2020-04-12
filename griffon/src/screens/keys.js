@@ -102,19 +102,6 @@ export default class Keys extends React.Component {
     return (
 
       <div className="wrapper">
-          <Nav/>
-          <nav className="navbar 1">
-          <h1>Settings</h1>
-           <ul id="nav1">
-       <Link to="/">
-               <li >Home</li></Link>
-               <Link to="/settings">
-               <li >Change Password</li></Link>
-               <li id="active">View Keys</li>
-               <Link to="/seed">
-              <li >View SeedPhrase</li></Link>
-           </ul>
-           </nav>
            <div className="extra">
              <h1>Keys</h1>
              <div className="currSel">

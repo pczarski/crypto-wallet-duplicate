@@ -10,6 +10,7 @@ import Table from 'react-bootstrap/Table'
 import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
+//id,currency1,currency2,initialAmount,amountComplete,unitPrice,type,status,percentComplete,date
 
 export default class OrderHistory extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ export default class OrderHistory extends React.Component {
 
     this.state = {
       supportedEx: ["Binance"],
+      displayOptions:["ALL","COMPLETE","INCOMPLETE"],
+      currentDisplay:"Select a Display",
       images: [],
       exchange: "Select an Exchange",
       completedOrders: [],
@@ -31,9 +34,7 @@ export default class OrderHistory extends React.Component {
     }
 
   }
-  componentDidMount() {
-    // this.setState({images: getIcons()})
-  }
+
 
   send() {
   }
@@ -50,25 +51,32 @@ export default class OrderHistory extends React.Component {
   }
 
   getOrders(prev, exch){
-      let con = getOrderHistory(exch)
+      let allOrders = getOrderHistory(exch)
       let incomplete =[]
       let complete =[]
       let orders =[]
-      console.log(con)
-      /*for(let i =0; i<keypairs.length;i++){
-        privk.push(keypairs[i].privateKey)
-        pubk.push(keypairs[i].publicKey)
+      console.log(allOrders)
+      for(let i =0; i<allOrders.length;i++){
+        orders.push(allOrders[i].status)
+        incomplete.push(allOrders[i].status)
+        complete.push(allOrders[i].status)
       }
-      */
-      //console.log("go"+privk )
+      /*
+      this.state.con.map((element,i)=>{
+        orders.push(element)
+        if {element.status} ==="COMPLETE"? complete.push(element): incomplete.push(element)
+
+      })*/
+
       this.setState(
         {
           gotOrders: true,
-          incomplete:incomplete,
+          incompleteOders:incomplete,
           completedOrders:complete,
-      })
+        }
+      )
     //  console.log("gotLEMWO"+this.state.gotKeys )
-      //console.log(privk)
+      console.log(complete)
     }
   select(e) {
     const prev = this.state.exchange;
@@ -83,21 +91,35 @@ export default class OrderHistory extends React.Component {
   }
 
   getTable(){
-    return this.state.orders.map((element,i)=>{
+    let display= null;
+    if (this.state.currentDisplay === "COMPLETE"){
+      display = this.state.completedOrders
+    }
+    else if(this.state.currentDisplay === "INCOMPLETE"){
+      display = this.state.incompletedOrders
+    }
+    else if(this.state.currentDisplay === "ALL"){
+      display = this.state.orders
+    }
+    else{
+      return
+    }
+    return display.map((element,i)=>{
       return(
         <tr  key={i}>
           <td>{i}</td>
            //<td >{this.state.publickeys[i]}</td>
-           <td >{this.state.orders[i]}</td>
+           <td >{display[i]}</td>
         </tr>
 
       )
     })
   }
-  getDropdownItems(){
-    return this.state.supportedEx.map((element,i)=>{
+  getDropdownItems(item){
+    item ===1? item=this.state.supportedEx: item=this.state.displayOptions
+    return item.map((element,i)=>{
       return(
-        <DropdownItem key={element} onClick={this.select}>{this.state.supportedEx[i]}</DropdownItem>
+        <DropdownItem key={element} onClick={this.select}>{item[i]}</DropdownItem>
       )
     })
   }
@@ -121,7 +143,16 @@ export default class OrderHistory extends React.Component {
               {this.state.exchange}
             </DropdownToggle>
             <DropdownMenu>
-               {this.getDropdownItems()}
+               {this.getDropdownItems(1)}
+
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggle}>
+            <DropdownToggle caret>
+              {this.state.currentDisplay}
+            </DropdownToggle>
+            <DropdownMenu>
+               {this.getDropdownItems(2)}
 
             </DropdownMenu>
           </Dropdown>
