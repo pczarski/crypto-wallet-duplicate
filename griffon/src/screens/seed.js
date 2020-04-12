@@ -12,12 +12,6 @@ import {getSeed} from '../lib/backendHandler.js';
 // import { Button, Alert } from 'reactstrap';
 
 export default class Seed extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
 
   getSeed(){
       let seed = getSeed()
@@ -41,9 +35,9 @@ export default class Seed extends React.Component {
                 <Link to="/settings">
                <li >Change Password</li></Link>
                <Link to="/keys">
-                     <li>>Keys</li>
+                     <li>>View Keys</li>
                </Link>
-               <li id="active">Seed Phrase</li>
+               <li id="active">View SeedPhrase</li>
 
            </ul>
            </nav>

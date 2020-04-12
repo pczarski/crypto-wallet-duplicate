@@ -104,11 +104,11 @@ export default class Keys extends React.Component {
            <ul id="nav1">
        <Link to="/">
                <li >Home</li></Link>
-                <Link to="/settings">
+               <Link to="/settings">
                <li >Change Password</li></Link>
-               <li id="active">Keys</li>
+               <li id="active">View Keys</li>
                <Link to="/seed">
-              <li >Seed Phrase</li></Link>
+              <li >View SeedPhrase</li></Link>
            </ul>
            </nav>
            <div className="extra">
