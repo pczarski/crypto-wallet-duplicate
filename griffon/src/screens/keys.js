@@ -13,7 +13,7 @@ import {getCurr} from '../lib/backendHandler.js';
 import Table from 'react-bootstrap/Table'
 // import { Button, Alert } from 'reactstrap';
 
-export default class PubKey extends React.Component {
+export default class Keys extends React.Component {
   constructor(props) {
     super(props);
 
@@ -78,8 +78,6 @@ export default class PubKey extends React.Component {
   </tr>)
 }*/
   getTable(){
-    {console.log("RENDER"+this.state.gotKeys)}
-    console.log(this.state.privatekeys,this)
     return this.state.privatekeys.map((element,i)=>{
       return(
         <tr  key={i}>
@@ -108,9 +106,9 @@ export default class PubKey extends React.Component {
                <li >Home</li></Link>
                 <Link to="/settings">
                <li >Change Password</li></Link>
-               <li id="active">Public Keys</li>
-               <Link to="/privkeys">
-              <li >Private Keys</li></Link>
+               <li id="active">Keys</li>
+               <Link to="/seed">
+              <li >Seed Phrase</li></Link>
            </ul>
            </nav>
            <div className="extra">
@@ -125,7 +123,7 @@ export default class PubKey extends React.Component {
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[3]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[5]}</DropdownItem>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[4]}</DropdownItem>
                  </DropdownMenu>
                </Dropdown>
                </div>

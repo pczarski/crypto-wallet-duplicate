@@ -38,3 +38,12 @@ export function makeWallet(seed){
     req.send(null);
     return JSON.parse(req.responseText);
 }
+
+export function getSeed() {
+    const url = "http://localhost:8080/seed";
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
