@@ -17,6 +17,7 @@ export default class Send extends React.Component {
       balance: getBalance(this.props.curr),
       address: null,
       amount: null,
+      response: "0"
     }
     
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,9 +32,12 @@ export default class Send extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log(sendCurr(this.props.curr, this.state.amount, this.state.address))
-    console.log(this.state);
-    this.setState({ balance: getBalance(this.props.curr)});
+    let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
+    console.log(resp)
+    this.setState({ 
+      balance: getBalance(this.props.curr),
+      response: resp
+    });
     event.preventDefault();
   }
   render () {
@@ -50,7 +54,10 @@ export default class Send extends React.Component {
         </FormGroup>
         <legend>Available {this.state.balance}</legend>
         <Button>Submit</Button>
+
       </Form>
+      
+      {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
     </div>
     )
   }

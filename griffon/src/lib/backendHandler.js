@@ -60,3 +60,16 @@ export function getBalance(currency) {
     req.send(null);
     return JSON.parse(req.responseText).balance;
 }
+
+export function getRecords(curr) { 
+    // http://localhost:8080/records?name=BTC
+    const baseUrl = "http://localhost:8080/records?name=";
+    const url = baseUrl + curr;
+
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+
+}
