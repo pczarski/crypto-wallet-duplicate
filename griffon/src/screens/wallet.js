@@ -7,10 +7,11 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
+
+
 import Crypto from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
-// import {roundTo2} from '../lib/helper.js';
 
 import { Button } from 'reactstrap';
 
@@ -57,8 +58,7 @@ export default class Wallet extends React.Component {
       <Nav />
         <div className="container">
           <div className="content">
-            <h1>Wallet</h1>
-            <Crypto/>
+              <Crypto/>
             <Link to="/transfer">
               <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button>
             </Link>

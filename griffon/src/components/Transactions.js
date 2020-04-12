@@ -16,7 +16,6 @@ export default class Transactions extends React.Component {
     this.state = {
         records: getRecords(this.props.curr).records
     }
-    console.log(this.state.records)
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -25,13 +24,11 @@ export default class Transactions extends React.Component {
     }
   }
   componentDidMount () {
-      
   }
 
   render () { 
 
- 
-
+    let array = this.state.records.sort((a, b) => a.id - b.id)
     return (
     <div>
     <Table>
@@ -46,7 +43,8 @@ export default class Transactions extends React.Component {
         </tr>
       </thead>
       <tbody>
-      {Object.keys(this.state.records).map((item, i) => {
+      {
+      Object.keys(array).map((item, i) => {
         return (
         <tr key={i}>
             <td>{this.state.records[item].id}</td>

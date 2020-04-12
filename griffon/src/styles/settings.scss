@@ -27,7 +27,6 @@
     color: #adadad;
     padding: 0em 1em 0em 1em;
 
-
 }
 #nav1 li:hover {
 	background: #333333;
@@ -36,26 +35,13 @@
 #active{
 	background: #333333;
 }
-.extra{
-  position: absolute;
-  background-color:#242424;
-  color: #adadad;
-  top: 10em;
-  right: 4em;
-  left: 7em;
-  margin:auto;
 
-  width: 50%;
-  height: 70%;
-
-}
 .password{
   margin-top: 1em;
 
 }
 input{
   padding: 0px 10px;
-
   height: 3.5vh;
   font-family: 'Open Sans', sans-serif;
   border: 0;
@@ -86,8 +72,4 @@ input{
 
   display:inline-grid;
 
-}
-
-#simple-board{
-  background-color:white;
 }
