@@ -80,13 +80,23 @@ public class Wallet {
 		throw new IllegalStateException();
 	}
 
+	public double valueIn(CryptoCurrency c1, CryptoCurrency c2) {
+		CurrencyInWallet currencyInWallet = this.getCurrencyInWallet(c1);
+		CurrencyInWallet currencyInWallet2 = this.getCurrencyInWallet(c2);
+		return currencyInWallet.getPrice()/currencyInWallet2.getPrice();
+	}
+
 	public ArrayList<CurrencyInWallet> getCurrenciesInWallet() {
 		return this.currencyInWallets;
 	}
 
 	public double getTotalBalance(CryptoCurrency displayCurrency) {
-		// TODO - implement Wallet.getTotalBalance
-		throw new UnsupportedOperationException();
+		CurrencyInWallet currencyIn = this.getCurrencyInWallet(displayCurrency);
+		double value = 0;
+		for (CurrencyInWallet currency: this.currencyInWallets) {
+			value += currency.getPriceIn(currencyIn) * currency.getBalance();
+		}
+		return value;
 	}
 
 	public Collection<TransactionRecord> getTransactionHistory() {
