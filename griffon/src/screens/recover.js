@@ -3,16 +3,13 @@ import '../styles/App.scss';
 import {Link, Redirect} from 'react-router-dom';
 
 import {makeWallet} from "../lib/backendHandler.js";
-
-// import validator from 'validator';
-
 // import {hashPassword, verifyPassword} from "../lib/hash.js"
 
 import {Input} from 'reactstrap';
 
 // to fix :
 // , recover wallet, validation, check 12 words
-// some css
+// some css 
 export default class Recover extends React.Component {
   constructor(props) {
     super(props);

@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/App.scss';
 import {getCurr} from '../lib/backendHandler'
 import QRCode from 'qrcode';
-import {  Button } from "reactstrap";
 
 export default class Receive extends React.Component {
   
@@ -34,8 +33,7 @@ export default class Receive extends React.Component {
 
     return (
     <div>
-      <h2>Receive Crypto</h2>
-      <Button className="btn btn-primary" size="lg" onClick={this.renderCanvas}>Receive Currency</Button> 
+      <h2>Receive {this.props.curr}</h2>
       <h2>{this.state.key}</h2>
       <canvas id="canvas" width="400" height="400" />
     </div>

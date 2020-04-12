@@ -1,11 +1,15 @@
 import React from 'react';
+
 import '../styles/App.scss';
+import '../styles/nav.scss';
+
 import Balance from '../components/Balance';
 
 import {Link} from 'react-router-dom';
 
 function Nav() {
   return (
+    <div id="wrap">
     <nav id="sidebar">
         <div className="sidebar-header">
             <Balance />
@@ -37,7 +41,7 @@ function Nav() {
             </div>
         </ul>
     </nav>
-
+</div>
   );
 }
 

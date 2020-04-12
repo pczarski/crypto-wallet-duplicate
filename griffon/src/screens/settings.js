@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../components/Nav';
 
+import Topbar from '../components/Topbar';
 
 import '../styles/nav.scss';
 import '../styles/App.scss';
@@ -25,7 +26,9 @@ const initialState ={
 const userpass="Password123";
 
 export default class Settings extends React.Component {
-
+  constructor() {
+    super();
+}
   state=initialState;
   handleChange = event=>{
     const isCheckbox = event.target.type === "checkbox";
@@ -69,6 +72,7 @@ export default class Settings extends React.Component {
     console.log(this.state)
     this.setState(initialState);
   }
+
   }
   render () {
     return (
