@@ -7,6 +7,8 @@ import '../styles/nav.scss';
 import '../styles/bal.scss';
 import '../styles/coinLogos.css';
 
+
+
 import Crypto from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
@@ -65,7 +67,7 @@ export default class Wallet extends React.Component {
       <Nav />
         <div className="container">
           <div className="content">
-            <h1>Wallet</h1>
+            
 
               <Crypto/>
 

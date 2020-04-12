@@ -10,6 +10,7 @@ import Settings from './screens/settings';
 import PubKey from './screens/pubkeys';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
+import ExchangeAccess from './screens/ExchangeAccess';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -30,6 +31,7 @@ export default class App extends React.Component {
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
           <Route path="/pubkeys" render={(props) => <PubKey {...props} />}/>
+          <Route path='/ExchangeAccess' render ={(props) => <ExchangeAccess {...props}/>}/>
         </Switch>
         </div>
       </Router>

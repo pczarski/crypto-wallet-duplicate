@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/App.scss';
 import Balance from '../components/Balance';
-
+import ExchangeAccess from "../screens/ExchangeAccess.js";
 import {Link} from 'react-router-dom';
+
 
 function Nav() {
   return (
@@ -17,7 +18,7 @@ function Nav() {
                 </Link>
             </li>
             <li>
-                <Link to="/exchange">
+                <Link to="/ExchangeAccess">
                     Exchange
                 </Link>
             </li>
