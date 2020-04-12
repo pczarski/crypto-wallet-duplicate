@@ -25,7 +25,7 @@ const initialState ={
 const userpass="Password123";
 
 export default class Settings extends React.Component {
-
+  
   state=initialState;
   handleChange = event=>{
     const isCheckbox = event.target.type === "checkbox";
