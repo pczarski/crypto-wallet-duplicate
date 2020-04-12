@@ -32,7 +32,7 @@ export default class Wallet extends React.Component {
     ipcRenderer.send('asynchronous-message', 'ping')
 
   }
-  
+
   getCurrencies () {
     let currencies = [];
     let getCurs = this.state.supportedCurr.map((i) => {
@@ -42,7 +42,7 @@ export default class Wallet extends React.Component {
           name: req.name,
           price: req.price,
           balance: req.balance
-        }); 
+        });
         resolve(true);
       });
     })
@@ -59,7 +59,7 @@ export default class Wallet extends React.Component {
 
 
   render () {
-    
+
     return (
       <div className="wrapper">
       <Nav />
@@ -70,7 +70,10 @@ export default class Wallet extends React.Component {
               <Crypto/>
 
             <Link to="/transfer">
-              <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button> 
+              <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button>
+            </Link>
+            <Link to="/orderHistory">
+              <Button className="btn btn-primary" size="lg" block>View Order History</Button>
             </Link>
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>

@@ -129,20 +129,20 @@ export default class Keys extends React.Component {
                </Dropdown>
                </div>
                <div>
-               {this.state.gotKeys === true? <
-                 Table id="simple-board" size="sm" className="striped bordered hover">
+                 {this.state.gotKeys === true? <
+                   Table id="simple-board" size="sm" className="striped bordered hover">
 
-                 <thead>
-                 <tr>
-                  <th>#</th>
-                  <th>Private Keys</th>
-                  <th>Public Keys</th>
-                 </tr>
-                 </thead>
-                 <tbody>{this.getTable()}</tbody>
-                 </Table>:null}
+                   <thead>
+                   <tr>
+                    <th>#</th>
+                    <th>Private Keys</th>
+                    <th>Public Keys</th>
+                   </tr>
+                   </thead>
+                   <tbody>{this.getTable()}</tbody>
+                   </Table>:null}
 
-            </div>
+                </div>
            </div>
          </div>
     );

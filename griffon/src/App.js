@@ -11,6 +11,7 @@ import Keys from './screens/keys';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
 import Seed from './screens/seed';
+import OrderHistory from './screens/orderHistory';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -32,6 +33,7 @@ export default class App extends React.Component {
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
           <Route path="/keys" render={(props) => <Keys {...props} />}/>
           <Route path="/seed" render={(props) => <Seed {...props} />}/>
+          <Route path="/OrderHistory" render={(props) => <OrderHistory {...props} />}/>
         </Switch>
         </div>
       </Router>

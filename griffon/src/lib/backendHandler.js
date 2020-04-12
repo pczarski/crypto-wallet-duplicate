@@ -47,3 +47,13 @@ export function getSeed() {
     req.send(null);
     return JSON.parse(req.responseText);
 }
+
+export function getOrderHistory(exchange) {
+  const baseUrl = "http://localhost:8080/orders?exchange=";
+  const url = baseUrl + exchange;
+  // get request
+  let req = new XMLHttpRequest();
+  req.open('GET', url, false);
+  req.send(null);
+  return JSON.parse(req.responseText);
+}
