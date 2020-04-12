@@ -34,7 +34,7 @@ export default class PubKey extends React.Component {
       let keypairs = con.keyPairs
       let privk =[]
       let pubk =[]
-      console.log(keypairs)
+      //console.log(keypairs)
       for(let i =0; i<keypairs.length;i++){
         privk.push(keypairs[i].privateKey)
         pubk.push(keypairs[i].publicKey)
@@ -46,7 +46,7 @@ export default class PubKey extends React.Component {
           publickeys:pubk,
           privatekeys:privk,
       })
-      console.log("gotLEMWO"+this.state.gotKeys )
+    //  console.log("gotLEMWO"+this.state.gotKeys )
       //console.log(privk)
     }
 
@@ -69,14 +69,14 @@ export default class PubKey extends React.Component {
       this.getkeys(prev, e.target.innerText)
     }
   }
-rows(element,i){
-  console.log("rows")
+/*rows(element,i){
+  //console.log("rows")
   return(<tr  key={i}>
     <td>{i}</td>
      <td >{this.state.publickeys[i]}</td>
      <td >{this.state.privatekeys[i]}</td>
   </tr>)
-}
+}*/
   getTable(){
     {console.log("RENDER"+this.state.gotKeys)}
     console.log(this.state.privatekeys,this)
@@ -124,8 +124,8 @@ rows(element,i){
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
                    <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>GBP</DropdownItem>
-                   <DropdownItem onClick={this.select}>USD</DropdownItem>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[3]}</DropdownItem>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[5]}</DropdownItem>
                  </DropdownMenu>
                </Dropdown>
                </div>
