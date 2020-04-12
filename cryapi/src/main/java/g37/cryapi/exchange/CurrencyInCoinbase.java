@@ -11,8 +11,8 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.coinbase.com/v2/prices/";
 
-    public CurrencyInCoinbase(CryptoCurrency name) {
-        super(name);
+    public CurrencyInCoinbase(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     @Override
@@ -33,6 +33,10 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
     // JUST A MARKER TO SEE CHANGES
     @Override
     public void updateMarketPrice() {
+        if(this.getName() == CryptoCurrency.USDT) {
+            this.setMarketPrice(1.01);
+            return;
+        }
         try {
             RestTemplate restTemplate = this.getRestTemplate();
 //            ResponseEntity<String> response = restTemplate.getForEntity(PRICE_URL_BASE + this.getName() + "-USD/spot", String.class);

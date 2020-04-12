@@ -3,12 +3,12 @@ package g37.cryapi.exchange;
 import java.util.ArrayList;
 import java.util.Random;
 // JUST A MARKER TO SEE CHANGES
-// todo: most of this class is just for prototype
+// todo: most of this class is just for prototype - in reality this should be class that actually posts and tracks the orders on exchanges
 public class OrderHandler implements Runnable {
-    private long maxSleepTime;
+    private int maxSleepTime;
     private ArrayList<Order> orders;
 
-    public OrderHandler(long maxSleepTime){
+    public OrderHandler(int maxSleepTime){
         this.maxSleepTime = maxSleepTime;
         this.orders = new ArrayList<>();
     }
@@ -28,7 +28,7 @@ public class OrderHandler implements Runnable {
 
     private void generateFulfil(Order order) {
         // todo: this is very just whatever
-        double amountTOFulfil = 4 + new Random().nextDouble() * order.getInitialAmount();
+        double amountTOFulfil = new Random().nextDouble() * order.getInitialAmount()/2;
         order.fulFilAmount(amountTOFulfil);
     };
 
@@ -65,6 +65,7 @@ public class OrderHandler implements Runnable {
         while (!Thread.interrupted()) {
             try {
                 this.waitForOrder();
+                Thread.sleep(new Random().nextInt(this.maxSleepTime));
             } catch (InterruptedException e) {
                 break;
             }
