@@ -87,10 +87,14 @@ export default class Keys extends React.Component {
         </tr>
 
       )
-    }
-  )
-
-
+    })
+  }
+  getDropdownItems(){
+    return this.state.supportedCurr.map((element,i)=>{
+      return(
+        <DropdownItem key={element} onClick={this.select}>{this.state.supportedCurr[i]}</DropdownItem>
+      )
+    })
   }
 
 
@@ -119,11 +123,8 @@ export default class Keys extends React.Component {
                    {this.state.currency}
                  </DropdownToggle>
                  <DropdownMenu>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[3]}</DropdownItem>
-                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[4]}</DropdownItem>
+                    {this.getDropdownItems()}
+
                  </DropdownMenu>
                </Dropdown>
                </div>
