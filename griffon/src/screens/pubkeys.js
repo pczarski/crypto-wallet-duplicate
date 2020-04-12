@@ -10,6 +10,7 @@ import '../styles/settings.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
 import {getCurr} from '../lib/backendHandler.js';
+import Table from 'react-bootstrap/Table'
 // import { Button, Alert } from 'reactstrap';
 
 export default class PubKey extends React.Component {
@@ -21,8 +22,8 @@ export default class PubKey extends React.Component {
     this.state = {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
       currency: "Select a currency", // currency name (bitcoin, litecoin, etc. btc by default)
-      publick: [],
-      privatek: [],
+      publickeys: [],
+      privatekeys: [],
       gotKeys: false,
       dropdownOpen: false
     }
@@ -31,9 +32,21 @@ export default class PubKey extends React.Component {
   getkeys(prev, curr){
       let con = getCurr(curr)
       let keypairs = con.keyPairs
+      let privk =[]
+      let pubk =[]
       console.log(keypairs)
-      this.setState({publickeys:con})
-      this.setState({gotKeys: true})
+      for(let i =0; i<keypairs.length;i++){
+        privk.push(keypairs[i].privateKey)
+        pubk.push(keypairs[i].publicKey)
+      }
+      console.log(privk)
+      this.setState(
+        {
+          gotKeys: true,
+          publickeys:pubk,
+          privatekeys:privk,
+      })
+      //console.log(privk)
     }
 
   toggle(e) {
@@ -56,6 +69,39 @@ export default class PubKey extends React.Component {
     }
   }
 
+  getTable(){
+    return (<Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colSpan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+  </Table>)
+
+  }
+
 
   render () {
     return (
@@ -75,30 +121,26 @@ export default class PubKey extends React.Component {
            </ul>
            </nav>
            <div className="extra">
-           <h1>Keys</h1>
-           <div className="currSel">
-           <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-             <DropdownToggle caret>
-               {this.state.currency}
-             </DropdownToggle>
-             <DropdownMenu>
-               <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
-               <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
-               <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
-               <DropdownItem onClick={this.select}>GBP</DropdownItem>
-               <DropdownItem onClick={this.select}>USD</DropdownItem>
-             </DropdownMenu>
-           </Dropdown>
-           </div>
-           <div>
-             <table>
-               <thead>
-                <tr>#</tr>
-                <tr>Private Keys</tr>
-                <tr>Public Keys</tr>
-               </thead>
-             </table>
-             </div>
+             <h1>Keys</h1>
+             <div className="currSel">
+               <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                 <DropdownToggle caret>
+                   {this.state.currency}
+                 </DropdownToggle>
+                 <DropdownMenu>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
+                   <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
+                   <DropdownItem onClick={this.select}>GBP</DropdownItem>
+                   <DropdownItem onClick={this.select}>USD</DropdownItem>
+                 </DropdownMenu>
+               </Dropdown>
+               </div>
+               <div>
+               {console.log("RENDER"+this.gotKeys)}
+               {this.gotKeys === true? this.getTable():null}
+
+            </div>
            </div>
          </div>
     );
