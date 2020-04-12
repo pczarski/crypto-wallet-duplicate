@@ -17,7 +17,6 @@ export default class Splash extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -41,7 +40,6 @@ export default class Splash extends React.Component {
     }
     else {
       this.setState({redirToWall: false, incor: true})
-      console.log("HELLO")
     }
     
     event.preventDefault();

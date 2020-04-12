@@ -1,7 +1,6 @@
 import React from 'react';
-import Nav from '../components/Nav';
-
-import Topbar from '../components/Topbar';
+import Navig from '../components/Nav';
+import RecoveryPhrase from '../components/RecoveryPhrase';
 
 import '../styles/nav.scss';
 import '../styles/App.scss';
@@ -10,9 +9,14 @@ import '../styles/settings.scss';
 
 // import RecoveryPhrase from '../components/RecoveryPhrase';
 
-import {Link} from 'react-router-dom';
-
-import { Button } from 'reactstrap';
+import {
+  Button,
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 
 const initialState ={
   current:"",
@@ -28,8 +32,9 @@ const userpass="Password123";
 export default class Settings extends React.Component {
   constructor() {
     super();
+    this.state={selected: null}
+    this.select = this.select.bind(this);
 }
-  state=initialState;
   handleChange = event=>{
     const isCheckbox = event.target.type === "checkbox";
    this.setState({
@@ -72,48 +77,82 @@ export default class Settings extends React.Component {
     console.log(this.state)
     this.setState(initialState);
   }
-
+}
+  select (event) {
+    this.setState({selected:event.target.name})
+    console.log(this.state.selected)
   }
-  render () {
-    return (
-      <div className="wrapper">
-          <Nav/>
-          <nav className="navbar 1">
-          <h1>Settings</h1>
-           <ul id="nav1">
-            <li id="active">Change Password</li>
-            <Link to="/pubkeys">
-              <li>>Public Keys</li>
-            </Link>
-           </ul>
-           </nav>
-           <div className="extra">
-         <form onSubmit={this.handleSubmit}>
 
-         <h1>Change Password</h1>
-         <div>
-         <p>Enter your current Password:</p>
-         <input type='password' name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
-         </div>
-         <div style={{ color:"#f73636"}}>{this.state.currentError}</div>
-         <div>
-         <p>Enter your new Password:</p>
-         <input type='password' name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
-         </div>
+  render () {
+    const Password = () => (
+      <div className="extra">
+        <form onSubmit={this.handleSubmit}>
+          <h1>Change Password</h1>
+          <div>
+            <p>Enter your current Password:</p>
+            <input type='password' name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
+          </div>
+          <div style={{ color:"#f73636"}}>{this.state.currentError}</div>
+          <div>
+            <p>Enter your new Password:</p>
+            <input type='password' name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
+          </div>
           <div style={{ color:"#f73636"}}>{this.state.newError}</div>
-         <div>
-         <p>Confirm your new Password:</p>
-         <input type='password' name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
-         </div>
+            <div>
+              <p>Confirm your new Password:</p>
+              <input type='password' name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
+            </div>
           <div style={{ color:"#f73636"}}>{this.state.confirmError}</div>
          <div className="password">
-         <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>
-         </div>
-         </form>
-           </div>
+          <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>
+        </div>
+        </form>
+      </div>
+    );
+    const PubKey = () => (
+        <h1>Public Key</h1>
+    );
+    const Topbar = () => (
+      <Navbar color="dark" dark expand="md">
+        <NavbarBrand>Settings</NavbarBrand>
+        <Nav className="mr-auto" navbar>
+          <NavItem  >
+            <NavLink onClick={this.select} name="password">
+              Change Password
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink onClick={this.select} name="publickeys">
+              View Public Keys
+            </NavLink>
+          </NavItem>
+          <NavItem >
+            <NavLink onClick={this.select} name="recovery">
+              View Recovery Phrase
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
+  );
 
-
-         </div>
+  let component;
+  if (this.state.selected === "publickeys") {
+    component = <PubKey />;
+  } else if (this.state.selected === "recovery") {
+    component = <RecoveryPhrase/>;
+  } else {
+    component = <Password/>;
+  }
+  return (
+    <div className="wrapper">
+        
+      <Navig/>
+      
+      <div className="container">
+      <Topbar/>
+      {component}
+      </div>
+    </div>
     );
   }
 }

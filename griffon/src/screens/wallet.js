@@ -10,7 +10,6 @@ import '../styles/coinLogos.css';
 import Crypto from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
-// import {roundTo2} from '../lib/helper.js';
 
 import { Button } from 'reactstrap';
 
