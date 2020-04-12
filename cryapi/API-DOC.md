@@ -141,6 +141,13 @@
     resonpnse:
     
     {"response":"BTC in ETH","value":43.5464204842362}
+    
+## Get total exchange balance
+    http://localhost:8080/exchange-total-balance?exchange=Binance&in=BTC
+    
+    response:
+    
+    {"response":"Binance total balance in BTC","value":104.01884516446508}
 
 ## Make Orders
 

@@ -33,6 +33,10 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
     // JUST A MARKER TO SEE CHANGES
     @Override
     public void updateMarketPrice() {
+        if(this.getName() == CryptoCurrency.USDT) {
+            this.setMarketPrice(1.01);
+            return;
+        }
         try {
             RestTemplate restTemplate = this.getRestTemplate();
 //            ResponseEntity<String> response = restTemplate.getForEntity(PRICE_URL_BASE + this.getName() + "-USD/spot", String.class);

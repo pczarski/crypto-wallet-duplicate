@@ -102,6 +102,10 @@ public abstract class CurrencyInExchange extends Currency {
 
 	public abstract double getMarketPriceIn(CryptoCurrency currencyIn);
 
+	public double getValueIn(CurrencyInExchange currencyInExchange) {
+		return this.getMarketPrice() / currencyInExchange.getMarketPrice();
+	}
+
 	//todo for tests
 
 	public void addTestBalance(double amount) {

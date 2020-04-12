@@ -311,7 +311,6 @@ public class ExchangeController {
             @RequestParam(value = "in", defaultValue = "ETH") String c2
     ) {
         this.runHelpers();
-        // get wallet instance
         ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
         try {
             double value = exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).valueInCurrency(CryptoCurrency.valueOf(c1), CryptoCurrency.valueOf(c2));
@@ -320,6 +319,22 @@ public class ExchangeController {
             return new ValueResponse("Couldn't find the currencies or the exchange", -1);
         }
     } // http://localhost:8080/exchange-price-in?exchange=Binance&base=BTC&in=ETH
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-total-balance") // setting up the url location
+    public ValueResponse getTotalBalance(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "in", defaultValue = "BTC") String currency
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            double value = exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).getTotalBalance(CryptoCurrency.valueOf(currency));
+            return new ValueResponse(exchange + " total balance in "+currency, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies or exchange", -1);
+        }
+    } // http://localhost:8080/exchange-total-balance?exchange=Binance&in=BTC
 
 
 
