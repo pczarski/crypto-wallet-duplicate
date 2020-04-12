@@ -28,7 +28,6 @@ export default class Transactions extends React.Component {
 
   render () { 
 
-    let array = this.state.records.sort((a, b) => a.id - b.id)
     return (
     <div>
     <Table>
@@ -43,8 +42,8 @@ export default class Transactions extends React.Component {
         </tr>
       </thead>
       <tbody>
-      {
-      Object.keys(array).map((item, i) => {
+      {Object.keys(this.state.records.sort((a, b) => a.id - b.id))
+      .map((item, i) => {
         return (
         <tr key={i}>
             <td>{this.state.records[item].id}</td>
