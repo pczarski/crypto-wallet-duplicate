@@ -13,8 +13,8 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.binance.com/api/v3/ticker/price?symbol=";
 
-    public CurrencyInBinance(CryptoCurrency name) {
-        super(name);
+    public CurrencyInBinance(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     private void SetupSymbolList() {
@@ -39,11 +39,15 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     @Override
     public void updateMarketPrice() {
+        if(this.getName() == CryptoCurrency.USDT) {
+            this.setMarketPrice(1.01);
+            return;
+        }
         try {
             RestTemplate restTemplate = this.getRestTemplate();
             String url = PRICE_URL_BASE + this.getName()+"USDT";
             MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
-            System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
+            //System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
             this.setMarketPrice(marketPrice.getPrice());
 
         } catch (Exception e) {
@@ -60,6 +64,9 @@ public class CurrencyInBinance extends CurrencyInExchange {
     public double getMarketPriceIn(CryptoCurrency currencyIn) {
         if(this.getName().getName().equals(currencyIn.getName())) {
             return 1.0;
+        }
+        if (currencyIn == CryptoCurrency.USDT) {
+            return this.getMarketPrice();
         }
         RestTemplate restTemplate = this.getRestTemplate();
         String url;

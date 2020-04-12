@@ -16,7 +16,7 @@ public class Binance extends ExchangeAccess {
     @Override
     protected void addSupportedCurrencies() {
         for(CryptoCurrency currency: CryptoCurrency.values()) {
-            this.addCurrency(new CurrencyInBinance(currency));
+            this.addCurrency(new CurrencyInBinance(currency, this));
         }
     }
 

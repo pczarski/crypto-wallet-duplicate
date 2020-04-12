@@ -3,6 +3,7 @@ package g37.cryapi.exchange.api;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
+import g37.cryapi.common.ValueResponse;
 import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +70,38 @@ public class ExchangeController {
         }
 
     } // http://localhost:8080/exchange-currency?exchange=Binance&currency=Bitcoin
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-currencies") // setting up the url location
+    public CurrencyInExchangeJson[] getExchangeCurrencies(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+
+        try {
+            ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
+            return this.toCurrencyInExchangeJsonArray(selectedExchange.getCurrenciesInExchange());
+        }
+        catch (IllegalArgumentException e) {
+            CurrencyInExchangeJson[] error = {new CurrencyInExchangeJson("Exchange not found", null, null, -1, -1)};
+            return error;
+        }
+
+    } // http://localhost:8080/exchange-currencies?exchange=Binance
+
+    private CurrencyInExchangeJson[] toCurrencyInExchangeJsonArray(List<CurrencyInExchange> currencies) {
+        CurrencyInExchangeJson[] out = new CurrencyInExchangeJson[currencies.size()];
+        for (int i = 0; i < out.length; i++){
+            CurrencyInExchange currency = currencies.get(i);
+            out[i] = new CurrencyInExchangeJson(
+                    currency.getName().toString(),
+                    currency.getExchangeAccess().getName().getName(),
+                    currency.getCurrentPublicKey(),
+                    currency.getBalance(),
+                    currency.getMarketPrice());
+        }
+        return out;
+    }
 
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/withdraw") // setting up the url location
@@ -245,6 +278,65 @@ public class ExchangeController {
         }
         return toRet;
     }
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/cancel") // setting up the url location
+    public OrderJson cancelOrder(@RequestParam(value = "exchange") String exchange, @RequestParam(value = "id") long id) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            Order order = exchangeHandler.getOrder(id, ExchangeName.valueOf(exchange));
+            order.cancelOrder();
+            return new OrderJson(
+                    order.getOrderID(), order.getExchangeAccess().getName().getName(),
+                    order.getCurrency1().toString(), order.getCurrency2().toString(),
+                    order.getInitialAmount(), order.getAmountComplete(), order.getUnitPrice(),
+                    order.getType(), order.getStatus(), order.getDate().toString()
+            );
+
+        } catch (IllegalArgumentException e) {
+            return new OrderJson(-1, null, "Unsupported/Invalid exchange", null, -1,
+                    -1, -1, null, null, null);
+        } catch (NoSuchObjectException e) {
+            return new OrderJson(-1, null, "Order doesn't exist", null, -1,
+                    -1, -1, null, null, null);
+        }
+    } // http://localhost:8080/cancel?exchange=Binance&id=1
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-price-in") // setting up the url location
+    public ValueResponse getPriceIn(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "base", defaultValue = "BTC") String c1,
+            @RequestParam(value = "in", defaultValue = "ETH") String c2
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            double value = exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).valueInCurrency(CryptoCurrency.valueOf(c1), CryptoCurrency.valueOf(c2));
+            return new ValueResponse(c1 + " in " + c2, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies or the exchange", -1);
+        }
+    } // http://localhost:8080/exchange-price-in?exchange=Binance&base=BTC&in=ETH
+
+    @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
+    @GetMapping("/exchange-total-balance") // setting up the url location
+    public ValueResponse getTotalBalance(
+            @RequestParam(value = "exchange", defaultValue = "Binance") String exchange,
+            @RequestParam(value = "in", defaultValue = "BTC") String currency
+    ) {
+        this.runHelpers();
+        ExchangeHandler exchangeHandler = ExchangeHandler.getInstance();
+        try {
+            double value = exchangeHandler.getExchange(ExchangeName.valueOf(exchange)).getTotalBalance(CryptoCurrency.valueOf(currency));
+            return new ValueResponse(exchange + " total balance in "+currency, value);
+        } catch (IllegalArgumentException e) {
+            return new ValueResponse("Couldn't find the currencies or exchange", -1);
+        }
+    } // http://localhost:8080/exchange-total-balance?exchange=Binance&in=BTC
+
+
 
 
 

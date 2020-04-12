@@ -12,13 +12,8 @@ import '../styles/coinLogos.css';
 import Crypto from '../components/walletComponents/Coins.js';
 
 import {getCurr} from '../lib/backendHandler.js';
-// import {roundTo2} from '../lib/helper.js';
-
 
 import { Button } from 'reactstrap';
-
-
-const {ipcRenderer} = window.require("electron")
 
 export default class Wallet extends React.Component {
   constructor(props){
@@ -28,11 +23,7 @@ export default class Wallet extends React.Component {
       currency: [],
       seed: null
     }
-    ipcRenderer.on('asynchronous-reply', (event, arg) => {
-      console.log(arg) // prints "pong"
-    })
-    ipcRenderer.send('asynchronous-message', 'ping')
-
+ 
   }
   
   getCurrencies () {
@@ -67,10 +58,7 @@ export default class Wallet extends React.Component {
       <Nav />
         <div className="container">
           <div className="content">
-            
-
               <Crypto/>
-
             <Link to="/transfer">
               <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button> 
             </Link>

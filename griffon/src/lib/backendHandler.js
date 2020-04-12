@@ -60,3 +60,64 @@ export function getBalance(currency) {
     req.send(null);
     return JSON.parse(req.responseText).balance;
 }
+
+export function getRecords(curr) { 
+    // http://localhost:8080/records?name=BTC
+    const baseUrl = "http://localhost:8080/records?name=" + curr;
+    const url = baseUrl + curr;
+
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+
+}
+export function cancelOrder(exchange, id) { 
+    // http://localhost:8080/cancel?exchange=Binance&id=1
+    const url = "http://localhost:8080/cancel?exchange=" + exchange + "&id=" + id;
+
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+export function getOrders(exchange) { 
+    // http://localhost:8080/orders?exchange=Binance
+    const url = "http://localhost:8080/orders?exchange=" + exchange;
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+export function makeOrder(type, exchange, currencyFrom, currencyTo, amount, price) { 
+    // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4`
+    const url = "http://localhost:8080/new-order?&type=" + type + "&exchange=" + exchange + "&currency1=" + currencyFrom + "&currency2=" + currencyTo +"&amount="+amount+"&price=" + price;
+
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+export function swapOrder(exchange, currencyFrom, currencyTo, amount) { 
+    // http://localhost:8080/swap?exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5
+    const url = "http://localhost:8080/swap?exchange="+ exchange + "&currency1=" + currencyFrom + "&currency2=" + currencyTo + "&amount=" + amount;
+
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+export function addExchange(exchange, key) { 
+    // http://localhost:8080/add-exchange?name=Coinbase&key=XXXKEYXXX
+    const url = "http://localhost:8080/add-exchange?name=" + exchange + "&key=" + key;
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}

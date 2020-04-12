@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/App.scss';
-import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
 
@@ -10,6 +9,7 @@ import LTC from "../../node_modules/cryptocurrency-icons/svg/icon/ltc.svg";
 import BTC from "../../node_modules/cryptocurrency-icons/svg/icon/btc.svg";
 import USDT from "../../node_modules/cryptocurrency-icons/svg/icon/usdt.svg";
 
+import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
@@ -37,7 +37,6 @@ export default class Transfer extends React.Component {
   }
 
   handleClick(e) {
-    console.log(e.target.value)
     this.setState({
       choice: e.target.value
     });
@@ -85,12 +84,12 @@ export default class Transfer extends React.Component {
   );
 
   let component;
-  if (this.state.choice == 1) {
+  if (this.state.choice === "1") {
     component = <Send curr={this.state.selected}/>;
-  } else  if (this.state.choice == 2) {
+  } else  if (this.state.choice === "2") {
     component = <Receive curr={this.state.selected} />
   } else {
-    component = null;
+    component = <Transactions curr={this.state.selected} />;
   }
 
   return (

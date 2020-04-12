@@ -76,29 +76,26 @@ export default class RecoveryPhrase extends React.Component {
   );
 
     return (
-    <div>
-      <div>
-    <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
-      <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
-      <ModalBody>
-        Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
-        It will only display for 3 minutes before requiring authentification again.
-      </ModalBody>
-      <ModalFooter>
-        <Button color="primary" onClick={this.select}>Continue</Button>
-        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-      </ModalFooter>
-    </Modal>
-    </div>
+      <div className="extra">
+      <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
+        <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
+        <ModalBody>
+          Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
+          It will only display for 3 minutes before requiring authentification again.
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.select}>Continue</Button>
+          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
       <h1>Your RecoveryPhrase</h1>
       <Stopwatch/>
       {this.state.showSeed && 
-      <p>
-        {this.state.seed}
-      </p>
+        <b>{this.state.seed}</b>
       }
       <Button className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
     </div>
+    
     )
   }
 }
