@@ -14,3 +14,4 @@ cryapi/.gradle/6.2.2/fileHashes/fileHashes.bin
 cryapi/.gradle/6.2.2/executionHistory/executionHistory.lock
 cryapi/.gradle/6.2.2/executionHistory/executionHistory.bin
 cryapi/.gradle/6.2.2/javaCompile/classAnalysis.bin
+*.ser

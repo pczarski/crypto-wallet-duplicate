@@ -1,7 +1,16 @@
 package g37.cryapi.wallet.api;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
+import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
+import g37.cryapi.wallet.Bitcoin;
+import g37.cryapi.wallet.CurrencyInWallet;
+import g37.cryapi.wallet.KeyPair;
 import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +51,39 @@ public class WalletController {
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/seed") // setting up the url location
     public WalletJson getWallet() {
-
         if (!Wallet.getInstance().getIsSetUp()) {
             Wallet.getInstance().setUpNew();
         }
+
+        // todo: example for saving stuff
+//        try
+//        {
+//            KeyPair pair = Wallet.getInstance().getCurrencyInWallet(CryptoCurrency.BTC).getKeyPairs().get(0);
+//            FileOutputStream myFileOutputStream = new FileOutputStream("pair.ser");
+//            ObjectOutputStream myObjectOutputStream = new ObjectOutputStream(myFileOutputStream);
+//            myObjectOutputStream.writeObject(pair);
+//            myObjectOutputStream.close();
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println("fuck off:  "+e.toString());
+//        }
+//
+//        try
+//        {
+//            FileInputStream myFileInputStream = new FileInputStream("pair.ser");
+//            ObjectInputStream myObjectInputStream = new ObjectInputStream(myFileInputStream);
+//            KeyPair hiTest= (KeyPair) myObjectInputStream.readObject();
+//            myObjectInputStream.close();
+//            System.out.println(hiTest.getPublicKey());
+//            System.out.println(hiTest.getAmount());
+//            System.out.println(hiTest.getTransactions().get(0).getTime());
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println("fuck off:  "+e.toString());
+//        }
+
         // get wallet instance
         Wallet wallet = Wallet.getInstance();
         return new WalletJson(wallet.getRecoveryPhrase());

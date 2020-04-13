@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class CurrencyInWallet extends Currency {
+public abstract class CurrencyInWallet extends Currency implements Serializable {
 
 	private static final String PRICE_BASE_URL = "https://api.coinbase.com/v2/prices/";
 
