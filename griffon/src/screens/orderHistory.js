@@ -54,7 +54,7 @@ cancelOrder(){
     if (e.target.innerText !== exch) {
       //After an exchange option has been chosen, if the currentExchange does not equal the selected exchange option
       //changes currentExchange to selected option
-      console.log("e.target.innerText !== exch")
+    //  console.log("e.target.innerText !== exch")
 
       await this.setState({
         dropdownOpen: !this.state.dropdownOpen,
@@ -80,7 +80,7 @@ cancelOrder(){
         dropdownDisplayOpen: !this.state.dropdownDisplayOpen,
         currentDisplay: e.target.innerText,
       });
-      this.getOrders()
+      //this.getOrders()
     }
   }
   getDropdownItems(item){
@@ -103,6 +103,7 @@ cancelOrder(){
 
   getOrders(){
       let allOrders =[]
+      //console.log("DISPLAY OPTION: "+ this.state.currentDisplay)
       this.state.currentDisplay === this.state.displayOptions[0]? allOrders = getAllOrderHistory():allOrders = getOrderHistory(this.state.exchange);
       //returns all orders from specified exchange
       let incomplete =[]
@@ -115,9 +116,9 @@ cancelOrder(){
         orders.push(allOrders[i])
         allOrders[i].status ==="COMPLETE"? complete.push(allOrders[i]):incomplete.push(allOrders[i])
       }
-      console.log("COMPLETE: " +complete)
-      console.log("INCOMPLETE: " +incomplete)
-      console.log("ALL: " +orders)
+      console.log("COMPLETE: " +complete.length)
+      console.log("INCOMPLETE: " +incomplete.length)
+      console.log("ALL: " +orders.length)
 
       this.setState(
         {
@@ -131,18 +132,18 @@ cancelOrder(){
     }
 
   getTable(){
-    let display= null;
+    let display= [];
     if (this.state.currentDisplay === this.state.displayOptions[0]){
       display = this.state.allOrders
-      console.log("DISPLAY ALLORDERS: " +display)
+      //console.log("DISPLAY ALLORDERS: " +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[1]){
       display = this.state.completedOrders
-      console.log("DISPLAY COMPLETE: " +display)
+      //console.log("DISPLAY COMPLETE: " +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[2]){
       display = this.state.incompleteOrders
-      console.log("INCOMPLETE: " +display)
+      //console.log("INCOMPLETE: " +display)
     }
     else{
       console.log("display=null")
@@ -150,7 +151,7 @@ cancelOrder(){
     }
     //id,currency1,currency2,initialAmount,amountComplete
     //unitPrice,type,status,percentComplete,date
-    return  display ===null? null:display.map((element,i)=>{
+    return  display ===[]? null:display.map((element,i)=>{
       return(
         <tr  key={i}>
           <td>{element.id}</td>
