@@ -9,9 +9,6 @@ html {
       display: flex;
       overflow-y: scroll;
     }
-    .content {
-
-    }
   }
 }  
 .vertical-input-group .input-group:first-child {
@@ -37,7 +34,4 @@ html {
 }  
 .vertical-input-group .input-group:not(:first-child) * {
   border-top: 0;
-}
-#wrap {
-  
 }
