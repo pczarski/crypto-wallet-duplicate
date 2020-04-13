@@ -4,17 +4,19 @@ import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
 // import getIcons from '../components/Icons';
-import {getOrderHistory} from '../lib/backendHandler.js';
+import {getOrderHistory,makeOrder} from '../lib/backendHandler.js';
 import Table from 'react-bootstrap/Table'
 
 import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
 //id,currency1,currency2,initialAmount,amountComplete,unitPrice,type,status,percentComplete,date
-
+//console.log(makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0"))
 export default class OrderHistory extends React.Component {
   constructor(props) {
+
     super(props);
+    //makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
     this.toggleDisplay = this.toggleDisplay.bind(this);
@@ -28,7 +30,7 @@ export default class OrderHistory extends React.Component {
       exchange: "Select an Exchange",
       completedOrders: [],
       incompleteOrders: [],
-      orders:[],
+      allOrders:[],
       gotOrders: false,
       dropdownOpen: false,
       dropdownDisplayOpen: false,
@@ -38,7 +40,9 @@ export default class OrderHistory extends React.Component {
 
   }
 
-cancelOrder(){}
+cancelOrder(){
+  return this.state.gotOrders ===false? null:null
+}
 
   toggle(e) {
     e.preventDefault();
@@ -52,7 +56,8 @@ cancelOrder(){}
       this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         exchange: e.target.innerText,
-        gotOrders: false
+        gotOrders: false,
+        gotExchange: false
       });
       this.getOrders(prev, e.target.innerText)
     }
@@ -93,16 +98,18 @@ cancelOrder(){}
   }
 
   getOrders(prev, exch){
-      let allOrders = getOrderHistory(exch)
+      let allOrders = getOrderHistory(exch)//returns all orders from specified exchange
       let incomplete =[]
       let complete =[]
       let orders =[]
-      console.log(allOrders)
+      console.log("allOrders "+allOrders)
       for(let i =0; i<allOrders.length;i++){
-        orders.push(allOrders[i].status)
-        incomplete.push(allOrders[i].status)
-        complete.push(allOrders[i].status)
+        orders.push(allOrders[i])
+        allOrders[i].status ==="COMPLETE"? complete.push(allOrders[i]):incomplete.push(allOrders[i])
       }
+      console.log("completre " +complete[0].type)
+      console.log("INcompletre " +incomplete)
+      console.log("alll " +orders)
       /*
       this.state.con.map((element,i)=>{
         orders.push(element)
@@ -113,30 +120,34 @@ cancelOrder(){}
       this.setState(
         {
           gotOrders: true,
-          incompleteOders:incomplete,
+          incompleteOrders:incomplete,
           completedOrders:complete,
+          allOrders:orders
         }
       )
-    //  console.log("gotLEMWO"+this.state.gotKeys )
-      console.log(complete)
+
     }
   getTable(){
     let display= null;
     if (this.state.currentDisplay === this.state.displayOptions[0]){
-      display = this.state.orders
+      display = this.state.allOrders
+      console.log("O" +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[1]){
       display = this.state.completedOrders
+      console.log("1" +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[2]){
       display = this.state.incompleteOrders
+      console.log("2" +display)
     }
     else{
+      console.log("display=null")
       return
     }
     //id,currency1,currency2,initialAmount,amountComplete
     //unitPrice,type,status,percentComplete,date
-    return  display ===null? display.map((element,i)=>{
+    return  display ===null? null:display.map((element,i)=>{
       return(
         <tr  key={i}>
           <td>{element.id}</td>
@@ -148,7 +159,7 @@ cancelOrder(){}
         </tr>
 
       )
-    }):null
+    })
   }
 
   render () {
