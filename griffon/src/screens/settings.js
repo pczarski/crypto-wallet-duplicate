@@ -1,7 +1,7 @@
 import React from 'react';
 import Navig from '../components/Nav';
 import RecoveryPhrase from '../components/RecoveryPhrase';
-
+import Help from '../components/Help';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -30,7 +30,7 @@ const initialState ={
 const userpass="Password123";
 
 export default class Settings extends React.Component {
-    
+
   state=initialState;
   constructor() {
     super();
@@ -133,6 +133,11 @@ export default class Settings extends React.Component {
               Recovery Phrase
             </NavLink>
           </NavItem>
+          <NavItem >
+            <NavLink onClick={this.select} name="help">
+              Help
+            </NavLink>
+          </NavItem>
         </Nav>
       </Navbar>
   );
@@ -142,14 +147,17 @@ export default class Settings extends React.Component {
     component = <PubKey />;
   } else if (this.state.selected === "recovery") {
     component = <RecoveryPhrase/>;
+  }
+  else if (this.state.selected === "help") {
+    component = <Help/>;
   } else {
     component = <Password/>;
   }
   return (
     <div className="wrapper">
-        
+
       <Navig/>
-      
+
       <div className="container">
           <div className="content">
       <Topbar/>

@@ -34,11 +34,7 @@ function Nav() {
                     </Link>
                 </li>
 
-                <li>
-                <Link to="/help">
-                    Help
-                    </Link>
-                </li>
+            
                 <li>
                 <Link to="/orders">
                     test

@@ -20,23 +20,12 @@ import {
 
 export default class Help extends React.Component {
   render () {
-    const Topbar = () => (
-      <Navbar color="dark" dark expand="md">
-        <NavbarBrand>Settings</NavbarBrand>
-        <Nav className="mr-auto" navbar>
-          <NavItem  >
-            <NavLink onClick={this.select} name="security">
-            Security Guidelines            
-          </NavLink>
-         </NavItem>
-        </Nav>
-      </Navbar>
-  );
+
     return (
-            <div className="wrapper">
-                <Navig/>
+
+
                  <div>
-                <Topbar />
+
                  <h1> Security Guidelines </h1>
                  <p>Using our app provides an extra layer of security, as it is a desktop app which can be accessed while offline.
                  This means that we do not know anything about your password, 12-word recovery phrase, private keys, or even your public addresses.
@@ -48,7 +37,7 @@ export default class Help extends React.Component {
                  <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 16 characters, use a range of cases, numbers and special characters.</li>
                  </ul>
                  </div>
-               </div>
+          
     );
   }
 }

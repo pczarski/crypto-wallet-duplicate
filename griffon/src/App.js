@@ -5,7 +5,7 @@ import Splash from './screens/splash';
 import Wallet from './screens/wallet';
 import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
-import Help from './screens/help';
+
 import Settings from './screens/settings';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
@@ -31,7 +31,7 @@ export default class App extends React.Component {
           <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
           <Route path="/recover" render={(props) => <Recover {...props} />}/>
           <Route path="/exchange" render={(props) => <Exchange {...props} />}/>
-          <Route path="/help" render={(props) => <Help {...props} />}/>
+          
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
           <Route path="/order" render={(props) => <Order {...props} />}/>
