@@ -17,37 +17,79 @@ export default class OrderHistory extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+    this.selectDisplay = this.selectDisplay.bind(this);
 
     this.state = {
       supportedEx: ["Binance"],
       displayOptions:["ALL","COMPLETE","INCOMPLETE"],
-      currentDisplay:"Select a Display",
+      currentDisplay:"ALL",
       images: [],
       exchange: "Select an Exchange",
       completedOrders: [],
-      incompleteOders: [],
+      incompleteOrders: [],
       orders:[],
       gotOrders: false,
       dropdownOpen: false,
+      dropdownDisplayOpen: false,
       //selected: "BTC",
-      change: false
+      gotExchange: false
     }
 
   }
 
-
-  send() {
-  }
-
-  receive() {
-
-  }
+cancelOrder(){}
 
   toggle(e) {
     e.preventDefault();
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+  select(e) {
+    const prev = this.state.exchange;
+    if (!(e.target.innerText === prev)) {
+      this.setState({
+        dropdownOpen: !this.state.dropdownOpen,
+        exchange: e.target.innerText,
+        gotOrders: false
+      });
+      this.getOrders(prev, e.target.innerText)
+    }
+  }
+  toggleDisplay(e) {
+    e.preventDefault();
+    this.setState({
+      dropdownDisplayOpen: !this.state.dropdownDisplayOpen
+    });
+  }
+  selectDisplay(e) {
+    const prev = this.state.currentDisplay;
+    if (!(e.target.innerText === prev)) {
+      this.setState({
+        dropdownDisplayOpen: !this.state.dropdownDisplayOpen,
+        currentDisplay: e.target.innerText,
+        gotOrders: false
+      });
+      this.getOrders(prev, e.target.innerText)
+    }
+  }
+  getDropdownItems(item){
+    let select =null;
+    if(item ===1){
+      return this.state.supportedEx.map((element,i)=>{
+        return(
+          <DropdownItem key={element} onClick={this.select}>{this.state.supportedEx[i]}</DropdownItem>
+        )
+      })
+    }
+    else{
+      return this.state.displayOptions.map((element,i)=>{
+        return(
+          <DropdownItem key={element} onClick={this.selectDisplay}>{this.state.displayOptions[i]}</DropdownItem>
+        )
+      })
+    }
   }
 
   getOrders(prev, exch){
@@ -78,28 +120,16 @@ export default class OrderHistory extends React.Component {
     //  console.log("gotLEMWO"+this.state.gotKeys )
       console.log(complete)
     }
-  select(e) {
-    const prev = this.state.exchange;
-    if (!(e.target.innerText === prev)) {
-      this.setState({
-        dropdownOpen: !this.state.dropdownOpen,
-        exchange: e.target.innerText,
-        gotOrders: false
-      });
-      this.getOrders(prev, e.target.innerText)
-    }
-  }
-
   getTable(){
     let display= null;
-    if (this.state.currentDisplay === "COMPLETE"){
+    if (this.state.currentDisplay === this.state.displayOptions[0]){
+      display = this.state.orders
+    }
+    else if(this.state.currentDisplay === this.state.displayOptions[1]){
       display = this.state.completedOrders
     }
-    else if(this.state.currentDisplay === "INCOMPLETE"){
-      display = this.state.incompletedOrders
-    }
-    else if(this.state.currentDisplay === "ALL"){
-      display = this.state.orders
+    else if(this.state.currentDisplay === this.state.displayOptions[2]){
+      display = this.state.incompleteOrders
     }
     else{
       return
@@ -108,18 +138,9 @@ export default class OrderHistory extends React.Component {
       return(
         <tr  key={i}>
           <td>{i}</td>
-           //<td >{this.state.publickeys[i]}</td>
            <td >{display[i]}</td>
         </tr>
 
-      )
-    })
-  }
-  getDropdownItems(item){
-    item ===1? item=this.state.supportedEx: item=this.state.displayOptions
-    return item.map((element,i)=>{
-      return(
-        <DropdownItem key={element} onClick={this.select}>{item[i]}</DropdownItem>
       )
     })
   }
@@ -147,7 +168,8 @@ export default class OrderHistory extends React.Component {
 
             </DropdownMenu>
           </Dropdown>
-          <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggle}>
+          <h3>Display:</h3>
+          <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
             <DropdownToggle caret>
               {this.state.currentDisplay}
             </DropdownToggle>
@@ -159,7 +181,7 @@ export default class OrderHistory extends React.Component {
           </div>
 
         <Button className="btn btn-primary" size="lg" onClick={
-    this.send()}>Cancel an Order</Button>
+    this.cancelOrder()}>Cancel an Order</Button>
         <Button className="btn btn-primary" size="lg">View  in-progress Orders</Button>
         <div className="table">
 

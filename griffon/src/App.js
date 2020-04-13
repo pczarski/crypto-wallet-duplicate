@@ -10,6 +10,7 @@ import Settings from './screens/settings';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
 import OrderHistory from './screens/orderHistory';
+import ExchangeAccess from './screens/ExchangeAccess';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
