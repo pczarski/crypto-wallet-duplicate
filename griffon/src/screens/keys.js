@@ -10,7 +10,7 @@ import '../styles/settings.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
 import {getCurr} from '../lib/backendHandler.js';
-import Table from 'react-bootstrap/Table'
+import Table from 'react-bootstrap/Table';
 // import { Button, Alert } from 'reactstrap';
 
 export default class Keys extends React.Component {

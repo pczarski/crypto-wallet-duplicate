@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
 // import getIcons from '../components/Icons';
-import {getOrderHistory,makeOrder} from '../lib/backendHandler.js';
-import Table from 'react-bootstrap/Table'
+import {getOrderHistory,makeOrder,getAllOrderHistory} from '../lib/backendHandler.js';
+import Table from 'react-bootstrap/Table';
 
 import Receive from '../components/Receive';
 import Send from '../components/Send';
@@ -23,11 +23,10 @@ export default class OrderHistory extends React.Component {
     this.selectDisplay = this.selectDisplay.bind(this);
 
     this.state = {
-      supportedEx: ["Binance"],
+      supportedEx: ["ALL","Binance"],
       displayOptions:["ALL","COMPLETE","INCOMPLETE"],
       currentDisplay:"ALL",
-      images: [],
-      exchange: "Select an Exchange",
+      exchange: "Select an exchange",
       completedOrders: [],
       incompleteOrders: [],
       allOrders:[],
@@ -35,13 +34,13 @@ export default class OrderHistory extends React.Component {
       dropdownOpen: false,
       dropdownDisplayOpen: false,
       //selected: "BTC",
-      gotExchange: false
+      //gotExchange: false
     }
 
   }
 
 cancelOrder(){
-  return this.state.gotOrders ===false? null:null
+  return this.state.getOrders ===false? null:null
 }
 
   toggle(e) {
@@ -50,16 +49,21 @@ cancelOrder(){
       dropdownOpen: !this.state.dropdownOpen
     });
   }
-  select(e) {
-    const prev = this.state.exchange;
-    if (!(e.target.innerText === prev)) {
-      this.setState({
+  async select(e) {
+    const exch = this.state.exchange;
+    if (e.target.innerText !== exch) {
+      //After an exchange option has been chosen, if the currentExchange does not equal the selected exchange option
+      //changes currentExchange to selected option
+      console.log("e.target.innerText !== exch")
+
+      await this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         exchange: e.target.innerText,
         gotOrders: false,
-        gotExchange: false
-      });
-      this.getOrders(prev, e.target.innerText)
+        //gotExchange: true
+      })
+      //console.log("SELECTED EXCHANGE: "+ this.state.exchange )
+      this.getOrders()//get orders for the current exchange
     }
   }
   toggleDisplay(e) {
@@ -68,15 +72,15 @@ cancelOrder(){
       dropdownDisplayOpen: !this.state.dropdownDisplayOpen
     });
   }
-  selectDisplay(e) {
+  async selectDisplay(e) {
     const prev = this.state.currentDisplay;
     if (!(e.target.innerText === prev)) {
-      this.setState({
+      //After an display option has been chosen, if the currentDisplay does not equal the selected display option
+      await this.setState({
         dropdownDisplayOpen: !this.state.dropdownDisplayOpen,
         currentDisplay: e.target.innerText,
-        gotOrders: false
       });
-      this.getOrders(prev, e.target.innerText)
+      this.getOrders()
     }
   }
   getDropdownItems(item){
@@ -97,25 +101,23 @@ cancelOrder(){
     }
   }
 
-  getOrders(prev, exch){
-      let allOrders = getOrderHistory(exch)//returns all orders from specified exchange
+  getOrders(){
+      let allOrders =[]
+      this.state.currentDisplay === this.state.displayOptions[0]? allOrders = getAllOrderHistory():allOrders = getOrderHistory(this.state.exchange);
+      //returns all orders from specified exchange
       let incomplete =[]
       let complete =[]
       let orders =[]
-      console.log("allOrders "+allOrders)
+      console.log("CURRENT EXCHANGE: "+ this.state.exchange)
+      console.log("CURRENT DISPLAY: "+ this.state.currentDisplay)
+      console.log("ALLORDERS: "+ allOrders.length)
       for(let i =0; i<allOrders.length;i++){
         orders.push(allOrders[i])
         allOrders[i].status ==="COMPLETE"? complete.push(allOrders[i]):incomplete.push(allOrders[i])
       }
-      console.log("completre " +complete[0].type)
-      console.log("INcompletre " +incomplete)
-      console.log("alll " +orders)
-      /*
-      this.state.con.map((element,i)=>{
-        orders.push(element)
-        if {element.status} ==="COMPLETE"? complete.push(element): incomplete.push(element)
-
-      })*/
+      console.log("COMPLETE: " +complete)
+      console.log("INCOMPLETE: " +incomplete)
+      console.log("ALL: " +orders)
 
       this.setState(
         {
@@ -127,19 +129,20 @@ cancelOrder(){
       )
 
     }
+
   getTable(){
     let display= null;
     if (this.state.currentDisplay === this.state.displayOptions[0]){
       display = this.state.allOrders
-      console.log("O" +display)
+      console.log("DISPLAY ALLORDERS: " +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[1]){
       display = this.state.completedOrders
-      console.log("1" +display)
+      console.log("DISPLAY COMPLETE: " +display)
     }
     else if(this.state.currentDisplay === this.state.displayOptions[2]){
       display = this.state.incompleteOrders
-      console.log("2" +display)
+      console.log("INCOMPLETE: " +display)
     }
     else{
       console.log("display=null")
@@ -163,70 +166,64 @@ cancelOrder(){
   }
 
   render () {
-  const DropdownList = () => (
-    <div>
-      {this.state.supportedEx.map(exch =>
-      <DropdownItem onClick={this.select} key={exch}> {exch} </DropdownItem>
-      )}
-    </div>
-  );
-  return (
-    <div className="wrapper">
-    <Nav/>
-      <div className="container">
-        <h2>Order History</h2>
-        <div className="currSel">
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>
-              {this.state.exchange}
-            </DropdownToggle>
-            <DropdownMenu>
-               {this.getDropdownItems(1)}
 
-            </DropdownMenu>
-          </Dropdown>
-          <h3>Display:</h3>
-          <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
-            <DropdownToggle caret>
-              {this.state.currentDisplay}
-            </DropdownToggle>
-            <DropdownMenu>
-               {this.getDropdownItems(2)}
 
-            </DropdownMenu>
-          </Dropdown>
-          </div>
+    return (
+      <div className="wrapper">
+      <Nav/>
+        <div className="container">
+          <h2>Order History</h2>
+          <div className="currSel">
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <DropdownToggle caret>
+                {this.state.exchange}
+              </DropdownToggle>
+              <DropdownMenu>
+                 {this.getDropdownItems(1)}
 
-        <Button className="btn btn-primary" size="lg" onClick={
-    this.cancelOrder()}>Cancel an Order</Button>
-        <Button className="btn btn-primary" size="lg">View  in-progress Orders</Button>
-        <div className="table">
+              </DropdownMenu>
+            </Dropdown>
+            <h3>Display:</h3>
+            <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
+              <DropdownToggle caret>
+                {this.state.currentDisplay}
+              </DropdownToggle>
+              <DropdownMenu>
+                 {this.getDropdownItems(2)}
 
-          <  Table id="simple-board" size="sm" className="striped bordered hover">
+              </DropdownMenu>
+            </Dropdown>
+            </div>
 
-            <thead>
-            <tr>
-             <th>ID</th>
-             <th>Currency1</th>
-             <th>Currency2</th>
-             <th>Type</th>
-             <th>Status</th>
-             <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            {this.state.gotOrders === true?
-            this.getTable()
-            :null}
-            </tbody>
-            </Table>
+          <Button className="btn btn-primary" size="lg" onClick={this.cancelOrder()}>Cancel an Order</Button>
+          <Button className="btn btn-primary" size="lg">View  in-progress Orders</Button>
+          <div className="table">
 
-         </div>
-        <Link to="/">
-          <button type="button" className="btn btn-primary">Go back</button>
-        </Link>
+            <  Table id="simple-board" size="sm" className="striped bordered hover">
+
+              <thead>
+              <tr>
+               <th>ID</th>
+               <th>Currency1</th>
+               <th>Currency2</th>
+               <th>Type</th>
+               <th>Status</th>
+               <th>Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              {this.state.gotOrders === true?
+              this.getTable()
+              :null}
+              </tbody>
+              </Table>
+
+           </div>
+          <Link to="/">
+            <button type="button" className="btn btn-primary">Go back</button>
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
   }
 }

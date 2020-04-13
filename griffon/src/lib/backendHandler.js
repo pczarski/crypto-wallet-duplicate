@@ -130,3 +130,11 @@ export function getOrderHistory(exchange) {
   req.send(null);
   return JSON.parse(req.responseText);
 }
+export function getAllOrderHistory() {
+  const url = "http://localhost:8080/all-orders";
+  // get request
+  let req = new XMLHttpRequest();
+  req.open('GET', url, false);
+  req.send(null);
+  return JSON.parse(req.responseText);
+}
