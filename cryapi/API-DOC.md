@@ -109,7 +109,7 @@
 #### call
     http://localhost:8080/exchange-currency?exchange=Binance&currency=BTC
 #### response: 
-    {"name":"Bitcoin","exchangeName":"Binance","publicAddress":"Bitcoin_TEST_KEY_XX","balance":100.0,"marketValue":0.0}
+    {"name":"Bitcoin","code":"BTC","exchangeName":"Binance","currentPublicKey":"Bitcoin_TEST_KEY_XX","balance":100.0,"price":6779.76}
 
 ## Withdraw from an exchange to the wallet
 

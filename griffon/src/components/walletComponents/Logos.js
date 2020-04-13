@@ -23,3 +23,21 @@ export default[
     }
 
 ]
+
+// returns the icon based on currency symbol passed
+export function getIcon(coin_symbol) {
+    switch(coin_symbol) {
+        case "BTC":
+            return bitcoinLogo;
+        case "ETH":
+            return ethLogo;
+        case "USDT":
+            return tetherLogo;
+        case "LTC":
+            return liteLogo;
+        case "DASH":
+            return dashLogo;
+        default:
+            return null;
+    }
+}

@@ -6,7 +6,9 @@ import g37.cryapi.common.TextResponse;
 import g37.cryapi.common.ValueResponse;
 import g37.cryapi.exchange.*;
 import g37.cryapi.wallet.Wallet;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
@@ -60,13 +62,15 @@ public class ExchangeController {
             CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
             return new CurrencyInExchangeJson(
                     CryptoCurrency.valueOf(currency).getName(),
+                    CryptoCurrency.valueOf(currency).toString(),
                     selectedExchange.getName().getName(),
                     selectedCurrency.getCurrentPublicKey(),
                     selectedCurrency.getBalance(),
                     selectedCurrency.getMarketPrice());
         }
         catch (IllegalArgumentException e) {
-            return new CurrencyInExchangeJson("Exchange or currency not found", null, null, -1, -1);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exchange or currency not found");
+           // return new CurrencyInExchangeJson("Exchange or currency not found", null, null, null, -1, -1);
         }
 
     } // http://localhost:8080/exchange-currency?exchange=Binance&currency=Bitcoin
@@ -83,8 +87,9 @@ public class ExchangeController {
             return this.toCurrencyInExchangeJsonArray(selectedExchange.getCurrenciesInExchange());
         }
         catch (IllegalArgumentException e) {
-            CurrencyInExchangeJson[] error = {new CurrencyInExchangeJson("Exchange not found", null, null, -1, -1)};
-            return error;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exchange not found");
+           // CurrencyInExchangeJson[] error = {new CurrencyInExchangeJson("Exchange not found", null, null, -1, -1)};
+           // return error;
         }
 
     } // http://localhost:8080/exchange-currencies?exchange=Binance
@@ -94,6 +99,7 @@ public class ExchangeController {
         for (int i = 0; i < out.length; i++){
             CurrencyInExchange currency = currencies.get(i);
             out[i] = new CurrencyInExchangeJson(
+                    currency.getName().getName(),
                     currency.getName().toString(),
                     currency.getExchangeAccess().getName().getName(),
                     currency.getCurrentPublicKey(),

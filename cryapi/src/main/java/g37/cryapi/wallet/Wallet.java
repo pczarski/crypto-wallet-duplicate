@@ -23,6 +23,7 @@ public class Wallet {
 	}
 
 	private void setUpCurrencies(){
+		//todo make coin factory instead and loop through the enum to follow better practises
 		currencyInWallets = new ArrayList<>();
 		currencyInWallets.add(new Bitcoin());
 		currencyInWallets.add(new Ethereum());
