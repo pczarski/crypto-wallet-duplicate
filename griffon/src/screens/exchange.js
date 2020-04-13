@@ -65,6 +65,3 @@ export default class Exchange extends React.Component {
     );
   }
 }
-// <input className="input1" type='text' name="current" placeholder="0.00" />   <input className="input2" type='text' name="current" placeholder="0.00" />
-// <img className="btc"src={bitcoinLogo} alt= "Bitcoin"></img>
-// <img className="eth"src={ethLogo} alt= "Etherium"></img>
