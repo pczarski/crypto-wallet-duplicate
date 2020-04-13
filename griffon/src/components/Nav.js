@@ -39,6 +39,11 @@ function Nav() {
                     Help
                     </Link>
                 </li>
+                <li>
+                <Link to="/orders">
+                    test
+                    </Link>
+                </li>
             </div>
         </ul>
     </nav>

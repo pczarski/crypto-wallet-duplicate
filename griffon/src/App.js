@@ -10,9 +10,10 @@ import Settings from './screens/settings';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
+import Orders from './screens/orders';
 import Buy from './screens/Buy';
-import TopUp from './screens/topup';
-import Withdraw from './screens/Withdraw';
+
+
 import ExchangeAccess from './screens/ExchangeAccess';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -34,9 +35,9 @@ export default class App extends React.Component {
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
           <Route path="/order" render={(props) => <Order {...props} />}/>
+          <Route path="/orders" render={(props) => <Orders {...props} />}/>
           <Route path="/Buy" render={(props) => <Buy {...props} />}/>
-          <Route path="/topup" render={(props) => <TopUp {...props} />}/>
-          <Route path="/Withdraw" render={(props) => <Withdraw {...props} />}/>
+
           <Route path='/ExchangeAccess' render ={(props) => <ExchangeAccess {...props}/>}/>
         </Switch>
         </div>
