@@ -58,7 +58,7 @@ export default class Exchange extends React.Component {
                        </div>
                         <div className="Available">
                         <p className="Available1">Available: 0 BTC</p>
-                        <input className="exchange1"type="button" value="exchange"/></div>
+                        <input className="exchange1" type="button" value="exchange"/></div>
 
                        </div>
                      </div>
