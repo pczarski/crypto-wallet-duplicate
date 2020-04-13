@@ -104,7 +104,7 @@ cancelOrder(){
   getOrders(){
       let allOrders =[]
       //console.log("DISPLAY OPTION: "+ this.state.currentDisplay)
-      this.state.currentDisplay === this.state.displayOptions[0]? allOrders = getAllOrderHistory():allOrders = getOrderHistory(this.state.exchange);
+      this.state.exchange === this.state.supportedEx[0]? allOrders = getAllOrderHistory():allOrders = getOrderHistory(this.state.exchange);
       //returns all orders from specified exchange
       let incomplete =[]
       let complete =[]
