@@ -33,15 +33,23 @@ export default class OrderHistory extends React.Component {
       gotOrders: false,
       dropdownOpen: false,
       dropdownDisplayOpen: false,
+      cancel:false
       //selected: "BTC",
       //gotExchange: false
     }
 
   }
 
-cancelOrder(){
-  return this.state.getOrders ===false? null:null
-}
+  toggleCancel() {
+  this.setState(
+    {cancel: !this.state.cancel});
+  console.log(this.state.cancel)
+  }
+
+  toCancelOrder(){
+    return this.state.getOrders ===false? null:null
+  }
+
 
   toggle(e) {
     e.preventDefault();
@@ -109,16 +117,19 @@ cancelOrder(){
       let incomplete =[]
       let complete =[]
       let orders =[]
+      /*
       console.log("CURRENT EXCHANGE: "+ this.state.exchange)
       console.log("CURRENT DISPLAY: "+ this.state.currentDisplay)
       console.log("ALLORDERS: "+ allOrders.length)
+      */
       for(let i =0; i<allOrders.length;i++){
         orders.push(allOrders[i])
         allOrders[i].status ==="COMPLETE"? complete.push(allOrders[i]):incomplete.push(allOrders[i])
       }
+      /*
       console.log("COMPLETE: " +complete.length)
       console.log("INCOMPLETE: " +incomplete.length)
-      console.log("ALL: " +orders.length)
+      console.log("ALL: " +orders.length)*/
 
       this.setState(
         {
@@ -160,6 +171,7 @@ cancelOrder(){
            <td >{element.type}</td>
            <td >{element.status}</td>
            <td >{element.data}</td>
+           {this.state.cancel === true? <th><input type="checkbox" /></th>:null}
         </tr>
 
       )
@@ -196,8 +208,7 @@ cancelOrder(){
             </Dropdown>
             </div>
 
-          <Button className="btn btn-primary" size="lg" onClick={this.cancelOrder()}>Cancel an Order</Button>
-          <Button className="btn btn-primary" size="lg">View  in-progress Orders</Button>
+          <Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>{this.state.cancel === true?"Exit cancel Orders":"Cancel Orders"}</Button>
           <div className="table">
 
             <  Table id="simple-board" size="sm" className="striped bordered hover">
@@ -210,6 +221,7 @@ cancelOrder(){
                <th>Type</th>
                <th>Status</th>
                <th>Date</th>
+               {this.state.cancel === true? <th>Cancel</th>:null}
               </tr>
               </thead>
               <tbody>
