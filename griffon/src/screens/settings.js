@@ -30,6 +30,8 @@ const initialState ={
 const userpass="Password123";
 
 export default class Settings extends React.Component {
+    
+  state=initialState;
   constructor() {
     super();
     this.state={selected: null}
