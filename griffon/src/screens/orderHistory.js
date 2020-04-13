@@ -134,15 +134,21 @@ cancelOrder(){}
     else{
       return
     }
-    return display.map((element,i)=>{
+    //id,currency1,currency2,initialAmount,amountComplete
+    //unitPrice,type,status,percentComplete,date
+    return  display ===null? display.map((element,i)=>{
       return(
         <tr  key={i}>
-          <td>{i}</td>
-           <td >{display[i]}</td>
+          <td>{element.id}</td>
+           <td >{element.currency1}</td>
+           <td >{element.currency2}</td>
+           <td >{element.type}</td>
+           <td >{element.status}</td>
+           <td >{element.data}</td>
         </tr>
 
       )
-    })
+    }):null
   }
 
   render () {
