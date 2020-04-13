@@ -114,7 +114,7 @@ export default class Orders extends React.Component {
         <div id="box"className="container">
 
             <TopUp />
-            <Withdraw />
+          
           </div>
         </div>
 
