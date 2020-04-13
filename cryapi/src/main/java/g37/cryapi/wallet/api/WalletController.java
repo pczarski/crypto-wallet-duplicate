@@ -24,6 +24,17 @@ public class WalletController {
 
     private final int MIN_SEED_LEN = 24; // TODO: I don't know what is the actual minimum
 
+    private void runHelpers(){
+        Wallet wallet = Wallet.getInstance();
+        if(wallet.areSavedFiles() && !wallet.getIsSetUp()){
+            wallet.loadFromFile();
+            return;
+        }
+        if (!wallet.getIsSetUp()) {
+            wallet.setUpNew();
+        }
+    }
+
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/new-wallet") // setting up the url location
     public WalletJson createNew(@RequestParam(value = "type", defaultValue = "new") String name) {
@@ -51,11 +62,7 @@ public class WalletController {
     @CrossOrigin(origins = "*")  //fixes the CORS blocking problem
     @GetMapping("/seed") // setting up the url location
     public WalletJson getWallet() {
-        if (!Wallet.getInstance().getIsSetUp()) {
-            Wallet.getInstance().setUpNew();
-        }
-
-        // todo: example for saving stuff
+        this.runHelpers();
 //        try
 //        {
 //            KeyPair pair = Wallet.getInstance().getCurrencyInWallet(CryptoCurrency.BTC).getKeyPairs().get(0);

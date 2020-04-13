@@ -24,9 +24,19 @@ public class CurrencyController {
 
     // todo temporary helpers for testing
     private void runHelpers() {
-        if (!Wallet.getInstance().getIsSetUp()) {
+        Wallet wallet = Wallet.getInstance();
+        if(wallet.areSavedFiles() && !wallet.getIsSetUp()){
+            wallet.loadFromFile();
+            return;
+        }
+        if (!wallet.getIsSetUp()) {
             Wallet.getInstance().setUpNew();
         }
+    }
+
+    private void saveState() {
+        Wallet wallet = Wallet.getInstance();
+        wallet.saveState();
     }
 
     private KeyPairJson[] convertToKeyPairJson(List<KeyPair> keyPairs) {
@@ -103,6 +113,7 @@ public class CurrencyController {
         try {
             CurrencyInWallet currency = wallet.getCurrencyInWallet(CryptoCurrency.valueOf(name));
             if(currency.send(address, amount)) {
+                wallet.saveState();
                 return new TextResponse("success", counter.incrementAndGet());
             }
             return new TextResponse("Insufficient balance", 0);

@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -27,20 +28,32 @@ public abstract class CurrencyInWallet extends Currency implements Serializable 
 
 	private Double price;
 
-	// TODO: temporary variable for prototype
-	protected int isSet;
+	// for prototype testing
+	private boolean isToSet;
 
-	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
+	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name, boolean isToSet) {
 		super(name);
 		this.privLen = privLen;
 		this.pubLen = pubLen;
 		this.keyPairs = new ArrayList<>();
-		this.generateKeys();
 		this.restTemplate = new RestTemplate();
 		this.updatePrice();
+		this.isToSet = isToSet;
+		if(isToSet){
+			this.generateKeys();
+		}
+	}
 
-		//todo: temporary
-		this.isSet = 0;
+	public void setKeyPairs(List<KeyPair> keyPairs){
+		this.keyPairs.addAll(keyPairs);
+	}
+
+	public boolean isToSet() {
+		return isToSet;
+	}
+
+	public void setIsToSet(boolean toSet) {
+		isToSet = toSet;
 	}
 
 	private void generateKeys(){
@@ -143,6 +156,14 @@ public abstract class CurrencyInWallet extends Currency implements Serializable 
 				this.counter.incrementAndGet(), new Date().toString(),
 				amount, keys.getPublicKey(), addressFrom, TransactionType.RECEIVE
 				));
+	}
+
+	public KeyPair[] keyPairsToArray(){
+		KeyPair[] out = new KeyPair[this.keyPairs.size()];
+		for(int i = 0; i < out.length; i++){
+			out[i] = this.keyPairs.get(i);
+		}
+		return out;
 	}
 
 

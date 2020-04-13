@@ -1,6 +1,4 @@
 package g37.cryapi.exchange.api;
-
-import com.sun.org.apache.xpath.internal.operations.Or;
 import g37.cryapi.common.CryptoCurrency;
 import g37.cryapi.common.TextResponse;
 import g37.cryapi.common.ValueResponse;
@@ -9,7 +7,6 @@ import g37.cryapi.wallet.Wallet;
 import org.springframework.web.bind.annotation.*;
 
 import java.rmi.NoSuchObjectException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +17,13 @@ public class ExchangeController {
         if(ExchangeHandler.getInstance().getExchanges().size() == 0) {
             ExchangeHandler.getInstance().addTestExchanges();
         }
-        if(!Wallet.getInstance().getIsSetUp()) {
-            Wallet.getInstance().setUpNew();
+        Wallet wallet = Wallet.getInstance();
+        if(wallet.areSavedFiles() && !wallet.getIsSetUp()){
+            wallet.loadFromFile();
+            return;
+        }
+        if (!wallet.getIsSetUp()) {
+            wallet.setUpNew();
         }
     }
 
@@ -116,6 +118,7 @@ public class ExchangeController {
             ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
             CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
             if(selectedCurrency.withdrawCurrency(amount)) {
+                Wallet.getInstance().saveState();
                 return new TextResponse("success", 1); //todo the id thing, smth is missing here
             };
             return new TextResponse("insufficient balance", 0);
@@ -139,6 +142,7 @@ public class ExchangeController {
             ExchangeAccess selectedExchange = exchangeHandler.getExchange(ExchangeName.valueOf(exchange));
             CurrencyInExchange selectedCurrency = selectedExchange.getCurrencyInExchange(CryptoCurrency.valueOf(currency));
             if(selectedCurrency.depositCurrency(amount)) {
+                Wallet.getInstance().saveState();
                 return new TextResponse("success", 1); //todo the id thing, smth is missing here
             };
             return new TextResponse("insufficient balance", 0);
@@ -147,7 +151,7 @@ public class ExchangeController {
             return new TextResponse("Exchange or currency not found", -1);
         }
 
-    } // http://localhost:8080/deposit?exchange=Binance&currency=Bitcoin&amount=0.5
+    } // http://localhost:8080/deposit?exchange=Binance&currency=BTC&amount=0.5
 
 
     /* orders */
