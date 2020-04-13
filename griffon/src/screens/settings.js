@@ -1,6 +1,7 @@
 import React from 'react';
 import Navig from '../components/Nav';
 import RecoveryPhrase from '../components/RecoveryPhrase';
+import Keys from '../screens/keys';
 
 import '../styles/nav.scss';
 import '../styles/App.scss';
@@ -110,7 +111,10 @@ export default class Settings extends React.Component {
       </div>
     );
     const PubKey = () => (
+      <div>
         <h1>Public Key</h1>
+        <Keys/>
+        </div>
     );
     const Topbar = () => (
       <Navbar color="dark" dark expand="md">
