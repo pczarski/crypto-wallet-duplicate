@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import '../styles/App.scss';
 import '../styles/nav.scss';
 import '../styles/bal.scss';
-import '../styles/coinLogos.css';
 
 
 

@@ -118,17 +118,17 @@ export default class Settings extends React.Component {
         <Nav className="mr-auto" navbar>
           <NavItem  >
             <NavLink onClick={this.select} name="password">
-              Change Password
+              Password
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={this.select} name="publickeys">
-              View Public Keys
+              Public Keys
             </NavLink>
           </NavItem>
           <NavItem >
             <NavLink onClick={this.select} name="recovery">
-              View Recovery Phrase
+              Recovery Phrase
             </NavLink>
           </NavItem>
         </Nav>
@@ -149,8 +149,10 @@ export default class Settings extends React.Component {
       <Navig/>
       
       <div className="container">
+          <div className="content">
       <Topbar/>
       {component}
+      </div>
       </div>
     </div>
     );
