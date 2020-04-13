@@ -33,7 +33,7 @@ export default class App extends React.Component {
           <Route path="/help" render={(props) => <Help {...props} />}/>
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
-          <Route path="/pubkeys" render={(props) => <PubKey {...props} />}/>
+        
           <Route path="/order" render={(props) => <Order {...props} />}/>
           <Route path="/Buy" render={(props) => <Buy {...props} />}/>
           <Route path="/topup" render={(props) => <TopUp {...props} />}/>
