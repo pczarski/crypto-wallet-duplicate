@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 
-import Logos from "./Logos";
+import Logos from "../components/walletComponents/Logos";
 
-import { getCurr } from '../../lib/backendHandler';
-import { roundTo2 } from '../../lib/helper';
+import { getCurr } from '../lib/backendHandler';
+import { roundTo2 } from '../lib/helper';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom';
+import { Button, Nav } from 'reactstrap';
+import SideBar from '../components/Nav.js';
 
-export default class Coins extends Component
+export default class ExchangeAccess extends Component
 {
     //creating array of coins
     constructor(props){
@@ -18,36 +21,32 @@ export default class Coins extends Component
                     
                     logo:<img src = {Logos[0].logo} alt = {"bitcoin"}></img>,
                     name:"Bitcoin",
-                    balance:roundTo2(getCurr("BTC").balance),
-                    address:getCurr("BTC").currentPublicKey
+                    price:"placeholder",
+                    
                 },
                 {
                     
                     logo:<img src = {Logos[1].logo} alt = {"bitcoin"}></img>,
                     name:"Ethereum",
-                    balance:roundTo2(getCurr("ETH").balance),
-                    address:getCurr("ETH").currentPublicKey
+                    price:"placeholder",
                 },
                 {
                     
                     logo:<img src = {Logos[2].logo} alt = {"bitcoin"}></img>,
                     name:"Litecoin",
-                    balance:roundTo2(getCurr("LTC").balance),
-                    address:getCurr("LTC").currentPublicKey
+                    price:"placeholder",
                 },
                 {
                     
                     logo:<img src = {Logos[3].logo} alt = {"dash"}></img>,
                     name:"Dash",
-                    balance:roundTo2(getCurr("DASH").balance),
-                    address:getCurr("DASH").currentPublicKey
+                    price:"placeholder",
                 },
                 {
                     
                     logo:<img src = {Logos[4].logo} alt = {"dash"}></img>,
                     name:"Tether",
-                    balance:roundTo2(getCurr("USDT").balance),
-                    address:getCurr("USDT").currentPublicKey
+                    price:"placeholder",
                 }
                 
                 ]
@@ -62,26 +61,39 @@ export default class Coins extends Component
             }
             renderTableData(){
                 return this.state.coins.map((coins, index) =>{
-                    const {logo,name,balance,address} = coins
+                    const {logo,name,price} = coins
                     return (
-                        <tr key = {name}>
+                        
+                    <tr key = {name}>
                             <th scope ="row">{logo}</th>
                             <td>{name}</td>
-                            <td>{balance}</td>
-                            <td>{address}</td>
+                            <td>{price}</td>
+                            
                         </tr>
+                       
                     )
                 })
             }
             render(){
                 return (
-                    <div>
+                    <div className="wrapper">
+                        
+                        <SideBar></SideBar>
+                        <div className="container">
                         <table className= "table table-striped table-hover table-dark">
+                        
                             <tbody>
                                 <tr>{this.renderTableHeader()}</tr>
                                 {this.renderTableData()}
                             </tbody>
+                        
                         </table>
+                        
+                        <Link to="./exchange">
+
+                        <Button className = "button">Exchange a Currency</Button>
+                        </Link>
+                        </div>
                     </div>
                 )
             }

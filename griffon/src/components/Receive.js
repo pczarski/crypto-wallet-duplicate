@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/App.scss';
 import {getCurr} from '../lib/backendHandler'
 import QRCode from 'qrcode';
-import {  Button } from "reactstrap";
 
 export default class Receive extends React.Component {
   

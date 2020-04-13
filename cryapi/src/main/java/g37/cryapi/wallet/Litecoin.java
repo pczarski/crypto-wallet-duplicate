@@ -9,7 +9,7 @@ public class Litecoin extends CurrencyInWallet {
 
     public Litecoin() {
         super(privLen, pubLen, CryptoCurrency.LTC);
-        this.addTestReceive(3, 20);
+        this.addTestReceive(3, 500);
     }
 
     @Override

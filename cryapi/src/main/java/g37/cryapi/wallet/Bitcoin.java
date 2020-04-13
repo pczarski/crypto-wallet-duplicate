@@ -11,7 +11,7 @@ public class Bitcoin extends CurrencyInWallet {
         super(privLen, pubLen, CryptoCurrency.BTC);
 
         // todo temporary for tests
-        this.addTestReceive(12, 2);
+        this.addTestReceive(12, 30);
     }
 
     @Override

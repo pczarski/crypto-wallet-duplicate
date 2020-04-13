@@ -1,5 +1,6 @@
 package g37.cryapi.exchange;
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.wallet.CurrencyInWallet;
 
 import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
@@ -131,8 +132,18 @@ public abstract class ExchangeAccess {
 	}
 
 	public double valueInCurrency(CryptoCurrency currency, CryptoCurrency inCurrency){
-		return this.getCurrencyInExchange(currency).getMarketPriceIn(inCurrency);
+		return this.getCurrencyInExchange(currency).getValueIn(this.getCurrencyInExchange(inCurrency));
+		//return this.getCurrencyInExchange(currency).getMarketPriceIn(inCurrency);
 	};
+
+	public double getTotalBalance(CryptoCurrency inCurrency) {
+		CurrencyInExchange currencyIn = this.getCurrencyInExchange(inCurrency);
+		double value = 0;
+		for (CurrencyInExchange currency: this.currencies) {
+			value += currency.getValueIn(currencyIn) * currency.getBalance();
+		}
+		return value;
+	}
 
 	public List<Order> getOrder() {
 		return this.orders;
