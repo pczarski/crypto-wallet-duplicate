@@ -36,7 +36,7 @@ export default class Select extends React.Component {
     renderItems() {
         return this.props.items.map((item) => {
             return(
-                <DropdownItem onClick={this.select}>
+                <DropdownItem onClick={this.select} key={item}>
                     {item}
                 </DropdownItem>
             );
