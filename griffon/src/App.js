@@ -105,7 +105,6 @@ export default class App extends React.Component {
               <Route path="/recover" render={(props) => <Recover {...props} />}/>
               <Route path="/settings" render={(props) => <Settings {...props} />}/>
               <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
-              <Route path="/OrderHistory" render={(props) => <OrderHistory {...props} />}/>
               <Route path="/order" render={(props) => <Order {...props} />}/>
               <Route path="/orders" render={(props) => <Orders {...props} />}/>
               <Route path="/Buy" render={(props) => <Buy {...props} />}/>

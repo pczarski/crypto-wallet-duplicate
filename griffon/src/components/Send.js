@@ -18,7 +18,7 @@ export default class Send extends React.Component {
       address: null,
       amount: null,
       response: "0"
-    }
+    };
     
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

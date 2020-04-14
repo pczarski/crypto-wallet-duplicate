@@ -2,21 +2,13 @@ import React from 'react';
 import '../styles/App.scss';
 import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
-
-// import getIcons from '../components/Icons';
 import {getOrderHistory,makeOrder,getAllOrderHistory,cancelOrder} from '../lib/backendHandler.js';
 import {Table} from 'react-bootstrap';
-
-import Receive from '../components/Receive';
-import Send from '../components/Send';
 import Nav from '../components/Nav';
-//id,currency1,currency2,initialAmount,amountComplete,unitPrice,type,status,percentComplete,date
-//console.log(makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0"))
 export default class OrderHistory extends React.Component {
   constructor(props) {
 
     super(props);
-    //makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
     this.toggleDisplay = this.toggleDisplay.bind(this);
@@ -59,7 +51,7 @@ export default class OrderHistory extends React.Component {
         }
 
       }
-    console.log("selected orders cancelled")
+    console.log("selected orders cancelled");
     return this.state.getOrders ===false? null:null
   }
 }
@@ -83,7 +75,7 @@ export default class OrderHistory extends React.Component {
         exchange: e.target.innerText,
         gotOrders: false,
         //gotExchange: true
-      })
+      });
       //console.log("SELECTED EXCHANGE: "+ this.state.exchange )
       this.getOrders()//get orders for the current exchange
     }
@@ -218,6 +210,9 @@ export default class OrderHistory extends React.Component {
         {this.state.cancel === false?
           <div>
           <h2>Order History</h2>
+
+            {/*TODO: please style this button*/}
+            <button onClick={this.props.goBack}>Go back</button>
 
           <div className="currSel">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

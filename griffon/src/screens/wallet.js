@@ -35,9 +35,6 @@ export default class Wallet extends React.Component {
             <Link to="/transfer">
               <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button>
             </Link>
-            <Link to="/orderHistory">
-              <Button className="btn btn-primary" size="lg" block>View Order History</Button>
-            </Link>
               <Link to="/">
                 <Button className="btn btn-primary" size="lg" block>Go back</Button>
               </Link>
