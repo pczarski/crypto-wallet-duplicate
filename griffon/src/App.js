@@ -19,18 +19,19 @@ import {getIcon} from "./components/walletComponents/Logos";
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+const exchangeList = {"Binance": "Binance", "Coinbase": "Coinbase"};
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state =  {
       coins: null,
+      exchangeAccess: exchangeList.Binance,
     }
   }
 
   // will update the coins to wallet coins
   fetchWalletCoins = () => {
-    console.log("fetching coins");
     const url = "http://localhost:8080/all-coins";
     $.ajax({
       type: "GET",
@@ -40,9 +41,17 @@ export default class App extends React.Component {
     });
   };
 
+  setExchange = (exchangeName) => {
+    this.setState({
+      exchangeAccess: exchangeList[exchangeName],
+    });
+    console.log(this.state.exchangeAccess);
+    this.fetchExchangeCoins();
+  };
+
   // will update the coins to selected exchange coins
-  fetchExchangeCoins = (exchangeName) => {
-    console.log("fetching coins");
+  fetchExchangeCoins = () => {
+    const exchangeName = this.state.exchangeAccess;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
     $.ajax({
       url: url,
@@ -57,8 +66,6 @@ export default class App extends React.Component {
     this.setState({
       coins: null,
     });
-    console.log("updating coins");
-    console.log(data);
     let coins = data;
     for(let i = 0; i < data.length; i++) {
       coins[i].icon = getIcon(coins[i].code);
@@ -66,7 +73,6 @@ export default class App extends React.Component {
     this.setState({
       coins: coins,
     });
-    console.log(this.state.coins);
   };
 
   render() {
@@ -74,34 +80,38 @@ export default class App extends React.Component {
     const coins = this.state.coins;
 
     return (
-      <Router>
-        <div className="App">
-        <Switch>
-          <Route path="/" exact component={Splash}/>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route path="/" exact component={Splash}/>
 
-          <Route path="/wallet" render=
-              {(props) => <Wallet {...props} coins={coins} fetch={this.fetchWalletCoins}/>}
-          />
+              <Route path="/wallet" render=
+                  {(props) => <Wallet {...props} coins={coins} fetch={this.fetchWalletCoins}/>}
+              />
 
-          <Route path='/ExchangeAccess' render =
-              {(props) => <ExchangeAccess coins={coins} fetch={this.fetchExchangeCoins}/>}
-          />
+              <Route path='/ExchangeAccess' render =
+                  {(props) => <ExchangeAccess
+                      {...props} coins={coins} fetch={this.fetchExchangeCoins}
+                      setExchange = {this.setExchange} exchanges={exchangeList}
+                      exchange={this.state.exchangeAccess}
+                  />}
+              />
 
-          <Route path="/exchange" render=
-              {(props) => <Exchange {...props}/>}
-          />
+              <Route path="/exchange" render=
+                  {(props) => <Exchange {...props}/>}
+              />
 
-          <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
-          <Route path="/recover" render={(props) => <Recover {...props} />}/>
-          <Route path="/settings" render={(props) => <Settings {...props} />}/>
-          <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
-          <Route path="/OrderHistory" render={(props) => <OrderHistory {...props} />}/>
-          <Route path="/order" render={(props) => <Order {...props} />}/>
-          <Route path="/orders" render={(props) => <Orders {...props} />}/>
-          <Route path="/Buy" render={(props) => <Buy {...props} />}/>
-        </Switch>
-        </div>
-      </Router>
+              <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
+              <Route path="/recover" render={(props) => <Recover {...props} />}/>
+              <Route path="/settings" render={(props) => <Settings {...props} />}/>
+              <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
+              <Route path="/OrderHistory" render={(props) => <OrderHistory {...props} />}/>
+              <Route path="/order" render={(props) => <Order {...props} />}/>
+              <Route path="/orders" render={(props) => <Orders {...props} />}/>
+              <Route path="/Buy" render={(props) => <Buy {...props} />}/>
+            </Switch>
+          </div>
+        </Router>
     );
   }
 }

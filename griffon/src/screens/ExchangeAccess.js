@@ -1,84 +1,42 @@
 import React, {Component} from 'react';
-
-import Logos from "../components/walletComponents/Logos";
-
-import { getCurr } from '../lib/backendHandler';
-import { roundTo2 } from '../lib/helper';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import { Button, Nav } from 'reactstrap';
 import SideBar from '../components/Nav.js';
 import Coins from '../components/walletComponents/Coins.js'
+import Select from "../components/common/select";
 
 export default class ExchangeAccess extends Component
 {
     //creating array of coins
     constructor(props){
         super(props);
-        this.state = {
-            exchangeName: "Binance",
-            coins: [
-                {
-
-                    logo:<img src = {Logos[0].logo} alt = {"bitcoin"}></img>,
-                    name:"Bitcoin",
-                    price:"placeholder",
-
-                },
-                {
-
-                    logo:<img src = {Logos[1].logo} alt = {"bitcoin"}></img>,
-                    name:"Ethereum",
-                    price:"placeholder",
-                },
-                {
-
-                    logo:<img src = {Logos[2].logo} alt = {"bitcoin"}></img>,
-                    name:"Litecoin",
-                    price:"placeholder",
-                },
-                {
-
-                    logo:<img src = {Logos[3].logo} alt = {"dash"}></img>,
-                    name:"Dash",
-                    price:"placeholder",
-                },
-                {
-
-                    logo:<img src = {Logos[4].logo} alt = {"dash"}></img>,
-                    name:"Tether",
-                    price:"placeholder",
-                }
-
-            ]
-        }
-
-    }
-    renderTableHeader(){
-        let header = Object.keys(this.state.coins[0])
-        return header.map((key,index)=> {
-            return <th scope= "col" key={index}>{key.toUpperCase()}</th>
-        })
-    }
-    renderTableData(){
-        return this.state.coins.map((coins, index) =>{
-            const {logo,name,price} = coins;
-            return (
-
-                <tr key = {name}>
-                    <th scope ="row">{logo}</th>
-                    <td>{name}</td>
-                    <td>{price}</td>
-
-                </tr>
-
-            )
-        })
+        this.state = {}
     }
 
-    handleFetch = () => {
-        this.props.fetch(this.state.exchangeName);
+    handleSelect() {
+        const e = document.getElementById("select-exchange");
+        console.log(e.options[e.selectedIndex].value);
+        console.log("selecting");
+        this.props.setExchange(e.options[e.selectedIndex].value);
+    };
+
+    renderSelect = () => {
+        const exchanges = Object.keys(this.props.exchanges).map((name) => {
+            return(
+                <option value={name} onSelect={() => this.handleSelect}>
+                    {name}
+                </option>
+            );
+        });
+
+        return(
+            <div>
+                <select id="select-exchange" onSelectCapture={() => this.handleSelect}>
+                    {exchanges}
+                </select>
+            </div>
+        );
     };
 
     render(){
@@ -86,9 +44,18 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="container">
+
+                    <Select items={Object.keys(this.props.exchanges)}
+                            onSelect={this.props.setExchange}
+                            selectedItem={this.props.exchange}
+                    />
+                    <div id="order history">
+                        TODO: placeholder for a tab for selecting order history based on the current exchange
+                    </div>
+
                     <div className="content">
-                        <Coins fetch={this.handleFetch} coins={this.props.coins} />
-                        <Link to="./exchange">
+                        <Coins fetch={this.props.fetch} coins={this.props.coins} />
+                        <Link to="/exchange">
 
                             <Button className = "button">Exchange a Currency</Button>
                         </Link>
