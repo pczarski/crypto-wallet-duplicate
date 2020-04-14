@@ -7,9 +7,12 @@ public class Tether extends CurrencyInWallet {
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
-    public Tether() {
-        super(privLen, pubLen, CryptoCurrency.USDT);
-        this.addTestReceive(4, 3000);
+    public Tether(boolean isToSet) {
+        super(privLen, pubLen, CryptoCurrency.USDT, isToSet);
+
+        if(isToSet) {
+            this.addTestReceive(4, 3000);
+        }
     }
 
     @Override

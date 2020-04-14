@@ -63,8 +63,7 @@ export function getBalance(currency) {
 
 export function getRecords(curr) {
     // http://localhost:8080/records?name=BTC
-    const baseUrl = "http://localhost:8080/records?name=" + curr;
-    const url = baseUrl + curr;
+    const url = "http://localhost:8080/records?name=" + curr;
 
     // get request
     let req = new XMLHttpRequest();
