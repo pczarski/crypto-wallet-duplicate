@@ -1,8 +1,9 @@
 import React from 'react';
 import Navig from '../components/Nav';
 import RecoveryPhrase from '../components/RecoveryPhrase';
-import Keys from '../screens/keys';
 
+import Keys from '../screens/keys';
+import Help from '../components/Help';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -31,6 +32,8 @@ const initialState ={
 const userpass="Password123";
 
 export default class Settings extends React.Component {
+
+  state=initialState;
   constructor() {
     super();
     this.state={selected: null}
@@ -122,17 +125,22 @@ export default class Settings extends React.Component {
         <Nav className="mr-auto" navbar>
           <NavItem  >
             <NavLink onClick={this.select} name="password">
-              Change Password
+              Password
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={this.select} name="publickeys">
-              View Public Keys
+              Public Keys
             </NavLink>
           </NavItem>
           <NavItem >
             <NavLink onClick={this.select} name="recovery">
-              View Recovery Phrase
+              Recovery Phrase
+            </NavLink>
+          </NavItem>
+          <NavItem >
+            <NavLink onClick={this.select} name="help">
+              Help
             </NavLink>
           </NavItem>
         </Nav>
@@ -144,6 +152,9 @@ export default class Settings extends React.Component {
     component = <PubKey />;
   } else if (this.state.selected === "recovery") {
     component = <RecoveryPhrase/>;
+  }
+  else if (this.state.selected === "help") {
+    component = <Help/>;
   } else {
     component = <Password/>;
   }
@@ -153,8 +164,10 @@ export default class Settings extends React.Component {
       <Navig/>
 
       <div className="container">
+          <div className="content">
       <Topbar/>
       {component}
+      </div>
       </div>
     </div>
     );

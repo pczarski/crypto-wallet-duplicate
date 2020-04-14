@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/App.scss';
-import '../styles/splash.scss';
 
 import {Link, Redirect} from 'react-router-dom';
 
@@ -73,7 +72,7 @@ export default class Splash extends React.Component {
           </Link>
           </div>
         </div>
-      </div>
+      // </div>
     );
   }
 }

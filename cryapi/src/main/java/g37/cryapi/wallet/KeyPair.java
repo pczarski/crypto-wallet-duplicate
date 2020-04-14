@@ -1,10 +1,11 @@
 package g37.cryapi.wallet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import g37.cryapi.lib.KeyGenerator;
 
-public class KeyPair {
+public class KeyPair implements Serializable {
 
 	private String privateKey;
 	private String publicKey;

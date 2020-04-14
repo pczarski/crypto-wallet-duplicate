@@ -2,35 +2,41 @@ package g37.cryapi.exchange.api;
 
 public class CurrencyInExchangeJson {
     private final String name;
+    private final String code;
     private final String exchangeName;
-    private final String publicAddress;
+    private final String currentPublicKey;
     private final double balance;
-    private final double marketPrice;
+    private final double price;
 
-    public CurrencyInExchangeJson(String name, String exchangeName, String publicAddress, double balance, double marketPrice) {
+    public CurrencyInExchangeJson(String name, String code, String exchangeName, String currentPublicKey, double balance, double price) {
         this.name = name;
         this.exchangeName = exchangeName;
-        this.publicAddress = publicAddress;
+        this.currentPublicKey = currentPublicKey;
         this.balance = balance;
-        this.marketPrice = marketPrice;
+        this.price = price;
+        this.code = code;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     public String getExchangeName() {
         return exchangeName;
     }
 
-    public String getPublicAddress() {
-        return publicAddress;
+    public String getCurrentPublicKey() {
+        return currentPublicKey;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public double getMarketValue() { return marketPrice; }
+    public double getPrice() { return price; }
 
 }
