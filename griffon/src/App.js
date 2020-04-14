@@ -30,7 +30,7 @@ export default class App extends React.Component {
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
           <Route path='/ExchangeAccess' render ={(props) => <ExchangeAccess {...props}/>}/>
-
+ 
         </Switch>
         </div>
       </Router>

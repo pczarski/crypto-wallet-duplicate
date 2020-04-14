@@ -96,6 +96,7 @@ export default class CreateNew extends React.Component {
 
   render () {
   if (this.state.redirToWall === true) {
+    
     return <Redirect to='/wallet' />
   }
   const Confirm = () => (
