@@ -61,19 +61,19 @@ export default class Coins extends Component
             return <th scope= "col" key={index}>{key.toUpperCase()}</th>
         })
     }
-    renderTableData(){
-        return this.state.coins.map((coins, index) =>{
-            const {logo,name,balance,address} = coins;
-            return (
-                <tr key = {name}>
-                    <th scope ="row">{logo}</th>
-                    <td>{name}</td>
-                    <td>{balance}</td>
-                    <td>{address}</td>
-                </tr>
-            )
-        });
-    }
+    // renderTableData(){
+    //     return this.state.coins.map((coins, index) =>{
+    //         const {logo,name,balance,address} = coins;
+    //         return (
+    //             <tr key = {name}>
+    //                 <th scope ="row">{logo}</th>
+    //                 <td>{name}</td>
+    //                 <td>{balance}</td>
+    //                 <td>{address}</td>
+    //             </tr>
+    //         )
+    //     });
+    // }
 
     renderCoinsToTable(){
         if(this.props.coins == null) {

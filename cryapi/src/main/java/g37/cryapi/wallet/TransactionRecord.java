@@ -1,6 +1,8 @@
 package g37.cryapi.wallet;
 
-public class TransactionRecord {
+import java.io.Serializable;
+
+public class TransactionRecord implements Serializable {
 
 	private String time;
 	private double amount;

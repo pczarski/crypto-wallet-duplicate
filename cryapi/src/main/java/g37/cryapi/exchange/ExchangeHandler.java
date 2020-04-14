@@ -37,11 +37,6 @@ public class ExchangeHandler {
 		}
 	}
 
-	public ArrayList<Order> getOrderHistory() {
-		// TODO - implement ExchangeHandler.getOrderHistory
-		throw new UnsupportedOperationException();
-	}
-
 	public ExchangeAccess getExchange(ExchangeName name) {
 		for(int i = 0; i < exchanges.size(); i++) {
 			ExchangeAccess exchangeAccess = exchanges.get(i);

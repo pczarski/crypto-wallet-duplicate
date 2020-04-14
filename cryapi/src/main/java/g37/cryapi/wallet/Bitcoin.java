@@ -7,11 +7,13 @@ public class Bitcoin extends CurrencyInWallet {
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
-    public Bitcoin() {
-        super(privLen, pubLen, CryptoCurrency.BTC);
+    public Bitcoin(boolean isToSet) {
+        super(privLen, pubLen, CryptoCurrency.BTC, isToSet);
 
         // todo temporary for tests
-        this.addTestReceive(12, 30);
+        if(this.isToSet()) {
+            this.addTestReceive(12, 30);
+        }
     }
 
     @Override
