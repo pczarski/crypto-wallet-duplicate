@@ -50,19 +50,27 @@ export default class OrderHistory extends React.Component {
   }
 
   toCancelOrder(){
-    for(let i =0; i<this.state.ordersToCancel.length;i++){
-      //console.log(this.state.incompleteOrders)
-      for(let x =0; x<this.state.incompleteOrders.length;x++)
+    console.log("in cancel orders: 1)"+this.state.ordersToCancel+"2) "+this.state.incompleteOrders)
+    this.state.incompleteOrders.map((element,i)=>{
+      if(this.state.ordersToCancel.includes(element.id)){
+        let can = cancelOrder(element.exchange,element.id)
+        console.log(can)
+      }
+    })
+
+      /*
+      for(var x =0; x<this.state.incompleteOrders.length;x++)
       {
+        console.log("INCOMPLETE ORDER"+i)
         if (this.state.incompleteOrders[x].id ===this.state.ordersToCancel[i]){
-          cancelOrder(this.state.incompleteOrders[x].exchange,this.state.incompleteOrders[x].id)
+          console.log("incompleteid== ordertocancelid"+this.state.incompleteOrders[x].id +this.state.ordersToCancel[i])
+          let can = cancelOrder(this.state.incompleteOrders[x].exchange,this.state.incompleteOrders[x].id)
+          console.log(can)
         }
 
-      }
-    console.log("selected orders cancelled")
-    return this.state.getOrders ===false? null:null
+      }*/
+    return
   }
-}
 
 
   toggle(e) {
@@ -186,7 +194,7 @@ export default class OrderHistory extends React.Component {
            <td >{element.type}</td>
            <td >{element.status}</td>
            <td >{element.data}</td>
-           {this.state.cancel === true? <th><input type="checkbox" onChange={this.handleInputChange} name={element.id}  cancelinfo={[element.exchange,element.id]} /></th>:null}
+           {this.state.cancel === true? <th><input type="checkbox" onChange={this.handleInputChange} name={element.id}  id={element.id} cancelinfo={[element.exchange,element.id]} /></th>:null}
         </tr>
 
       )
@@ -195,7 +203,8 @@ export default class OrderHistory extends React.Component {
   async handleInputChange(event) {
     const target = event.target;
     var arr=this.state.ordersToCancel
-    var index = arr.indexOf(target.id)//finds the index of the arg, if arg not in arr return a no <0
+    const index = arr.indexOf(target.id)//finds the index of the arg, if arg not in arr return a no <0
+    console.log("index: "+ index + "target id: "+target.id)
     if (target.checked === true){
       if (index<0){arr.push(target.id)}//if target.id not in arr
     }
