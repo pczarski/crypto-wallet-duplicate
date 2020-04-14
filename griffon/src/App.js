@@ -9,11 +9,10 @@ import Recover from './screens/recover';
 import Settings from './screens/settings';
 import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
+import OrderHistory from './screens/orderHistory';
 import Order from './screens/order';
 import Orders from './screens/orders';
 import Buy from './screens/Buy';
-
-
 import ExchangeAccess from './screens/ExchangeAccess';
 import $ from 'jquery';
 import {getIcon} from "./components/walletComponents/Logos";
@@ -96,6 +95,7 @@ export default class App extends React.Component {
           <Route path="/recover" render={(props) => <Recover {...props} />}/>
           <Route path="/settings" render={(props) => <Settings {...props} />}/>
           <Route path="/transfer" render={(props) => <Transfer {...props} />}/>
+          <Route path="/OrderHistory" render={(props) => <OrderHistory {...props} />}/>
           <Route path="/order" render={(props) => <Order {...props} />}/>
           <Route path="/orders" render={(props) => <Orders {...props} />}/>
           <Route path="/Buy" render={(props) => <Buy {...props} />}/>
