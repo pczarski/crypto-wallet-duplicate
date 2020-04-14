@@ -5,7 +5,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "re
 
 // import getIcons from '../components/Icons';
 import {getOrderHistory,makeOrder,getAllOrderHistory,cancelOrder} from '../lib/backendHandler.js';
-import Table from 'react-bootstrap/Table';
+import {Table} from 'react-bootstrap';
 
 import Receive from '../components/Receive';
 import Send from '../components/Send';
