@@ -25,6 +25,7 @@ export default class ExchangeAccess extends Component
     };
 
     render() {
+        // use the mainComponent prop which is taken from App.js's state
         const selectedComponent = this.props.mainComponent;
         let mainComponent;
 
