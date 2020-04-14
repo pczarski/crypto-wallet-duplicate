@@ -23,6 +23,8 @@ export default class OrderHistory extends React.Component {
     this.selectDisplay = this.selectDisplay.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
 
+    this.toCancelOrder = this.toCancelOrder.bind(this);
+
     this.state = {
       supportedEx: ["ALL","Binance"],
       displayOptions:["ALL","COMPLETE","INCOMPLETE"],
@@ -48,14 +50,12 @@ export default class OrderHistory extends React.Component {
   }
 
   toCancelOrder(){
-    console.log("orderto cancel "+this.state.ordersToCancel[0] + "got orders " + this.state.gotOrders)
-    for(let i =0; i<this.state.incomplete.length;i++){
-      window.alert("Only incomplete orders will be deleted")
-      console.log(this.state.incomplete)
-      for(let x =0; x<this.state.ordersToCancel.length;i++)
+    for(let i =0; i<this.state.ordersToCancel.length;i++){
+      //console.log(this.state.incompleteOrders)
+      for(let x =0; x<this.state.incompleteOrders.length;x++)
       {
-        if (this.state.incomplete[x].id ===this.state.ordersToCancel[i]){
-          cancelOrder(this.state.incomplete[x].exchange,this.state.incomplete[x].id)
+        if (this.state.incompleteOrders[x].id ===this.state.ordersToCancel[i]){
+          cancelOrder(this.state.incompleteOrders[x].exchange,this.state.incompleteOrders[x].id)
         }
 
       }
@@ -158,7 +158,11 @@ export default class OrderHistory extends React.Component {
 
   getTable(){
     let display= [];
-    if (this.state.currentDisplay === this.state.displayOptions[0]){
+    if(this.state.currentDisplay === this.state.displayOptions[2] || this.state.cancel === true){
+      display = this.state.incompleteOrders
+      //console.log("INCOMPLETE: " +display)
+    }
+    else if (this.state.currentDisplay === this.state.displayOptions[0]){
       display = this.state.allOrders
       //console.log("DISPLAY ALLORDERS: " +display)
     }
@@ -166,10 +170,7 @@ export default class OrderHistory extends React.Component {
       display = this.state.completedOrders
       //console.log("DISPLAY COMPLETE: " +display)
     }
-    else if(this.state.currentDisplay === this.state.displayOptions[2]){
-      display = this.state.incompleteOrders
-      //console.log("INCOMPLETE: " +display)
-    }
+
     else{
       console.log("display=null")
       return
@@ -204,7 +205,7 @@ export default class OrderHistory extends React.Component {
     await this.setState({
       ordersToCancel: arr
     })
-    console.log("CHECKED changes ARR: "+this.state.ordersToCancel.length)
+    console.log("CHECKED length ARR: "+this.state.ordersToCancel.length +"CHECKED ARR:" +this.state.ordersToCancel )
   }
 
   render () {
@@ -214,8 +215,10 @@ export default class OrderHistory extends React.Component {
       <div className="wrapper">
       <Nav/>
         <div className="container">
+        {this.state.cancel === false?
+          <div>
           <h2>Order History</h2>
-          
+
           <div className="currSel">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle caret>
@@ -236,11 +239,9 @@ export default class OrderHistory extends React.Component {
 
               </DropdownMenu>
             </Dropdown>
-            </div>
+            </div></div>:<div><h2>Cancel Order</h2><p>Select incomplete orders you would like to cancel</p></div>}
 
-          <Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>{this.state.cancel === true?"Exit cancel Orders":"Cancel Orders"}</Button>
-
-          {this.state.cancel === true?<Button className="btn btn-primary" size="lg" onClick={() => this.toCancelOrder()}>Cancel selected Orders</Button>:null}
+          {this.state.cancel === true?<Button className="btn btn-primary" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>:<Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>Cancel Orders</Button>}
 
           <div className="table">
 
@@ -265,9 +266,7 @@ export default class OrderHistory extends React.Component {
               </Table>
 
            </div>
-          <Link to="/">
-            <button type="button" className="btn btn-primary">Go back</button>
-          </Link>
+           {this.state.cancel === true?<Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>Exit Cancel Orders</Button>:null}
         </div>
       </div>
     );
