@@ -17,7 +17,7 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     @Override
     public String getCurrentPublicKey() {
-        return this.getName().getName() + "_TEST_KEY_XX";
+        return this.getName().getName() + "_TEST_KEY_"+"Coinbase";
     }
 
     @Override
