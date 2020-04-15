@@ -6,6 +6,7 @@
 /cryapi/.gradle/
 *.lock
 *.bin
+*.ser
 cryapi/.gradle/buildOutputCleanup/buildOutputCleanup.lock
 cryapi/.gradle/6.2.2/javaCompile/javaCompile.lock
 cryapi/.gradle/6.2.2/javaCompile/classAnalysis.bin

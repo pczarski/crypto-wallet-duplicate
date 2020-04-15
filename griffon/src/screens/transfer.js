@@ -19,7 +19,7 @@ export default class Transfer extends React.Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
-    
+
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
@@ -41,7 +41,7 @@ export default class Transfer extends React.Component {
       choice: e.target.value
     });
   }
-  
+
   toggle(e) {
     e.preventDefault();
     this.setState({
@@ -68,7 +68,7 @@ export default class Transfer extends React.Component {
       case "LTC":
         return LTC;
       case "DASH":
-        return DASH;      
+        return DASH;
       default:
         return null;
     }
@@ -77,7 +77,7 @@ export default class Transfer extends React.Component {
   render () {
   const DropdownList = () => (
     <div>
-      {this.state.supportedCurr.map(curr => 
+      {this.state.supportedCurr.map(curr =>
       <DropdownItem onClick={this.select} key={curr}> {curr} </DropdownItem>
       )}
     </div>
@@ -106,8 +106,8 @@ export default class Transfer extends React.Component {
             <DropdownList/>
           </DropdownMenu>
         </Dropdown>
-        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1">Send Currency</Button> 
-        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2">Receive Currency</Button> 
+        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1">Send Currency</Button>
+        <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2">Receive Currency</Button>
         {component}
         <Button type="button" className="btn btn-primary"onClick={this.handleClick}  value="0">Go back</Button>
       </div>
@@ -115,3 +115,5 @@ export default class Transfer extends React.Component {
   );
   }
 }
+
+ 

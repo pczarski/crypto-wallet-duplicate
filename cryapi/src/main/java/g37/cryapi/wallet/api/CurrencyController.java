@@ -3,11 +3,13 @@ package g37.cryapi.wallet.api;
 import g37.cryapi.common.TextResponse;
 import g37.cryapi.common.ValueResponse;
 import g37.cryapi.wallet.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import g37.cryapi.common.CryptoCurrency;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,19 @@ public class CurrencyController {
 
     // todo temporary helpers for testing
     private void runHelpers() {
-        if (!Wallet.getInstance().getIsSetUp()) {
+        Wallet wallet = Wallet.getInstance();
+        if(wallet.areSavedFiles() && !wallet.getIsSetUp()){
+            wallet.loadFromFile();
+            return;
+        }
+        if (!wallet.getIsSetUp()) {
             Wallet.getInstance().setUpNew();
         }
+    }
+
+    private void saveState() {
+        Wallet wallet = Wallet.getInstance();
+        wallet.saveState();
     }
 
     private KeyPairJson[] convertToKeyPairJson(List<KeyPair> keyPairs) {
@@ -57,6 +69,7 @@ public class CurrencyController {
             );
         } catch (IllegalArgumentException e) {
             return new CurrencyJson("Invalid name", null, -1, -1, null, null);
+            //  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid currency name", e); //TODO: this is what it should be but don't want to mess up the front end
         }
     } // accessed through: http://localhost:8080/currency?name=CurrencyName
 
@@ -100,6 +113,7 @@ public class CurrencyController {
         try {
             CurrencyInWallet currency = wallet.getCurrencyInWallet(CryptoCurrency.valueOf(name));
             if(currency.send(address, amount)) {
+                wallet.saveState();
                 return new TextResponse("success", counter.incrementAndGet());
             }
             return new TextResponse("Insufficient balance", 0);
@@ -123,6 +137,7 @@ public class CurrencyController {
             return new RecordsJson(currency.getTransactionRecords(), name);
 
         } catch (IllegalArgumentException e) {
+          //  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid currency name", e); //TODO: this is what it should be but don't want to mess up the front end
             return new RecordsJson(null, "Invalid Name");
         }
     } // accessed through: http://localhost:8080/records?name=Bitcoin
