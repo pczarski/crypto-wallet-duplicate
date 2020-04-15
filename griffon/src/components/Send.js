@@ -1,25 +1,25 @@
 import React from 'react';
 import '../styles/App.scss';
- 
+
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 import {sendCurr, getBalance} from '../lib/backendHandler';
 
 // TO DO:
 // VALIDATION, can't be empty
-// 
+//
 
 export default class Send extends React.Component {
-  
+
   constructor(props) {
-    super(props);  
+    super(props);
     this.state = {
       balance: getBalance(this.props.curr),
       address: null,
       amount: null,
       response: "0"
     };
-    
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -34,7 +34,7 @@ export default class Send extends React.Component {
   handleSubmit(event) {
     let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
     console.log(resp)
-    this.setState({ 
+    this.setState({
       balance: getBalance(this.props.curr),
       response: resp
     });
@@ -56,7 +56,7 @@ export default class Send extends React.Component {
         <Button>Submit</Button>
 
       </Form>
-      
+
       {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
     </div>
     )

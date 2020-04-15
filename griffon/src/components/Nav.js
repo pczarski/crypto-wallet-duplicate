@@ -34,10 +34,10 @@ function Nav() {
                     </Link>
                 </li>
 
-            
+
                 <li>
                 <Link to="/orders">
-                    test
+                    Add Exchange
                     </Link>
                 </li>
             </div>
