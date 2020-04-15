@@ -109,7 +109,7 @@
 #### call
     http://localhost:8080/exchange-currency?exchange=Binance&currency=BTC
 #### response: 
-    {"name":"Bitcoin","exchangeName":"Binance","publicAddress":"Bitcoin_TEST_KEY_XX","balance":100.0,"marketValue":0.0}
+    {"name":"Bitcoin","code":"BTC","exchangeName":"Binance","currentPublicKey":"Bitcoin_TEST_KEY_XX","balance":100.0,"price":6779.76}
 
 ## Withdraw from an exchange to the wallet
 
@@ -171,6 +171,10 @@
     
 ## get order history:
 #### all history:
+    http://localhost:8080/all-orders
+    
+    response:
+    
     [{"id":1,"exchange":"Binance","currency1":"BTC","currency2":"DASH","initialAmount":10.0,"amountComplete":10.0,"unitPrice":10.0,"type":"Buy","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:14 BST 2020"},{"id":2,"exchange":"Binance","currency1":"LTC","currency2":"ETH","initialAmount":20.0,"amountComplete":20.0,"unitPrice":3.2,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:22 BST 2020"},{"id":4,"exchange":"Coinbase","currency1":"DASH","currency2":"ETH","initialAmount":15.0,"amountComplete":15.0,"unitPrice":0.4366547219974569,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:46:30 BST 2020"},{"id":5,"exchange":"Coinbase","currency1":"DASH","currency2":"ETH","initialAmount":4.0,"amountComplete":4.0,"unitPrice":0.43705889158856875,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:46:36 BST 2020"}]
    
 #### by exchange:

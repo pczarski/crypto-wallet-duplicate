@@ -1,4 +1,4 @@
-const electron = require('electron');   
+const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -15,7 +15,7 @@ let mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1366, 
+        width: 1366,
         height: 768,
         name: "griffon"
     });
@@ -31,7 +31,7 @@ function createWindow() {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
 
- 
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows

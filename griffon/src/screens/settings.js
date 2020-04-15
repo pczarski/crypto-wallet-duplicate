@@ -2,6 +2,8 @@ import React from 'react';
 import Navig from '../components/Nav';
 import RecoveryPhrase from '../components/RecoveryPhrase';
 
+import Keys from '../screens/keys';
+import Help from '../components/Help';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -24,32 +26,36 @@ const initialState ={
   confirm:"",
   currentError:"",
   newError:"",
-  confirmError:""
+  confirmError:"",
+  selected: null
 
 }
 const userpass="Password123";
 
 export default class Settings extends React.Component {
+
   constructor() {
     super();
-    this.state={selected: null}
+    this.state=initialState
     this.select = this.select.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.Password = this.Password.bind(this);
 }
-  handleChange = event=>{
-    const isCheckbox = event.target.type === "checkbox";
+  handleChange(event) {
+    console.log(this.state)
    this.setState({
-     [event.target.name]: isCheckbox
-       ? event.target.checked
-       : event.target.value
+     [event.target.name]:  event.target.value
    });
  };
+
   validate=()=>{
     // var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
-    let password1= userpass;
+    let password1= localStorage.getItem('password');
     let currentError="";
     let newError="";
     let confirmError="";
-    if(!this.state.current.includes(password1)){
+    if(!this.state.current === (password1)){
       currentError="Password is not correct!";
     }
     if(this.state.confirm!==""){
@@ -80,12 +86,11 @@ export default class Settings extends React.Component {
 }
   select (event) {
     this.setState({selected:event.target.name})
-    console.log(this.state.selected)
   }
 
-  render () {
-    const Password = () => (
-      <div className="extra">
+  Password() {
+    return (
+      <div>
         <form onSubmit={this.handleSubmit}>
           <h1>Change Password</h1>
           <div>
@@ -109,26 +114,40 @@ export default class Settings extends React.Component {
         </form>
       </div>
     );
+  }
+
+
+  render () {
+
     const PubKey = () => (
+      <div>
         <h1>Public Key</h1>
+        <Keys/>
+        </div>
     );
+
     const Topbar = () => (
       <Navbar color="dark" dark expand="md">
         <NavbarBrand>Settings</NavbarBrand>
         <Nav className="mr-auto" navbar>
           <NavItem  >
             <NavLink onClick={this.select} name="password">
-              Change Password
+              Password
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink onClick={this.select} name="publickeys">
-              View Public Keys
+              Public Keys
             </NavLink>
           </NavItem>
           <NavItem >
             <NavLink onClick={this.select} name="recovery">
-              View Recovery Phrase
+              Recovery Phrase
+            </NavLink>
+          </NavItem>
+          <NavItem >
+            <NavLink onClick={this.select} name="help">
+              Help
             </NavLink>
           </NavItem>
         </Nav>
@@ -140,14 +159,15 @@ export default class Settings extends React.Component {
     component = <PubKey />;
   } else if (this.state.selected === "recovery") {
     component = <RecoveryPhrase/>;
+  }
+  else if (this.state.selected === "help") {
+    component = <Help/>;
   } else {
-    component = <Password/>;
+    component = this.Password()
   }
   return (
     <div className="wrapper">
-        
       <Navig/>
-      
       <div className="container">
       <Topbar/>
       {component}

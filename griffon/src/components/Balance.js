@@ -45,7 +45,7 @@ export default class Balance extends React.Component {
         } else {
           value = await converter.convert(req.balance, this.state.supportedCurr[i], curr);  
         }
-        console.log(req, value, totalBal) 
+        console.log(req, value, totalBal);
         totalBal += value
       }
     }
