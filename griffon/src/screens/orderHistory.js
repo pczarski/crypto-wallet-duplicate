@@ -16,7 +16,7 @@ export default class OrderHistory extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.toCancelOrder = this.toCancelOrder.bind(this);
-    makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
+    //makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.state = {
       supportedEx: ["ALL","Binance"],
       displayOptions:["ALL","COMPLETE","INCOMPLETE","CANCELED"],
@@ -128,6 +128,7 @@ export default class OrderHistory extends React.Component {
       let incomplete =[]
       let complete =[]
       let orders =[]
+      let cancelled =[]
       /*
       console.log("CURRENT EXCHANGE: "+ this.state.exchange)
       console.log("CURRENT DISPLAY: "+ this.state.currentDisplay)
@@ -135,7 +136,10 @@ export default class OrderHistory extends React.Component {
       */
       for(let i =0; i<allOrders.length;i++){
         orders.push(allOrders[i])
-        allOrders[i].status ==="COMPLETE"? complete.push(allOrders[i]):incomplete.push(allOrders[i])
+
+        if (allOrders[i].status ==="COMPLETE"){complete.push(allOrders[i])}
+        else if(allOrders[i].status ==="CANCELED"){cancelled.push(allOrders[i])}
+        else{incomplete.push(allOrders[i])}
       }
       /*
       console.log("COMPLETE: " +complete.length)
@@ -147,7 +151,8 @@ export default class OrderHistory extends React.Component {
           gotOrders: true,
           incompleteOrders:incomplete,
           completedOrders:complete,
-          allOrders:orders
+          allOrders:orders,
+          cancelledOrders:cancelled,
         }
       )
 
@@ -186,7 +191,7 @@ export default class OrderHistory extends React.Component {
            <td >{element.type}</td>
            <td >{element.status}</td>
            <td >{element.data}</td>
-           {element.status === "COMPLETE"||element.status === "CANCELED"?<th><input type="checkbox" disabled={true} name={element.id} id={element.id} /></th> :<th><input type="checkbox" id={element.id} onChange={this.handleInputChange} name={element.id} /></th>}
+           {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} name={element.id} id={element.id} /></td> :<td><input type="checkbox" id={element.id} onChange={this.handleInputChange} name={element.id} /></td>}
         </tr>
 
       )
