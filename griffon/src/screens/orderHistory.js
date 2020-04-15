@@ -16,14 +16,15 @@ export default class OrderHistory extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.toCancelOrder = this.toCancelOrder.bind(this);
-
+    makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.state = {
       supportedEx: ["ALL","Binance"],
-      displayOptions:["ALL","COMPLETE","INCOMPLETE"],
+      displayOptions:["ALL","COMPLETE","INCOMPLETE","CANCELED"],
       currentDisplay:"ALL",
       exchange: "Select an exchange",
       completedOrders: [],
       incompleteOrders: [],
+      cancelledOrders: [],
       allOrders:[],
       gotOrders: false,
       dropdownOpen: false,
@@ -35,26 +36,30 @@ export default class OrderHistory extends React.Component {
     }
 
   }
-
+/*
   toggleCancel() {
   this.setState(
     {cancel: !this.state.cancel});
-  }
+  }*/
 
   toCancelOrder(){
-    for(let i =0; i<this.state.ordersToCancel.length;i++){
-      //console.log(this.state.incompleteOrders)
-      for(let x =0; x<this.state.incompleteOrders.length;x++)
-      {
-        if (this.state.incompleteOrders[x].id ===this.state.ordersToCancel[i]){
-          cancelOrder(this.state.incompleteOrders[x].exchange,this.state.incompleteOrders[x].id)
-        }
+    const toCancel = this.state.ordersToCancel
+    console.log("in cancel orders: 1)"+toCancel+" 2) "+this.state.incompleteOrders.length)
+    this.state.incompleteOrders.map((element,i)=>{
+      console.log(element.id)
+      let index = toCancel.indexOf(element.id.toString())
+      console.log("index: " + index)
+      if (index>=0){cancelOrder(element.exchange,element.id)}//if element.id is in ordersToCancel
 
-      }
-    console.log("selected orders cancelled");
-    return this.state.getOrders ===false? null:null
+      //{this.state.ordersToCancel.includes(element.id)?console.log("includes element "):console.log("Doesnot includes element") }
+      /*{
+        console.log("includes element is")
+        let can = cancelOrder(element.exchange,element.id)
+        console.log(can)
+      }*/
+    })
+    this.getOrders()
   }
-}
 
 
   toggle(e) {
@@ -150,7 +155,7 @@ export default class OrderHistory extends React.Component {
 
   getTable(){
     let display= [];
-    if(this.state.currentDisplay === this.state.displayOptions[2] || this.state.cancel === true){
+    if(this.state.currentDisplay === this.state.displayOptions[2]){
       display = this.state.incompleteOrders
       //console.log("INCOMPLETE: " +display)
     }
@@ -161,6 +166,9 @@ export default class OrderHistory extends React.Component {
     else if(this.state.currentDisplay === this.state.displayOptions[1]){
       display = this.state.completedOrders
       //console.log("DISPLAY COMPLETE: " +display)
+    }
+    else if(this.state.currentDisplay === this.state.displayOptions[3]){
+      display = this.state.cancelledOrders
     }
 
     else{
@@ -178,7 +186,7 @@ export default class OrderHistory extends React.Component {
            <td >{element.type}</td>
            <td >{element.status}</td>
            <td >{element.data}</td>
-           {this.state.cancel === true? <th><input type="checkbox" onChange={this.handleInputChange} name={element.id}  cancelinfo={[element.exchange,element.id]} /></th>:null}
+           {element.status === "COMPLETE"||element.status === "CANCELED"?<th><input type="checkbox" disabled={true} name={element.id} id={element.id} /></th> :<th><input type="checkbox" id={element.id} onChange={this.handleInputChange} name={element.id} /></th>}
         </tr>
 
       )
@@ -197,7 +205,7 @@ export default class OrderHistory extends React.Component {
     await this.setState({
       ordersToCancel: arr
     })
-    console.log("CHECKED length ARR: "+this.state.ordersToCancel.length +"CHECKED ARR:" +this.state.ordersToCancel )
+    console.log(this.state.ordersToCancel)
   }
 
   render () {
@@ -236,7 +244,7 @@ export default class OrderHistory extends React.Component {
             </Dropdown>
             </div></div>:<div><h2>Cancel Order</h2><p>Select incomplete orders you would like to cancel</p></div>}
 
-          {this.state.cancel === true?<Button className="btn btn-primary" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>:<Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>Cancel Orders</Button>}
+          <Button className="btn btn-primary" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
 
           <div className="table">
 
@@ -250,18 +258,17 @@ export default class OrderHistory extends React.Component {
                <th>Type</th>
                <th>Status</th>
                <th>Date</th>
-               {this.state.cancel === true? <th>Cancel</th>:null}
+               <th>Cancel</th>
               </tr>
               </thead>
               <tbody>
               {this.state.gotOrders === true?
-              this.getTable()
-              :null}
+              this.getTable():null}
               </tbody>
               </Table>
 
            </div>
-           {this.state.cancel === true?<Button className="btn btn-primary" size="lg" onClick={() => this.toggleCancel()}>Exit Cancel Orders</Button>:null}
+
         </div>
       </div>
     );
