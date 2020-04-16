@@ -30,8 +30,8 @@ export default class OrderHistory extends React.Component {
       dropdownOpen: false,
       dropdownDisplayOpen: false,
       cancel:false,
-      ordersToCancel:[]
-      //selected: "BTC",
+      ordersToCancel:[],
+      selectedDetail: null,
       //gotExchange: fals
     }
 
@@ -184,7 +184,10 @@ export default class OrderHistory extends React.Component {
     //unitPrice,type,status,percentComplete,date
     return  display ===[]? null:display.map((element,i)=>{
       return(
-        <tr  key={i}>
+
+        <Table key={i}>
+        <caption>Info</caption>
+        <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
           <td>{element.id}</td>
            <td >{element.currency1}</td>
            <td >{element.currency2}</td>
@@ -194,9 +197,20 @@ export default class OrderHistory extends React.Component {
            {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} name={element.id} id={element.id} /></td> :<td><input type="checkbox" id={element.id} onChange={this.handleInputChange} name={element.id} /></td>}
         </tr>
 
+        </Table>
+
+
+
       )
     })
   }
+  async fetchDetails(id) {
+    console.log(id)
+
+    //this.expand()
+
+ }
+
   async handleInputChange(event) {
     const target = event.target;
     var arr=this.state.ordersToCancel
@@ -253,8 +267,7 @@ export default class OrderHistory extends React.Component {
 
           <div className="table">
 
-            <  Table id="simple-board" size="sm" className="striped bordered hover">
-
+            <Table id="simple-board" size="sm" className="striped bordered hover">
               <thead>
               <tr>
                <th>ID</th>
@@ -266,11 +279,9 @@ export default class OrderHistory extends React.Component {
                <th>Cancel</th>
               </tr>
               </thead>
-              <tbody>
+            </Table>
               {this.state.gotOrders === true?
               this.getTable():null}
-              </tbody>
-              </Table>
 
            </div>
 
