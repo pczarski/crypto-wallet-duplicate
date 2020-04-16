@@ -17,9 +17,7 @@ export default class Orders extends React.Component {
 
       address:null,
       name: null,
-      response: "0",
-      choice:0
-
+      response: "0"
     }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,17 +33,16 @@ export default class Orders extends React.Component {
     console.log(resp);
     this.setState({
 
-      response: resp,
-      choice:'1'
+      response: resp
     });
     event.preventDefault();
   }
   render () {
-    let component;
-        if (this.state.choice === "1") {
-          component = <Buy name={this.state.name}/>;
-    }
 
+
+  // const AddExchange  = () => (
+
+  // );
     return (
       <div className="wrapper">
       <Nav />
@@ -66,7 +63,7 @@ export default class Orders extends React.Component {
         </Form>
 
 
-        {component}
+        <Buy name={this.state.name}/>
           </div>
         </div>
 
