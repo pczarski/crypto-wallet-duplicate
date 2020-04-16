@@ -8,7 +8,6 @@ import DASH from "../../node_modules/cryptocurrency-icons/svg/icon/dash.svg";
 import LTC from "../../node_modules/cryptocurrency-icons/svg/icon/ltc.svg";
 import BTC from "../../node_modules/cryptocurrency-icons/svg/icon/btc.svg";
 import USDT from "../../node_modules/cryptocurrency-icons/svg/icon/usdt.svg";
-import {Redirect} from "react-router";
 import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
 import Send from '../components/Send';
