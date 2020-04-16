@@ -26,6 +26,8 @@ function Nav() {
                 <li>
                     <Link className="list-group-item list-group-item-action bg-dark active" to="/ExchangeAccess">
                         Exchange
+                    </Link>
+                </li>
                 <li>
                 <Link className="list-group-item list-group-item-action bg-dark active" to="/orders">
                     Add Exchange
