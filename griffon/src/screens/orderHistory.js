@@ -186,27 +186,32 @@ export default class OrderHistory extends React.Component {
     return  display ===[]? null:display.map((element,i)=>{
       return(
 
-        <Table key={i}>
-        <caption id={element.id} className="collapse">Info</caption>
-        <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
-          <td>{element.id}</td>
-           <td >{element.currency1}</td>
-           <td >{element.currency2}</td>
-           <td >{element.type}</td>
-           <td >{element.status}</td>
-           <td >{element.data}</td>
-           {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} name={element.id} id={element.id} /></td> :<td><input type="checkbox" id={element.id} onChange={this.handleInputChange} name={element.id} /></td>}
-        </tr>
+        /*<Table size="sm" key={i}>*/
+        <tbody key={i}>
+          <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
+            <td>{element.id}</td>
+             <td >{element.currency1}</td>
+             <td >{element.currency2}</td>
+             <td >{element.type}</td>
+             <td >{element.status}</td>
+             <td >{element.data}</td>
+             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange}  /></td>}
+          </tr>
+          <tr id={element.id}  className="collapse"><td colSpan="7">
+          IninitialAmount:{element.initialAmount} AmountComplete:{element.amountComplete}
+          unitPrice:{element.unitPrice} percentComplete:{element.percentComplete}
+          </td></tr>
+        </tbody>
 
-        </Table>
+        /*</Table>*/
 
 
 
       )
     })
   }
-  async fetchDetails(id) {
-    console.log(document.getElementById(id))
+  fetchDetails(id) {
+    //console.log(document.getElementById(id))
     if (document.getElementById(id)) {
 
                 if (document.getElementById(id).className == "collapse") {
@@ -277,7 +282,7 @@ export default class OrderHistory extends React.Component {
 
           <div className="table">
 
-            <Table id="simple-board" size="sm" className="striped bordered hover">
+            <Table  size="sm" className="striped bordered hover ">
               <thead>
               <tr>
                <th>ID</th>
@@ -289,9 +294,10 @@ export default class OrderHistory extends React.Component {
                <th>Cancel</th>
               </tr>
               </thead>
-            </Table>
+
               {this.state.gotOrders === true?
               this.getTable():null}
+              </Table>
 
            </div>
 
