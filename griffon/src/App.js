@@ -11,7 +11,7 @@ import Exchange from './screens/exchange';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
 import Orders from './screens/orders';
-import Buy from './screens/Buy';
+
 import ExchangeAccess from './screens/ExchangeAccess';
 import $ from 'jquery';
 import {getIcon} from "./components/walletComponents/Logos";
@@ -179,7 +179,6 @@ export default class App extends React.Component {
               <Route path="/settings" render={(props) => <Settings {...props} />}/>
               {/*TODO: all those should be integrated in the exchange instead of being separate pages*/}
               <Route path="/order" render={(props) => <Order {...props} />}/>
-              <Route path="/Buy" render={(props) => <Buy {...props} />}/>
             </Switch>
           </div>
         </Router>

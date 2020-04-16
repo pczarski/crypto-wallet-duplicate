@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.scss';
 
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Tooltip} from 'reactstrap';
 
 import {sendCurr, getBalance} from '../lib/backendHandler';
 
@@ -16,12 +16,14 @@ export default class Send extends React.Component {
     this.state = {
       balance: getBalance(this.props.curr),
       address: null,
-      amount: null,
-      response: "0"
+      amount: '',
+      response: '',
+      tooltipOpen: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setSendAsAvail = this.setSendAsAvail.bind(this);
 
   }
   handleInputChange(event) {
@@ -30,16 +32,35 @@ export default class Send extends React.Component {
     });
 
   }
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.curr !== this.props.curr) {
+    this.setState({balance: getBalance(this.props.curr), amount: '', address: ''})
+    }
+  }
 
   handleSubmit(event) {
-    let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
-    console.log(resp)
-    this.setState({
-      balance: getBalance(this.props.curr),
-      response: resp
-    });
-    event.preventDefault();
+    if (this.state.amount > 0) {
+      let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
+      console.log(resp)
+      this.setState({
+        balance: getBalance(this.props.curr),
+        response: resp
+      });
+      
+    } else {
+      this.setState({response: 'Insufficient amount'})
+    }
+      event.preventDefault();
+    }
+
+  toggle = () => {
+    this.setState({tooltipOpen: !this.state.tooltipOpen})
   }
+
+  setSendAsAvail () {
+    this.setState({amount: this.state.balance})
+  }
+
   render () {
     return (
     <div>
@@ -50,14 +71,16 @@ export default class Send extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label for="amount">Amount</Label>
-          <Input type="text" name="amount" placeholder="0" onChange={this.handleInputChange} />
+          <Input type="text" name="amount" placeholder="0.00" onChange={this.handleInputChange} value={this.state.amount}/>
         </FormGroup>
-        <legend>Available {this.state.balance}</legend>
-        <Button>Submit</Button>
-
+        <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance}</span></legend>
+        <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>
+        Send all available currency
+      </Tooltip>
+        <Button type="submit">Submit</Button>
       </Form>
 
-      {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
+      <p>{this.state.response}</p>
     </div>
     )
   }
