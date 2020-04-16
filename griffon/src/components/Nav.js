@@ -22,16 +22,11 @@ function Nav() {
                         Wallet
                     </Link>
                 </li>
-<<<<<<< HEAD
-
-
-=======
                 <li>
                     <Link className="list-group-item list-group-item-action bg-dark active" to="/ExchangeAccess">
                         Exchange
                     </Link>
                 </li>
->>>>>>> 96572a84ca9d3376c2bae9e49fe7952cb5c9d341
                 <li>
                 <Link className="list-group-item list-group-item-action bg-dark active" to="/orders">
                     Add Exchange
