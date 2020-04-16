@@ -8,6 +8,7 @@ import DASH from "../../node_modules/cryptocurrency-icons/svg/icon/dash.svg";
 import LTC from "../../node_modules/cryptocurrency-icons/svg/icon/ltc.svg";
 import BTC from "../../node_modules/cryptocurrency-icons/svg/icon/btc.svg";
 import USDT from "../../node_modules/cryptocurrency-icons/svg/icon/usdt.svg";
+
 import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
 import Send from '../components/Send';
@@ -118,7 +119,7 @@ export default class Transfer extends React.Component {
   return (
     <div className="wrapper">
     <Nav/>
-      <div className="container">
+      <div className="cont">
         <Button close type="button" className="btn btn-primary" onClick={this.handleClick} value="0" />
         <h2>Send or Receive from Wallet</h2>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

@@ -88,7 +88,7 @@ export default class RecoveryPhrase extends React.Component {
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
-      <h1>Your RecoveryPhrase</h1>
+      <h1>Your Recovery Phrase</h1>
       <Stopwatch/>
       {this.state.showSeed && 
         <b>{this.state.seed}</b>
