@@ -24,6 +24,10 @@ export default class ExchangeAccess extends Component
         this.props.setMainComponent(COINS);
     };
 
+    handleCoinClick = (coin) => {
+        console.log(coin);
+    };
+
     render() {
         // use the mainComponent prop which is taken from App.js's state
         const selectedComponent = this.props.mainComponent;
@@ -31,7 +35,7 @@ export default class ExchangeAccess extends Component
 
         // controlling the main display
         if (selectedComponent === COINS) {
-            mainComponent = <Coins fetch={this.props.fetch} coins={this.props.coins} />;
+            mainComponent = <Coins fetch={this.props.fetch} coins={this.props.coins} coinClick={this.handleCoinClick}/>;
         } else {
             mainComponent = <OrderHistory goBack={this.selectCoins} exchange={this.props.exchange} exchanges={this.props.exchanges} setExchange={this.props.setExchange}/>;
         }
