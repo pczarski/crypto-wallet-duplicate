@@ -274,7 +274,7 @@ export default class OrderHistory extends React.Component {
 
                 </DropdownMenu>
               </Dropdown>
-              <label>Display:</label>
+              <label className="tableInput">Display:</label>
               <Dropdown className="tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
                 <DropdownToggle caret>
                   {this.state.currentDisplay}
@@ -284,7 +284,7 @@ export default class OrderHistory extends React.Component {
 
                 </DropdownMenu>
               </Dropdown>
-              <Button className="btn btn-primary tableInput" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
+              <Button className="btn btn-primary tableInput cancelBtn"  size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
             </div>
           </div>
 

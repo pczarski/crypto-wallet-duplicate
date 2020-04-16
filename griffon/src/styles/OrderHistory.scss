@@ -11,8 +11,7 @@ caption {
 
 .Dropdowns{
 
-  align-items: center;
-  display:flex;
+
 }
 .column {
   float: left;
@@ -21,7 +20,11 @@ caption {
 }
 
 .tableInput{
+  display:inline-flex;
   vertical-align: middle;
+  float:left;
   margin: 5px 10px 5px 0;
-  padding: 10px;
+}
+.cancelBtn{
+  float:right;
 }
