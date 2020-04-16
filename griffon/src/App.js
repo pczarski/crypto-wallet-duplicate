@@ -52,6 +52,7 @@ export default class App extends React.Component {
 
       walletCoin: "BTC",
       exchangeCoin: "BTC",
+      exchangeCoin2: "ETH",
 
       // exchange Access portfolio
       selectedInPortfolio: COINS,
@@ -130,6 +131,12 @@ export default class App extends React.Component {
     this.updateSelectedInPortfolio(TRADE)
   };
 
+  updateExchangeCoin2 = (coin) => {
+    this.setState({
+      exchangeCoin2: coin,
+    });
+  };
+
   // updates the exchange main component
   setExchangeMainComponent = (option) => {
     this.setState({
@@ -143,6 +150,12 @@ export default class App extends React.Component {
     });
   };
 
+  updateSelectedInTrade = (option) => {
+    this.setState({
+      tradeMainComponent: option,
+    })
+  };
+
   render() {
 
     const walletCoin = this.state.walletCoin;
@@ -150,7 +163,9 @@ export default class App extends React.Component {
 
     const exchangeCoins = this.state.exchangeCoins;
     const exchangeCoin = this.state.exchangeCoin;
+    const exchangeCoin2 = this.state.exchangeCoin2;
     const selectedInPortfolio = this.state.selectedInPortfolio;
+    const tradeMainComponent = this.state.tradeMainComponent;
 
     return (
         <Router>
@@ -174,7 +189,7 @@ export default class App extends React.Component {
 
               <Route path='/ExchangeAccess' render={
                 (props) => <ExchangeAccess
-                      {...props} coin = {exchangeCoin}
+                      {...props} coin = {exchangeCoin} coin2 = {exchangeCoin2}
                       coins={exchangeCoins} fetch={this.fetchExchangeCoins /* for updating state.coins to exchange coins*/}
                       setExchange = {this.setExchange} exchanges={exchangeList /* for rendering a list of exchanges*/}
                       exchange={this.state.exchangeAccess /* so that we can show which exchange was selected in the dropdown*/ }
@@ -183,6 +198,9 @@ export default class App extends React.Component {
                       handleCoinClick={this.updateExchangeCoin}
                       selectedInPortfolio={selectedInPortfolio}
                       setSelectedInPortfolio={this.updateSelectedInPortfolio}
+                      tradeMainComponent={tradeMainComponent}
+                      setTradeMainComponent={this.updateSelectedInTrade}
+                      setCoin2={this.updateExchangeCoin2}
                   />}/>
 
               <Route path="/exchange" render={
