@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/App.scss';
 import {Link} from 'react-router-dom';
+import '../styles/OrderHistory.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 import {getOrderHistory,makeOrder,getAllOrderHistory,cancelOrder} from '../lib/backendHandler.js';
 import {Table} from 'react-bootstrap';
@@ -186,7 +187,7 @@ export default class OrderHistory extends React.Component {
       return(
 
         <Table key={i}>
-        <caption>Info</caption>
+        <caption id={element.id} className="collapse">Info</caption>
         <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
           <td>{element.id}</td>
            <td >{element.currency1}</td>
@@ -205,7 +206,16 @@ export default class OrderHistory extends React.Component {
     })
   }
   async fetchDetails(id) {
-    console.log(id)
+    console.log(document.getElementById(id))
+    if (document.getElementById(id)) {
+
+                if (document.getElementById(id).className == "collapse") {
+                    document.getElementById(id).className = "expand";
+                }
+                else {
+                    document.getElementById(id).className = "collapse";
+                }
+            }
 
     //this.expand()
 
