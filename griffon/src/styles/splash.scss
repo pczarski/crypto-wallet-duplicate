@@ -1,0 +1,24 @@
+
+.spl {
+        font-size: 5em;
+}
+
+.old { 
+    Input {
+        margin-top: 15px;
+    }
+    Button {
+        float: right;
+        margin-right: 5px;
+    }
+    .btn-primary {
+        float: left
+    }
+}
+.new {
+    .container {
+        // max-width: 500px !important;
+    text-align: center; 
+    vertical-align: middle;
+    }
+}

@@ -79,7 +79,9 @@ export default class Settings extends React.Component {
     event.preventDefault();
     const isValid = this.validate();
     if(isValid){
-    this.setState(initialState);
+      localStorage.setItem('pass', this.state.confirm)
+      this.setState(initialState);
+      this.setState({confirmError: 'Password changed!'});
   }
 }
   select (event) {
@@ -113,7 +115,6 @@ export default class Settings extends React.Component {
       </div>
     );
   }
-
 
   render () {
 
@@ -159,7 +160,7 @@ export default class Settings extends React.Component {
   return (
     <div className="wrapper">
       <Navig/>
-      <div className="container">
+      <div className="cont">
       <Topbar/>
       {component}
       </div>

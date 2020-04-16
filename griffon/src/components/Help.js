@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
-import '../styles/help.scss';
 import '../styles/settings.scss';
 
 export default class Help extends React.Component {
@@ -18,7 +17,7 @@ export default class Help extends React.Component {
           <li>Write down your 12 word recovery phrase on paper</li>
           <li>Print your recovery phrases on your home printer</li>
           <li>Keep your recovery phrase in a safe and reliable place, where only you know</li>
-          <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 16 characters, use a range of cases, numbers and special characters.</li>
+          <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 8 characters, use a range of cases, numbers and special characters.</li>
         </ul>
       </div>    
     );

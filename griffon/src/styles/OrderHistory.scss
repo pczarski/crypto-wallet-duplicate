@@ -1,0 +1,30 @@
+caption {
+    background-color:white;
+    caption-side: bottom;
+}
+.expand{
+  opacity:1
+}
+.collapse{
+  visibility: collapse
+}
+
+.Dropdowns{
+
+
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.tableInput{
+  display:inline-flex;
+  vertical-align: middle;
+  float:left;
+  margin: 5px 10px 5px 0;
+}
+.cancelBtn{
+  float:right;
+}

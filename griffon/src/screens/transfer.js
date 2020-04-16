@@ -13,6 +13,7 @@ import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
+import { Redirect } from 'react-router-dom';
 
 export default class Transfer extends React.Component {
   constructor(props) {
@@ -26,20 +27,36 @@ export default class Transfer extends React.Component {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
       images: [],
       dropdownOpen: false,
-      selected: "BTC",
+      selected: this.props.coin,
       change: false,
-      choice: 0
+      choice: 0,
+      renderTrans: true,
+      redirToWall: false
     }
 
-  }
-  componentDidMount() {
-    // this.setState({images: getIcons()})
   }
 
   handleClick(e) {
     this.setState({
-      choice: e.target.value
+      choice: e.currentTarget.value
     });
+    console.log(e.target.value)
+    console.log(this.state)
+    if (e.target.value == null) {
+      this.setState({
+        renderTrans: true
+      });
+    } else {
+      this.setState({
+        renderTrans: false
+      });
+      return;
+    }
+    if (this.state.renderTrans === true) {
+      this.setState({
+        redirToWall: true
+      });
+    }
   }
 
   toggle(e) {
@@ -74,10 +91,16 @@ export default class Transfer extends React.Component {
     }
   }
 
+
   render () {
+    if(this.props.coins == null || this.state.redirToWall === true){
+      // if wallet wasn't rendered, we shouldn't even be here
+      return <Redirect to="/wallet"/>
+    }
+    const supportedCurrency = this.props.coins.map((coin) => coin.code);
   const DropdownList = () => (
     <div>
-      {this.state.supportedCurr.map(curr =>
+      {supportedCurrency.map(curr =>
       <DropdownItem onClick={this.select} key={curr}> {curr} </DropdownItem>
       )}
     </div>
@@ -92,10 +115,12 @@ export default class Transfer extends React.Component {
     component = <Transactions curr={this.state.selected} />;
   }
 
+
   return (
     <div className="wrapper">
     <Nav/>
-      <div className="container">
+      <div className="cont">
+        <Button close type="button" className="btn btn-primary" onClick={this.handleClick} value="0" />
         <h2>Send or Receive from Wallet</h2>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <img src={this.renderIcon()} alt=""/>
@@ -109,7 +134,7 @@ export default class Transfer extends React.Component {
         <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1">Send Currency</Button>
         <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2">Receive Currency</Button>
         {component}
-        <Button type="button" className="btn btn-primary"onClick={this.handleClick}  value="0">Go back</Button>
+
       </div>
     </div>
   );
