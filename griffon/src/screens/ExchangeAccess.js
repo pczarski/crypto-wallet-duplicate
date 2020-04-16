@@ -7,39 +7,11 @@ import Coins from '../components/walletComponents/Coins.js'
 import Select from "../components/common/select";
 import OrderHistory from "./orderHistory";
 import {ORDERS, COINS} from "../App";
-import Buy from '../components/Buy';
-import Withdraw from '../components/Withdraw';
-import Deposit from '../components/Deposit';
 
 export default class ExchangeAccess extends Component
 {
     constructor(props){
         super(props);
-        this.state={
-          choice:0
-        }
-        this.handleClick = this.handleClick.bind(this);
-        this.handleClick1 = this.handleClick1.bind(this);
-          this.handleClick2 = this.handleClick2.bind(this);
-    }
-    handleClick(event) {
-      this.setState({
-        choice:'2'
-      });
-
-      event.preventDefault();
-    }handleClick1(event) {
-      this.setState({
-        choice:'1'
-      });
-
-      event.preventDefault();
-    }handleClick2(event) {
-      this.setState({
-        choice:'3'
-      });
-
-      event.preventDefault();
     }
 
     // will update the main component to order history
@@ -63,17 +35,7 @@ export default class ExchangeAccess extends Component
         } else {
             mainComponent = <OrderHistory goBack={this.selectCoins} exchange={this.props.exchange} exchanges={this.props.exchanges} setExchange={this.props.setExchange}/>;
         }
-        let component;
-        if (this.state.choice === "1") {
-          component = <Buy name={this.props.exchange}/>;
-        }else if (this.state.choice ==="2") {
 
-            component = <Withdraw name={this.props.exchange}/>;
-        }
-        else if (this.state.choice ==="3") {
-
-            component = <Deposit name={this.props.exchange}/>;
-        }
         return (
             <div className="wrapper">
                 <SideBar/>
@@ -91,9 +53,8 @@ export default class ExchangeAccess extends Component
                         {mainComponent}
                         <Link to="/exchange">
 
-                            <Button  onClick={this.handleClick} className = "button">Withdraw from Exchange</Button> <Button  onClick={this.handleClick1} className = "button">Make an order</Button> <Button  onClick={this.handleClick2}className = "button">Deposit to Exchange</Button>
+                            <Button className = "button">Exchange a Currency</Button>
                         </Link>
-                        {component}
                     </div>
                 </div>
             </div>

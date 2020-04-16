@@ -26,6 +26,7 @@ export default class Orders extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleClick1 = this.handleClick1.bind(this);
+          this.handleClick2 = this.handleClick2.bind(this);
   }
   handleInputChange(event) {
     this.setState({
@@ -39,19 +40,26 @@ export default class Orders extends React.Component {
     this.setState({
 
       response: resp,
-    
+
     });
 
     event.preventDefault();
   }
   handleClick(event) {
     this.setState({
-      choice:'2'
+      choice:'1'
     });
 
     event.preventDefault();
   }
   handleClick1(event) {
+    this.setState({
+      choice:'2'
+    });
+
+    event.preventDefault();
+  }
+  handleClick2(event) {
     this.setState({
       choice:'3'
     });
@@ -87,6 +95,8 @@ export default class Orders extends React.Component {
           </FormGroup>
 
           <Button onClick={this.handleSubmit} >Submit</Button>
+          <div>
+          <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button></div>
 
 
     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
