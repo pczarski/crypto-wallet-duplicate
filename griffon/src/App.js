@@ -152,8 +152,8 @@ export default class App extends React.Component {
                     handleCoinClick={this.updateWalletCoin}
                 />}/>
 
-              <Route path='/ExchangeAccess' render =
-                  {(props) => <ExchangeAccess
+              <Route path='/ExchangeAccess' render={
+                (props) => <ExchangeAccess
                       {...props} coin = {exchangeCoin}
                       coins={exchangeCoins} fetch={this.fetchExchangeCoins /* for updating state.coins to exchange coins*/}
                       setExchange = {this.setExchange} exchanges={exchangeList /* for rendering a list of exchanges*/}
@@ -163,16 +163,22 @@ export default class App extends React.Component {
                       handleCoinClick={this.updateExchangeCoin}
                   />}/>
 
-              <Route path="/exchange" render=
-                  {(props) => <Exchange {...props}/>}
-              />
+              <Route path="/exchange" render={
+                (props) => <Exchange
+                    {...props}
+                />}/>
+
+              <Route path="/orders" render={
+                (props) => <Orders
+                    {...props} coin={exchangeCoin}
+                    coins={exchangeCoins}
+                />}/>
 
               <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
               <Route path="/recover" render={(props) => <Recover {...props} />}/>
               <Route path="/settings" render={(props) => <Settings {...props} />}/>
               {/*TODO: all those should be integrated in the exchange instead of being separate pages*/}
               <Route path="/order" render={(props) => <Order {...props} />}/>
-              <Route path="/orders" render={(props) => <Orders {...props} />}/>
               <Route path="/Buy" render={(props) => <Buy {...props} />}/>
             </Switch>
           </div>

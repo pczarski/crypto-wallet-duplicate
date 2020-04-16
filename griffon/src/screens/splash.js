@@ -6,14 +6,14 @@ import {Link, Redirect} from 'react-router-dom';
 import {Button, Form, FormGroup, Input, FormFeedback} from 'reactstrap';
 
 export default class Splash extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
       firstLaunch: true,
       password: '',
       redirToWall: null,
       incor: null
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
