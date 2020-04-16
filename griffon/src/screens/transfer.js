@@ -8,7 +8,7 @@ import DASH from "../../node_modules/cryptocurrency-icons/svg/icon/dash.svg";
 import LTC from "../../node_modules/cryptocurrency-icons/svg/icon/ltc.svg";
 import BTC from "../../node_modules/cryptocurrency-icons/svg/icon/btc.svg";
 import USDT from "../../node_modules/cryptocurrency-icons/svg/icon/usdt.svg";
-
+import {Redirect} from "react-router";
 import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
 import Send from '../components/Send';
@@ -27,7 +27,7 @@ export default class Transfer extends React.Component {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
       images: [],
       dropdownOpen: false,
-      selected: "BTC",
+      selected: this.props.coin,
       change: false,
       choice: 0
     }
@@ -81,9 +81,15 @@ export default class Transfer extends React.Component {
   }
 
   render () {
+    if(this.props.coins == null){
+      // if wallet wasn't rendered, we shouldn't even be here
+      return <Redirect to="/wallet"/>
+    }
+    console.log(this.props.coins);
+    const supportedCurrency = this.props.coins.map((coin) => coin.code);
   const DropdownList = () => (
     <div>
-      {this.state.supportedCurr.map(curr =>
+      {supportedCurrency.map(curr =>
       <DropdownItem onClick={this.select} key={curr}> {curr} </DropdownItem>
       )}
     </div>
