@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link, Route, Switch, Redirect} from 'react-router-dom';
 import { Button, Nav } from 'reactstrap';
 import SideBar from '../components/Nav.js';
 import Coins from '../components/walletComponents/Coins.js'
@@ -12,6 +12,9 @@ export default class ExchangeAccess extends Component
 {
     constructor(props){
         super(props);
+        this.state = {
+            goToOrders: false,
+        }
     }
 
     // will update the main component to order history
@@ -25,10 +28,20 @@ export default class ExchangeAccess extends Component
     };
 
     handleCoinClick = (coin) => {
-        console.log(coin);
+        this.props.handleCoinClick(coin);
+        this.setState({
+            goToOrders: true,
+        });
     };
 
     render() {
+        const orders = this.state.goToOrders;
+        if(orders) {
+            return (
+                <Redirect to='/orders'/>
+            )
+        }
+
         // use the mainComponent prop which is taken from App.js's state
         const selectedComponent = this.props.mainComponent;
         let mainComponent;

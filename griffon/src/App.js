@@ -165,7 +165,8 @@ export default class App extends React.Component {
 
               <Route path="/exchange" render={
                 (props) => <Exchange
-                    {...props}
+                    {...props} coin={exchangeCoin}
+                    coins={exchangeCoins}
                 />}/>
 
               <Route path="/orders" render={
