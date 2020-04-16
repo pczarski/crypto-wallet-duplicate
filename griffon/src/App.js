@@ -7,7 +7,7 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 
 import Settings from './screens/settings';
-import Exchange from './screens/exchange';
+import Trade from './screens/trade';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
 import Orders from './screens/orders';
@@ -21,10 +21,18 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // a dictionary to store all the supported exchanges, so that we can easily dynamically add more later on
 // please use if you need to have a list of all the exchanges. Object.keys(exchangeList) will return ['Binance', 'Coinbase']
 const exchangeList = {"Binance": "Binance", "Coinbase": "Coinbase"};
+
+// used to control what's displayed in exchange access page and it's children components
 export const PORTFOLIO = 0;
 export const ORDERS = 1;
 export const COINS = 2;
 export const TRADE = 3;
+
+// used to control trade display
+export const BUY = 4;
+export const SELL = 5;
+export const WITHDRAW = 6;
+export const DEPOSIT = 7;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -44,9 +52,12 @@ export default class App extends React.Component {
 
       walletCoin: "BTC",
       exchangeCoin: "BTC",
+      exchangeCoin2: "ETH",
 
       // exchange Access portfolio
       selectedInPortfolio: COINS,
+
+      tradeMainComponent: null,
     }
   }
 
@@ -63,11 +74,8 @@ export default class App extends React.Component {
     });
   };
 
-  // sets the coins state member to data passed by an ajax call and adds icon property
+  // sets the walletCoins state member to data passed by an ajax call and adds icon property
   updateWalletCoins = (data) => {
-    this.setState({
-      walletCoins: null,
-    });
     let coins = data;
     for(let i = 0; i < data.length; i++) {
       coins[i].icon = getIcon(coins[i].code);
@@ -94,7 +102,7 @@ export default class App extends React.Component {
     this.fetchExchangeCoins();
   };
 
-  // will update the coins to selected exchange coins
+  // will update the exchangeCoins to selected exchange coins
   fetchExchangeCoins = () => {
     const exchangeName = this.state.exchangeAccess;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
@@ -105,7 +113,7 @@ export default class App extends React.Component {
     });
   };
 
-  // sets the coins state member to data passed by an ajax call and adds icon property
+  // sets the coins state member to data passed by an ajax call and adds the icon property
   updateExchangeCoins = (data) => {
     let coins = data;
     for(let i = 0; i < data.length; i++) {
@@ -123,6 +131,12 @@ export default class App extends React.Component {
     this.updateSelectedInPortfolio(TRADE)
   };
 
+  updateExchangeCoin2 = (coin) => {
+    this.setState({
+      exchangeCoin2: coin,
+    });
+  };
+
   // updates the exchange main component
   setExchangeMainComponent = (option) => {
     this.setState({
@@ -136,6 +150,12 @@ export default class App extends React.Component {
     });
   };
 
+  updateSelectedInTrade = (option) => {
+    this.setState({
+      tradeMainComponent: option,
+    })
+  };
+
   render() {
 
     const walletCoin = this.state.walletCoin;
@@ -143,7 +163,9 @@ export default class App extends React.Component {
 
     const exchangeCoins = this.state.exchangeCoins;
     const exchangeCoin = this.state.exchangeCoin;
+    const exchangeCoin2 = this.state.exchangeCoin2;
     const selectedInPortfolio = this.state.selectedInPortfolio;
+    const tradeMainComponent = this.state.tradeMainComponent;
 
     return (
         <Router>
@@ -167,7 +189,7 @@ export default class App extends React.Component {
 
               <Route path='/ExchangeAccess' render={
                 (props) => <ExchangeAccess
-                      {...props} coin = {exchangeCoin}
+                      {...props} coin = {exchangeCoin} coin2 = {exchangeCoin2}
                       coins={exchangeCoins} fetch={this.fetchExchangeCoins /* for updating state.coins to exchange coins*/}
                       setExchange = {this.setExchange} exchanges={exchangeList /* for rendering a list of exchanges*/}
                       exchange={this.state.exchangeAccess /* so that we can show which exchange was selected in the dropdown*/ }
@@ -176,10 +198,13 @@ export default class App extends React.Component {
                       handleCoinClick={this.updateExchangeCoin}
                       selectedInPortfolio={selectedInPortfolio}
                       setSelectedInPortfolio={this.updateSelectedInPortfolio}
+                      tradeMainComponent={tradeMainComponent}
+                      setTradeMainComponent={this.updateSelectedInTrade}
+                      setCoin2={this.updateExchangeCoin2}
                   />}/>
 
               <Route path="/exchange" render={
-                (props) => <Exchange
+                (props) => <Trade
                     {...props} coin={exchangeCoin}
                     coins={exchangeCoins}
                 />}/>
