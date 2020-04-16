@@ -7,7 +7,7 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 
 import Settings from './screens/settings';
-import Exchange from './screens/exchange';
+import Trade from './screens/trade';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
 import Orders from './screens/orders';
@@ -27,6 +27,12 @@ export const PORTFOLIO = 0;
 export const ORDERS = 1;
 export const COINS = 2;
 export const TRADE = 3;
+
+// used to control trade display
+export const BUY = 4;
+export const SELL = 5;
+export const WITHDRAW = 6;
+export const DEPOSIT = 7;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -49,6 +55,8 @@ export default class App extends React.Component {
 
       // exchange Access portfolio
       selectedInPortfolio: COINS,
+
+      tradeMainComponent: null,
     }
   }
 
@@ -178,7 +186,7 @@ export default class App extends React.Component {
                   />}/>
 
               <Route path="/exchange" render={
-                (props) => <Exchange
+                (props) => <Trade
                     {...props} coin={exchangeCoin}
                     coins={exchangeCoins}
                 />}/>

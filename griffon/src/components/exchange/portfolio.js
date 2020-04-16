@@ -1,7 +1,7 @@
 import Coins from "../walletComponents/Coins";
 import React from "react";
 import {COINS} from "../../App";
-import Exchange from "../../screens/exchange";
+import Trade from "../../screens/trade";
 
 // controller component to display coins or making orders
 export default function Portfolio(props) {
@@ -12,9 +12,9 @@ export default function Portfolio(props) {
                                coinClick={props.coinClick}
         />
     } else {
-        mainComponent = <Exchange coin={props.coin} coins={props.coins}
-                                  setCoin={props.coinClick}
-                                  setMainComponent={props.setMainComponent}
+        mainComponent = <Trade coin={props.coin} coins={props.coins}
+                               setCoin={props.coinClick}
+                               setMainComponent={props.setMainComponent}
         />
     }
 

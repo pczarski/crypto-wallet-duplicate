@@ -10,7 +10,7 @@ import {COINS} from "../App";
 
 
 
-export default class Exchange extends React.Component {
+export default class Trade extends React.Component {
 
     goBack = () => {
         this.props.setMainComponent(COINS);
@@ -32,6 +32,20 @@ export default class Exchange extends React.Component {
                     <button onClick={this.goBack}>
                         go back todo: make an X instead
                     </button>
+                    <button>
+                        Sell
+                    </button>
+                    <button>
+                        Buy
+                    </button>
+                    <button>
+                        withdraw
+                    </button>
+                    <button>
+                        deposit
+                    </button>
+                    Place holder for main component
+
                 </div>
             </div>
         );
