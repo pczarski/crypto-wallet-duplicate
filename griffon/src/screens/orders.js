@@ -28,8 +28,8 @@ export default class Orders extends React.Component {
 
   }
   handleSubmit(event) {
-    let resp = addExchange( this.state.name, this.state.address).response
-    console.log(resp)
+    let resp = addExchange( this.state.name, this.state.address);
+    console.log(resp);
     this.setState({
 
       response: resp
