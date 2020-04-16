@@ -17,7 +17,7 @@ export default class OrderHistory extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
 
     this.toCancelOrder = this.toCancelOrder.bind(this);
-    makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
+    //makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.state = {
       supportedEx: ["ALL","Binance"],
       displayOptions:["ALL","COMPLETE","INCOMPLETE","CANCELED"],
