@@ -6,11 +6,7 @@ import '../styles/App.scss';
 import '../styles/nav.scss';
 import '../styles/bal.scss';
 
-
-
 import Coins from '../components/walletComponents/Coins.js';
-
-import {getCurr} from '../lib/backendHandler.js';
 
 import { Button } from 'reactstrap';
 
@@ -31,7 +27,7 @@ export default class Wallet extends React.Component {
       <Nav />
         <div className="container">
           <div className="content">
-              <Coins fetch={this.props.fetch} coins={this.props.coins} />
+              <Coins fetch={this.props.fetch} coins={this.props.coins}/>
             <Link to="/transfer">
               <Button className="btn btn-primary" size="lg" block>Send or Receive Currency</Button>
             </Link>

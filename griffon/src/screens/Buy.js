@@ -25,7 +25,7 @@ export default class Buy extends React.Component {
                       <Nav/>
                   <div className="box">
                   <div className="icons">
-                  <img src={bitcoinLogo} className="img-fluid" alt="Responsive image" />
+                  <img src={bitcoinLogo} className="img-fluid" alt="Responsive crypyto logo" />
                   </div>
                   <div className="Available2">
                   Available: x BTC

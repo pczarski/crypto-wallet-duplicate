@@ -1,9 +1,8 @@
 import React from 'react';
 import '../styles/App.scss';
-import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 import {getOrderHistory,makeOrder,getAllOrderHistory,cancelOrder} from '../lib/backendHandler.js';
-import {Table} from 'react-bootstrap';
+import {Table} from 'reactstrap';
 import Nav from '../components/Nav';
 export default class OrderHistory extends React.Component {
   constructor(props) {
@@ -212,7 +211,7 @@ export default class OrderHistory extends React.Component {
           <h2>Order History</h2>
 
             {/*TODO: please style this button*/}
-            <button onClick={this.props.goBack}>Go back</button>
+            <Button onClick={this.props.goBack}>Go back</Button>
 
           <div className="currSel">
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

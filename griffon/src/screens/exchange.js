@@ -14,9 +14,6 @@ import liteLogo from "../../node_modules/cryptocurrency-icons/svg/color/ltc.svg"
 import bitcoinLogo from "../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
 
 
-
-import { Button, Alert } from 'reactstrap';
-
 export default class Exchange extends React.Component {
   render () {
 

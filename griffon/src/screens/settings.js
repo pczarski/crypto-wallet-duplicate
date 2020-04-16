@@ -30,7 +30,6 @@ const initialState ={
   selected: null
 
 }
-const userpass="Password123";
 
 export default class Settings extends React.Component {
 
@@ -80,7 +79,6 @@ export default class Settings extends React.Component {
     event.preventDefault();
     const isValid = this.validate();
     if(isValid){
-    console.log(this.state)
     this.setState(initialState);
   }
 }
@@ -119,13 +117,6 @@ export default class Settings extends React.Component {
 
   render () {
 
-    const PubKey = () => (
-      <div>
-        <h1>Public Key</h1>
-        <Keys/>
-        </div>
-    );
-
     const Topbar = () => (
       <Navbar color="dark" dark expand="md">
         <NavbarBrand>Settings</NavbarBrand>
@@ -156,14 +147,14 @@ export default class Settings extends React.Component {
 
   let component;
   if (this.state.selected === "publickeys") {
-    component = <PubKey />;
+    component = <Keys/>;
   } else if (this.state.selected === "recovery") {
     component = <RecoveryPhrase/>;
   }
   else if (this.state.selected === "help") {
     component = <Help/>;
   } else {
-    component = this.Password()
+    component = this.Password();
   }
   return (
     <div className="wrapper">

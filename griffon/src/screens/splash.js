@@ -30,7 +30,6 @@ export default class Splash extends React.Component {
   }
   
   handleChange(e) {
-    // console.log(e.target.value)
     this.setState({password: e.target.value})
   }
   handleSubmit(event) {
@@ -72,7 +71,7 @@ export default class Splash extends React.Component {
           </Link>
           </div>
         </div>
-      // </div>
+       </div>
     );
   }
 }

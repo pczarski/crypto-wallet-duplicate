@@ -1,7 +1,5 @@
 import React from 'react';
-import Nav from '../components/Nav';
 
-import {Link} from 'react-router-dom';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -10,7 +8,7 @@ import '../styles/settings.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
 import {getCurr} from '../lib/backendHandler.js';
-import Table from 'react-bootstrap/Table';
+import {Table} from 'reactstrap';
 // import { Button, Alert } from 'reactstrap';
 
 export default class Keys extends React.Component {

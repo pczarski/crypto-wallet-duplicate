@@ -16,7 +16,6 @@ function Nav() {
             <Balance />
         </div>
         <div className="dropdown-divider"></div>
-       
             <ul className="list-group list-group-flush">
                 <li className="listElement">
                     <Link className="list-group-item list-group-item-action bg-dark active" to="/wallet">
@@ -33,20 +32,13 @@ function Nav() {
                     Add Exchange
                     </Link>
                 </li>
-                
                 <div className="bottomMenu">
                     <li>
                     <Link className="list-group-item list-group-item-action bg-dark active" to="/settings">
                         Settings
                         </Link>
                     </li>
-                    <li>
-                    <Link className="list-group-item list-group-item-action bg-dark active" to="/help">
-                        Help
-                        </Link>
-                    </li>
                 </div>
-
             </ul>
     
     </nav>

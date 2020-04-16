@@ -61,9 +61,9 @@ export default class Coins extends Component
             <div>
                 <table className= "table table-striped table-hover table-dark">
                     <tbody>
-                    <tr>{this.renderTableHeader()}</tr>
-                    {this.renderCoinsToTable()}
-                    </tbody>
+                        <tr>{this.renderTableHeader()}</tr>
+                        {this.renderCoinsToTable()}
+                        </tbody>
                 </table>
             </div>
         )
