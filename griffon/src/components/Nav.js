@@ -15,33 +15,32 @@ function Nav() {
         <div className="sidebar-header">
             <Balance />
         </div>
-        <ul className="list-unstyled components">
-            <li className="listElement">
-                <Link to="/wallet">
-                    Wallet
-                </Link>
-            </li>
-            <li>
-                <Link to="/ExchangeAccess">
-                    Exchange
-                </Link>
-            </li>
-            <div className="dropdown-divider"></div>
-            <div className="bottomMenu">
-                <li>
-                <Link to="/settings">
-                    Settings
+        <div className="dropdown-divider"></div>
+            <ul className="list-group list-group-flush">
+                <li className="listElement">
+                    <Link className="list-group-item list-group-item-action bg-dark active" to="/wallet">
+                        Wallet
                     </Link>
                 </li>
-
-
                 <li>
-                <Link to="/orders">
+                    <Link className="list-group-item list-group-item-action bg-dark active" to="/ExchangeAccess">
+                        Exchange
+                    </Link>
+                </li>
+                <li>
+                <Link className="list-group-item list-group-item-action bg-dark active" to="/orders">
                     Add Exchange
                     </Link>
                 </li>
-            </div>
-        </ul>
+                <div className="bottomMenu">
+                    <li>
+                    <Link className="list-group-item list-group-item-action bg-dark active" to="/settings">
+                        Settings
+                        </Link>
+                    </li>
+                </div>
+            </ul>
+    
     </nav>
 </div>
   );

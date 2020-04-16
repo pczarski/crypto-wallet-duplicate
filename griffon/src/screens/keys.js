@@ -1,7 +1,5 @@
 import React from 'react';
-import Nav from '../components/Nav';
 
-import {Link} from 'react-router-dom';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -10,7 +8,7 @@ import '../styles/settings.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
 import {getCurr} from '../lib/backendHandler.js';
-import Table from 'react-bootstrap/Table';
+import {Table} from 'reactstrap';
 // import { Button, Alert } from 'reactstrap';
 
 export default class Keys extends React.Component {
@@ -80,7 +78,7 @@ export default class Keys extends React.Component {
   getTable(){
     return this.state.privatekeys.map((element,i)=>{
       return(
-        <tr  key={i}>
+        <tr key={i}>
           <td>{i}</td>
            <td >{this.state.publickeys[i]}</td>
            <td >{this.state.privatekeys[i]}</td>
@@ -101,8 +99,7 @@ export default class Keys extends React.Component {
   render () {
     return (
 
-      <div className="wrapper">
-           <div className="extra">
+      <div>
              <h1>Keys</h1>
              <div className="currSel">
                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -111,13 +108,12 @@ export default class Keys extends React.Component {
                  </DropdownToggle>
                  <DropdownMenu>
                     {this.getDropdownItems()}
-
                  </DropdownMenu>
                </Dropdown>
                </div>
                <div>
                  {this.state.gotKeys === true? <
-                   Table id="simple-board" size="sm" className="striped bordered hover">
+                   Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
 
                    <thead>
                    <tr>
@@ -128,10 +124,8 @@ export default class Keys extends React.Component {
                    </thead>
                    <tbody>{this.getTable()}</tbody>
                    </Table>:null}
-
                 </div>
            </div>
-         </div>
     );
   }
 }

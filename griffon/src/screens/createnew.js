@@ -96,6 +96,7 @@ export default class CreateNew extends React.Component {
 
   render () {
   if (this.state.redirToWall === true) {
+    
     return <Redirect to='/wallet' />
   }
   const Confirm = () => (
@@ -134,7 +135,7 @@ export default class CreateNew extends React.Component {
           </Card>
           <div className='d-flex flex-row justify-content-around'>
             <Link to="/">
-              <Button type="button" className="btn btn-primary">Go back</Button>
+              <Button type="button" className="btn btn-primary gbackbutton">Go back</Button>
             </Link>
           </div>
         </div>
