@@ -19,34 +19,14 @@ export default class Keys extends React.Component {
     this.select = this.select.bind(this);
     this.state = {
       supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
-      currency: "Select a currency", // currency name (bitcoin, litecoin, etc. btc by default)
+      currency: "BTC", // currency name (bitcoin, litecoin, etc. btc by default)
+      keyPairs: getCurr("BTC").keyPairs,
       publickeys: [],
       privatekeys: [],
       gotKeys: false,
       dropdownOpen: false
     }
   }
-
-  getkeys(prev, curr){
-      let con = getCurr(curr)
-      let keypairs = con.keyPairs
-      let privk =[]
-      let pubk =[]
-      //console.log(keypairs)
-      for(let i =0; i<keypairs.length;i++){
-        privk.push(keypairs[i].privateKey)
-        pubk.push(keypairs[i].publicKey)
-      }
-      //console.log("go"+privk )
-      this.setState(
-        {
-          gotKeys: true,
-          publickeys:pubk,
-          privatekeys:privk,
-      })
-    //  console.log("gotLEMWO"+this.state.gotKeys )
-      //console.log(privk)
-    }
 
   toggle(e) {
     e.preventDefault();
@@ -62,31 +42,24 @@ export default class Keys extends React.Component {
       this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         currency: e.target.innerText,
+        keyPairs: getCurr(e.target.innerText).keyPairs,
         gotKeys: false
       });
-      this.getkeys(prev, e.target.innerText)
+      this.getTable()
     }
   }
-/*rows(element,i){
-  //console.log("rows")
-  return(<tr  key={i}>
-    <td>{i}</td>
-     <td >{this.state.publickeys[i]}</td>
-     <td >{this.state.privatekeys[i]}</td>
-  </tr>)
-}*/
   getTable(){
-    return this.state.privatekeys.map((element,i)=>{
-      return(
-        <tr key={i}>
-          <td>{i}</td>
-           <td >{this.state.publickeys[i]}</td>
-           <td >{this.state.privatekeys[i]}</td>
-        </tr>
-
-      )
-    })
-  }
+    return Object.keys(this.state.keyPairs).map((item, i) => {
+        return (
+          <tr key={i}>
+            <td>{item}</td>
+            <td>{this.state.keyPairs[item].publicKey}</td>
+            <td>{this.state.keyPairs[item].privateKey}</td>
+            <td>{this.state.keyPairs[item].balance}</td>
+          </tr>
+          )
+        });
+      }
   getDropdownItems(){
     return this.state.supportedCurr.map((element,i)=>{
       return(
@@ -98,7 +71,6 @@ export default class Keys extends React.Component {
 
   render () {
     return (
-
       <div>
              <h1>Keys</h1>
              <div className="currSel">
@@ -112,18 +84,19 @@ export default class Keys extends React.Component {
                </Dropdown>
                </div>
                <div>
-                 {this.state.gotKeys === true? <
-                   Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
-
+                 <Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
                    <thead>
                    <tr>
                     <th>#</th>
                     <th>Private Keys</th>
                     <th>Public Keys</th>
+                    <th>Balance</th>
                    </tr>
                    </thead>
-                   <tbody>{this.getTable()}</tbody>
-                   </Table>:null}
+                   <tbody>
+                    {this.getTable()}
+                    </tbody>
+                   </Table>
                 </div>
            </div>
     );
