@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/App.scss';
+import '../styles/splash.scss';
 
 import {Link, Redirect} from 'react-router-dom';
 
@@ -52,36 +53,34 @@ export default class Splash extends React.Component {
     return (
       <div className="wrapper">
         <div className="container">
-          <h1>griffon</h1>
-          <div>
+          <h1 className="spl">griffon</h1>
           {!this.state.firstLaunch &&
+          <div className="old">
           <Form onSubmit={this.handleSubmit} id="form">
             <FormGroup>
               <Input value={this.state.password} onChange={this.handleChange} invalid={this.state.incor} type="password" name="password" id="password" placeholder="Enter your password" />
-              <FormFeedback>Password incorrect!</FormFeedback>
-              <Button type="submit" color="primary" size="lg" className="btn btn-primary" style={{float: "left"}}>Open wallet</Button>
-              <ButtonGroup style={{float: "right"}}>
+              <FormFeedback tooltip>Password incorrect!</FormFeedback><p></p>
+              <Button type="submit" color="primary" size="lg" className="btn btn-primary">Open wallet</Button>
                 <Link to="/recover">
-                  <Button >Recover wallet from seed phrase</Button>
+                  <Button size="lg" >Recover wallet from seed phrase</Button>
                 </Link>
                 <Link to="/createnew">
-                  <Button>Create a new wallet</Button>
+                  <Button size="lg">Create a new wallet</Button>
                 </Link>
-              </ButtonGroup>
             </FormGroup>
           </Form>
+          </div>
           }
           {this.state.firstLaunch && 
-          <div>
-            <Link to="/recover">
-              <Button type="button" size="lg" className="btn btn-primary">Recover wallet from seed phrase</Button>
-            </Link>
+          <div className="new">
             <Link to="/createnew">
-              <Button type="button" size="lg" className="btn btn-primary">Create a new wallet</Button>
+              <Button type="button" color="primary" size="lg" className="btn btn-primary">Create a new wallet</Button>
+            </Link>
+            <Link to="/recover">
+              <Button type="button" size="lg">Recover wallet from seed phrase</Button>
             </Link>
           </div>
           }
-          </div>
         </div>
        </div>
     );
