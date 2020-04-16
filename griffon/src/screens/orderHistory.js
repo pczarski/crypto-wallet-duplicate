@@ -48,7 +48,6 @@ export default class OrderHistory extends React.Component {
         if (this.state.incompleteOrders[x].id ===this.state.ordersToCancel[i]){
           cancelOrder(this.state.incompleteOrders[x].exchange,this.state.incompleteOrders[x].id)
         }
-
       }
     console.log("selected orders cancelled");
     return this.state.getOrders ===false? null:null

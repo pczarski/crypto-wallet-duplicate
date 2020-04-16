@@ -21,6 +21,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 // a dictionary to store all the supported exchanges, so that we can easily dynamically add more later on
 // please use if you need to have a list of all the exchanges. Object.keys(exchangeList) will return ['Binance', 'Coinbase']
 const exchangeList = {"Binance": "Binance", "Coinbase": "Coinbase"};
+
+// used to control what's displayed in exchange access page and it's children components
 export const PORTFOLIO = 0;
 export const ORDERS = 1;
 export const COINS = 2;
@@ -63,11 +65,8 @@ export default class App extends React.Component {
     });
   };
 
-  // sets the coins state member to data passed by an ajax call and adds icon property
+  // sets the walletCoins state member to data passed by an ajax call and adds icon property
   updateWalletCoins = (data) => {
-    this.setState({
-      walletCoins: null,
-    });
     let coins = data;
     for(let i = 0; i < data.length; i++) {
       coins[i].icon = getIcon(coins[i].code);
@@ -94,7 +93,7 @@ export default class App extends React.Component {
     this.fetchExchangeCoins();
   };
 
-  // will update the coins to selected exchange coins
+  // will update the exchangeCoins to selected exchange coins
   fetchExchangeCoins = () => {
     const exchangeName = this.state.exchangeAccess;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
@@ -105,7 +104,7 @@ export default class App extends React.Component {
     });
   };
 
-  // sets the coins state member to data passed by an ajax call and adds icon property
+  // sets the coins state member to data passed by an ajax call and adds the icon property
   updateExchangeCoins = (data) => {
     let coins = data;
     for(let i = 0; i < data.length; i++) {

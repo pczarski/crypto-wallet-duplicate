@@ -3,6 +3,7 @@ import React from "react";
 import {COINS} from "../../App";
 import Exchange from "../../screens/exchange";
 
+// controller component to display coins or making orders
 export default function Portfolio(props) {
     const selectedComponent = props.selectedComponent;
     let mainComponent;
