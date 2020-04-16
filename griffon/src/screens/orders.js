@@ -8,6 +8,7 @@ import '../styles/exchange.scss';
 import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,Form, FormGroup, Label, Input } from "reactstrap";
 import { InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import Buy from '../components/Buy';
 import { addExchange} from '../lib/backendHandler';
 export default class Orders extends React.Component {
   constructor(props) {
@@ -60,8 +61,9 @@ export default class Orders extends React.Component {
 
     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
         </Form>
-        
 
+
+        <Buy name={this.state.name}/>
           </div>
         </div>
 
@@ -136,7 +138,7 @@ export default class Orders extends React.Component {
 //      </div>
 // </form>
 //                </div>
-//
+
 //
 // );
 // const TopUp  = () => (
