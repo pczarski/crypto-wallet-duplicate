@@ -103,6 +103,7 @@ export default class Balance extends React.Component {
             <DropdownItem onClick={this.select}>USD</DropdownItem>
           </DropdownMenu>
         </Dropdown>
+          
         </div>
     </div>
     )

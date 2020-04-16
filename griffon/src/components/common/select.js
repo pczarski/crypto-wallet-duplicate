@@ -1,5 +1,5 @@
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import React, {useState} from "react";
+import React from "react";
 
 //TODO: Please fix the fact that you need to select twice for update to happen!
 

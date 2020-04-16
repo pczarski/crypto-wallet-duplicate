@@ -39,7 +39,7 @@ export default class Recover extends React.Component {
       <div className="container">
         <h1>recover Wallet</h1>
         <form className="needs-validation" onSubmit={this.handleSubmit}>
-          <Input type="textarea" name="text" id="seed"  value={this.state.seed} onChange={this.handleChange}/>
+          <Input type="textarea" name="text" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange}/>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         <Link to="/">

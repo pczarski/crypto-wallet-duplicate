@@ -8,6 +8,7 @@ import '../styles/exchange.scss';
 import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,Form, FormGroup, Label, Input } from "reactstrap";
 import { InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import Buy from '../components/Buy';
 import { addExchange} from '../lib/backendHandler';
 export default class Orders extends React.Component {
   constructor(props) {
@@ -16,7 +17,9 @@ export default class Orders extends React.Component {
 
       address:null,
       name: null,
-      response: "0"
+      response: "0",
+      choice:0
+
     }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,20 +31,21 @@ export default class Orders extends React.Component {
 
   }
   handleSubmit(event) {
-    let resp = addExchange( this.state.name, this.state.address).response
-    console.log(resp)
+    let resp = addExchange( this.state.name, this.state.address);
+    console.log(resp);
     this.setState({
 
-      response: resp
+      response: resp,
+      choice:'1'
     });
     event.preventDefault();
   }
   render () {
+    let component;
+        if (this.state.choice === "1") {
+          component = <Buy name={this.state.name}/>;
+    }
 
-
-  // const AddExchange  = () => (
-
-  // );
     return (
       <div className="wrapper">
       <Nav />
@@ -60,8 +64,9 @@ export default class Orders extends React.Component {
 
     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
         </Form>
-        
 
+
+        {component}
           </div>
         </div>
 
@@ -136,7 +141,7 @@ export default class Orders extends React.Component {
 //      </div>
 // </form>
 //                </div>
-//
+
 //
 // );
 // const TopUp  = () => (
