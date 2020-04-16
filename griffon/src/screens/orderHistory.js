@@ -195,7 +195,7 @@ export default class OrderHistory extends React.Component {
              <td >{element.type}</td>
              <td >{element.status}</td>
              <td >{element.data}</td>
-             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange}  /></td>}
+             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
           </tr>
           <tr id={element.id}  className="collapse">
             <td colSpan="7">
@@ -239,9 +239,9 @@ export default class OrderHistory extends React.Component {
   async handleInputChange(event) {
     const target = event.target;
     var arr=this.state.ordersToCancel
-    var index = arr.indexOf(target.id)//finds the index of the arg, if arg not in arr return a no <0
+    var index = arr.indexOf(target.name)//finds the index of the arg, if arg not in arr return a no <0
     if (target.checked === true){
-      if (index<0){arr.push(target.id)}//if target.id not in arr
+      if (index<0){arr.push(target.name)}//if target.id not in arr
     }
     else{
       if (index>=0){arr.splice(index,1)}//if target.id is in arr removes it
