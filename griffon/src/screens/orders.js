@@ -9,6 +9,8 @@ import {Link} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,Form, FormGroup, Label, Input } from "reactstrap";
 import { InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 import Buy from '../components/Buy';
+import Withdraw from '../components/Withdraw';
+import Deposit from '../components/Deposit';
 import { addExchange} from '../lib/backendHandler';
 export default class Orders extends React.Component {
   constructor(props) {
@@ -17,10 +19,13 @@ export default class Orders extends React.Component {
 
       address:null,
       name: null,
-      response: "0"
+      response: "0",
+      choice:''
     }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleClick1 = this.handleClick1.bind(this);
   }
   handleInputChange(event) {
     this.setState({
@@ -33,22 +38,46 @@ export default class Orders extends React.Component {
     console.log(resp);
     this.setState({
 
-      response: resp
+      response: resp,
+    
     });
+
+    event.preventDefault();
+  }
+  handleClick(event) {
+    this.setState({
+      choice:'2'
+    });
+
+    event.preventDefault();
+  }
+  handleClick1(event) {
+    this.setState({
+      choice:'3'
+    });
+
     event.preventDefault();
   }
   render () {
+    let component;
+    if (this.state.choice === "1") {
+      component = <Buy name={this.state.name}/>;
+    }else if (this.state.choice ==="2") {
 
+        component = <Withdraw name={this.state.name}/>;
+    }
+    else if (this.state.choice ==="3") {
 
-  // const AddExchange  = () => (
+        component = <Deposit name={this.state.name}/>;
+    }
 
-  // );
     return (
       <div className="wrapper">
       <Nav />
         <div id="box"className="container">
+          <h2>Add Exchange or Withdraw/Deposit</h2>
 
-        <Form onSubmit={this.handleSubmit}>
+        <Form >
 
           <FormGroup>
             <Label for="name">Exchange Name</Label>
@@ -57,134 +86,17 @@ export default class Orders extends React.Component {
             <Input type="text" name="address" placeholder="Enter your Exchange Address"  onChange={this.handleInputChange} />
           </FormGroup>
 
-          <Button >Submit</Button>
+          <Button onClick={this.handleSubmit} >Submit</Button>
+
 
     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
         </Form>
 
 
-        <Buy name={this.state.name}/>
+        {component}
           </div>
         </div>
 
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-// const DropdownList = () => (
-//   <div>
-//     {this.state.exchanges.map(curr =>
-//     <DropdownItem onClick={this.select} key={curr}> {curr} </DropdownItem>
-//     )}
-//   </div>
-// );
-// const Withdraw  = () => (
-//
-//                <div className="container">
-//                <form id="form1"className="text-center  p-5" action="#!">
-//  <p className="h4 mb-4">Withdraw Currency</p>
-//
-//  <div className="form-row mb-4 ">
-//      <div className="col">
-//      <label >Currency:</label>
-//      <select id="Crypto" className="form-control" name="cars" >
-//
-//  <option value="BTC">Bitcoin</option>
-//  <option value="ETH">Etherium</option>
-//  <option value="LTC">Litecoin</option>
-//  <option value="USTC">Tether</option>
-//  <option value="Dash">Dash</option>
-// </select>
-//      </div>
-//      <div className="col">
-//      <label >Available Balance:</label>
-//           <input type="text"  className="form-control" placeholder="0.00" />
-//      </div>
-//
-//
-//  </div>
-// <div className="form-row mb-4">
-// <label >Withdrawal Address:</label>
-// <input type="text"  className="form-control" placeholder="Enter your Withdrawal address" />
-// </div>
-//  <div className="form-row mb-4">
-//
-//  <div className="col">
-// <label >Enter Amount:</label>
-//  <input type="number" className="form-control mb-4" placeholder="0.00"/></div>
-//  </div>
-//
-// <div className="form-row mb-4">
-// <div className="col">
-//  <button className="btn btn-info my-4 btn-block" type="submit">Continue</button>
-//  </div>
-//  <div className="col">
-//  <Link to= "Buy">
-//      <button className="btn btn-info my-4 btn-block" >Back</button></Link>
-//      </div>
-//      </div>
-// </form>
-//                </div>
-
-//
-// );
-// const TopUp  = () => (
-//    <div className="container">
-//   <form id="form1"className="text-center  p-5" action="#!">
-// <p className="h4 mb-4">Send Currency</p>
-//
-// <div className="form-row mb-4 ">
-//     <div className="col">
-//     <label >Currency:</label>
-//     <select id="Crypto" className="form-control" name="cars" >
-//
-// <option value="BTC">Bitcoin</option>
-// <option value="ETH">Etherium</option>
-// <option value="LTC">Litecoin</option>
-// <option value="USTC">Tether</option>
-// <option value="Dash">Dash</option>
-// </select>
-//     </div>
-//     <div className="col">
-//     <label >To:</label>
-//          <input type="text"  className="form-control" placeholder="Enter your Public Key address" />
-//     </div>
-//
-//
-// </div>
-//
-// <div className="form-row mb-4">
-//
-// <div className="col">
-// <label >Enter Amount:</label>
-// <input type="number" className="form-control mb-4" placeholder="0.00"/></div><p id="arrow" onClick=""> <a id="test" href="#">&#8644;</a></p>
-// <div className="col">
-// <label >To:</label>
-// <input  type="number"  className="form-control" placeholder="0.00" />
-// </div></div>
-//
-// <div className="form-row mb-4">
-// <div className="col">
-//     <button className="btn btn-info my-4 btn-block" type="submit">Continue</button>
-//     </div>
-//     <div className="col">
-//     <Link to= "Buy">
-//         <button className="btn btn-info my-4 btn-block" >Back</button></Link>
-//         </div>
-//         </div>
-// </form>
-// </div>
-// );
