@@ -197,10 +197,20 @@ export default class OrderHistory extends React.Component {
              <td >{element.data}</td>
              {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange}  /></td>}
           </tr>
-          <tr id={element.id}  className="collapse"><td colSpan="7">
-          IninitialAmount:{element.initialAmount} AmountComplete:{element.amountComplete}
-          unitPrice:{element.unitPrice} percentComplete:{element.percentComplete}
-          </td></tr>
+          <tr id={element.id}  className="collapse">
+            <td colSpan="7">
+            <small>
+              <div className="column">
+                <p><b>Ininitial Amount: </b>{element.initialAmount}</p>
+                <b>Unit Price: </b>{element.unitPrice}
+              </div>
+              <div className="column">
+                <p><b>Amount Complete: </b>{element.amountComplete}</p>
+                <b>Percent Complete: </b>{element.percentComplete}
+              </div>
+              </small>
+            </td>
+          </tr>
         </tbody>
 
         /*</Table>*/
