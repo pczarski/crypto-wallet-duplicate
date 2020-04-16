@@ -6,8 +6,6 @@ import '../styles/App.scss';
 import '../styles/nav.scss';
 import '../styles/bal.scss';
 
-
-
 import Coins from '../components/walletComponents/Coins.js';
 
 import { Button } from 'reactstrap';
@@ -42,7 +40,7 @@ export default class Wallet extends React.Component {
     return (
       <div className="wrapper">
       <Nav />
-        <div className="container">
+        <div className="cont">
           <div className="content">
               <Coins fetch={this.props.fetch} coins={this.props.coins} coinClick={this.handleCoinClick}/>
             <Link to="/transfer">

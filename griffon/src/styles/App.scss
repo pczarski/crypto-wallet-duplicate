@@ -9,6 +9,10 @@ html {
       display: flex;
       overflow-y: scroll;
     }
+    .cont {
+      max-width: 100%;
+      width: 100%;
+    }
   }
 }  
 .vertical-input-group .input-group:first-child {
