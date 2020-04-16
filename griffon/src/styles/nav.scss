@@ -5,9 +5,12 @@
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #242424;
+    background: #343a40;
     color: #adadad; 
     overflow: fix;
+}
+ul{
+    list-style-type: none;
 }
 li {
     font-size: 1.5em;
