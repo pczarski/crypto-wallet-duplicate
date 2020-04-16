@@ -9,11 +9,19 @@ caption {
   visibility: collapse
 }
 
-Dropdown{
-  display:inline;
+.Dropdowns{
+
+  align-items: center;
+  display:flex;
 }
 .column {
   float: left;
   width: 50%;
+  padding: 10px;
+}
+
+.tableInput{
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
   padding: 10px;
 }

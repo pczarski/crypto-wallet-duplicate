@@ -256,42 +256,41 @@ export default class OrderHistory extends React.Component {
 
 
     return (
-      <div className="wrapper">
+      <div className="container">
       <Nav/>
-        <div className="container">
-        {this.state.cancel === false?
-          <div>
           <h2>Order History</h2>
 
             {/*TODO: please style this button*/}
             <button onClick={this.props.goBack}>Go back</button>
 
           <div className="currSel">
-            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-              <DropdownToggle caret>
-                {this.state.exchange}
-              </DropdownToggle>
-              <DropdownMenu>
-                 {this.getDropdownItems(1)}
+            <div className="Dropdowns">
+              <Dropdown className="tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle caret>
+                  {this.state.exchange}
+                </DropdownToggle>
+                <DropdownMenu>
+                   {this.getDropdownItems(1)}
 
-              </DropdownMenu>
-            </Dropdown>
-            <h3>Display:</h3>
-            <Dropdown isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
-              <DropdownToggle caret>
-                {this.state.currentDisplay}
-              </DropdownToggle>
-              <DropdownMenu>
-                 {this.getDropdownItems(2)}
+                </DropdownMenu>
+              </Dropdown>
+              <label>Display:</label>
+              <Dropdown className="tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
+                <DropdownToggle caret>
+                  {this.state.currentDisplay}
+                </DropdownToggle>
+                <DropdownMenu>
+                   {this.getDropdownItems(2)}
 
-              </DropdownMenu>
-            </Dropdown>
-            </div></div>:<div><h2>Cancel Order</h2><p>Select incomplete orders you would like to cancel</p></div>}
+                </DropdownMenu>
+              </Dropdown>
+              <Button className="btn btn-primary tableInput" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
+            </div>
+          </div>
 
-          <Button className="btn btn-primary" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
+
 
           <div className="table">
-
             <Table  size="sm" className="striped bordered hover ">
               <thead>
               <tr>
@@ -304,15 +303,13 @@ export default class OrderHistory extends React.Component {
                <th>Cancel</th>
               </tr>
               </thead>
-
               {this.state.gotOrders === true?
               this.getTable():null}
               </Table>
-
            </div>
 
         </div>
-      </div>
+
     );
   }
 }
