@@ -17,7 +17,7 @@ export default class Exchange extends React.Component {
     };
 
     render () {
-        if(this.props.coins === null){
+        if(this.props.coins === null || !this.props.setMainComponent){
             // we shouldn't be here
             return(<Redirect to='/ExchangeAccess'/>);
         }
