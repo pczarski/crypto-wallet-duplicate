@@ -25,7 +25,7 @@ export default class Wallet extends React.Component {
     return (
       <div className="wrapper">
       <Nav />
-        <div className="container">
+        <div className="cont">
           <div className="content">
               <Coins fetch={this.props.fetch} coins={this.props.coins}/>
             <Link to="/transfer">

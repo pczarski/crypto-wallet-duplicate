@@ -159,7 +159,7 @@ export default class Settings extends React.Component {
   return (
     <div className="wrapper">
       <Navig/>
-      <div className="container">
+      <div className="cont">
       <Topbar/>
       {component}
       </div>

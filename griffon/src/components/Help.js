@@ -2,7 +2,6 @@ import React from 'react';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
-import '../styles/help.scss';
 import '../styles/settings.scss';
 
 export default class Help extends React.Component {
