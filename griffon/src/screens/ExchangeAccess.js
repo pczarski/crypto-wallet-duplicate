@@ -6,7 +6,8 @@ import SideBar from '../components/Nav.js';
 import Coins from '../components/walletComponents/Coins.js'
 import Select from "../components/common/select";
 import OrderHistory from "./orderHistory";
-import {ORDERS, COINS} from "../App";
+import {ORDERS, PORTFOLIO} from "../App";
+import Portfolio from "../components/exchange/portfolio";
 
 export default class ExchangeAccess extends Component
 {
@@ -24,10 +25,11 @@ export default class ExchangeAccess extends Component
 
     // will update the main component to the exchange access wallet
     selectCoins = () => {
-        this.props.setMainComponent(COINS);
+        this.props.setMainComponent(PORTFOLIO);
     };
 
     handleCoinClick = (coin) => {
+        console.log(coin);
         this.props.handleCoinClick(coin);
         this.setState({
             goToOrders: true,
@@ -36,27 +38,34 @@ export default class ExchangeAccess extends Component
 
     render() {
         const orders = this.state.goToOrders;
-        if(orders) {
-            return (
-                <Redirect to='/orders'/>
-            )
-        }
+        // if(orders) {
+        //     return (
+        //         <Redirect to='/orders'/>
+        //     )
+        // }
 
         // use the mainComponent prop which is taken from App.js's state
         const selectedComponent = this.props.mainComponent;
         let mainComponent;
 
         // controlling the main display
-        if (selectedComponent === COINS) {
-            mainComponent = <Coins fetch={this.props.fetch} coins={this.props.coins} coinClick={this.handleCoinClick}/>;
+        if (selectedComponent === PORTFOLIO) {
+            mainComponent = <Portfolio fetch={this.props.fetch} coin={this.props.coin}
+                                       coins={this.props.coins} coinClick={this.handleCoinClick}
+                                       selectedComponent={this.props.selectedInPortfolio}
+                                       setMainComponent={this.props.setSelectedInPortfolio}
+            />
         } else {
-            mainComponent = <OrderHistory goBack={this.selectCoins} exchange={this.props.exchange} exchanges={this.props.exchanges} setExchange={this.props.setExchange}/>;
+            mainComponent = <OrderHistory goBack={this.selectCoins}
+                                          exchange={this.props.exchange} exchanges={this.props.exchanges}
+                                          setExchange={this.props.setExchange}
+            />;
         }
 
         return (
             <div className="wrapper">
                 <SideBar/>
-                <div className="container">
+                <div className="cont">
 
                     <Select items={Object.keys(this.props.exchanges) /*to dynamically render the list of exchanges*/}
                             onSelect={this.props.setExchange /* to update to the selected exchange*/}
