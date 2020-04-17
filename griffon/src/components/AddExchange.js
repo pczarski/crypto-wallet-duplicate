@@ -32,16 +32,13 @@ export default class AddExchange extends React.Component {
   }
   handleSubmit(event) {
     let resp = addExchange( this.state.name, this.state.address);
-    console.log(resp);
     this.setState({
       response: resp.exchangeName
     });
-    console.log(this.state.response)
     event.preventDefault();
   }
 
   render () {
-    console.log(this.state)
     return (
       <div className="container">
         <Form onSubmit={this.handleSubmit}>

@@ -15,6 +15,8 @@ import Send from '../components/Send';
 import Nav from '../components/Nav';
 import { Redirect } from 'react-router-dom';
 
+import SelectCoin from '../components/selectCoin';
+
 export default class Transfer extends React.Component {
   constructor(props) {
     super(props);
@@ -122,6 +124,8 @@ export default class Transfer extends React.Component {
       <div className="cont">
         <Button close type="button" className="btn btn-primary" onClick={this.handleClick} value="0" />
         <h2>Send or Receive from Wallet</h2>
+        {console.log(this.props)}
+        {/* <SelectCoin options=/> */}
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
           <img src={this.renderIcon()} alt=""/>
           <DropdownToggle caret>
