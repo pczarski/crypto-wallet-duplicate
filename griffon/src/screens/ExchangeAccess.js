@@ -67,24 +67,24 @@ export default class ExchangeAccess extends Component
                 <SideBar/>
                 <div className="cont">
                     <div className = "nav justify-content-center">
-                        
-                        
-                            <div id="order-history">
-                                <Button onClick={this.selectOrderHistory} className="nav-item">View Order History</Button>
-                            </div>
-                    <Select options={exchangeOptions}
-                            onChange={this.props.setExchange}
-                            value={this.props.exchange}
-                    />
-                        
-                                <Button className = "nav nav-item">Exchange a Currency</Button>
 
-                            
-                        
+
+                        <div id="order-history">
+                            <Button onClick={this.selectOrderHistory} className="nav-item">View Order History</Button>
                         </div>
-                        {mainComponent}
+                        <Select options={exchangeOptions}
+                                onChange={this.props.setExchange}
+                                value={this.props.exchange}
+                        />
+
+                        <Button className = "nav nav-item">Exchange a Currency</Button>
+
+
+
+                    </div>
+                    {mainComponent}
                 </div>
-                
+
             </div>
         )
     }
