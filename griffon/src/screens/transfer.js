@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/App.scss';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
+import { Button } from "reactstrap";
 
 import CurrSel from '../components/common/currencySelect'
 
@@ -10,19 +10,18 @@ import Send from '../components/Send';
 import Nav from '../components/Nav';
 import { Redirect } from 'react-router-dom';
 
-import Select from 'react-select';
-
 export default class Transfer extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+
     this.state = {
       dropdownOpen: false,
       selected: this.props.coin,
       change: false,
       choice: 0,
       renderTrans: true,
-      redirToWall: false
+      redirToWall: false,
     }
 
   }
@@ -55,12 +54,14 @@ export default class Transfer extends React.Component {
       return <Redirect to="/wallet"/>
     }
 
-
     let component;
     if (this.state.choice === "1") {
-      component = <Send curr={this.props.coin}/>;
+      console.log(this.state)
+      component = <Send 
+                  curr={this.props.coin} 
+                  />;
     } else  if (this.state.choice === "2") {
-      component = <Receive curr={this.props.coin} />
+      component = <Receive curr={this.props.coin}/>
     } else {
       component = <Transactions curr={this.props.coin} />;
     }

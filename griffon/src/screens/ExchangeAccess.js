@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import SideBar from '../components/Nav.js';
-//import Select from "../components/common/select";
 import Select from 'react-select';
 import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";

@@ -127,10 +127,10 @@ public class ExchangeController {
                 Wallet.getInstance().saveState();
                 return new TextResponse("success", 1); //todo the id thing, smth is missing here
             };
-            return new TextResponse("insufficient balance", 0);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
         catch (IllegalArgumentException e) {
-            return new TextResponse("Exchange or currency not found", -1);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Exchange or currency not found");
         }
 
     } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
@@ -151,10 +151,10 @@ public class ExchangeController {
                 Wallet.getInstance().saveState();
                 return new TextResponse("success", 1); //todo the id thing, smth is missing here
             };
-            return new TextResponse("insufficient balance", 0);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
         catch (IllegalArgumentException e) {
-            return new TextResponse("Exchange or currency not found", -1);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Exchange or currency not found");
         }
 
     } // http://localhost:8080/deposit?exchange=Binance&currency=BTC&amount=0.5
@@ -187,11 +187,9 @@ public class ExchangeController {
                     order.getType(), order.getStatus(), order.getDate().toString()
                     );
         } catch (IllegalArgumentException e) {
-            return new OrderJson(-1, null, "Unsupported exchange or currency", null, -1,
-                    -1, -1, null, null, null);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unsupported exchange or currency");
         } catch (IllegalStateException e) {
-            return new OrderJson(0, null, "Insufficient Balance", null, -1,
-                    -1, -1, null, null, null);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
 
     } // http://localhost:8080/new-order?&type=Sell&exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5&price=10.4
@@ -218,11 +216,9 @@ public class ExchangeController {
                     order.getType(), order.getStatus(), order.getDate().toString()
             );
         } catch (IllegalArgumentException e) {
-            return new OrderJson(-1, null, "Unsupported exchange or currency", null, -1,
-                    -1, -1, null, null, null);
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Unsupported exchange or currency");
         } catch (IllegalStateException e) {
-            return new OrderJson(0, null, "Insufficient Balance", null, -1,
-                    -1, -1, null, null, null);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
 
     } // http://localhost:8080/swap?exchange=Binance&currency1=BTC&currency2=ETH&amount=0.5

@@ -15,26 +15,44 @@ export default class Send extends React.Component {
     super(props);
     this.state = {
       balance: getBalance(this.props.curr),
-      address: null,
       amount: '',
+      address: '',
       response: '',
       tooltipOpen: false
     };
 
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAddrChange = this.handleAddrChange.bind(this);
+    this.handleAmChange = this.handleAmChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setSendAsAvail = this.setSendAsAvail.bind(this);
 
   }
-  handleInputChange(event) {
+  componentDidMount() {
+    if (!(localStorage.getItem('sendState') == null)) {
+      const rehydrate = JSON.parse(localStorage.getItem('sendState'))
+      this.setState({amount: rehydrate.amount, address: rehydrate.address})
+    }
+  }
+  componentWillUnmount() {
+    if (this.state.amount !== '' || this.state.address !== ''){
+      localStorage.setItem('sendState', JSON.stringify(this.state))
+    }
+  }
+
+  handleAddrChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      address: event.target.value
+    });
+  }
+  handleAmChange(event) {
+    this.setState({
+      amount: event.target.value
     });
 
   }
   componentDidUpdate(prevProps, prevState){
     if (prevProps.curr !== this.props.curr) {
-    this.setState({balance: getBalance(this.props.curr), amount: '', address: ''})
+      this.setState({balance: getBalance(this.props.curr)}, this.props.reset)
     }
   }
 
@@ -46,7 +64,6 @@ export default class Send extends React.Component {
         balance: getBalance(this.props.curr),
         response: resp
       });
-      
     } else {
       this.setState({response: 'Insufficient amount'})
     }
@@ -63,17 +80,18 @@ export default class Send extends React.Component {
 
   render () {
     return (
-    <div className="container" style={{}}>
+    <div className="container">
       <Card body className="text-center bg-dark text-white ">
       <h2>Send {this.props.curr}</h2>
       <CardBody>
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
-          <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleInputChange}  />
+          <Label for="address">Address</Label>
+          <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleAddrChange} value={this.state.address} />
         </FormGroup>
         <FormGroup>
           <Label for="amount">Amount</Label>
-          <Input type="text" name="amount" placeholder="0.00" onChange={this.handleInputChange} value={this.state.amount}/>
+          <Input type="text" name="amount" placeholder="0.00" onChange={this.handleAmChange} value={this.state.amount}/>
         </FormGroup>
         <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance}</span></legend>
         <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>

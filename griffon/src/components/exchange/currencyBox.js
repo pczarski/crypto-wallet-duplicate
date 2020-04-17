@@ -16,7 +16,9 @@ export default function CurrencyBox(props) {
                 <Label>{props.label}</Label>
                 <Input type="text" onChange={handleChange}
                        className="form-control" name="currency"
-                       placeholder={props.placeholder} />
+                       placeholder={props.placeholder}
+                       value={(props.value) ? props.value : props.placeholder}
+                />
             </div>
 
         </div>
