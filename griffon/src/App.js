@@ -20,7 +20,10 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 // a dictionary to store all the supported exchanges, so that we can easily dynamically add more later on
 // please use if you need to have a list of all the exchanges. Object.keys(exchangeList) will return ['Binance', 'Coinbase']
-const exchangeList = {"Binance": "Binance", "Coinbase": "Coinbase"};
+const exchangeList = [
+  {value: 'Binance', label: "Binance"},
+  {value: 'Coinbase', label: 'Coinbase'},
+];
 
 // used to control what's displayed in exchange access page and it's children components
 export const PORTFOLIO = 0;
@@ -45,7 +48,7 @@ export default class App extends React.Component {
       exchangeCoins: null,
 
       // to save the selected exchange access
-      exchangeAccess: exchangeList.Binance,
+      exchangeAccess: exchangeList[0],
 
       // to save whether the user was on coins tab or order history tab
       exchangeMainComponent: PORTFOLIO,
@@ -94,9 +97,9 @@ export default class App extends React.Component {
   /** Exchange functions **/
 
   // will update the state to the passed exchange
-  setExchange = (exchangeName) => {
+  setExchange = (exchange) => {
     this.setState({
-      exchangeAccess: exchangeList[exchangeName],
+      exchangeAccess: exchange,
     });
     console.log(this.state.exchangeAccess);
     this.fetchExchangeCoins();
@@ -104,7 +107,7 @@ export default class App extends React.Component {
 
   // will update the exchangeCoins to selected exchange coins
   fetchExchangeCoins = () => {
-    const exchangeName = this.state.exchangeAccess;
+    const exchangeName = this.state.exchangeAccess.value;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
     $.ajax({
       url: url,

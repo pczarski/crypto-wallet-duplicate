@@ -1,11 +1,11 @@
 import React from 'react';
-import CurrencyBox from "./currencyBox";
+import CurrencySelect from "../common/currencySelect";
 
 export default function Withdraw(props) {
     return(
         <div>
             withdraw {props.coin}
-            <CurrencyBox/>
+            <CurrencySelect/>
         </div>
     )
 }
