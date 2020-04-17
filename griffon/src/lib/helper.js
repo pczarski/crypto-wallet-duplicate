@@ -1,5 +1,9 @@
 export function roundTo2(val) {
-    return(Math.floor(val * 100) / 100 )
+    if (val > 0) {
+        return(Math.floor(val * 100) / 100 ) }
+    else {
+        return val.toFixed(2)
+    }
 }
 
 export function getCoinByCode(code, coins) {
