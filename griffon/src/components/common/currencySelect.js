@@ -9,7 +9,6 @@ import {getCoinByCode} from "../../lib/helper";
 **/
 
 export default function CurrencySelect(props) {
-    console.log(props);
     const selected = getOption(getCoinByCode(props.coin, props.coins));
     //{value: props.coin, label: props.coin};
     const handleChange = (selectedOption) => {

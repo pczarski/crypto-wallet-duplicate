@@ -13,11 +13,16 @@ export default function Portfolio(props) {
         />
     } else {
         mainComponent = <Trade coin={props.coin} coins={props.coins}
+                               exchange={props.exchange}
                                setCoin={props.setCoin} coin2={props.coin2}
                                setCoin2={props.setCoin2}
                                goBack={props.setMainComponent}
                                mainComponent={props.tradeMainComponent}
                                setMainComponent={props.setTradeMainComponent}
+                               price={props.price} setPrice={props.setPrice}
+                               marketPrice={props.marketPrice}
+                               amount={props.amount} setAmount={props.setAmount}
+                               amount2={props.amount2} setAmount2={props.setAmount2}
         />
     }
 
