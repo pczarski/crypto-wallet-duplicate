@@ -22,7 +22,7 @@ export default class Coins extends Component
 
     renderCoinsToTable(){
         if(this.props.coins == null) {
-            return "";
+            return <tr></tr>;
         }
         return this.props.coins.map((coin) => {
             return (
@@ -47,10 +47,12 @@ export default class Coins extends Component
         return (
             <div>
                 <table className= "table table-striped table-hover table-dark">
+                    <thead>
+                    <tr>{this.renderTableHeader()}</tr>
+                    </thead>
                     <tbody>
-                        <tr>{this.renderTableHeader()}</tr>
-                        {this.renderCoinsToTable()}
-                        </tbody>
+                    {this.renderCoinsToTable()}
+                    </tbody>
                 </table>
             </div>
         )
