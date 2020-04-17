@@ -20,6 +20,14 @@ caption {
   width: 50%;
   padding: 10px;
 }
+.back{
+  color:white;
+  background-color: grey;
+  border:none;
+  border-radius: 0.5em;
+  margin-top:1em;
+  float:right;
+}
 
 .tableInput{
   display:inline-flex;
@@ -29,9 +37,9 @@ caption {
 }
 .tableInputSelect{
 }
-.cancelBtn{
+#cancelBtn{
   float:right;
-  background-color: white;
+  margin-left: auto;
 }
 .table{
 
