@@ -4,8 +4,21 @@ import {Form, Input, Label} from 'reactstrap';
 import {roundTo2} from "../../lib/helper";
 export default function Sell(props) {
     const handlePriceChange = (e) => {
-        props.setPrice(e.target.value);
+        const val = e.target.value;
+        props.setPrice(val);
+        props.setAmount2(props.amount * val);
     };
+
+    const handleAmountChange = (val) => {
+        props.setAmount(val);
+        props.setAmount2(val * props.price);
+    };
+
+    const handleAmount2Change = (val) => {
+        props.setAmount2(val);
+        props.setPrice(val/props.amount);
+    };
+
     return(
         <div className="container">
             Sell
@@ -16,7 +29,7 @@ export default function Sell(props) {
                             coin={props.coin}
                             setCoin={props.setCoin}
                             coins={props.coins} amount={props.amount}
-                            setAmount={props.setAmount} placeholder={props.amount}
+                            setAmount={handleAmountChange} placeholder={props.amount}
                             label={'amount:'}
                         />
                     </div>
@@ -25,6 +38,7 @@ export default function Sell(props) {
                         <Input type='text' className='form-control'
                                placeholder={props.marketPrice}
                                onChange={handlePriceChange}
+                               value={props.price}
                         />
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
                     </div>
@@ -33,8 +47,8 @@ export default function Sell(props) {
                             coin={props.coin2}
                             setCoin={props.setCoin2}
                             coins={props.coins} amount={props.amount2}
-                            setAmount={props.setAmount2} placeholder={props.price*props.amount}
-                            label={"you'll get:"}
+                            setAmount={handleAmount2Change} placeholder={props.price*props.amount}
+                            label={"you'll get:"} value={props.amount2}
                         />
                     </div>
                 </div>

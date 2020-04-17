@@ -225,7 +225,7 @@ export default class App extends React.Component {
   setMarketPrice = (newPrice) => {
     this.setState({
       marketPrice: newPrice.value,
-    });
+    },() => this.setPrice(this.state.marketPrice));
   };
 
 
