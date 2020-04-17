@@ -17,7 +17,6 @@ export function getCurr(currency) {
     const baseUrl = "http://localhost:8080/currency?name=";
     const url = baseUrl + currency;
     // console.log(url); // example url: http://localhost:8080/currency?name=Bitcoin
-
     // get request
     let req = new XMLHttpRequest();
     req.open('GET', url, false);
@@ -39,10 +38,8 @@ export function makeWallet(seed){
 }
 
 export function sendCurr(curr, amount, address){
-
     // http://localhost:8080/send?name=BTC&amount=0.5&address=xxxxxxxxxxx
     // example URL
-
     const url = "http://localhost:8080/send?name=" + curr + "&amount=" + amount + "&address=" + address;
     let req = new XMLHttpRequest();
     req.open('GET', url, false);
@@ -120,6 +117,24 @@ export function addExchange(exchange, key) {
     req.send(null);
     return JSON.parse(req.responseText);
 }
+export function withdrawExchange(exchange, currency, amount) {
+    // http://localhost:8080/withdraw?exchange=Binance&currency=BTC&amount=2.5
+    const url = "http://localhost:8080/withdraw?exchange=" + exchange + "&currency=" + currency + "&amount=" + amount;
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+export function depositExchange(exchange, currency, amount) {
+    // http://localhost:8080/deposit?exchange=Binance&currency=BTC&amount=0.5
+    const url = "http://localhost:8080/deposit?exchange=" + exchange + "&currency=" + currency + "&amount=" + amount;
+    // get request
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
 export function getOrderHistory(exchange) {
   const baseUrl = "http://localhost:8080/orders?exchange=";
   const url = baseUrl + exchange;
@@ -136,4 +151,12 @@ export function getAllOrderHistory() {
   req.open('GET', url, false);
   req.send(null);
   return JSON.parse(req.responseText);
+}
+export function getValIn (curr) {
+    const url = "http://localhost:8080/total-balance?in=" + curr
+
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.response);
 }

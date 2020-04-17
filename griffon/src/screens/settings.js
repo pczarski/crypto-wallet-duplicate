@@ -1,9 +1,12 @@
 import React from 'react';
 import Navig from '../components/Nav';
+
 import RecoveryPhrase from '../components/RecoveryPhrase';
+import AddEx from '../components/AddExchange';
 
 import Keys from '../screens/keys';
 import Help from '../components/Help';
+
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
@@ -138,6 +141,11 @@ export default class Settings extends React.Component {
             </NavLink>
           </NavItem>
           <NavItem >
+            <NavLink onClick={this.select} name="addex">
+              Add Exchange
+            </NavLink>
+          </NavItem>
+          <NavItem >
             <NavLink onClick={this.select} name="help">
               Help
             </NavLink>
@@ -154,6 +162,8 @@ export default class Settings extends React.Component {
   }
   else if (this.state.selected === "help") {
     component = <Help/>;
+  } else if (this.state.selected === "addex"){
+    component = <AddEx />;
   } else {
     component = this.Password();
   }
