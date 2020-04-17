@@ -76,10 +76,10 @@ export default class RecoveryPhrase extends React.Component {
   );
 
     return (
-      <div className="extra">
-      <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
-        <ModalHeader toggle={this.toggle}>Warning!</ModalHeader>
-        <ModalBody>
+      <div>
+      <Modal isOpen={this.state.modal} toggle={this.toggle} >
+        <ModalHeader toggle={this.toggle} style={{color: "black"}}>Warning!</ModalHeader>
+        <ModalBody style={{color: "black"}}>
           Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
           It will only display for 3 minutes before requiring authentification again.
         </ModalBody>

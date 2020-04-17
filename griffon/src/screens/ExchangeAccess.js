@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import SideBar from '../components/Nav.js';
-//import Select from "../components/common/select";
 import Select from 'react-select';
 import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";
 import Portfolio from "../components/exchange/portfolio";
+
 
 import '../styles/exchangeAccess.css'
 
@@ -24,7 +24,7 @@ export default class ExchangeAccess extends Component
     };
 
     // will update the main component to the exchange access wallet
-    selectCoins = () => {
+    selectPortfolio = () => {
         this.props.setMainComponent(PORTFOLIO);
     };
 
@@ -54,7 +54,7 @@ export default class ExchangeAccess extends Component
                                        amount2={this.props.amount2} setAmount2={this.props.setAmount2}
             />
         } else {
-            mainComponent = <OrderHistory goBack={this.selectCoins}
+            mainComponent = <OrderHistory goBack={this.selectPortfolio}
                                           exchange={this.props.exchange} exchanges={this.props.exchanges}
                                           setExchange={this.props.setExchange}
             />;
@@ -67,24 +67,20 @@ export default class ExchangeAccess extends Component
                 <SideBar/>
                 <div className="cont">
                     <div className = "nav justify-content-center">
-                        
-                        
-                            <div id="order-history">
-                                <Button onClick={this.selectOrderHistory} className="nav-item">View Order History</Button>
-                            </div>
-                    <Select options={exchangeOptions}
-                            onChange={this.props.setExchange}
-                            value={this.props.exchange}
-                    />
-                        
-                                <Button className = "nav nav-item">Exchange a Currency</Button>
 
-                            
-                        
-                        </div>
-                        {mainComponent}
+                        <Button className = "nav justify-content-center nav-item" onClick={this.selectPortfolio}>Exchange</Button>
+
+                        <Select className="react-select-container" classNamePrefix="react-select"  options={exchangeOptions}
+                                onChange={this.props.setExchange}
+                                value={this.props.exchange}
+                               
+                        />
+                            <Button onClick={this.selectOrderHistory} className="nav-item">Order History</Button>
+                       
+                    </div>
+                    {mainComponent}
                 </div>
-                
+
             </div>
         )
     }
