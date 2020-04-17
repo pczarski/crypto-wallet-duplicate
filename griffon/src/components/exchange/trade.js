@@ -26,23 +26,94 @@ function getSubmit(option) {
     }
 }
 
+const urlBase = 'http://localhost:8080/';
 export default class Trade extends React.Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         submit: ""
-    //     }
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            response: "",
+        }
+    }
+
+    updateOrderResponse = (data) => {
+        console.log(data);
+        this.setState({
+            response: "order placed with id " + data.id,
+        });
+    };
+
+    handleOrderError = (error) => {
+      console.log(error.getAllResponseHeaders());
+    };
+
+    handleSubmit = () => {
+        console.log("called!!");
+        switch (this.props.mainComponent) {
+            case SWAP:
+                this.placeSwapOrder();
+                break;
+            case SELL:
+                this.placeSellOrder();
+                break;
+            case BUY:
+                this.placeBuyOrder();
+                break;
+            case WITHDRAW:
+                this.placeWithdrawOrder();
+                break;
+            case DEPOSIT:
+                this.placeDepositOrder();
+                break;
+            default:
+                console.log("we shouldn't be here");
+        }
+    };
 
     placeSellOrder = () => {
-
+        const url = urlBase + "new-order?type=Sell&exchange="+
+            this.props.exchange.value+"&currency1="+
+            this.props.coin+"&currency2="+
+            this.props.coin2+"&amount="+
+            this.props.amount+"&price="+
+            this.props.price;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateOrderResponse,
+            error: this.handleOrderError,
+        });
     };
-    placeBuyOrder = () => {
 
+    placeBuyOrder = () => {
+        const url = urlBase + "new-order?type=Buy&exchange="+
+            this.props.exchange.value+"&currency1="+
+            this.props.coin+"&currency2="+
+            this.props.coin2+"&amount="+
+            this.props.amount+"&price="+
+            this.props.price;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateOrderResponse,
+            error: this.handleOrderError,
+        });
     };
     placeSwapOrder = () => {
-
+        const url = urlBase + "swap?exchange="+
+            this.props.exchange.value+"&currency1="+
+            this.props.coin+"&currency2="+
+            this.props.coin2+"&amount="+
+            this.props.amount;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateOrderResponse,
+            error: this.handleOrderError,
+        });
     };
     placeWithdrawOrder = () => {
 
@@ -179,7 +250,10 @@ export default class Trade extends React.Component {
                     </button>
                     <Form>
                         {mainComponent}
-                        <button type="button">{getSubmit(selectedMainComponent)}</button>
+                        <button type="button" onClick={this.handleSubmit}>
+                            {getSubmit(selectedMainComponent)}
+                        </button>
+                        <p>{this.state.response} </p>
                     </Form>
 
                 </div>
