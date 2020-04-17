@@ -290,12 +290,6 @@ export default class Trade extends React.Component {
             <div className="wrapper">
                 <Nav/>
                 <div className="container">
-                    <div>
-                        <CurrencySelect coin={selectedCoin}
-                                        coins={this.props.coins}
-                                        setCoin={this.props.setCoin}
-                        />
-                    </div>
                     <button onClick={this.goBack}>
                         go back todo: make an X instead
                     </button>
