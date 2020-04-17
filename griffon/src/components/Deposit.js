@@ -21,7 +21,7 @@ export default class Deposit extends React.Component {
             currency:null,
             amount:null,
             response:"0"
-        }
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }

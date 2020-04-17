@@ -13,24 +13,15 @@ import Withdraw from "../components/exchange/withdraw";
 import Deposit from "../components/exchange/deposit";
 import CurrencySelect from "../components/common/currencySelect";
 import $ from "jquery";
+import Portfolio from "../components/exchange/portfolio";
 
 
 
 export default class Trade extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            price: 0,
-        }
-
-    }
-
-    setPrice = (newPrice) => {
-        this.setState({
-            price: newPrice.value,
-        });
-    };
+    // constructor(props) {
+    //     super(props);
+    // }
 
     goBack = () => {
         this.props.goBack(COINS);
@@ -72,14 +63,20 @@ export default class Trade extends React.Component {
             // we shouldn't be here
             return(<Redirect to='/ExchangeAccess'/>);
         }
+        const marketPrice = this.props.marketPrice;
+        const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
                 mainComponent = <Sell
                     coins={this.props.coins} exchange={this.props.exchange}
+                    marketPrice={marketPrice}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
+                    price={price} setPrice={this.props.setPrice}
+                    amount={this.props.amount} setAmount={this.props.setAmount}
+                    amount2={this.props.amount2} setAmount2={this.props.setAmount2}
                 />;
                 break;
             case BUY:

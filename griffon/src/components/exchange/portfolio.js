@@ -19,6 +19,10 @@ export default function Portfolio(props) {
                                goBack={props.setMainComponent}
                                mainComponent={props.tradeMainComponent}
                                setMainComponent={props.setTradeMainComponent}
+                               price={props.price} setPrice={props.setPrice}
+                               marketPrice={props.marketPrice}
+                               amount={props.amount} setAmount={props.setAmount}
+                               amount2={props.amount2} setAmount2={props.setAmount2}
         />
     }
 

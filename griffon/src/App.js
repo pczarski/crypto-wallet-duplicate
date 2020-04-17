@@ -86,7 +86,11 @@ export default class App extends React.Component {
 
       tradeMainComponent: null,
 
-      test: null,
+      price: 0,
+      marketPrice: 0,
+
+      amount: 0,
+      amount2: 0,
     };
   }
 
@@ -156,14 +160,14 @@ export default class App extends React.Component {
   updateExchangeCoin = (coin) => {
     this.setState({
       exchangeCoin: coin,
-    });
+    }, this.fetchPriceIn);
     this.updateSelectedInPortfolio(TRADE)
   };
 
   updateExchangeCoin2 = (coin) => {
     this.setState({
       exchangeCoin2: coin,
-    });
+    }, this.fetchPriceIn);
   };
 
   // updates the exchange main component
@@ -185,6 +189,44 @@ export default class App extends React.Component {
     })
   };
 
+  setPrice = (price) => {
+    this.setState({
+      price: price,
+    });
+  };
+
+  setAmount = (amount) => {
+    this.setState({
+      amount: amount,
+    });
+  };
+
+  setAmount2 = (amount) => {
+    this.setState({
+      amount2: amount
+    });
+  };
+
+  fetchPriceIn = () => {
+    const url =
+        "http://localhost:8080/exchange-price-in?exchange="+
+        this.state.exchangeAccess.value+"&base="+this.state.exchangeCoin+
+        "&in="+this.state.exchangeCoin2;
+    console.log(url);
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType: "json",
+      success: this.setMarketPrice,
+    });
+  };
+
+  setMarketPrice = (newPrice) => {
+    this.setState({
+      marketPrice: newPrice.value,
+    });
+  };
+
 
   render() {
 
@@ -196,6 +238,10 @@ export default class App extends React.Component {
     const exchangeCoin2 = this.state.exchangeCoin2;
     const selectedInPortfolio = this.state.selectedInPortfolio;
     const tradeMainComponent = this.state.tradeMainComponent;
+    const price = this.state.price;
+    const marketPrice = this.state.marketPrice;
+    const amount = this.state.amount;
+    const amount2 = this.state.amount2;
 
     return (
         <Router>
@@ -232,6 +278,11 @@ export default class App extends React.Component {
                       tradeMainComponent={tradeMainComponent}
                       setTradeMainComponent={this.updateSelectedInTrade}
                       setCoin2={this.updateExchangeCoin2}
+                      price={price} setPrice={this.setPrice}
+                      marketPrice={marketPrice}
+                      setMarketPrice={this.setMarketPrice}
+                      amount={amount} setAmount={this.setAmount}
+                      amount2={amount2} setAmount2={this.setAmount2}
                   />}/>
 
               <Route path="/exchange" render={
