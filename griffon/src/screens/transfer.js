@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
 
-import currSel from '../components/common/currencySelect'
+import CurrSel from '../components/common/currencySelect'
 
 import Transactions from '../components/Transactions';
 import Receive from '../components/Receive';
@@ -48,7 +48,7 @@ export default class Transfer extends React.Component {
     }
   }
 
-
+  
   render () {
     if(this.props.coins == null || this.state.redirToWall === true){
       // if wallet wasn't rendered, we shouldn't even be here
@@ -65,12 +65,13 @@ export default class Transfer extends React.Component {
       component = <Transactions curr={this.props.coin} />;
     }
 
+
     return (
       <div className="wrapper">
       <Nav/>
         <div className="cont">
           <Button close type="button" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
-          {currSel(this.props)}
+          <CurrSel coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
           <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>Send Currency</Button>
           <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2" style={{width: '50%'}}>Receive Currency</Button>
           {component}

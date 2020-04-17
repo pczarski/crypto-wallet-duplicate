@@ -12,7 +12,7 @@ export default function CurrencySelect(props) {
     const selected = getOption(getCoinByCode(props.coin, props.coins));
     //{value: props.coin, label: props.coin};
     const handleChange = (selectedOption) => {
-        props.handleCoinClick(selectedOption.value);
+        props.setCoin(selectedOption.value);
     };
     const options = props.coins.map( coin => getOption(coin));
     return(
