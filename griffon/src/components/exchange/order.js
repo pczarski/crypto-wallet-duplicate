@@ -22,7 +22,6 @@ export default function Order(props) {
     return(
         <div className="container">
             {props.title}
-            <Form>
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
                         <CurrencyBox
@@ -52,7 +51,6 @@ export default function Order(props) {
                         />
                     </div>
                 </div>
-            </Form>
         </div>
     )
 }

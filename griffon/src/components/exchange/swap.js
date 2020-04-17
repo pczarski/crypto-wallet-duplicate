@@ -1,6 +1,5 @@
 import React from 'react';
 import CurrencyBox from "./currencyBox";
-import {Form, Input, Label} from 'reactstrap';
 import {roundTo2} from "../../lib/helper";
 
 export default function Swap(props) {
@@ -18,7 +17,6 @@ export default function Swap(props) {
     return(
         <div className="container">
             {props.title}
-            <Form>
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
                         <CurrencyBox
@@ -43,7 +41,6 @@ export default function Swap(props) {
                         />
                     </div>
                 </div>
-            </Form>
         </div>
     )
 }

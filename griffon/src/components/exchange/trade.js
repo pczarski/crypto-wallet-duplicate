@@ -13,14 +13,43 @@ import Deposit from "./deposit";
 import CurrencySelect from "../../components/common/currencySelect";
 import $ from "jquery";
 import Swap from "./swap";
+import {Form} from 'reactstrap';
 
-
+function getSubmit(option) {
+    switch (option) {
+        case WITHDRAW:
+            return "Withdraw";
+        case DEPOSIT:
+            return "Deposit";
+        default:
+            return "Place Order";
+    }
+}
 
 export default class Trade extends React.Component {
 
     // constructor(props) {
     //     super(props);
+    //     this.state = {
+    //         submit: ""
+    //     }
     // }
+
+    placeSellOrder = () => {
+
+    };
+    placeBuyOrder = () => {
+
+    };
+    placeSwapOrder = () => {
+
+    };
+    placeWithdrawOrder = () => {
+
+    };
+    placeDepositOrder = () => {
+
+    };
 
     goBack = () => {
         this.props.goBack(COINS);
@@ -148,7 +177,10 @@ export default class Trade extends React.Component {
                     <button onClick={this.goToDeposit}>
                         deposit
                     </button>
-                    {mainComponent}
+                    <Form>
+                        {mainComponent}
+                        <button type="button">{getSubmit(selectedMainComponent)}</button>
+                    </Form>
 
                 </div>
             </div>
