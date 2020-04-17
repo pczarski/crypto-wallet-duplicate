@@ -3,6 +3,8 @@ import '../styles/App.scss';
 import {getCurr} from '../lib/backendHandler'
 import QRCode from 'qrcode';
 
+import {Card, CardBody} from 'reactstrap';
+
 export default class Receive extends React.Component {
   
   constructor(props) {
@@ -32,10 +34,16 @@ export default class Receive extends React.Component {
   render () {
 
     return (
-    <div>
-      <h2>Receive {this.props.curr}</h2>
-      <h2>{this.state.key}</h2>
-      <canvas id="canvas" width="400" height="400" />
+    <div className="container">
+      
+      <Card body className="text-center bg-dark text-white ">
+        <h2>Receive {this.props.curr}</h2>
+        
+        <CardBody>
+        <h2>{this.state.key}</h2>
+        <canvas id="canvas" width="400" height="400" />
+        </CardBody>
+      </Card>
     </div>
     )
   }

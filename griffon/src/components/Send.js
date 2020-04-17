@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/App.scss';
 
-import { Button, Form, FormGroup, Label, Input, Tooltip} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Tooltip, Card, CardBody, CardText} from 'reactstrap';
 
 import {sendCurr, getBalance} from '../lib/backendHandler';
 
@@ -63,8 +63,10 @@ export default class Send extends React.Component {
 
   render () {
     return (
-    <div>
+    <div className="container" style={{}}>
+      <Card body className="text-center bg-dark text-white ">
       <h2>Send {this.props.curr}</h2>
+      <CardBody>
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleInputChange}  />
@@ -79,8 +81,10 @@ export default class Send extends React.Component {
       </Tooltip>
         <Button type="submit">Submit</Button>
       </Form>
-
-      <p>{this.state.response}</p>
+      </CardBody>
+      <CardText>{this.state.response}</CardText>
+      </Card>
+      <p></p>
     </div>
     )
   }

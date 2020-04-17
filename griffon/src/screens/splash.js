@@ -4,7 +4,7 @@ import '../styles/splash.scss';
 
 import {Link, Redirect} from 'react-router-dom';
 
-import {Button, Form, FormGroup, Input, FormFeedback, ButtonGroup} from 'reactstrap';
+import {Button, Form, FormGroup, Input, FormFeedback} from 'reactstrap';
 
 export default class Splash extends React.Component {
   constructor(props){
