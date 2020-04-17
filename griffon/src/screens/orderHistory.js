@@ -255,6 +255,7 @@ export default class OrderHistory extends React.Component {
     return (
       <div className="container">
       <Nav/>
+        <button onClick={this.props.goBack}>Go back</button>
           <h2>Order History</h2>
 
           <div className="currSel">
@@ -285,7 +286,7 @@ export default class OrderHistory extends React.Component {
 
 
           <div className="table">
-            <Table  size="sm" className="striped bordered hover ">
+            <Table  size="sm" className="table table-striped table-hover table-dark ">
               <thead>
               <tr>
                <th>ID</th>

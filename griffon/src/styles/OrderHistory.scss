@@ -10,9 +10,9 @@ caption {
 }
 
 .Dropdowns{
-  display: flex;
-    flex-flow: row wrap;
-    align-items: center;
+   display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 
 }
 .column {
@@ -28,13 +28,13 @@ caption {
   margin: 5px 10px 5px 0;
 }
 .tableInputSelect{
-  background-color:#262626;
 }
 .cancelBtn{
   float:right;
+  background-color: white;
 }
 .table{
-  background-color: #242424;
+
   color: #adadad;
-  border: none;
+   border: none;
 }
