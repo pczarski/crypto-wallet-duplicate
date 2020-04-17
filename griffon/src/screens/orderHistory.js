@@ -255,7 +255,7 @@ export default class OrderHistory extends React.Component {
     return (
       <div className="container">
       <Nav/>
-        <button className="back"onClick={this.props.goBack}>Go back</button>
+        <button className="back"onClick={this.props.goBack}>X</button>
           <h2>Order History</h2>
 
           <div className="currSel">
@@ -279,7 +279,7 @@ export default class OrderHistory extends React.Component {
 
                 </DropdownMenu>
               </Dropdown>
-              <Button className="btn btn-primary tableInput "  id="cancelBtn" size="lg" onClick={this.toCancelOrder}>Cancel selected Orders</Button>
+              <Button className="btn btn-primary tableInput "  id="cancelBtn" size="lg" onClick={this.toCancelOrder}>Cancel Selected Orders</Button>
             </div>
           </div>
 
