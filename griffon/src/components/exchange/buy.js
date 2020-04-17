@@ -6,8 +6,6 @@ export default function Buy(props) {
     return(
         <div>
             buy {props.coin} (-- {props.coin2}
-            <CurrencySelect/>
-            <CurrencySelect/>
         </div>
     );
 }

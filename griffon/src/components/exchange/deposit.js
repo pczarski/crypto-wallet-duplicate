@@ -5,7 +5,6 @@ export default function Deposit(props) {
     return(
         <div>
             deposit {props.coin}
-            <CurrencySelect/>
         </div>
     )
 }

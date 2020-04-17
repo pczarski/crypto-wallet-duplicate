@@ -5,7 +5,6 @@ export default function Withdraw(props) {
     return(
         <div>
             withdraw {props.coin}
-            <CurrencySelect/>
         </div>
     )
 }

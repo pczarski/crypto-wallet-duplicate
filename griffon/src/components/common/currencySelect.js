@@ -7,7 +7,7 @@ import {getCoinByCode} from "../../lib/helper";
  * coins: list of coins fetched by fetchExchangeCoins of fetchWalletCoins in app.js
  * setCoin: function that will save the selection of coin
 **/
- 
+
 export default function CurrencySelect(props) {
     console.log(props);
     const selected = getOption(getCoinByCode(props.coin, props.coins));
