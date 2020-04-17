@@ -30,6 +30,7 @@ export default function Swap(props) {
                     <div className="col">
                         <h2>⇄</h2>
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
+                        <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
                     </div>
                     <div className="col">
                         <CurrencyBox
