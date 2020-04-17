@@ -1,8 +1,8 @@
 export function roundTo2(val) {
-    if (val > 0) {
+    if (val > 0.001) {
         return(Math.floor(val * 100) / 100 ) }
     else {
-        return val.toFixed(2)
+        return val.toPrecision(4);
     }
 }
 

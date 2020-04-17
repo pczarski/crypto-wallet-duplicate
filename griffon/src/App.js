@@ -7,7 +7,7 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 
 import Settings from './screens/settings';
-import Trade from './screens/trade';
+import Trade from './components/exchange/trade';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
 import Orders from './screens/orders';
@@ -59,6 +59,7 @@ export const BUY = 4;
 export const SELL = 5;
 export const WITHDRAW = 6;
 export const DEPOSIT = 7;
+export const SWAP = 8;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -84,7 +85,7 @@ export default class App extends React.Component {
       // exchange Access portfolio
       selectedInPortfolio: COINS,
 
-      tradeMainComponent: null,
+      tradeMainComponent: SWAP,
 
       price: 0,
       marketPrice: 0,
@@ -224,7 +225,7 @@ export default class App extends React.Component {
   setMarketPrice = (newPrice) => {
     this.setState({
       marketPrice: newPrice.value,
-    });
+    },() => this.setPrice(this.state.marketPrice));
   };
 
 

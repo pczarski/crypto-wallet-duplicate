@@ -260,9 +260,6 @@ export default class OrderHistory extends React.Component {
       <Nav/>
           <h2>Order History</h2>
 
-            {/*TODO: please style this button*/}
-            <Button onClick={this.props.goBack}>Go back</Button>
-
           <div className="currSel">
             <div className="Dropdowns">
               <Dropdown className="tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
