@@ -6,7 +6,7 @@ import '../styles/bal.scss';
 import '../styles/exchange.scss';
 import '../styles/buy.scss';
 
-import {  Button,Form, FormGroup, Label, Input } from "reactstrap";
+import {Card, Select , Button,Form, FormGroup, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
 // TO DO CHECK EMPTY/ VALID
@@ -16,7 +16,7 @@ export default class AddExchange extends React.Component {
     super(props);
     this.state = {
       address:null,
-      name: null,
+      name: "Binance",
       response: ""
     }
 
@@ -32,25 +32,39 @@ export default class AddExchange extends React.Component {
   }
   handleSubmit(event) {
     let resp = addExchange( this.state.name, this.state.address);
-    this.setState({
-      response: resp.exchangeName
-    });
+    if(resp.exchangeName==="Coinbase"){
+      this.setState({
+        response: "Coinbase has been added as an Exchange"
+      });
+    }else if(resp.exchangeName==="Binance"){
+      this.setState({
+        response: "Binance has been added as an Exchange"
+      });
+    }
+
+
     event.preventDefault();
   }
 
   render () {
     return (
       <div className="container">
+      <Card id="addExchange" body className="text-center bg-dark text-white ">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="name">Exchange Name</Label>
-            <Input type="text" name="name" placeholder="Enter your Exchange Name"  onChange={this.handleInputChange} />
+            <Input  onChange={this.handleInputChange}  type="select" name="name" id="exampleSelect">
+            <option>Binance</option>
+            <option>Coinbase</option>
+
+          </Input>
             <Label for="address">Exchange Address</Label>
-            <Input type="text" name="address" placeholder="Enter your Exchange Address"  onChange={this.handleInputChange} />
+            <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
           </FormGroup>
           <Button >Submit</Button>
-          <p>{this.state.response}</p>
+          <p id="addExchange">{this.state.response}</p>
         </Form>
+        </Card>
       </div>
     );
   }
