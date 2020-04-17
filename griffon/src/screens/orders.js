@@ -96,18 +96,17 @@ export default class Orders extends React.Component {
       <div className="wrapper">
       <Nav />
         <div id="box"className="container">
-          <h2>Add Exchange or Withdraw/Deposit</h2>
+          <h2>Make Orders</h2>
 
         <Form >
 
           <FormGroup>
             <Label for="name">Exchange Name</Label>
-            <Input type="text" name="name" placeholder="Enter your Exchange Name"  onChange={this.handleInputChange} />
-            <Label for="address">Exchange Address</Label>
-            <Input type="text" name="address" placeholder="Enter your Exchange Address"  onChange={this.handleInputChange} />
+            <Input type="select" name="name" placeholder="Enter your Exchange Name"  onChange={this.handleInputChange} >
+            <option>Binance</option>
+            <option>Coinbase</option>
+            </Input>
           </FormGroup>
-
-          <Button onClick={this.handleSubmit} >Submit</Button>
           <div>
           <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button> <Button onClick={this.handleClick3} >Swap Order</Button></div>
 
