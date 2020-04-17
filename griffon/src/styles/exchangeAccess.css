@@ -1,8 +1,35 @@
-.btn{
+.btn.btn-secondary{
     background-color:#464B51;
-    border-style: none;
+    border: 50px,solid,white;
+    text-align: center;
+    width:150px;
+    height:auto;
 }
 
 .cont{
     background-color: #464B51;
 }
+
+.react-select-container{
+    width:150px;
+    border-radius:10 ;
+    
+    
+}
+
+
+/* .css-2b097c-container{
+ width:150px;
+ height:auto;
+ 
+ 
+}
+.css-g1d714-ValueContainer{
+    background-color:#464B51;
+}
+.css-1hb7zxy-IndicatorsContainer{
+
+    background-color: #464B51;
+}
+.css-yk16xz-control{
+} */

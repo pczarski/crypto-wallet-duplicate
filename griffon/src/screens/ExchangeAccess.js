@@ -9,6 +9,7 @@ import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";
 import Portfolio from "../components/exchange/portfolio";
 
+
 import '../styles/exchangeAccess.css'
 
 export default class ExchangeAccess extends Component
@@ -68,16 +69,17 @@ export default class ExchangeAccess extends Component
                 <div className="cont">
                     <div className = "nav justify-content-center">
 
-                        <Button className = "nav nav-item" onClick={this.selectPortfolio}>Exchange</Button>
+                        <Button className = "nav justify-content-center nav-item" onClick={this.selectPortfolio}>Exchange</Button>
 
-                        <Select options={exchangeOptions}
+                        <Select className="react-select-container" classNamePrefix="react-select"  options={exchangeOptions}
                                 onChange={this.props.setExchange}
                                 value={this.props.exchange}
+                               
                         />
 
-                        <div id="order-history">
+                        
                             <Button onClick={this.selectOrderHistory} className="nav-item">Order History</Button>
-                        </div>
+                       
 
                     </div>
                     {mainComponent}
