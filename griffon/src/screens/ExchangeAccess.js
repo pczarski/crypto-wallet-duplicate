@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import SideBar from '../components/Nav.js';
-import Select from "../components/common/select";
+//import Select from "../components/common/select";
+import Select from 'react-select';
 import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";
 import Portfolio from "../components/exchange/portfolio";
@@ -56,6 +57,8 @@ export default class ExchangeAccess extends Component
                                           setExchange={this.props.setExchange}
             />;
         }
+
+        const exchangeOptions = Object.keys(this.props.exchanges).map(item => {})
 
         return (
             <div className="wrapper">

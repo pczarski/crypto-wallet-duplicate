@@ -46,21 +46,27 @@ export default class Trade extends React.Component {
         switch (selectedMainComponent) {
             case SELL:
                 mainComponent = <Sell
+                    coins={this.props.coins}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                 />;
                 break;
             case BUY:
                 mainComponent = <Buy
+                    coins={this.props.coins}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                 />;
                 break;
             case WITHDRAW:
-                mainComponent = <Withdraw coin={this.props.coin} setCoin={this.props.setCoin}/>;
+                mainComponent = <Withdraw
+                    coins={this.props.coins}
+                    coin={this.props.coin} setCoin={this.props.setCoin}/>;
                 break;
             case DEPOSIT:
-                mainComponent = <Deposit coin={this.props.coin} setCoin={this.props.setCoin}/>;
+                mainComponent = <Deposit
+                    coins={this.props.coins}
+                    coin={this.props.coin} setCoin={this.props.setCoin}/>;
                 break;
             default:
                 mainComponent = null;
