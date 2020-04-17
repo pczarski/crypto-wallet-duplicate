@@ -18,12 +18,35 @@ import {getIcon} from "./components/walletComponents/Logos";
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+import BinanceIcon from './assets/binance.png';
+import CoinbaseIcon from './assets/coinbase.png';
+
 // a dictionary to store all the supported exchanges, so that we can easily dynamically add more later on
 // please use if you need to have a list of all the exchanges. Object.keys(exchangeList) will return ['Binance', 'Coinbase']
 const exchangeList = [
-  {value: 'Binance', label: "Binance"},
-  {value: 'Coinbase', label: 'Coinbase'},
+  {value: 'Binance', label: getExchangeLabel('Binance')},
+  {value: 'Coinbase', label: getExchangeLabel('Coinbase')},
 ];
+
+function getExchangeLabel(name){
+  switch (name) {
+    case 'Binance':
+      return (
+          <div>
+            <img src={BinanceIcon}/> {name}
+          </div>
+      );
+    case 'Coinbase':
+      return (
+          <div>
+            <img src={CoinbaseIcon}/> {name}
+          </div>
+      );
+    default:
+          return null;
+
+  }
+}
 
 // used to control what's displayed in exchange access page and it's children components
 export const PORTFOLIO = 0;
@@ -41,6 +64,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    //this.setExchange = this.setExchange.bind(this);
     // Keep all the states the need to be shared across the app here, and pass them as props where necessary
     this.state =  {
       // - to render coins info on wallet and exchange
@@ -61,7 +85,9 @@ export default class App extends React.Component {
       selectedInPortfolio: COINS,
 
       tradeMainComponent: null,
-    }
+
+      test: null,
+    };
   }
 
   /** wallet functions: **/
@@ -96,17 +122,17 @@ export default class App extends React.Component {
 
   /** Exchange functions **/
 
-  // will update the state to the passed exchange
-  setExchange = (exchange) => {
+  // will update the state to the passed exchange and fetch coins once done
+  setExchange = (selectedExchange) => {
     this.setState({
-      exchangeAccess: exchange,
-    });
-    console.log(this.state.exchangeAccess);
-    this.fetchExchangeCoins();
+      exchangeAccess: selectedExchange,
+    }, this.fetchExchangeCoins);
   };
+
 
   // will update the exchangeCoins to selected exchange coins
   fetchExchangeCoins = () => {
+    console.log(this.state.exchangeAccess);
     const exchangeName = this.state.exchangeAccess.value;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
     $.ajax({
@@ -159,6 +185,7 @@ export default class App extends React.Component {
     })
   };
 
+
   render() {
 
     const walletCoin = this.state.walletCoin;
@@ -194,7 +221,8 @@ export default class App extends React.Component {
                 (props) => <ExchangeAccess
                       {...props} coin = {exchangeCoin} coin2 = {exchangeCoin2}
                       coins={exchangeCoins} fetch={this.fetchExchangeCoins /* for updating state.coins to exchange coins*/}
-                      setExchange = {this.setExchange} exchanges={exchangeList /* for rendering a list of exchanges*/}
+                      setExchange = {this.setExchange}
+                      exchanges={exchangeList /* for rendering a list of exchanges*/}
                       exchange={this.state.exchangeAccess /* so that we can show which exchange was selected in the dropdown*/ }
                       mainComponent={this.state.exchangeMainComponent /*so that the user continues on the tab they left off*/}
                       setMainComponent={this.setExchangeMainComponent}

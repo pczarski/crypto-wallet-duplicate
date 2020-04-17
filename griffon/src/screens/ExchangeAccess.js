@@ -26,11 +26,6 @@ export default class ExchangeAccess extends Component
         this.props.setMainComponent(PORTFOLIO);
     };
 
-    handleCoinClick = (coin) => {
-        console.log(coin);
-        this.props.handleCoinClick(coin);
-    };
-
     render() {
         // use the mainComponent prop which is taken from App.js's state
         const selectedComponent = this.props.mainComponent;
@@ -58,16 +53,16 @@ export default class ExchangeAccess extends Component
             />;
         }
 
-        const exchangeOptions = Object.keys(this.props.exchanges).map(item => {})
+        const exchangeOptions = this.props.exchanges;
 
         return (
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
 
-                    <Select items={Object.keys(this.props.exchanges) /*to dynamically render the list of exchanges*/}
-                            onSelect={this.props.setExchange /* to update to the selected exchange*/}
-                            selectedItem={this.props.exchange/*to show what we have selected right away as opposed to use a statically selected default*/}
+                    <Select options={exchangeOptions}
+                            onChange={this.props.setExchange}
+                            value={this.props.exchange}
                     />
                     <div id="order history">
                         <Button onClick={this.selectOrderHistory} className="btn btn-primary" size="lg" block>View Order History</Button>
