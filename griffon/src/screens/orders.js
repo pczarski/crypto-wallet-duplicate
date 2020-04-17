@@ -11,6 +11,8 @@ import { InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 import Buy from '../components/Buy';
 import Withdraw from '../components/Withdraw';
 import Deposit from '../components/Deposit';
+import Swap from '../components/Swap';
+
 import { addExchange} from '../lib/backendHandler';
 export default class Orders extends React.Component {
   constructor(props) {
@@ -18,7 +20,7 @@ export default class Orders extends React.Component {
     this.state = {
 
       address:null,
-      name: null,
+      name: "Binance",
       response: "0",
       choice:''
     }
@@ -27,6 +29,7 @@ export default class Orders extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleClick1 = this.handleClick1.bind(this);
           this.handleClick2 = this.handleClick2.bind(this);
+                this.handleClick3= this.handleClick3.bind(this);
   }
   handleInputChange(event) {
     this.setState({
@@ -66,6 +69,13 @@ export default class Orders extends React.Component {
 
     event.preventDefault();
   }
+  handleClick3(event) {
+    this.setState({
+      choice:'4'
+    });
+
+    event.preventDefault();
+  }
   render () {
     let component;
     if (this.state.choice === "1") {
@@ -77,6 +87,9 @@ export default class Orders extends React.Component {
     else if (this.state.choice ==="3") {
 
         component = <Deposit name={this.state.name}/>;
+    }else if (this.state.choice ==="4") {
+
+        component = <Swap name={this.state.name}/>;
     }
 
     return (
@@ -96,7 +109,7 @@ export default class Orders extends React.Component {
 
           <Button onClick={this.handleSubmit} >Submit</Button>
           <div>
-          <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button></div>
+          <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button> <Button onClick={this.handleClick3} >Swap Order</Button></div>
 
 
     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
