@@ -10,13 +10,29 @@ caption {
 }
 
 .Dropdowns{
-
+   display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 
 }
 .column {
   float: left;
   width: 50%;
   padding: 10px;
+}
+h5{color:grey}
+.back{
+  color:white;
+  background-color: grey;
+  border:none;
+  border-radius: 0.5em;
+  margin-top:1em;
+  margin-right: 1em;
+  float:right;
+}
+button:hover{
+
+  background-color: #242424
 }
 
 .tableInput{
@@ -25,6 +41,15 @@ caption {
   float:left;
   margin: 5px 10px 5px 0;
 }
-.cancelBtn{
+.tableInputSelect{
+}
+#cancelBtn{
   float:right;
+  margin-left: auto;
+}
+
+.table{
+
+  color: #adadad;
+   border: none;
 }
