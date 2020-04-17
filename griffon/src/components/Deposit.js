@@ -18,7 +18,7 @@ export default class Deposit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        currency:null,
+        currency:"ETH",
         amount:null,
         response:"0"
     }
@@ -50,7 +50,14 @@ export default class Deposit extends React.Component {
    <div className="form-row mb-4 ">
        <div className="col">
        <Label >Currency:</Label>
-       <Input type="text"   onChange={this.handleInputChange}className="form-control" name="currency"placeholder="What currency do you want to deposit?" />
+       <Input type="select"   onChange={this.handleInputChange}className="form-control" name="currency"placeholder="What currency do you want to deposit?" >
+         <option>ETH</option>
+         <option>BTC</option>
+         <option>LTC</option>
+         <option>USDT</option>
+         <option>DASH</option>
+       </Input>
+
        </div>
        <div className="col">
        <Label >Amount:</Label>

@@ -17,9 +17,9 @@ export default class Buy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            type:null,
-            currencyFrom:null,
-            currencyTo:null,
+            type:"Buy",
+            currencyFrom:"BTC",
+            currencyTo:"ETH",
             amount:null,
             price:null,
             response:"0"
@@ -52,32 +52,55 @@ export default class Buy extends React.Component {
                     <div className="form-row mb-4 ">
                         <div className="col">
                             <label >Type:</label>
-                            <Input type="text"   onChange={this.handleInputChange}className="form-control" name="type"placeholder="What Type of Order do you want to make" />
+                            <Input type="select"   onChange={this.handleInputChange}className="form-control" name="type"placeholder="What type of order would you like to make?" >
+                              <option>Buy</option>
+                              <option>Sell</option>
+
+                            </Input>
                         </div>
                     </div>
                     <div className="form-row mb-4">
                         <div className="col">
                             <Label>From:</Label>
-                            <Input type="text" className="form-control mb-4" name="currencyFrom" onChange={this.handleInputChange}placeholder="What currency are you converting from"/></div><p id="arrow" onClick=""> <a id="test" href="#">&#8644;</a></p>
-                        <div className="col">
+                            <Input type="select"   onChange={this.handleInputChange}className="form-control" name="currencyFrom"placeholder="What currency are you converting from?" >
+                              <option>BTC</option>
+                              <option>ETH</option>
+                              <option>LTC</option>
+                              <option>USDT</option>
+                              <option>DASH</option>
+                            </Input>
+                            </div>
+                            <div className="col">
                             <Label>To:</Label>
-                            <Input  type="text"  className="form-control" name="currencyTo" onChange={this.handleInputChange} placeholder="What currency are you converting to" />
-                        </div></div>
-                    <div className="form-row mb-4">
-                        <div className="col">
-                            <Label>Amount:</Label>
-                            <Input type="text" className="form-control mb-4"name="amount" onChange={this.handleInputChange} placeholder="Amount"/>
+                            <Input type="select"   onChange={this.handleInputChange}className="form-control" name="currencyTo"placeholder="What currency are you converting to?" >
+                              <option>ETH</option>
+                              <option>BTC</option>
+                              <option>LTC</option>
+                              <option>USDT</option>
+                              <option>DASH</option>
+                            </Input>
                         </div>
-                        <div className="col">
-                            <Label>Price:</Label>
-                            <Input type="text" className="form-control mb-4" name="price" onChange={this.handleInputChange} placeholder="0.00"/> </div>
-                    </div>
-                    <div className="form-row mb-4">
-                        <Button className="btn btn-info my-4 btn-block" type="submit">Submit</Button>
-                    </div>
+                        </div>
+                        <div className="form-row mb-4">
+                            <div className="col">
+                                <Label>Amount:</Label>
+                                <Input type="text"   onChange={this.handleInputChange}className="form-control" name="amount"placeholder="Amount"/ >
+
+                                </div>
+                                <div className="col">
+                                    <Label>Price:</Label>
+                                    <Input type="text"   onChange={this.handleInputChange}className="form-control" name="price"placeholder="0.00"/ >
+
+                                    </div>
+                            </div>
+
+                            <Button> Submit </Button>
+
+
+
                     {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
                 </Form>
-            </div>
+          </div>
         );
     }
 }
