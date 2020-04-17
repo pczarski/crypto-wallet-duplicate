@@ -1,20 +1,18 @@
 import React from 'react';
-import Nav from '../components/Nav';
+import Nav from '../Nav';
 
-import '../styles/nav.scss';
-import '../styles/App.scss';
-import '../styles/bal.scss';
-import '../styles/exchange.scss';
-import {Link, Redirect} from 'react-router-dom';
-import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../App";
-import Sell from "../components/exchange/sell";
-import Buy from "../components/exchange/buy";
-import Withdraw from "../components/exchange/withdraw";
-import Deposit from "../components/exchange/deposit";
-import CurrencySelect from "../components/common/currencySelect";
+import '../../styles/nav.scss';
+import '../../styles/App.scss';
+import '../../styles/bal.scss';
+import '../../styles/exchange.scss';
+import {Redirect} from 'react-router-dom';
+import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
+import Order from "./order";
+import Withdraw from "./withdraw";
+import Deposit from "./deposit";
+import CurrencySelect from "../../components/common/currencySelect";
 import $ from "jquery";
-import Portfolio from "../components/exchange/portfolio";
-import Swap from "../components/exchange/swap";
+import Swap from "./swap";
 
 
 
@@ -75,9 +73,10 @@ export default class Trade extends React.Component {
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
-                mainComponent = <Sell
+                mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
-                    marketPrice={marketPrice}
+                    marketPrice={marketPrice} label={"you will get:"}
+                    title={"Sell"}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -86,10 +85,15 @@ export default class Trade extends React.Component {
                 />;
                 break;
             case BUY:
-                mainComponent = <Buy
-                    coins={this.props.coins}
+                mainComponent = <Order
+                    coins={this.props.coins} exchange={this.props.exchange}
+                    marketPrice={marketPrice} label={"you will need:"}
+                    title={"Buy"}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
+                    price={price} setPrice={this.props.setPrice}
+                    amount={this.props.amount} setAmount={this.props.setAmount}
+                    amount2={this.props.amount2} setAmount2={this.props.setAmount2}
                 />;
                 break;
             case WITHDRAW:
@@ -103,7 +107,16 @@ export default class Trade extends React.Component {
                     coin={this.props.coin} setCoin={this.props.setCoin}/>;
                 break;
             default:
-                mainComponent = <Swap/>;
+                mainComponent = <Swap
+                    coins={this.props.coins} exchange={this.props.exchange}
+                    marketPrice={marketPrice} label={"you will get:"}
+                    title={"Swap"}
+                    coin={this.props.coin} setCoin={this.props.setCoin}
+                    coin2={this.props.coin2} setCoin2={this.props.setCoin2}
+                    price={price} setPrice={this.props.setPrice}
+                    amount={this.props.amount} setAmount={this.props.setAmount}
+                    amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                />;
         }
         const selectedCoin = this.props.coin;
         return (

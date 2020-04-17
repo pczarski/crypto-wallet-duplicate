@@ -1,7 +1,7 @@
 import Coins from "../walletComponents/Coins";
 import React from "react";
 import {COINS} from "../../App";
-import Trade from "../../screens/trade";
+import Trade from "./trade";
 
 // controller component to display coins or making orders
 export default function Portfolio(props) {

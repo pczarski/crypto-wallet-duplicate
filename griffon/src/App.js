@@ -7,7 +7,7 @@ import CreateNew from './screens/createnew';
 import Recover from './screens/recover';
 
 import Settings from './screens/settings';
-import Trade from './screens/trade';
+import Trade from './components/exchange/trade';
 import Transfer from './screens/transfer';
 import Order from './screens/order';
 import Orders from './screens/orders';
@@ -85,7 +85,7 @@ export default class App extends React.Component {
       // exchange Access portfolio
       selectedInPortfolio: COINS,
 
-      tradeMainComponent: SELL,
+      tradeMainComponent: SWAP,
 
       price: 0,
       marketPrice: 0,
