@@ -39,7 +39,6 @@ export default class Coins extends Component
 
     componentDidMount() {
         // update the coin values
-        console.log(this.props);
         this.props.fetch();
     }
 
