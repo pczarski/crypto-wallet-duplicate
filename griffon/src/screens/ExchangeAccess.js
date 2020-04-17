@@ -9,6 +9,8 @@ import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";
 import Portfolio from "../components/exchange/portfolio";
 
+import '../styles/exchangeAccess.css'
+
 export default class ExchangeAccess extends Component
 {
     constructor(props){
@@ -66,23 +68,26 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
+                    <div className = "nav justify-content-center">
+                        
+                        
+                            <div id="order-history">
+                                <Button onClick={this.selectOrderHistory} className="nav-item">View Order History</Button>
+                            </div>
+                            <Select className="nav nav-item" items={Object.keys(this.props.exchanges) /*to dynamically render the list of exchanges*/}
+                                onSelect={this.props.setExchange /* to update to the selected exchange*/}
+                                selectedItem={this.props.exchange/*to show what we have selected right away as opposed to use a statically selected default*/}
+                        />
+                        
+                                <Button className = "nav nav-item">Exchange a Currency</Button>
+                            
 
-                    <Select items={Object.keys(this.props.exchanges) /*to dynamically render the list of exchanges*/}
-                            onSelect={this.props.setExchange /* to update to the selected exchange*/}
-                            selectedItem={this.props.exchange/*to show what we have selected right away as opposed to use a statically selected default*/}
-                    />
-                    <div id="order history">
-                        <Button onClick={this.selectOrderHistory} className="btn btn-primary" size="lg" block>View Order History</Button>
-                    </div>
-
-                    <div className="content">
+                            
+                        
+                        </div>
                         {mainComponent}
-                        <Link to="/exchange">
-
-                            <Button className = "button">Exchange a Currency</Button>
-                        </Link>
-                    </div>
                 </div>
+                
             </div>
         )
     }

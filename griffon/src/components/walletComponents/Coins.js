@@ -50,7 +50,7 @@ export default class Coins extends Component
                     <tbody>
                         <tr>{this.renderTableHeader()}</tr>
                         {this.renderCoinsToTable()}
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         )
