@@ -152,3 +152,11 @@ export function getAllOrderHistory() {
   req.send(null);
   return JSON.parse(req.responseText);
 }
+export function getValIn (curr) {
+    const url = "http://localhost:8080/total-balance?in=" + curr
+
+    let req = new XMLHttpRequest();
+    req.open('GET', url, false);
+    req.send(null);
+    return JSON.parse(req.response);
+}

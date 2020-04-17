@@ -5,13 +5,13 @@ import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/exchange.scss';
-import {Link} from 'react-router-dom';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button,Form, FormGroup, Label, Input } from "reactstrap";
-import { InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+
+import {Button} from 'reactstrap';
+
 import Buy from '../components/Buy';
 import Withdraw from '../components/Withdraw';
 import Deposit from '../components/Deposit';
-import { addExchange} from '../lib/backendHandler';
+
 export default class Orders extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,6 @@ export default class Orders extends React.Component {
       choice:''
     }
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleClick1 = this.handleClick1.bind(this);
           this.handleClick2 = this.handleClick2.bind(this);
@@ -34,17 +33,7 @@ export default class Orders extends React.Component {
     });
 
   }
-  handleSubmit(event) {
-    let resp = addExchange( this.state.name, this.state.address);
-    console.log(resp);
-    this.setState({
 
-      response: resp,
-
-    });
-
-    event.preventDefault();
-  }
   handleClick(event) {
     this.setState({
       choice:'1'
@@ -82,31 +71,16 @@ export default class Orders extends React.Component {
     return (
       <div className="wrapper">
       <Nav />
-        <div id="box"className="container">
-          <h2>Add Exchange or Withdraw/Deposit</h2>
-
-        <Form >
-
-          <FormGroup>
-            <Label for="name">Exchange Name</Label>
-            <Input type="text" name="name" placeholder="Enter your Exchange Name"  onChange={this.handleInputChange} />
-            <Label for="address">Exchange Address</Label>
-            <Input type="text" name="address" placeholder="Enter your Exchange Address"  onChange={this.handleInputChange} />
-          </FormGroup>
-
-          <Button onClick={this.handleSubmit} >Submit</Button>
-          <div>
-          <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button></div>
-
-
-    {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
-        </Form>
-
-
+        <div className="cont">
+          <h2> Withdraw/Deposit from Exchange</h2>
+          <Button onClick={this.handleClick1} >Withdraw</Button><Button onClick={this.handleClick} >Make Order</Button><Button onClick={this.handleClick2} >Deposit</Button>
+          
         {component}
-          </div>
         </div>
 
+
+        {<p>Response: {this.state.response}</p> && (!this.state.response == null)}
+      </div>
     );
   }
 }
