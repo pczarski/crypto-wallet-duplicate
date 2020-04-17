@@ -256,10 +256,11 @@ export default class OrderHistory extends React.Component {
       <div className="container">
       <Nav/>
         <button className="back"onClick={this.props.goBack}>X</button>
-          <h2>Order History</h2>
+
 
           <div className="currSel">
             <div className="Dropdowns">
+            <h5 className="tableInput">Exchange:</h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                   {this.state.exchange}
