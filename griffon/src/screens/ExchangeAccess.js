@@ -9,6 +9,8 @@ import OrderHistory from "./orderHistory";
 import {ORDERS, PORTFOLIO} from "../App";
 import Portfolio from "../components/exchange/portfolio";
 
+import '../styles/exchangeAccess.css'
+
 export default class ExchangeAccess extends Component
 {
     // todo: not keeping an states, consider converting to a function component
@@ -64,23 +66,25 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
-
+                    <div className = "nav justify-content-center">
+                        
+                        
+                            <div id="order-history">
+                                <Button onClick={this.selectOrderHistory} className="nav-item">View Order History</Button>
+                            </div>
                     <Select options={exchangeOptions}
                             onChange={this.props.setExchange}
                             value={this.props.exchange}
                     />
-                    <div id="order history">
-                        <Button onClick={this.selectOrderHistory} className="btn btn-primary" size="lg" block>View Order History</Button>
-                    </div>
+                        
+                                <Button className = "nav nav-item">Exchange a Currency</Button>
 
-                    <div className="content">
+                            
+                        
+                        </div>
                         {mainComponent}
-                        <Link to="/exchange">
-
-                            <Button className = "button">Exchange a Currency</Button>
-                        </Link>
-                    </div>
                 </div>
+                
             </div>
         )
     }
