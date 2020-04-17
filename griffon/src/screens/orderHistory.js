@@ -19,15 +19,14 @@ export default class OrderHistory extends React.Component {
     this.toCancelOrder = this.toCancelOrder.bind(this);
     //makeOrder("Sell", "Binance", "ETH", "BTC", "5.0", "10.0")
     this.state = {
-      supportedEx: ["ALL","Binance"],
+      supportedEx: this.props.exchanges.map(element => element.value),
       displayOptions:["ALL","COMPLETE","INCOMPLETE","CANCELED"],
       currentDisplay:"ALL",
-      exchange: "Select an exchange",
+      exchange: this.props.exchange.value,
       completedOrders: [],
       incompleteOrders: [],
       cancelledOrders: [],
       allOrders:[],
-      gotOrders: false,
       dropdownOpen: false,
       dropdownDisplayOpen: false,
       cancel:false,
@@ -37,6 +36,7 @@ export default class OrderHistory extends React.Component {
     }
 
   }
+  componentDidMount(){this.getOrders()}
 /*
   toggleCancel() {
   this.setState(
@@ -45,11 +45,11 @@ export default class OrderHistory extends React.Component {
 
   toCancelOrder(){
     const toCancel = this.state.ordersToCancel
-    console.log("in cancel orders: 1)"+toCancel+" 2) "+this.state.incompleteOrders.length)
+    //console.log("in cancel orders: 1)"+toCancel+" 2) "+this.state.incompleteOrders.length)
     this.state.incompleteOrders.map((element,i)=>{
-      console.log(element.id)
+      //console.log(element.id)
       let index = toCancel.indexOf(element.id.toString())
-      console.log("index: " + index)
+      //console.log("index: " + index)
       if (index>=0){cancelOrder(element.exchange,element.id)}//if element.id is in ordersToCancel
 
       //{this.state.ordersToCancel.includes(element.id)?console.log("includes element "):console.log("Doesnot includes element") }
@@ -79,7 +79,6 @@ export default class OrderHistory extends React.Component {
       await this.setState({
         dropdownOpen: !this.state.dropdownOpen,
         exchange: e.target.innerText,
-        gotOrders: false,
         //gotExchange: true
       });
       //console.log("SELECTED EXCHANGE: "+ this.state.exchange )
@@ -124,7 +123,7 @@ export default class OrderHistory extends React.Component {
   getOrders(){
       let allOrders =[]
       //console.log("DISPLAY OPTION: "+ this.state.currentDisplay)
-      this.state.exchange === this.state.supportedEx[0]? allOrders = getAllOrderHistory():allOrders = getOrderHistory(this.state.exchange);
+      allOrders = getOrderHistory(this.state.exchange);
       //returns all orders from specified exchange
       let incomplete =[]
       let complete =[]
@@ -149,7 +148,6 @@ export default class OrderHistory extends React.Component {
 
       this.setState(
         {
-          gotOrders: true,
           incompleteOrders:incomplete,
           completedOrders:complete,
           allOrders:orders,
@@ -249,23 +247,19 @@ export default class OrderHistory extends React.Component {
     await this.setState({
       ordersToCancel: arr
     })
-    console.log(this.state.ordersToCancel)
+    //console.log(this.state.ordersToCancel)
   }
 
   render () {
-
-
+    //console.log(this.props.exchanges)
     return (
       <div className="container">
       <Nav/>
           <h2>Order History</h2>
 
-            {/*TODO: please style this button*/}
-            <Button onClick={this.props.goBack}>Go back</Button>
-
           <div className="currSel">
             <div className="Dropdowns">
-              <Dropdown className="tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+              <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                   {this.state.exchange}
                 </DropdownToggle>
@@ -274,8 +268,8 @@ export default class OrderHistory extends React.Component {
 
                 </DropdownMenu>
               </Dropdown>
-              <label className="tableInput">Display:</label>
-              <Dropdown className="tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
+              <h5 className="tableInput">Display:</h5>
+              <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
                 <DropdownToggle caret>
                   {this.state.currentDisplay}
                 </DropdownToggle>
@@ -303,8 +297,7 @@ export default class OrderHistory extends React.Component {
                <th>Cancel</th>
               </tr>
               </thead>
-              {this.state.gotOrders === true?
-              this.getTable():null}
+              {this.getTable()}
               </Table>
            </div>
 
