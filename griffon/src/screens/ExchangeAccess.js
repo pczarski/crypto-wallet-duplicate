@@ -37,7 +37,7 @@ export default class ExchangeAccess extends Component
             // children components are Coins and Exchange
             // this.props.selectedInPortfolio and this.props.setSelectedInPortfolio control
             // what is displayed in that component
-            mainComponent = <Portfolio fetch={this.props.fetch}
+            mainComponent = <Portfolio fetch={this.props.fetch} exchange={this.props.exchange}
                                        coin={this.props.coin} coin2={this.props.coin2}
                                        setCoin={this.props.handleCoinClick}
                                        setCoin2={this.props.setCoin2} coins={this.props.coins}

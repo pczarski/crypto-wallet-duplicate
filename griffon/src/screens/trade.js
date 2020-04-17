@@ -11,20 +11,38 @@ import Sell from "../components/exchange/sell";
 import Buy from "../components/exchange/buy";
 import Withdraw from "../components/exchange/withdraw";
 import Deposit from "../components/exchange/deposit";
+import CurrencySelect from "../components/common/currencySelect";
+import $ from "jquery";
 
 
 
 export default class Trade extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            price: 0,
+        }
+
+    }
+
+    setPrice = (newPrice) => {
+        this.setState({
+            price: newPrice.value,
+        });
+    };
 
     goBack = () => {
         this.props.goBack(COINS);
     };
 
     goToSell = () => {
+        this.fetchPriceIn();
         this.props.setMainComponent(SELL);
     };
 
     gotToBuy = () => {
+        this.fetchPriceIn();
         this.props.setMainComponent(BUY);
     };
 
@@ -34,6 +52,19 @@ export default class Trade extends React.Component {
 
     goToDeposit = () => {
         this.props.setMainComponent(DEPOSIT);
+    };
+
+    fetchPriceIn = () => {
+        const url =
+            "http://localhost:8080/exchange-price-in?exchange="+
+            this.props.exchange.value+"&base="+this.props.coin+
+            "&in="+this.props.coin2;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.setPrice,
+        });
     };
 
     render () {
@@ -46,7 +77,7 @@ export default class Trade extends React.Component {
         switch (selectedMainComponent) {
             case SELL:
                 mainComponent = <Sell
-                    coins={this.props.coins}
+                    coins={this.props.coins} exchange={this.props.exchange}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                 />;
@@ -77,7 +108,10 @@ export default class Trade extends React.Component {
                 <Nav/>
                 <div className="container">
                     <div>
-                        TODO: dropdown here: {selectedCoin}
+                        <CurrencySelect coin={selectedCoin}
+                                        coins={this.props.coins}
+                                        setCoin={this.props.setCoin}
+                        />
                     </div>
                     <button onClick={this.goBack}>
                         go back todo: make an X instead
