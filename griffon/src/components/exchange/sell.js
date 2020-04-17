@@ -3,10 +3,6 @@ import CurrencyBox from "./currencyBox";
 import {Form, Input, Label} from 'reactstrap';
 import {roundTo2} from "../../lib/helper";
 export default function Sell(props) {
-    // const [amount, setAmount] = useState(0);
-    // const [amount2, setAmount2] = useState(0);
-    console.log(props);
-
     const handlePriceChange = (e) => {
         props.setPrice(e.target.value);
     };
@@ -27,7 +23,7 @@ export default function Sell(props) {
                     <div className="col">
                         <Label>Price</Label>
                         <Input type='text' className='form-control'
-                               placeHolder={props.marketPrice}
+                               placeholder={props.marketPrice}
                                onChange={handlePriceChange}
                         />
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}

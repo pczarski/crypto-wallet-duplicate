@@ -59,6 +59,7 @@ export const BUY = 4;
 export const SELL = 5;
 export const WITHDRAW = 6;
 export const DEPOSIT = 7;
+export const SWAP = 8;
 
 export default class App extends React.Component {
   constructor(props) {
@@ -84,7 +85,7 @@ export default class App extends React.Component {
       // exchange Access portfolio
       selectedInPortfolio: COINS,
 
-      tradeMainComponent: null,
+      tradeMainComponent: SELL,
 
       price: 0,
       marketPrice: 0,

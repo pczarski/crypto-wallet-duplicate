@@ -6,7 +6,7 @@ import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/exchange.scss';
 import {Link, Redirect} from 'react-router-dom';
-import {COINS, SELL, BUY, WITHDRAW, DEPOSIT} from "../App";
+import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../App";
 import Sell from "../components/exchange/sell";
 import Buy from "../components/exchange/buy";
 import Withdraw from "../components/exchange/withdraw";
@@ -14,6 +14,7 @@ import Deposit from "../components/exchange/deposit";
 import CurrencySelect from "../components/common/currencySelect";
 import $ from "jquery";
 import Portfolio from "../components/exchange/portfolio";
+import Swap from "../components/exchange/swap";
 
 
 
@@ -25,6 +26,11 @@ export default class Trade extends React.Component {
 
     goBack = () => {
         this.props.goBack(COINS);
+    };
+
+    goToSwap = () => {
+        this.fetchPriceIn();
+        this.props.setMainComponent(SWAP);
     };
 
     goToSell = () => {
@@ -97,7 +103,7 @@ export default class Trade extends React.Component {
                     coin={this.props.coin} setCoin={this.props.setCoin}/>;
                 break;
             default:
-                mainComponent = null;
+                mainComponent = <Swap/>;
         }
         const selectedCoin = this.props.coin;
         return (
@@ -114,6 +120,9 @@ export default class Trade extends React.Component {
                         go back todo: make an X instead
                     </button>
                     <br/>
+                    <button onClick={this.goToSwap}>
+                        Swap
+                    </button>
                     <button onClick={this.goToSell}>
                         Sell
                     </button>
