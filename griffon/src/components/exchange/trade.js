@@ -8,7 +8,7 @@ import '../../styles/exchange.scss';
 import {Redirect} from 'react-router-dom';
 import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
 import Order from "./order";
-import Withdraw from "./withdraw";
+import WithdrawDeposit from "./withdrawDeposit";
 import Deposit from "./deposit";
 import CurrencySelect from "../../components/common/currencySelect";
 import $ from "jquery";
@@ -33,6 +33,7 @@ export default class Trade extends React.Component {
         super(props);
         this.state = {
             response: "",
+            isError: false,
         }
     }
 
@@ -40,15 +41,41 @@ export default class Trade extends React.Component {
         console.log(data);
         this.setState({
             response: "order placed with id " + data.id,
+            isError: false,
         });
+        this.props.setAmount(0.0);
+        this.props.setAmount2(0.0);
     };
+
+    updateWithdrawDepositResponse = (data) => {
+        console.log(data);
+        this.setState({
+            response: "success!",
+            isError: false,
+        });
+        this.props.setAmount(0.0);
+        this.props.setAmount2(0.0);
+    };
+
 
     handleOrderError = (error) => {
-      console.log(error.getAllResponseHeaders());
+      if(error.status === 400){
+          this.setState({
+              response: "Insufficient balance",
+              isError: true,
+          });
+          this.props.setAmount(0.0);
+          this.props.setAmount2(0.0);
+      } else {
+          this.setState({
+              response: "Couldn't place order",
+              isError: true,
+          });
+      }
     };
 
-    handleSubmit = () => {
-        console.log("called!!");
+    handleSubmit = (e) => {
+        e.preventDefault();
         switch (this.props.mainComponent) {
             case SWAP:
                 this.placeSwapOrder();
@@ -116,10 +143,30 @@ export default class Trade extends React.Component {
         });
     };
     placeWithdrawOrder = () => {
-
+        const url = urlBase + "withdraw?exchange="+
+            this.props.exchange.value+"&currency="+
+            this.props.coin2+"&amount="+
+            this.props.amount;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateWithdrawDepositResponse,
+            error: this.handleOrderError,
+        });
     };
     placeDepositOrder = () => {
-
+        const url = urlBase + "deposit?exchange="+
+            this.props.exchange.value+"&currency="+
+            this.props.coin2+"&amount="+
+            this.props.amount;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateWithdrawDepositResponse,
+            error: this.handleOrderError,
+        });
     };
 
     goBack = () => {
@@ -129,24 +176,39 @@ export default class Trade extends React.Component {
     goToSwap = () => {
         this.fetchPriceIn();
         this.props.setMainComponent(SWAP);
+        this.setState({
+            response:"",
+        })
     };
 
     goToSell = () => {
         this.fetchPriceIn();
         this.props.setMainComponent(SELL);
+        this.setState({
+            response:"",
+        })
     };
 
     gotToBuy = () => {
         this.fetchPriceIn();
         this.props.setMainComponent(BUY);
+        this.setState({
+            response:"",
+        })
     };
 
     goToWithdraw = () => {
         this.props.setMainComponent(WITHDRAW);
+        this.setState({
+            response:"",
+        })
     };
 
     goToDeposit = () => {
         this.props.setMainComponent(DEPOSIT);
+        this.setState({
+            response:"",
+        })
     };
 
     fetchPriceIn = () => {
@@ -197,14 +259,19 @@ export default class Trade extends React.Component {
                 />;
                 break;
             case WITHDRAW:
-                mainComponent = <Withdraw
-                    coins={this.props.coins}
-                    coin={this.props.coin} setCoin={this.props.setCoin}/>;
+                mainComponent = <WithdrawDeposit
+                    coins={this.props.coins} title={"Withdraw"}
+                    coin={this.props.coin} setCoin={this.props.setCoin}
+                    setAmount={this.props.setAmount} amount={this.props.amount}
+                />;
                 break;
             case DEPOSIT:
-                mainComponent = <Deposit
-                    coins={this.props.coins}
-                    coin={this.props.coin} setCoin={this.props.setCoin}/>;
+                mainComponent = <WithdrawDeposit
+                    coins={this.props.coins} title={"Deposit"}
+                    coin={this.props.coin} setCoin={this.props.setCoin}
+                    setAmount={this.props.setAmount} amount={this.props.amount}
+                />;
+
                 break;
             default:
                 mainComponent = <Swap
@@ -248,12 +315,14 @@ export default class Trade extends React.Component {
                     <button onClick={this.goToDeposit}>
                         deposit
                     </button>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit}>
                         {mainComponent}
                         <button type="button" onClick={this.handleSubmit}>
                             {getSubmit(selectedMainComponent)}
                         </button>
-                        <p>{this.state.response} </p>
+                        <p className={(this.state.isError) ? 'error-message' : 'success-message'}>
+                            {this.state.response}
+                        </p>
                     </Form>
 
                 </div>

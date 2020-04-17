@@ -18,7 +18,6 @@ export default function CurrencyBox(props) {
                        className="form-control" name="currency"
                        placeholder={props.placeholder}
                        value={(props.value) ? props.value : props.placeholder}
-
                 />
             </div>
 

@@ -130,7 +130,7 @@ public class ExchangeController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient balance");
         }
         catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exchange or currency not found");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Exchange or currency not found");
         }
 
     } // http://localhost:8080/withdraw?exchange=Binance&currency=Bitcoin&amount=0.5
