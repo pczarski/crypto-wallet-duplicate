@@ -9,6 +9,7 @@ import Help from '../components/Help';
 
 import '../styles/nav.scss';
 import '../styles/App.scss';
+
 import '../styles/bal.scss';
 import '../styles/settings.scss';
 
