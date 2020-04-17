@@ -14,6 +14,7 @@ import CurrencySelect from "../../components/common/currencySelect";
 import $ from "jquery";
 import Swap from "./swap";
 import {Form} from 'reactstrap';
+import {getCoinByCode} from "../../lib/helper";
 
 function getSubmit(option) {
     switch (option) {
@@ -232,13 +233,14 @@ export default class Trade extends React.Component {
         const marketPrice = this.props.marketPrice;
         const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
+        const balance = getCoinByCode(this.props.coin, this.props.coins).balance;
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will get:"}
-                    title={"Sell"}
+                    title={"Sell"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -250,7 +252,7 @@ export default class Trade extends React.Component {
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will need:"}
-                    title={"Buy"}
+                    title={"Buy"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -261,6 +263,7 @@ export default class Trade extends React.Component {
             case WITHDRAW:
                 mainComponent = <WithdrawDeposit
                     coins={this.props.coins} title={"Withdraw"}
+                    balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
@@ -268,6 +271,7 @@ export default class Trade extends React.Component {
             case DEPOSIT:
                 mainComponent = <WithdrawDeposit
                     coins={this.props.coins} title={"Deposit"}
+                    balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
@@ -277,7 +281,7 @@ export default class Trade extends React.Component {
                 mainComponent = <Swap
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will get:"}
-                    title={"Swap"}
+                    title={"Swap"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
