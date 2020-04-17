@@ -9,12 +9,11 @@ import {Redirect} from 'react-router-dom';
 import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
 import Order from "./order";
 import WithdrawDeposit from "./withdrawDeposit";
-import Deposit from "./deposit";
-import CurrencySelect from "../../components/common/currencySelect";
+
 import $ from "jquery";
 import Swap from "./swap";
-import {Form} from 'reactstrap';
 import {getCoinByCode} from "../../lib/helper";
+import {Form, Button} from 'reactstrap';
 
 function getSubmit(option) {
     switch (option) {
@@ -291,12 +290,8 @@ export default class Trade extends React.Component {
         }
         const selectedCoin = this.props.coin;
         return (
-            <div className="wrapper">
-                <Nav/>
-                <div className="container">
-                    <button onClick={this.goBack}>
-                        go back todo: make an X instead
-                    </button>
+        <div className="container">
+                    <Button onClick={this.goBack} close/>
                     <br/>
                     <button onClick={this.goToSwap}>
                         Swap
@@ -322,9 +317,7 @@ export default class Trade extends React.Component {
                             {this.state.response}
                         </p>
                     </Form>
-
                 </div>
-            </div>
         );
     }
 }

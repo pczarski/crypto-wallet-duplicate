@@ -75,11 +75,8 @@ export default class ExchangeAccess extends Component
                                 value={this.props.exchange}
                                
                         />
-
-                        
                             <Button onClick={this.selectOrderHistory} className="nav-item">Order History</Button>
                        
-
                     </div>
                     {mainComponent}
                 </div>
