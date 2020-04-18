@@ -185,7 +185,8 @@ export default class Settings extends React.Component {
       console.log(this.props);
       component = <Keys coin={this.props.coin}
                         coins={this.props.coins}
-                        handleCoinClick={this.props.handleCoinClick}/>;
+                        handleCoinClick={this.props.handleCoinClick}
+                        />;
     } else if (this.state.selected === "recovery") {
       component = <RecoveryPhrase/>;
     }

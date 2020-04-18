@@ -28,13 +28,17 @@ export default class Send extends React.Component {
 
   }
   componentDidMount() {
-    if (!(localStorage.getItem('sendState') == null)) {
+    if (!(localStorage.getItem('sendState') == null || localStorage.getItem('sendState') == 'null')) {
       const rehydrate = JSON.parse(localStorage.getItem('sendState'))
       this.setState({amount: rehydrate.amount, address: rehydrate.address})
     }
   }
   componentWillUnmount() {
-    if (this.state.amount !== '' || this.state.address !== ''){
+    console.log(this.state.amount.length,this.state.address)
+    if (this.state.amount.length === 0 && this.state.address.length === 0){
+      localStorage.setItem('sendState', null)
+    }
+    else if (this.state.amount !== '' || this.state.address !== ''){
       localStorage.setItem('sendState', JSON.stringify(this.state))
     }
   }
