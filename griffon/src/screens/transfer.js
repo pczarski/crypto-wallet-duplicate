@@ -9,6 +9,7 @@ import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
 import { Redirect } from 'react-router-dom';
+import Select from "react-select";
 
 export default class Transfer extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class Transfer extends React.Component {
       choice: e.currentTarget.value
     });
     if (e.target.value == null) {
-      this.setState({ 
+      this.setState({
         renderTrans: true
       });
     } else {
@@ -47,7 +48,7 @@ export default class Transfer extends React.Component {
     }
   }
 
-  
+
   render () {
     if(this.props.coins == null || this.state.redirToWall === true){
       // if wallet wasn't rendered, we shouldn't even be here
@@ -56,9 +57,11 @@ export default class Transfer extends React.Component {
 
     let component;
     if (this.state.choice === "1") {
-      component = <Send 
-                  curr={this.props.coin} 
-                  />;
+      console.log(this.state);
+      component = <Send
+          curr={this.props.coin}
+      />;
+
     } else  if (this.state.choice === "2") {
       component = <Receive curr={this.props.coin}/>
     } else {
@@ -67,26 +70,47 @@ export default class Transfer extends React.Component {
 
     const active = this.state.choice;
     return (
-      <div className="wrapper">
-      <Nav/>
-        <div className="cont">
-          <Button close type="button" size = 'md' id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
-          <CurrSel coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
-            <Button className={(active === "1") ? "btn btn-primary active notRounded" : "btn btn-primary notRounded"}
-                    size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>
-              Send Currency
-            </Button>
+        <div className="wrapper">
+          <Nav/>
+          <div className="cont">
 
-            <Button className={(active === "2") ? "btn btn-primary active notRounded" : "btn btn-primary notRounded"}
-                    size="lg" onClick={this.handleClick} value="2" style={{width: '50%'}}>
-              Receive Currency
-            </Button>
-          {component}
+            <Button close type="button" size='md'
+                    id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{}}/>
 
+            <div style=
+                     {{display: 'flex',
+                       'padding-top':'32px',
+                     }}
+            >
+              <div style={{width: '200px'}}>
+                <CurrSel className ="react-select-ex" classNamePrefix="react-select"
+                         coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
+              </div>
+
+              <Button className={(active === "1") ? "btn btn-primary active" : "btn btn-primary notRounded"}
+                      size="lg" onClick={this.handleClick} value="1" style={{
+                        'margin-right': '5%', 'margin-left': '5%', minWidth: '200px',
+                      }}>
+                Send Currency
+              </Button>
+
+              <Button className={(active === "2") ? "btn btn-primary active" : "btn btn-primary notRounded"}
+                      size="lg" onClick={this.handleClick} value="2" style={{
+                        'margin-right': '5%', minWidth: '200px'
+                      }}>
+                Receive Currency
+              </Button>
+            </div>
+
+            <div style={{'padding-top':'32px',}}>
+              {component}
+            </div>
+
+
+          </div>
         </div>
-      </div>
     );
   }
 }
 
- 
+

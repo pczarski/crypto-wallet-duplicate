@@ -9,7 +9,7 @@ import Portfolio from "../components/exchange/portfolio";
 
 
 import '../styles/exchangeAccess.css'
-import {selectMenuStyles} from "../styles/selectStyles";
+import {selectStyles} from "../styles/selectStyles";
 
 export default class ExchangeAccess extends Component
 {
@@ -64,27 +64,45 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
-                    <div style={{display: 'flex'}}>
+                    <div style=
+                             {{display: 'flex',
+                                 'padding-top':'32px',
+                             }}
+                    >
+                        <div style={{width: '200px'}}>
+                            <Select className ="react-select-ex" classNamePrefix="react-select"
+                                    options={exchangeOptions}
+                                    onChange={this.props.setExchange}
+                                    value={this.props.exchange}
+                                    styles={selectStyles}
+                                    style={{width: '200px'}}
+                            />
+                        </div>
+
                         <Button
                             className = {(selectedComponent === PORTFOLIO) ?
-                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
-                            id='exchange' onClick={this.selectPortfolio}>
+                                "btn btn-primary active" : "btn btn-primary"}
+                            size="lg"
+                            id='exchange' onClick={this.selectPortfolio}
+                            style={{
+                                'margin-right': '5%', 'margin-left': '5%', minWidth: '200px'
+                            }}
+                        >
                             Exchange
                         </Button>
-                        <Select className ="react-select-ex" classNamePrefix="react-select"
-                                options={exchangeOptions}
-                                onChange={this.props.setExchange}
-                                value={this.props.exchange}
-                                styles={selectMenuStyles}
-                        />
                         <Button
                             className={(selectedComponent === ORDERS) ?
-                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
-                            onClick={this.selectOrderHistory} id='order' >
+                                "btn btn-primary active" : "btn btn-primary"}
+                            size="lg"
+                            onClick={this.selectOrderHistory} id='order'
+                            style={{
+                                minWidth: '200px'
+                            }}
+                        >
                             Order History
                         </Button>
                     </div>
-                    <div className='justify-content-center'>
+                    <div className='justify-content-center' style={{'padding-top':'32px',}}>
                         {mainComponent}
                     </div>
                 </div>
