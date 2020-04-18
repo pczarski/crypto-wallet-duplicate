@@ -1,3 +1,8 @@
+/**color theme here: **/
+$background-color: #464B51;
+$text-color: #f7f7f7;
+
+
 * {
   border-radius: 0 !important;
 }
@@ -10,7 +15,7 @@ html {
     .wrapper {
       height: 100vh;
       text-align: center;
-      background-color: #464B51;
+      background-color: $background-color;
       display: flex;
       overflow-y: scroll;
     }
@@ -68,10 +73,18 @@ h2 {
   color: chartreuse;
 }
 
+.cont{
+  background-color: #464B51;
+}
+
 .notRounded {
   border-radius: 0 !important;
 }
 
-.dark{
-    color: aqua !important;
+.input-style {
+  background-color: #464B51;
+}
+
+input{
+  background-color: #464B51;
 }

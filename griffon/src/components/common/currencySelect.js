@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import {getCoinByCode} from "../../lib/helper";
+import '../../styles/App.scss';
+import {selectMenuStyles, selectStyles} from "../../styles/selectStyles";
 
 /** required props:
  * coin: example "BTC" (just the code)
@@ -18,7 +20,7 @@ export default function CurrencySelect(props) {
     return(
         <div>
             <Select
-                styles={customStyles}
+                styles={selectMenuStyles}
                 value={selected}
                 onChange={handleChange}
                 options={options}
@@ -39,29 +41,3 @@ function getLabel(coin) {
         );
 }
 
-const customStyles = {
-    option: (provided, state) => {
-        return(
-            Object.assign({}, provided)
-        )
-    },
-};
-
-// const customStyles = {
-//     option: (provided, state) => ({
-//         ...provided,
-//         borderBottom: '1px dotted pink',
-//         color: state.isSelected ? 'red' : 'blue',
-//         padding: 20,
-//     }),
-//     control: () => ({
-//         // none of react-select's styles are passed to <Control />
-//         width: 200,
-//     }),
-//     singleValue: (provided, state) => {
-//         const opacity = state.isDisabled ? 0.5 : 1;
-//         const transition = 'opacity 300ms';
-//
-//         return { ...provided, opacity, transition };
-//     }
-// };
