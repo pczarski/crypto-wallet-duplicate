@@ -292,7 +292,7 @@ export default class Trade extends React.Component {
         return (
         <div className="cont">
                     <Button onClick={this.goBack} close id="back"/>
-                    <div>
+                    <div className='notRounded'>
                         <Button size='lg' onClick={this.goToSwap}
                                 className={(selectedMainComponent === SWAP) ? 'active' : ''}>
                             Swap

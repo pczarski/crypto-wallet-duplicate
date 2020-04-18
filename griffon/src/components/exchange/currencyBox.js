@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrencySelect from "../common/currencySelect";
-import {Input, Label} from 'reactstrap'
+import {Input, Label} from 'reactstrap';
+import '../../styles/App.scss';
 
 export default function CurrencyBox(props) {
 
@@ -14,8 +15,9 @@ export default function CurrencyBox(props) {
             />
             <div className="col">
                 <Label>{props.label}</Label>
-                <Input type="text" onChange={handleChange}
-                       className="form-control" name="currency"
+                <Input
+                    type="text" onChange={handleChange}
+                       className="form-control bg-dark text-white" name="currency"
                        placeholder={props.placeholder}
                        value={(props.value) ? props.value : props.placeholder}
                 />

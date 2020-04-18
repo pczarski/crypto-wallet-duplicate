@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import {getCoinByCode} from "../../lib/helper";
+import '../../styles/App.scss';
+import {selectMenuStyles, selectStyles} from "../../styles/selectStyles";
 
 /** required props:
  * coin: example "BTC" (just the code)
@@ -18,6 +20,7 @@ export default function CurrencySelect(props) {
     return(
         <div>
             <Select
+                styles={selectMenuStyles}
                 value={selected}
                 onChange={handleChange}
                 options={options}
@@ -37,3 +40,4 @@ function getLabel(coin) {
         </div>
         );
 }
+

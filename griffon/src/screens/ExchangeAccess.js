@@ -9,6 +9,7 @@ import Portfolio from "../components/exchange/portfolio";
 
 
 import '../styles/exchangeAccess.css'
+import {selectMenuStyles} from "../styles/selectStyles";
 
 export default class ExchangeAccess extends Component
 {
@@ -66,17 +67,19 @@ export default class ExchangeAccess extends Component
                     <div style={{display: 'flex'}}>
                         <Button
                             className = {(selectedComponent === PORTFOLIO) ?
-                                "exAcc nav-item active" : "exAcc nav-item"}
+                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
                             id='exchange' onClick={this.selectPortfolio}>
                             Exchange
                         </Button>
-                        <Select className ="react-select-ex" classNamePrefix="react-select"  options={exchangeOptions}
+                        <Select className ="react-select-ex" classNamePrefix="react-select"
+                                options={exchangeOptions}
                                 onChange={this.props.setExchange}
                                 value={this.props.exchange}
+                                styles={selectMenuStyles}
                         />
                         <Button
                             className={(selectedComponent === ORDERS) ?
-                                "exAcc nav-item active" : "exAcc nav-item"}
+                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
                             onClick={this.selectOrderHistory} id='order' >
                             Order History
                         </Button>
