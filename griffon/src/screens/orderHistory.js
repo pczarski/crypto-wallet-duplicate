@@ -193,7 +193,7 @@ export default class OrderHistory extends React.Component {
           /*<Table size="sm" key={i}>*/
           <tbody key={i}>
           <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
-            <td>{element.id}</td>
+            <td sytle={{'margin-left':'5em'}}>{element.id}</td>
             <td >{element.currency1}</td>
             <td >{element.currency2}</td>
             <td >{element.type}</td>
@@ -290,7 +290,7 @@ export default class OrderHistory extends React.Component {
 
 
           <div className="table">
-            <Table  size="sm" className="table table-striped table-hover table-dark history">
+            <Table   className="table table-striped table-hover table-dark history">
               <thead>
               <tr>
                 <th>ID</th>
