@@ -1,3 +1,7 @@
+* {
+  border-radius: 0 !important;
+}
+
 html {
 
   body {
@@ -62,4 +66,12 @@ h2 {
 
 .success-message{
   color: chartreuse;
+}
+
+.notRounded {
+  border-radius: 0 !important;
+}
+
+.dark{
+    color: aqua !important;
 }

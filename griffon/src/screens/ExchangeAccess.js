@@ -66,7 +66,7 @@ export default class ExchangeAccess extends Component
                     <div style={{display: 'flex'}}>
                         <Button
                             className = {(selectedComponent === PORTFOLIO) ?
-                                "exAcc nav-item active" : "exAcc nav-item"}
+                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
                             id='exchange' onClick={this.selectPortfolio}>
                             Exchange
                         </Button>
@@ -76,7 +76,7 @@ export default class ExchangeAccess extends Component
                         />
                         <Button
                             className={(selectedComponent === ORDERS) ?
-                                "exAcc nav-item active" : "exAcc nav-item"}
+                                "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
                             onClick={this.selectOrderHistory} id='order' >
                             Order History
                         </Button>
