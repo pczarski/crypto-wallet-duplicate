@@ -1,7 +1,7 @@
 /**color theme here: **/
-$background-color: #343a40;
-$secondary-color: #464B51;
-$text-color: #f7f7f7;
+$background-color: #36393f;
+//$secondary-color: #464B51;
+//$text-color: #f7f7f7;
 
 
 * {
@@ -90,4 +90,8 @@ h2 {
 
 input{
   background-color: #464B51;
+}
+
+.iconPadding {
+    margin-left: 5px;
 }

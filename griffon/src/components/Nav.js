@@ -21,19 +21,19 @@ function Nav() {
         <div className="dropdown-divider"></div>
             <ul className="list-group list-group-flush">
                 <li className="list-items">
-                    <Link className="list-group-item list-group-item-action bg-dark active" to="/wallet">
-                        <img id='icon' src ={Wallet} alt = 'wallet icon'/>Wallet
+                    <Link className="list-group-item list-group-item-action bg-dark active iconPadding" to="/wallet">
+                        <img id='icon' src ={Wallet} alt = 'wallet icon'/> <span className={"iconPadding"}>Wallet</span>
                     </Link>
                 </li>
                 <li className="list-items">
-                    <Link className="list-group-item list-group-item-action bg-dark active" to="/ExchangeAccess">
-                        <img id='icon' src ={Exch} alt = 'exchange icon'/>Exchange
+                    <Link className="list-group-item list-group-item-action bg-dark active iconPadding" to="/ExchangeAccess">
+                        <img id='icon' src ={Exch} alt = 'exchange icon'/> <span className={"iconPadding"}>Exchange</span>
                     </Link>
                 </li>
                 <div className="bottomMenu">
                     <li className="list-items">
-                    <Link className="list-group-item list-group-item-action bg-dark active" to="/settings">
-                        <img id='icon' src ={Sett} alt = 'settings icon'/>Settings
+                    <Link className="list-group-item list-group-item-action bg-dark active iconPadding" to="/settings">
+                        <img id='icon' src ={Sett} alt = 'settings icon'/> <span className={"iconPadding"}>Settings</span>
                     </Link>
                     </li>
                 </div>

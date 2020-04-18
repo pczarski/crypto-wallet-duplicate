@@ -78,7 +78,7 @@ export default class Transfer extends React.Component {
 
             <div style=
                      {{display: 'flex',
-                       'padding-top':'32px',
+                       'paddingTop':'32px',
                      }}
             >
               <div style={{width: '200px'}}>
@@ -88,20 +88,20 @@ export default class Transfer extends React.Component {
 
               <Button className={(active === "1") ? "btn btn-primary active" : "btn btn-primary notRounded"}
                       size="lg" onClick={this.handleClick} value="1" style={{
-                        'margin-right': '5%', 'margin-left': '5%', minWidth: '200px',
+                        'marginRight': '5%', 'marginLeft': '5%', minWidth: '200px',
                       }}>
                 Send Currency
               </Button>
 
               <Button className={(active === "2") ? "btn btn-primary active" : "btn btn-primary notRounded"}
                       size="lg" onClick={this.handleClick} value="2" style={{
-                        'margin-right': '5%', minWidth: '200px'
+                        'marginRight': '5%', minWidth: '200px'
                       }}>
                 Receive Currency
               </Button>
             </div>
 
-            <div style={{'padding-top':'32px',}}>
+            <div style={{'paddingTop':'32px',}}>
               {component}
             </div>
 

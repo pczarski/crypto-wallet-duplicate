@@ -21,9 +21,9 @@ export const selectStyles = {
             Object.assign({}, provided, {
                 backgroundColor: '#464B51',
                 borderColor: '',
-                'border-width': 'thick',
+                'borderWidth': 'thick',
                 background: 'solid',
-                'min-height': '48px',
+                'minHeight': '48px',
             })
         )
     },

@@ -66,7 +66,7 @@ export default class ExchangeAccess extends Component
                 <div className="cont">
                     <div style=
                              {{display: 'flex',
-                                 'padding-top':'32px',
+                                 'paddingTop':'32px',
                              }}
                     >
                         <div style={{width: '200px'}}>
@@ -85,7 +85,7 @@ export default class ExchangeAccess extends Component
                             size="lg"
                             id='exchange' onClick={this.selectPortfolio}
                             style={{
-                                'margin-right': '5%', 'margin-left': '5%', minWidth: '200px'
+                                'marginRight': '5%', 'marginLeft': '5%', minWidth: '200px'
                             }}
                         >
                             Exchange
@@ -102,7 +102,7 @@ export default class ExchangeAccess extends Component
                             Order History
                         </Button>
                     </div>
-                    <div className='justify-content-center cont' style={{'padding-top':'32px',}}>
+                    <div className='justify-content-center cont' style={{'paddingTop':'32px',}}>
                         {mainComponent}
                     </div>
                 </div>
