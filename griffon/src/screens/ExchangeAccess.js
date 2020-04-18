@@ -66,21 +66,22 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
-                    <div className = "nav justify-content-center">
+                   
 
-                        <Button className = "nav justify-content-center nav-item" onClick={this.selectPortfolio}>Exchange</Button>
-
+                        <Button className = "nav justify-content-center nav-item" id='exchange' onClick={this.selectPortfolio}>Exchange</Button>
+                        
                         <Select className="react-select-container" classNamePrefix="react-select"  options={exchangeOptions}
                                 onChange={this.props.setExchange}
                                 value={this.props.exchange}
                                
                         />
-                            <Button onClick={this.selectOrderHistory} className="nav-item">Order History</Button>
-                       
-                    </div>
-                    {mainComponent}
-                </div>
 
+                            <Button onClick={this.selectOrderHistory} id='order' className="nav-item">Order History</Button>
+                            <div className='justify-content-center'>
+                                {mainComponent}
+                            </div>
+                </div>
+               
             </div>
         )
     }
