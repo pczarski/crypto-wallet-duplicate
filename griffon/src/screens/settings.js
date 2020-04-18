@@ -158,7 +158,7 @@ export default class Settings extends React.Component {
             </NavItem>
             <NavItem>
               <NavLink href="# "  onClick={this.select} name="publickeys">
-                Public Keys
+                Keys
               </NavLink>
             </NavItem>
             <NavItem >
