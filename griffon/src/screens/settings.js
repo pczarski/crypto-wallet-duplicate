@@ -16,6 +16,7 @@ import '../styles/settings.scss';
 // import RecoveryPhrase from '../components/RecoveryPhrase';
 
 import {
+  Card,
   Button,
   Navbar,
   NavbarBrand,
@@ -28,10 +29,11 @@ const initialState ={
   current:"",
   new:"",
   confirm:"",
-  currentError:"",
-  newError:"",
-  confirmError:"",
-  selected: null
+  currentError:null,
+  newError:null,
+  confirmError:null,
+  selected: null,
+  confirmError:null
 
 }
 
@@ -46,7 +48,7 @@ export default class Settings extends React.Component {
     this.Password = this.Password.bind(this);
 }
   handleChange(event) {
-    console.log(this.state)
+
    this.setState({
      [event.target.name]:  event.target.value
    });
@@ -54,23 +56,37 @@ export default class Settings extends React.Component {
 
   validate=()=>{
     // var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
-    let password1= localStorage.getItem('password');
+    let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+    let password1= localStorage.getItem('pass');
+    console.log(password1);
     let currentError="";
     let newError="";
     let confirmError="";
-    if(!this.state.current === (password1)){
-      currentError="Password is not correct!";
-    }
-    if(this.state.confirm!==""){
-    if(this.state.confirm !== this.state.new){
-      confirmError="Please make sure your passwords match!";
 
-    }
-    }
-    if(this.state.new === "" || this.state.new.length <8){
-      newError="Password should contain atleast 8 characters, one capital letter and one digit";
-  }
 
+
+if (this.state.current != (password1)) {
+  currentError="Please make sure your password is correct"
+}
+
+if(this.state.new.search(/\d/) === -1){
+  newError="Make sure your Password contains atleast 1 number"
+}
+if(this.state.new.search(/[a-z]/) === -1){
+  newError="Make sure your Password contains atleast 1 lowercase letter"
+}
+if(this.state.new.search(/[A-Z]/) === -1){
+  newError="Make sure your Password contains atleast 1 uppercase letter"
+}
+if(this.state.new.search(/[-!$%^&*()_+|~=`{}[\]:";'<>?,./]/) !== -1){
+  newError="Password cannot contain symbols"
+}
+if(this.state.new.length<7){
+  newError="Make sure your Password is at least 8 characters long"
+}
+if(this.state.confirm !== this.state.new){
+  confirmError="Please make sure your passwords match!";
+}
 
     if (currentError || confirmError || newError){
       this.setState({currentError, confirmError, newError})
@@ -78,14 +94,16 @@ export default class Settings extends React.Component {
     }
 
     return true;
-  }
+  } //want to end here
   handleSubmit=event=>{
     event.preventDefault();
     const isValid = this.validate();
     if(isValid){
       localStorage.setItem('pass', this.state.confirm)
+
       this.setState(initialState);
-      this.setState({confirmError: 'Password changed!'});
+          this.setState({confirmError: 'Password changed!'})
+    ;
   }
 }
   select (event) {
@@ -95,6 +113,7 @@ export default class Settings extends React.Component {
   Password() {
     return (
       <div>
+      <Card id="pword" body className="text-center bg-dark text-white ">
         <form onSubmit={this.handleSubmit}>
           <h1>Change Password</h1>
           <div>
@@ -116,6 +135,7 @@ export default class Settings extends React.Component {
           <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>
         </div>
         </form>
+        </Card>
       </div>
     );
   }
@@ -124,30 +144,30 @@ export default class Settings extends React.Component {
 
     const Topbar = () => (
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand>Settings</NavbarBrand>
+        <NavbarBrand id="brand">Settings</NavbarBrand>
         <Nav className="mr-auto" navbar>
           <NavItem  >
-            <NavLink onClick={this.select} name="password">
+            <NavLink  href="# "onClick={this.select} name="password">
               Password
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={this.select} name="publickeys">
+            <NavLink href="# "  onClick={this.select} name="publickeys">
               Public Keys
             </NavLink>
           </NavItem>
           <NavItem >
-            <NavLink onClick={this.select} name="recovery">
+            <NavLink href="# " onClick={this.select} name="recovery">
               Recovery Phrase
             </NavLink>
           </NavItem>
           <NavItem >
-            <NavLink onClick={this.select} name="addex">
+            <NavLink href="# " onClick={this.select} name="addex">
               Add Exchange
             </NavLink>
           </NavItem>
           <NavItem >
-            <NavLink onClick={this.select} name="help">
+            <NavLink    href="# " onClick={this.select} name="help">
               Help
             </NavLink>
           </NavItem>

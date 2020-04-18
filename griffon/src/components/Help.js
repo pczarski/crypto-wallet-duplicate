@@ -3,12 +3,14 @@ import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/settings.scss';
+import {Card } from "reactstrap";
 
 export default class Help extends React.Component {
   render () {
 
     return (
       <div>
+        <Card id="help" body className="text-center bg-dark text-white ">
         <h1> Security Guidelines </h1>
         <p>Using our app provides an extra layer of security, as it is a desktop app which can be accessed while offline.
            This means that we do not know anything about your password, 12-word recovery phrase, private keys, or even your public addresses.
@@ -19,7 +21,8 @@ export default class Help extends React.Component {
           <li>Keep your recovery phrase in a safe and reliable place, where only you know</li>
           <li>Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 8 characters, use a range of cases, numbers and special characters.</li>
         </ul>
-      </div>    
+        </Card>
+      </div>
     );
   }
 }
