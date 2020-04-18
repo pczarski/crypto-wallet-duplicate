@@ -21,7 +21,7 @@ export const selectStyles = {
             Object.assign({}, provided, {
                 backgroundColor: '#36393f',
                 borderColor: '#6f84d2',
-                'borderWidth': 'thick',
+                //'borderWidth': 'thick',
                 background: 'solid',
                 'minHeight': '48px',
             })
@@ -50,14 +50,26 @@ export const selectStyles = {
     },
 };
 
-export const buttonStyles = {
-    //todo make styles for buttons here
+export const buttonHoover = {
+    backgroundColor: '#6f84d2',
+    color: '#d2d3d5',
+    //borderWidth: 'thick',
+    minWidth: '200px',
 };
 
-export const buttonActive = {
+export const buttonNormal = {
     borderColor: '#6f84d2',
     backgroundColor: '#36393f',
     color: '#6f84d2',
+  //  borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const buttonActive = {
+    backgroundColor: '#6f84d2',
+    color: '#36393f',
+   // borderWidth: 'thick',
+    minWidth: '200px',
 };
 
 // export const selectMenuStyles = {

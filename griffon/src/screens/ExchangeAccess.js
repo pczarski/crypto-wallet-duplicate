@@ -9,12 +9,18 @@ import Portfolio from "../components/exchange/portfolio";
 
 
 import '../styles/exchangeAccess.css'
-import {selectStyles, buttonActive} from "../styles/selectStyles";
+import {selectStyles, buttonActive, buttonHoover} from "../styles/selectStyles";
+import MenuButton from "../components/common/menuButton";
 
 export default class ExchangeAccess extends Component
 {
     // todo: not keeping an states, consider converting to a function component
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            hover: 0,
+        }
+    }
 
     // will update the main component to order history
     selectOrderHistory = () => {
@@ -82,33 +88,23 @@ export default class ExchangeAccess extends Component
                             />
                         </div>
 
-                        <Button
-                            className = {(selectedComponent === PORTFOLIO) ?
-                                "btn btn-primary active" : "btn btn-primary"}
-                            size="lg"
-                            id='exchange' onClick={this.selectPortfolio}
-                            style={{
-                                borderColor: '#6f84d2',
-                                backgroundColor: '#36393f',
-                                color: '#6f84d2',
-                                'marginRight': '5%', 'marginLeft': '5%', minWidth: '200px'
-                            }}
-                        >
-                            Exchange
-                        </Button>
-                        <Button
-                            className={(selectedComponent === ORDERS) ?
-                                "btn btn-primary active" : "btn btn-primary"}
-                            size="lg"
-                            onClick={this.selectOrderHistory} id='order'
-                            style={{
-                                backgroundColor: '#6f84d2',
-                                color: '#36393f',
-                                minWidth: '200px'
-                            }}
-                        >
-                            Order History
-                        </Button>
+                        <div style={{
+                            'marginRight': '5%', 'marginLeft': '5%',
+                        }}>
+                            <MenuButton
+                                text={'Exchange'}
+                                active={(selectedComponent === PORTFOLIO)}
+                                onClick={this.selectPortfolio}
+                            />
+                        </div>
+
+                        <div style={{}}>
+                            <MenuButton
+                                text={'Order History'}
+                                active={(selectedComponent === ORDERS)}
+                                onClick={this.selectOrderHistory}
+                            />
+                        </div>
                     </div>
                     <div className='justify-content-center cont' style={{'paddingTop':'32px',}}>
                         {mainComponent}
