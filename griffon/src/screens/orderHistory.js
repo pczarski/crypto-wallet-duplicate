@@ -291,7 +291,7 @@ export default class OrderHistory extends React.Component {
 
 
           <div className="table">
-            <Table  size="sm" className="table table-striped table-hover table-dark ">
+            <Table  size="sm" className="table table-striped table-hover table-dark history">
               <thead>
               <tr>
                <th>ID</th>

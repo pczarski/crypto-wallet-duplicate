@@ -61,6 +61,7 @@ export default class Transfer extends React.Component {
       component = <Send
           curr={this.props.coin}
       />;
+
     } else  if (this.state.choice === "2") {
       component = <Receive curr={this.props.coin}/>
     } else {

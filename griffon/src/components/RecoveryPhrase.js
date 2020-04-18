@@ -67,7 +67,7 @@ export default class RecoveryPhrase extends React.Component {
         return (
           <div>
             <p>
-              Time left: {this.toHHMMSS(180 - seconds + (60 * minutes)) }
+              Time left: {this.toHHMMSS(180 - seconds - (60 * minutes)) }
             </p>
           </div>
         );
