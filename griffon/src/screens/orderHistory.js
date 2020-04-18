@@ -43,11 +43,11 @@ export default class OrderHistory extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-/*
-  toggleCancel() {
-  this.setState(
-    {cancel: !this.state.cancel});
-  }*/
+  /*
+    toggleCancel() {
+    this.setState(
+      {cancel: !this.state.cancel});
+    }*/
 
   toCancelOrder(){
     const toCancel = this.state.ordersToCancel
@@ -80,7 +80,7 @@ export default class OrderHistory extends React.Component {
     if (e.target.innerText !== exch) {
       //After an exchange option has been chosen, if the currentExchange does not equal the selected exchange option
       //changes currentExchange to selected option
-    //  console.log("e.target.innerText !== exch")
+      //  console.log("e.target.innerText !== exch")
 
       await this.setState({
         dropdownOpen: !this.state.dropdownOpen,
@@ -113,55 +113,55 @@ export default class OrderHistory extends React.Component {
     if(item ===1){
       return this.state.supportedEx.map((element,i)=>{
         return(
-          <DropdownItem key={element} onClick={this.select}>{this.state.supportedEx[i]}</DropdownItem>
+            <DropdownItem key={element} onClick={this.select}>{this.state.supportedEx[i]}</DropdownItem>
         )
       })
     }
     else{
       return this.state.displayOptions.map((element,i)=>{
         return(
-          <DropdownItem key={element} onClick={this.selectDisplay}>{this.state.displayOptions[i]}</DropdownItem>
+            <DropdownItem key={element} onClick={this.selectDisplay}>{this.state.displayOptions[i]}</DropdownItem>
         )
       })
     }
   }
 
   getOrders(){
-      let allOrders =[]
-      //console.log("DISPLAY OPTION: "+ this.state.currentDisplay)
-      allOrders = getOrderHistory(this.state.exchange);
-      //returns all orders from specified exchange
-      let incomplete =[]
-      let complete =[]
-      let orders =[]
-      let cancelled =[]
-      /*
-      console.log("CURRENT EXCHANGE: "+ this.state.exchange)
-      console.log("CURRENT DISPLAY: "+ this.state.currentDisplay)
-      console.log("ALLORDERS: "+ allOrders.length)
-      */
-      for(let i =0; i<allOrders.length;i++){
-        orders.push(allOrders[i])
+    let allOrders =[]
+    //console.log("DISPLAY OPTION: "+ this.state.currentDisplay)
+    allOrders = getOrderHistory(this.state.exchange);
+    //returns all orders from specified exchange
+    let incomplete =[]
+    let complete =[]
+    let orders =[]
+    let cancelled =[]
+    /*
+    console.log("CURRENT EXCHANGE: "+ this.state.exchange)
+    console.log("CURRENT DISPLAY: "+ this.state.currentDisplay)
+    console.log("ALLORDERS: "+ allOrders.length)
+    */
+    for(let i =0; i<allOrders.length;i++){
+      orders.push(allOrders[i])
 
-        if (allOrders[i].status ==="COMPLETE"){complete.push(allOrders[i])}
-        else if(allOrders[i].status ==="CANCELED"){cancelled.push(allOrders[i])}
-        else{incomplete.push(allOrders[i])}
-      }
-      /*
-      console.log("COMPLETE: " +complete.length)
-      console.log("INCOMPLETE: " +incomplete.length)
-      console.log("ALL: " +orders.length)*/
+      if (allOrders[i].status ==="COMPLETE"){complete.push(allOrders[i])}
+      else if(allOrders[i].status ==="CANCELED"){cancelled.push(allOrders[i])}
+      else{incomplete.push(allOrders[i])}
+    }
+    /*
+    console.log("COMPLETE: " +complete.length)
+    console.log("INCOMPLETE: " +incomplete.length)
+    console.log("ALL: " +orders.length)*/
 
-      this.setState(
+    this.setState(
         {
           incompleteOrders:incomplete,
           completedOrders:complete,
           allOrders:orders,
           cancelledOrders:cancelled,
         }
-      )
+    )
 
-    }
+  }
 
   getTable(){
     let display= [];
@@ -190,34 +190,34 @@ export default class OrderHistory extends React.Component {
     return  display ===[]? null:display.map((element,i)=>{
       return(
 
-        /*<Table size="sm" key={i}>*/
-        <tbody key={i}>
+          /*<Table size="sm" key={i}>*/
+          <tbody key={i}>
           <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
             <td>{element.id}</td>
-             <td >{element.currency1}</td>
-             <td >{element.currency2}</td>
-             <td >{element.type}</td>
-             <td >{element.status}</td>
-             <td >{element.data}</td>
-             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
+            <td >{element.currency1}</td>
+            <td >{element.currency2}</td>
+            <td >{element.type}</td>
+            <td >{element.status}</td>
+            <td >{element.data}</td>
+            {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
           </tr>
           <tr id={element.id}  className="collapse">
             <td colSpan="7">
-            <small>
-              <div className="column">
-                <p><b>Ininitial Amount: </b>{element.initialAmount}</p>
-                <b>Unit Price: </b>{element.unitPrice}
-              </div>
-              <div className="column">
-                <p><b>Amount Complete: </b>{element.amountComplete}</p>
-                <b>Percent Complete: </b>{element.percentComplete}
-              </div>
+              <small>
+                <div className="column">
+                  <p><b>Ininitial Amount: </b>{element.initialAmount}</p>
+                  <b>Unit Price: </b>{element.unitPrice}
+                </div>
+                <div className="column">
+                  <p><b>Amount Complete: </b>{element.amountComplete}</p>
+                  <b>Percent Complete: </b>{element.percentComplete}
+                </div>
               </small>
             </td>
           </tr>
-        </tbody>
+          </tbody>
 
-        /*</Table>*/
+          /*</Table>*/
 
 
 
@@ -228,17 +228,17 @@ export default class OrderHistory extends React.Component {
     //console.log(document.getElementById(id))
     if (document.getElementById(id)) {
 
-                if (document.getElementById(id).className == "collapse") {
-                    document.getElementById(id).className = "expand";
-                }
-                else {
-                    document.getElementById(id).className = "collapse";
-                }
-            }
+      if (document.getElementById(id).className == "collapse") {
+        document.getElementById(id).className = "expand";
+      }
+      else {
+        document.getElementById(id).className = "collapse";
+      }
+    }
 
     //this.expand()
 
- }
+  }
 
   async handleInputChange(event) {
     const target = event.target;
@@ -259,18 +259,18 @@ export default class OrderHistory extends React.Component {
   render () {
     //console.log(this.props.exchanges)
     return (
-      <div className="container">
-      <Nav/>
-        <button className="back"onClick={this.props.goBack}>X</button>
+        <div className="">
+          <Nav/>
+          <button className="back"onClick={this.props.goBack}>X</button>
           <div className="currSel">
             <div className="Dropdowns">
-            <h5 className="tableInput">Exchange:</h5>
+              <h5 className="tableInput">Exchange:</h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                   {this.state.exchange}
                 </DropdownToggle>
                 <DropdownMenu>
-                   {this.getDropdownItems(1)}
+                  {this.getDropdownItems(1)}
 
                 </DropdownMenu>
               </Dropdown>
@@ -280,7 +280,7 @@ export default class OrderHistory extends React.Component {
                   {this.state.currentDisplay}
                 </DropdownToggle>
                 <DropdownMenu>
-                   {this.getDropdownItems(2)}
+                  {this.getDropdownItems(2)}
 
                 </DropdownMenu>
               </Dropdown>
@@ -294,18 +294,18 @@ export default class OrderHistory extends React.Component {
             <Table  size="sm" className="table table-striped table-hover table-dark history">
               <thead>
               <tr>
-               <th>ID</th>
-               <th>Currency1</th>
-               <th>Currency2</th>
-               <th>Type</th>
-               <th>Status</th>
-               <th>Date</th>
-               <th>Cancel</th>
+                <th>ID</th>
+                <th>Currency1</th>
+                <th>Currency2</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Cancel</th>
               </tr>
               </thead>
               {this.getTable()}
-              </Table>
-           </div>
+            </Table>
+          </div>
 
         </div>
 

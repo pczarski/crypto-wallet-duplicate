@@ -17,6 +17,9 @@ export default function CurrencySelect(props) {
         props.setCoin(selectedOption.value);
     };
     const options = props.coins.map( coin => getOption(coin));
+    if(!props.coins || !props.coin){
+        return ("");
+    }
     return(
         <div style={{width:'200px'}}>
             <Select

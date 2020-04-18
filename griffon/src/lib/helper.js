@@ -7,6 +7,9 @@ export function roundTo2(val) {
 }
 
 export function getCoinByCode(code, coins) {
+    if(!coins){
+        return null;
+    }
     for(let i = 0; i <coins.length; i++) {
         if(coins[i].code === code){
             return coins[i]

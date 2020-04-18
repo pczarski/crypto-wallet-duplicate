@@ -102,7 +102,7 @@ export default class ExchangeAccess extends Component
                             Order History
                         </Button>
                     </div>
-                    <div className='justify-content-center' style={{'padding-top':'32px',}}>
+                    <div className='justify-content-center cont' style={{'padding-top':'32px',}}>
                         {mainComponent}
                     </div>
                 </div>
