@@ -6,16 +6,38 @@ import '../styles/bal.scss';
 import '../styles/exchange.scss';
 import '../styles/buy.scss';
 
-import {Card , Button,Form, FormGroup, Label, Input } from "reactstrap";
+import {Card , Button,Form, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
 import Select from 'react-select';
 
+import BinanceIcon from '../assets/binance.png';
+import CoinbaseIcon from '../assets/coinbase.png';
+
+function getExchangeLabel(name){
+  switch (name) {
+    case 'Binance':
+      return (
+          <div>
+            <img src={BinanceIcon}/> {name}
+          </div>
+      );
+    case 'Coinbase':
+      return (
+          <div>
+            <img src={CoinbaseIcon}/> {name}
+          </div>
+      );
+    default:
+          return null;
+
+  }
+}
 export default class AddExchange extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      exchanges: [{label: "Binance"}, {label: "Coinbase"}],
+      exchanges: [{value: "Binance", label: getExchangeLabel("Binance")}, {value: "Coinbase", label: getExchangeLabel("Coinbase")}],
       address:null,
       name: "Binance",
       response: ""
@@ -47,7 +69,8 @@ export default class AddExchange extends React.Component {
 
   render () {
     const select = (selectedOption) => {
-      this.setState({name: selectedOption.label});
+      this.setState({name: selectedOption.value})
+      console.log(this.state);
   };
     return (
       <div className="container">
@@ -57,8 +80,7 @@ export default class AddExchange extends React.Component {
           {console.log(this.state)}
           <Select className="react-select-container" classNamePrefix="react-select"  
               options={this.state.exchanges}
-              onChange={select}
-              value={this.state.name} />
+              onChange={select} Value={this.state.name}/>
             <Label for="address">Exchange Address</Label>
             <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
           <Button >Submit</Button>

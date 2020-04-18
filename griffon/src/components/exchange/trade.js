@@ -291,7 +291,7 @@ export default class Trade extends React.Component {
 
         return (
         <div className="cont">
-                    <Button onClick={this.goBack} close/>
+                    <Button onClick={this.goBack} close id="back"/>
                     <div>
                         <Button size='lg' onClick={this.goToSwap}>
                             Swap

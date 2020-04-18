@@ -19,6 +19,9 @@ html {
 h2 {
   color: #f7f7f7;
 }
+.react-select__menu {
+  color: black;
+}
 .vertical-input-group .input-group:first-child {
   padding-bottom: 0;
 }
@@ -42,4 +45,9 @@ h2 {
 }  
 .vertical-input-group .input-group:not(:first-child) * {
   border-top: 0;
+}
+
+#back{
+  color:white;
+  border-radius: 10px;
 }

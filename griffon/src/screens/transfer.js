@@ -71,7 +71,7 @@ export default class Transfer extends React.Component {
       <div className="wrapper">
       <Nav/>
         <div className="cont">
-          <Button close type="button" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
+          <Button close type="button" id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
           <CurrSel coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
           <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>Send Currency</Button>
           <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2" style={{width: '50%'}}>Receive Currency</Button>
