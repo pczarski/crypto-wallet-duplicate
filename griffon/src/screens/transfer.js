@@ -56,7 +56,7 @@ export default class Transfer extends React.Component {
 
     let component;
     if (this.state.choice === "1") {
-      console.log(this.state)
+      console.log(this.state);
       component = <Send 
                   curr={this.props.coin} 
                   />;
@@ -66,15 +66,15 @@ export default class Transfer extends React.Component {
       component = <Transactions curr={this.props.coin} />;
     }
 
-
+    const active = this.state.choice;
     return (
       <div className="wrapper">
       <Nav/>
         <div className="cont">
           <Button close type="button" id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
           <CurrSel coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
-          <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>Send Currency</Button>
-          <Button className="btn btn-primary" size="lg" onClick={this.handleClick} value="2" style={{width: '50%'}}>Receive Currency</Button>
+          <Button className={(active === "1") ? "btn btn-primary active" : "btn btn-primary"} size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>Send Currency</Button>
+          <Button className={(active === "2") ? "btn btn-primary active" : "btn btn-primary"} size="lg" onClick={this.handleClick} value="2" style={{width: '50%'}}>Receive Currency</Button>
           {component}
 
         </div>

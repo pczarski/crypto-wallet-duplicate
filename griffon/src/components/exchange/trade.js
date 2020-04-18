@@ -293,19 +293,24 @@ export default class Trade extends React.Component {
         <div className="cont">
                     <Button onClick={this.goBack} close id="back"/>
                     <div>
-                        <Button size='lg' onClick={this.goToSwap}>
+                        <Button size='lg' onClick={this.goToSwap}
+                                className={(selectedMainComponent === SWAP) ? 'active' : ''}>
                             Swap
                         </Button>
-                        <Button size='lg'  onClick={this.gotToBuy}>
+                        <Button size='lg'  onClick={this.gotToBuy}
+                                className={(selectedMainComponent === BUY) ? 'active' : ''}>
                             Buy
                         </Button>
-                        <Button size='lg'  onClick={this.goToSell}>
+                        <Button size='lg'  onClick={this.goToSell}
+                                className={(selectedMainComponent === SELL) ? 'active' : ''}>
                             Sell
                         </Button>
-                        <Button size='lg'  onClick={this.goToWithdraw}>
+                        <Button size='lg'  onClick={this.goToWithdraw}
+                                className={(selectedMainComponent === WITHDRAW) ? 'active' : ''}>
                             Withdraw
                         </Button>
-                        <Button size='lg'  onClick={this.goToDeposit}>
+                        <Button size='lg'  onClick={this.goToDeposit}
+                                className={(selectedMainComponent === DEPOSIT) ? 'active' : ''}>
                             Deposit
                         </Button>
                     </div>

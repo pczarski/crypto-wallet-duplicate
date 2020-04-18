@@ -13,7 +13,7 @@ import '../styles/exchangeAccess.css'
 export default class ExchangeAccess extends Component
 {
     // todo: not keeping an states, consider converting to a function component
-    
+
 
     // will update the main component to order history
     selectOrderHistory = () => {
@@ -64,12 +64,22 @@ export default class ExchangeAccess extends Component
                 <SideBar/>
                 <div className="cont">
                     <div style={{display: 'flex'}}>
-                        <Button className = "exAcc nav-item" id='exchange' onClick={this.selectPortfolio}>Exchange</Button>
-                        <Select className="react-select-ex" classNamePrefix="react-select"  options={exchangeOptions}
+                        <Button
+                            className = {(selectedComponent === PORTFOLIO) ?
+                                "exAcc nav-item active" : "exAcc nav-item"}
+                            id='exchange' onClick={this.selectPortfolio}>
+                            Exchange
+                        </Button>
+                        <Select className ="react-select-ex" classNamePrefix="react-select"  options={exchangeOptions}
                                 onChange={this.props.setExchange}
                                 value={this.props.exchange}
                         />
-                        <Button onClick={this.selectOrderHistory} id='order' className="exAcc nav-item">Order History</Button>
+                        <Button
+                            className={(selectedComponent === ORDERS) ?
+                                "exAcc nav-item active" : "exAcc nav-item"}
+                            onClick={this.selectOrderHistory} id='order' >
+                            Order History
+                        </Button>
                     </div>
                     <div className='justify-content-center'>
                         {mainComponent}
