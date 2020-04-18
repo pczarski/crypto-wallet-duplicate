@@ -8,15 +8,24 @@
     background: #343a40;
     color: #adadad; 
     overflow: fix;
+    font-size: 1.2em;
+
 }
 ul{
     list-style-type: none;
 }
-li {
-    font-size: 1.5em;
-    text-align: center;
+li{
+    font-size: 1.4em;
+}
+.list-items {
+    font-size: 1.3em;
+    text-align: left;
 }
 #wrap {
     min-width: 200px;
     position: relative;
+}
+#icon {
+    max-width: 40px;
+    padding-right: 5px ; float: left;
 }

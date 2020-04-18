@@ -182,7 +182,6 @@ export default class Settings extends React.Component {
 
     let component;
     if (this.state.selected === "publickeys") {
-      console.log(this.props);
       component = <Keys coin={this.props.coin}
                         coins={this.props.coins}
                         handleCoinClick={this.props.handleCoinClick}

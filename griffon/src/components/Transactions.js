@@ -30,7 +30,7 @@ export default class Transactions extends React.Component {
 
     return (
     <div>
-    <Table className="table table-striped table-hover table-dark">
+    <Table className="table table-striped table-hover table-dark history">
       <thead>
         <tr>
           <th>ID</th>
