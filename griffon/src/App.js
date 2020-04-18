@@ -304,7 +304,8 @@ export default class App extends React.Component {
                 (props) => <Settings 
                 {...props} coin={walletCoin}
                 coins={walletCoins}
-                handleCoinClick={this.updateWalletCoin} />}/>
+                handleCoinClick={this.updateWalletCoin}/>}
+                />
               {/*TODO: all those should be integrated in the exchange instead of being separate pages*/}
               <Route path="/order" render={(props) => <Order {...props} />}/>
             </Switch>

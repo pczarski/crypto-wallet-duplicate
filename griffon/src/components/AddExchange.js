@@ -6,15 +6,16 @@ import '../styles/bal.scss';
 import '../styles/exchange.scss';
 import '../styles/buy.scss';
 
-import {Card, Select , Button,Form, FormGroup, Label, Input } from "reactstrap";
+import {Card , Button,Form, FormGroup, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
-// TO DO CHECK EMPTY/ VALID
+import Select from 'react-select';
 
 export default class AddExchange extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      exchanges: [{label: "Binance"}, {label: "Coinbase"}],
       address:null,
       name: "Binance",
       response: ""
@@ -41,27 +42,25 @@ export default class AddExchange extends React.Component {
         response: "Binance has been added as an Exchange"
       });
     }
-
-
     event.preventDefault();
   }
 
   render () {
+    const select = (selectedOption) => {
+      this.setState({name: selectedOption.label});
+  };
     return (
       <div className="container">
       <h1>Add Exchange</h1>
       <Card id="addExchange" body className="text-center bg-dark text-white ">
         <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <Label for="name">Exchange Name</Label>
-            <Input  onChange={this.handleInputChange}  type="select" name="name" id="exampleSelect">
-            <option>Binance</option>
-            <option>Coinbase</option>
-
-          </Input>
+          {console.log(this.state)}
+          <Select className="react-select-container" classNamePrefix="react-select"  
+              options={this.state.exchanges}
+              onChange={select}
+              defaultValue={this.state.exchanges[0]} />
             <Label for="address">Exchange Address</Label>
             <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
-          </FormGroup>
           <Button >Submit</Button>
           <p id="addExchange">{this.state.response}</p>
         </Form>
