@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.scss';
 import '../styles/splash.scss';
 
-import Logo from '../assets/LogoSpl.png';
+import Logo from '../assets/Logo.png';
 
 import {Link, Redirect} from 'react-router-dom';
 
@@ -56,6 +56,7 @@ export default class Splash extends React.Component {
       <div className="wrapper">
         <div className="container">
         <img id='logo' src ={Logo} alt = 'logo'></img>
+        <h1 style={{fontFamily: 'Abel', color: 'white', fontSize: '5em'}}>Griffon</h1>
           {!this.state.firstLaunch &&
           <div className="old">
           <Form onSubmit={this.handleSubmit} id="form">
