@@ -2,7 +2,7 @@ export const selectStyles = {
     option: (provided, state) => {
         return(
             Object.assign({}, provided, {
-                color: state.isFocused ? '#464B51' :'#f7f7f7',
+                color: state.isFocused ? '#6f84d2' :'#f7f7f7',
                 backgroundColor: state.isFocused ? '#6d747b' : '',
                  'text-align': 'left',
             })
@@ -20,8 +20,8 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 backgroundColor: '#464B51',
-                borderColor: '',
-                'borderWidth': 'thick',
+                borderColor: '#6f84d2',
+                //'borderWidth': '20px',
                 background: 'solid',
                 'minHeight': '48px',
             })
@@ -47,6 +47,10 @@ export const selectStyles = {
             })
         )
     },
+};
+
+export const buttonStyles = {
+    //todo make styles for buttons here
 };
 
 // export const selectMenuStyles = {
