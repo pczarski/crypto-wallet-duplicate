@@ -34,7 +34,7 @@ export default function Order(props) {
                     </div>
                     <div className="col">
                         <Label>Price</Label>
-                        <Input type='text' className='form-control'
+                        <Input type='text' className='form-control bg-dark text-white form-control'
                                placeholder={props.marketPrice}
                                onChange={handlePriceChange}
                                value={props.price}
