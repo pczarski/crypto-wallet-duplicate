@@ -40,7 +40,7 @@ export default function Order(props) {
                                value={props.price}
                         />
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
-                        <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
+                        <p> Available: {roundTo2(props.balance) +" "+props.coin}</p>
                     </div>
                     <div className="col">
                         <CurrencyBox
