@@ -10,7 +10,7 @@ import {Card , Button,Form, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
 import Select from 'react-select';
-import {selectMenuStyles} from "../styles/selectStyles";
+import {selectStyles} from "../styles/selectStyles";
 
 import BinanceIcon from '../assets/binance.png';
 import CoinbaseIcon from '../assets/coinbase.png';
@@ -42,7 +42,7 @@ export default class AddExchange extends React.Component {
       address:null,
       name: "Binance",
       response: ""
-    }
+    };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,7 +81,7 @@ export default class AddExchange extends React.Component {
           {console.log(this.state)}
           <Select className="react-select-container" classNamePrefix="react-select"  
               options={this.state.exchanges}
-              onChange={select} Value={this.state.name} styles={selectMenuStyles}/>
+              onChange={select} Value={this.state.name} styles={selectStyles}/>
             <Label for="address">Exchange Address</Label>
             <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
           <Button >Submit</Button>

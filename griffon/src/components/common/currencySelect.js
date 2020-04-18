@@ -18,9 +18,9 @@ export default function CurrencySelect(props) {
     };
     const options = props.coins.map( coin => getOption(coin));
     return(
-        <div>
+        <div style={{width:'200px'}}>
             <Select
-                styles={selectMenuStyles}
+                styles={selectStyles}
                 value={selected}
                 onChange={handleChange}
                 options={options}

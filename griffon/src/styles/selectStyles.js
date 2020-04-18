@@ -3,7 +3,8 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 color: state.isFocused ? '#464B51' :'#f7f7f7',
-
+                backgroundColor: state.isFocused ? '#6d747b' : '',
+                 'text-align': 'left',
             })
         )
     },
@@ -19,9 +20,10 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 backgroundColor: '#464B51',
-                borderColor: '#616161',
-                borderOpacity: '80%',
+                borderColor: '#5c007a',
+                'border-width': 'thick',
                 background: 'solid',
+                'min-height': '48px',
             })
         )
     },
@@ -32,41 +34,55 @@ export const selectStyles = {
             })
         )
     },
-};
-
-export const selectMenuStyles = {
-    option: (provided, state) => {
+    valueContainer: (provided, state) => {
         return(
             Object.assign({}, provided, {
-                color: state.isFocused ? '#464B51' :'#f7f7f7',
-
             })
         )
     },
-    menu: (provided, state) => {
+    container: (provided, state) => {
         return(
             Object.assign({}, provided, {
-                backgroundColor: '#464B51',
-                background: 'solid',
-            })
-        )
-    },
-    control: (provided, state) => {
-        return(
-            Object.assign({}, provided, {
-                backgroundColor: '#464B51',
-                borderColor: '#616161',
-                border: '0',
-                borderOpacity: '80%',
-                background: 'solid',
-            })
-        )
-    },
-    singleValue: (provided, state) => {
-        return(
-            Object.assign({}, provided, {
-                color: '#f7f7f7',
+                minWidth: '200px',
             })
         )
     },
 };
+
+// export const selectMenuStyles = {
+//     option: (provided, state) => {
+//         return(
+//             Object.assign({}, provided, {
+//                 color: state.isFocused ? '#464B51' :'#f7f7f7',
+//                 'text-align': 'left',
+//             })
+//         )
+//     },
+//     menu: (provided, state) => {
+//         return(
+//             Object.assign({}, provided, {
+//                 backgroundColor: '#464B51',
+//                 background: 'solid',
+//             })
+//         )
+//     },
+//     control: (provided, state) => {
+//         return(
+//             Object.assign({}, provided, {
+//                 backgroundColor: '#464B51',
+//                 borderColor: '#616161',
+//                 border: '0',
+//                 borderOpacity: '80%',
+//                 background: 'solid',
+//                 'min-height': '300px',
+//             })
+//         )
+//     },
+//     singleValue: (provided, state) => {
+//         return(
+//             Object.assign({}, provided, {
+//                 color: '#f7f7f7',
+//             })
+//         )
+//     },
+// };

@@ -1,10 +1,11 @@
 /**color theme here: **/
-$background-color: #464B51;
+$background-color: #343a40;
+$secondary-color: #464B51;
 $text-color: #f7f7f7;
 
 
 * {
-  border-radius: 0 !important;
+  //border-radius: 0 !important;
 }
 
 html {
@@ -74,11 +75,11 @@ h2 {
 }
 
 .cont{
-  background-color: #464B51;
+  background-color: $background-color;
 }
 
 .notRounded {
-  border-radius: 0 !important;
+  //border-radius: 0 !important;
 }
 
 .input-style {
