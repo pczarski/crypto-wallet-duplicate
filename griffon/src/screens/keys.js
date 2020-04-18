@@ -51,7 +51,7 @@ export default class Keys extends React.Component {
     return ( 
       <div>
         <h1>Keys</h1>
-        <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
+        {this.props.coins !== null && <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>}
         <div>
                  <Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
                    <thead>

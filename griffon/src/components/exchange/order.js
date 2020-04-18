@@ -1,6 +1,6 @@
 import React from 'react';
 import CurrencyBox from "./currencyBox";
-import {Form, Input, Label} from 'reactstrap';
+import { Input, Label} from 'reactstrap';
 import {roundTo2} from "../../lib/helper";
 export default function Order(props) {
     const handlePriceChange = (e) => {

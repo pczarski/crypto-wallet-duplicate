@@ -57,7 +57,6 @@ export default class Transfer extends React.Component {
 
     let component;
     if (this.state.choice === "1") {
-      console.log(this.state);
       component = <Send
           curr={this.props.coin}
       />;
