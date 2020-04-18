@@ -44,14 +44,18 @@ export default class Transactions extends React.Component {
       <tbody>
       {Object.keys(this.state.records.sort((a, b) => a.id - b.id))
       .map((item, i) => {
+        const type = this.state.records[item].type;
         return (
-        <tr key={i}>
+        <tr key={i} >
+
             <td>{this.state.records[item].id}</td>
             <td>{this.state.records[item].destinationAddress}</td>
             <td>{this.state.records[item].originAddress}</td>
             <td>{this.state.records[item].time}</td>
             <td>{this.state.records[item].transactionAmount}</td>
-            <td>{this.state.records[item].type}</td>
+            <td style={(type === "SEND") ? {color:'#ffca28'} : {color: '#9ccc65'}
+            }
+            >{this.state.records[item].type}</td>
         </tr>)})}
       </tbody>
     </Table>
