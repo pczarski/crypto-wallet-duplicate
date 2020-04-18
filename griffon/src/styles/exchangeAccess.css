@@ -1,51 +1,24 @@
 .btn.btn-secondary{
     background-color:#464B51;
     border: 50px,solid,white;
-    
-   
-    
 }
 
 .cont{
     background-color: #464B51;
 }
 
-.nav-item.btn.btn-secondary{
+/* .nav-item.btn.btn-secondary{
+    
+}
+ */
+.exAcc{
     width:33%;
-    height:50px;
-    
-
 }
 
-#exchange.nav-item.btn.btn-secondary{
-    float: left;
-    
-
-}
-#order.nav-item.btn.btn-secondary{
-
-    float: right;
-}
-.react-select-container{
-    width:34%;
-    border-radius:10 ;
-    display: inline-block;
-    
+#exchange {
+    float:left;
 }
 
-
-/* .css-2b097c-container{
- width:150px;
- height:auto;
- 
- 
+.react-select-ex{
+    width:33%;
 }
-.css-g1d714-ValueContainer{
-    background-color:#464B51;
-}
-.css-1hb7zxy-IndicatorsContainer{
-
-    background-color: #464B51;
-}
-.css-yk16xz-control{
-} */

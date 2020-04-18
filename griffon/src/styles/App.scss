@@ -2,7 +2,7 @@ html {
 
   body {
     height: 100%;
-    // color: #f7f7f7;
+
     .wrapper {
       height: 100vh;
       text-align: center;
@@ -16,6 +16,9 @@ html {
     }
   }
 }  
+h2 {
+  color: #f7f7f7;
+}
 .vertical-input-group .input-group:first-child {
   padding-bottom: 0;
 }
