@@ -27,7 +27,7 @@ h2 {
 }
 .vertical-input-group .input-group:first-child * {
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;    
+  border-bottom-right-radius: 0;
 }
 .vertical-input-group .input-group:last-child {
   padding-top: 0;
@@ -42,9 +42,13 @@ h2 {
 }
 .vertical-input-group .input-group:not(:last-child):not(:first-child) * {
   border-radius: 0;
-}  
+}
 .vertical-input-group .input-group:not(:first-child) * {
   border-top: 0;
+}
+
+#recPhase{
+  margin: auto;
 }
 
 #back{

@@ -1,16 +1,16 @@
 import React from 'react';
 import '../styles/App.scss';
 import ReactStopwatch from 'react-stopwatch';
- 
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter,Card } from 'reactstrap';
 
 import {getRequest} from '../lib/backendHandler'
 
 
 export default class RecoveryPhrase extends React.Component {
-  
+
   constructor(props) {
-    super(props);    
+    super(props);
 
     this.select = this.select.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -40,7 +40,7 @@ export default class RecoveryPhrase extends React.Component {
       this.timerDone()
     }
   }
-  
+
   toHHMMSS (time) {
     var sec_num = parseInt(time, 10); // don't forget the second param
     var minutes = Math.floor((sec_num) / 60);
@@ -88,14 +88,16 @@ export default class RecoveryPhrase extends React.Component {
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
+        <Card id="phrase" body className="text-center bg-dark text-white ">
       <h1>Your Recovery Phrase</h1>
       <Stopwatch/>
-      {this.state.showSeed && 
+      {this.state.showSeed &&
         <b>{this.state.seed}</b>
       }
-      <Button className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+      <Button id="recPhase"className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+      </Card>
     </div>
-    
+
     )
   }
 }
