@@ -9,11 +9,11 @@ import {Redirect} from 'react-router-dom';
 import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
 import Order from "./order";
 import WithdrawDeposit from "./withdrawDeposit";
-import Deposit from "./deposit";
-import CurrencySelect from "../../components/common/currencySelect";
+
 import $ from "jquery";
 import Swap from "./swap";
-import {Form} from 'reactstrap';
+import {getCoinByCode} from "../../lib/helper";
+import {Form, Button} from 'reactstrap';
 
 function getSubmit(option) {
     switch (option) {
@@ -232,13 +232,14 @@ export default class Trade extends React.Component {
         const marketPrice = this.props.marketPrice;
         const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
+        const balance = getCoinByCode(this.props.coin, this.props.coins).balance;
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will get:"}
-                    title={"Sell"}
+                    title={"Sell"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -250,7 +251,7 @@ export default class Trade extends React.Component {
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will need:"}
-                    title={"Buy"}
+                    title={"Buy"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -261,6 +262,7 @@ export default class Trade extends React.Component {
             case WITHDRAW:
                 mainComponent = <WithdrawDeposit
                     coins={this.props.coins} title={"Withdraw"}
+                    balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
@@ -268,6 +270,7 @@ export default class Trade extends React.Component {
             case DEPOSIT:
                 mainComponent = <WithdrawDeposit
                     coins={this.props.coins} title={"Deposit"}
+                    balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
@@ -277,7 +280,7 @@ export default class Trade extends React.Component {
                 mainComponent = <Swap
                     coins={this.props.coins} exchange={this.props.exchange}
                     marketPrice={marketPrice} label={"you will get:"}
-                    title={"Swap"}
+                    title={"Swap"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
                     price={price} setPrice={this.props.setPrice}
@@ -287,12 +290,8 @@ export default class Trade extends React.Component {
         }
         const selectedCoin = this.props.coin;
         return (
-            <div className="wrapper">
-                <Nav/>
-                <div className="container">
-                    <button onClick={this.goBack}>
-                        go back todo: make an X instead
-                    </button>
+        <div className="container">
+                    <Button onClick={this.goBack} close/>
                     <br/>
                     <button onClick={this.goToSwap}>
                         Swap
@@ -318,9 +317,7 @@ export default class Trade extends React.Component {
                             {this.state.response}
                         </p>
                     </Form>
-
                 </div>
-            </div>
         );
     }
 }

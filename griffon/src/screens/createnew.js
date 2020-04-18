@@ -118,7 +118,7 @@ export default class CreateNew extends React.Component {
         <Confirm />
         <div className="container">
           <h1>Create new Wallet</h1>
-          <Card body className="text-center">
+          <Card body className="text-center bg-dark text-light">
             <CardBody>
               <Form className="needs-validation " onSubmit={this.handleSubmit}>
                 <div className="vertical-input-group">

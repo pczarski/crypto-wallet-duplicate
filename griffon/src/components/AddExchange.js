@@ -49,6 +49,7 @@ export default class AddExchange extends React.Component {
   render () {
     return (
       <div className="container">
+      <h1>Add Exchange</h1>
       <Card id="addExchange" body className="text-center bg-dark text-white ">
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>

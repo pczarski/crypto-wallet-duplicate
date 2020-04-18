@@ -75,15 +75,11 @@ export default class ExchangeAccess extends Component
                                 value={this.props.exchange}
                                
                         />
-                        
-                        
+
                             <Button onClick={this.selectOrderHistory} id='order' className="nav-item">Order History</Button>
-                       
                             <div className='justify-content-center'>
                                 {mainComponent}
                             </div>
-                   
-                    
                 </div>
                
             </div>

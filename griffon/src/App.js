@@ -300,7 +300,11 @@ export default class App extends React.Component {
 
               <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
               <Route path="/recover" render={(props) => <Recover {...props} />}/>
-              <Route path="/settings" render={(props) => <Settings {...props} />}/>
+              <Route path="/settings" render={
+                (props) => <Settings 
+                {...props} coin={walletCoin}
+                coins={walletCoins}
+                handleCoinClick={this.updateWalletCoin} />}/>
               {/*TODO: all those should be integrated in the exchange instead of being separate pages*/}
               <Route path="/order" render={(props) => <Order {...props} />}/>
             </Switch>
