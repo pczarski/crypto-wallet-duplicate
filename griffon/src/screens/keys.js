@@ -5,21 +5,17 @@ import '../styles/App.scss';
 import '../styles/bal.scss';
 import '../styles/settings.scss';
 
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import SelectCurr from '../components/common/currencySelect'
 
 import {getCurr} from '../lib/backendHandler.js';
 import {Table} from 'reactstrap';
-// import { Button, Alert } from 'reactstrap';
 
 export default class Keys extends React.Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.select = this.select.bind(this);
     this.state = {
-      supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
-      currency: "BTC", // currency name (bitcoin, litecoin, etc. btc by default)
+      supportedCurr: this.props.coins,
+      currency: this.props.coin, // currency name (bitcoin, litecoin, etc. btc by default)
       keyPairs: getCurr("BTC").keyPairs,
       publickeys: [],
       privatekeys: [],
@@ -28,26 +24,14 @@ export default class Keys extends React.Component {
     }
   }
 
-  toggle(e) {
-    e.preventDefault();
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
-
-  select(e) {
-    const prev = this.state.currency;
-    if (!(e.target.innerText === prev)) {
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.coin !== this.props.coin){
       this.setState({
-        dropdownOpen: !this.state.dropdownOpen,
-        currency: e.target.innerText,
-        keyPairs: getCurr(e.target.innerText).keyPairs,
-        gotKeys: false
-      });
-      this.getTable()
+        keyPairs: getCurr(this.props.coin).keyPairs
+      })
     }
   }
+
   getTable(){
     return Object.keys(this.state.keyPairs).map((item, i) => {
         return (
@@ -60,30 +44,15 @@ export default class Keys extends React.Component {
           )
         });
       }
-  getDropdownItems(){
-    return this.state.supportedCurr.map((element,i)=>{
-      return(
-        <DropdownItem key={element} onClick={this.select}>{this.state.supportedCurr[i]}</DropdownItem>
-      )
-    })
-  }
+
 
 
   render () {
-    return (
+    return ( 
       <div>
-             <h1>Keys</h1>
-             <div className="currSel">
-               <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                 <DropdownToggle caret>
-                   {this.state.currency}
-                 </DropdownToggle>
-                 <DropdownMenu>
-                    {this.getDropdownItems()}
-                 </DropdownMenu>
-               </Dropdown>
-               </div>
-               <div>
+        <h1>Keys</h1>
+        <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
+        <div>
                  <Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
                    <thead>
                    <tr>

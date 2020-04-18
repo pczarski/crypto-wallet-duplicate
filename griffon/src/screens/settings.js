@@ -133,7 +133,7 @@ export default class Settings extends React.Component {
           </NavItem>
           <NavItem>
             <NavLink onClick={this.select} name="publickeys">
-              Public Keys
+              Keys
             </NavLink>
           </NavItem>
           <NavItem >
@@ -157,7 +157,10 @@ export default class Settings extends React.Component {
 
   let component;
   if (this.state.selected === "publickeys") {
-    component = <Keys/>;
+    console.log(this.props)
+    component = <Keys coin={this.props.coin}
+    coins={this.props.coins}
+    handleCoinClick={this.props.handleCoinClick}/>;
   } else if (this.state.selected === "recovery") {
     component = <RecoveryPhrase/>;
   }
