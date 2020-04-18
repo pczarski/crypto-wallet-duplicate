@@ -54,6 +54,13 @@ export default class AddExchange extends React.Component {
 
   }
   handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.address === null) {
+      this.setState({
+        response: "Enter a valid API key"
+      });
+      return
+    }
     let resp = addExchange( this.state.name, this.state.address);
     if(resp.exchangeName==="Coinbase"){
       this.setState({
@@ -64,7 +71,6 @@ export default class AddExchange extends React.Component {
         response: "Binance has been added as an Exchange"
       });
     }
-    event.preventDefault();
   }
 
   render () {
