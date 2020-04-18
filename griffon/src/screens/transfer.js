@@ -56,7 +56,6 @@ export default class Transfer extends React.Component {
 
     let component;
     if (this.state.choice === "1") {
-      console.log(this.state);
       component = <Send 
                   curr={this.props.coin} 
                   />;
@@ -71,10 +70,8 @@ export default class Transfer extends React.Component {
       <div className="wrapper">
       <Nav/>
         <div className="cont">
-          <Button close type="button" size = 'md'
-                  id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
+          <Button close type="button" size = 'md' id="back" className="btn btn-primary m-2" onClick={this.handleClick} value="0" style={{position: 'relative', zIndex: '1000'}}/>
           <CurrSel coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
-
             <Button className={(active === "1") ? "btn btn-primary active notRounded" : "btn btn-primary notRounded"}
                     size="lg" onClick={this.handleClick} value="1" style={{width: '50%', float:'left'}}>
               Send Currency

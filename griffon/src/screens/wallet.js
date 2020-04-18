@@ -23,7 +23,6 @@ export default class Wallet extends React.Component {
 
   handleCoinClick = (coin) => {
     this.props.handleCoinClick(coin);
-    console.log(coin);
     this.setState({
       goToTransfer: true,
     });
