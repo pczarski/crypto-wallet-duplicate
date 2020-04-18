@@ -5,17 +5,17 @@ import {roundTo2} from "../../lib/helper";
 export default function WithdrawDeposit(props) {
     return(
         <div className="container">
-            {props.title} {props.coin}
+            <h2>{props.title} {props.coin}</h2>
             <CurrencyBox
                 coin={props.coin}
                 setCoin={props.setCoin}
                 coins={props.coins}
                 setAmount={props.setAmount}
                 placeholder={props.amount}
-                label={'amount: '}
+                label={'Amount: '}
                 value={props.amount}
             />
-            <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
+            <p> Available: {roundTo2(props.balance) +" "+props.coin}</p>
         </div>
     )
 }

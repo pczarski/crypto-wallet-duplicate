@@ -27,7 +27,7 @@ export default class Coins extends Component
         return this.props.coins.map((coin) => {
             return (
                 <tr key = {coin.code} onClick={() => this.props.coinClick(coin.code)}>
-                    <th scope ="row"><img src={coin.icon}/></th>
+                    <th scope ="row"><img src={coin.icon} alt={coin.name}/></th>
                     <td>{coin.name}</td>
                     <td>{coin.balance} {coin.code}</td>
                     <td>{coin.currentPublicKey}</td>

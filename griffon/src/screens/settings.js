@@ -99,17 +99,17 @@ export default class Settings extends React.Component {
           <h1>Change Password</h1>
           <div>
             <p>Enter your current Password:</p>
-            <input type='password' name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
+            <input type='password' id="inp" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
           </div>
           <div style={{ color:"#f73636"}}>{this.state.currentError}</div>
           <div>
             <p>Enter your new Password:</p>
-            <input type='password' name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
+            <input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
           </div>
           <div style={{ color:"#f73636"}}>{this.state.newError}</div>
             <div>
               <p>Confirm your new Password:</p>
-              <input type='password' name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
+              <input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
             </div>
           <div style={{ color:"#f73636"}}>{this.state.confirmError}</div>
          <div className="password">
