@@ -11,15 +11,23 @@ export default class MenuButton extends React.Component {
         }
     }
 
+    handleClick = (e) => {
+        console.log(e);
+        this.props.onClick(e);
+    };
+
     renderButton(text) {
         const focus = this.state.focus;
         const active = this.props.active;
+        const value = (this.props.value) ? this.props.value : null;
         if(focus) {
             return(
                 <Button
                     size="lg"
                     className='btn btn-primary'
                     style={buttonHoover}
+                    onClick={this.handleClick}
+                    value={value}
                 >{text}</Button>
             );
         }
@@ -29,6 +37,8 @@ export default class MenuButton extends React.Component {
                     size="lg"
                     className='btn btn-primary'
                     style={buttonActive}
+                    onClick={this.handleClick}
+                    value={value}
                 >{text}</Button>
             );
         }
@@ -37,6 +47,8 @@ export default class MenuButton extends React.Component {
                 size="lg"
                 className='btn btn-primary'
                 style={buttonNormal}
+                onClick={this.handleClick}
+                value={value}
             >{text}</Button>
         )
     }
@@ -54,7 +66,7 @@ export default class MenuButton extends React.Component {
     };
     render() {
         return (
-            <div onMouseEnter={this.setFocus} onMouseLeave={this.setNotFocus} onClick={this.props.onClick}>
+            <div onMouseEnter={this.setFocus} onMouseLeave={this.setNotFocus}>
                 {this.renderButton(this.props.text)}
             </div>
         );

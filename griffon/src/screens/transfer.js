@@ -10,6 +10,8 @@ import Send from '../components/Send';
 import Nav from '../components/Nav';
 import { Redirect } from 'react-router-dom';
 import Select from "react-select";
+import MenuButton from "../components/common/menuButton";
+import {PORTFOLIO} from "../App";
 
 export default class Transfer extends React.Component {
   constructor(props) {
@@ -27,7 +29,7 @@ export default class Transfer extends React.Component {
 
   }
 
-  handleClick(e) {
+  handleClick = (e) => {
     this.setState({
       choice: e.currentTarget.value
     });
@@ -46,7 +48,11 @@ export default class Transfer extends React.Component {
         redirToWall: true
       });
     }
-  }
+  };
+
+//   goTo1 = () => {
+//     this.handleClick({c})
+// };
 
 
   render () {
@@ -86,19 +92,24 @@ export default class Transfer extends React.Component {
                          coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
               </div>
 
-              <Button className={(active === "1") ? "btn btn-primary active" : "btn btn-primary notRounded"}
-                      size="lg" onClick={this.handleClick} value="1" style={{
-                        'marginRight': '5%', 'marginLeft': '5%', minWidth: '200px',
-                      }}>
-                Send Currency
-              </Button>
+              <div value="1"
+                  style={{'marginRight': '5%', 'marginLeft': '5%',}}>
+                <MenuButton
+                    text={'Send Currency'}
+                    active={(active === "1")}
+                    onClick={this.handleClick}
+                    value="1"
+                />
+              </div>
 
-              <Button className={(active === "2") ? "btn btn-primary active" : "btn btn-primary notRounded"}
-                      size="lg" onClick={this.handleClick} value="2" style={{
-                        'marginRight': '5%', minWidth: '200px'
-                      }}>
-                Receive Currency
-              </Button>
+              <div style={{}}>
+                <MenuButton
+                    text={'Receive Currency'}
+                    active={(active === "2")}
+                    onClick={this.handleClick}
+                    value="2"
+                />
+              </div>
             </div>
 
             <div style={{'paddingTop':'32px',}}>
