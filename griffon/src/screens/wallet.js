@@ -43,7 +43,6 @@ export default class Wallet extends React.Component {
         <div className="cont">
           <div className="content">
               <Coins fetch={this.props.fetch} coins={this.props.coins} coinClick={this.handleCoinClick}/>
-
           </div>
         </div>
       </div>

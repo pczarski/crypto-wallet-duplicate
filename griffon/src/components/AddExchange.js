@@ -58,7 +58,7 @@ export default class AddExchange extends React.Component {
           <Select className="react-select-container" classNamePrefix="react-select"  
               options={this.state.exchanges}
               onChange={select}
-              defaultValue={this.state.exchanges[0]} />
+              value={this.state.name} />
             <Label for="address">Exchange Address</Label>
             <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
           <Button >Submit</Button>
