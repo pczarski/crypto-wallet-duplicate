@@ -27,6 +27,9 @@ export default function CurrencySelect(props) {
                 value={selected}
                 onChange={handleChange}
                 options={options}
+                components={{
+                    IndicatorSeparator: () => null
+                }}
             />
         </div>
     )

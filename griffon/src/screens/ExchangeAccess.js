@@ -9,7 +9,7 @@ import Portfolio from "../components/exchange/portfolio";
 
 
 import '../styles/exchangeAccess.css'
-import {selectStyles} from "../styles/selectStyles";
+import {selectStyles, buttonActive} from "../styles/selectStyles";
 
 export default class ExchangeAccess extends Component
 {
@@ -76,6 +76,9 @@ export default class ExchangeAccess extends Component
                                     value={this.props.exchange}
                                     styles={selectStyles}
                                     style={{width: '200px'}}
+                                    components={{
+                                        IndicatorSeparator: () => null
+                                    }}
                             />
                         </div>
 
@@ -85,6 +88,9 @@ export default class ExchangeAccess extends Component
                             size="lg"
                             id='exchange' onClick={this.selectPortfolio}
                             style={{
+                                borderColor: '#6f84d2',
+                                backgroundColor: '#36393f',
+                                color: '#6f84d2',
                                 'marginRight': '5%', 'marginLeft': '5%', minWidth: '200px'
                             }}
                         >
@@ -96,6 +102,8 @@ export default class ExchangeAccess extends Component
                             size="lg"
                             onClick={this.selectOrderHistory} id='order'
                             style={{
+                                backgroundColor: '#6f84d2',
+                                color: '#36393f',
                                 minWidth: '200px'
                             }}
                         >
