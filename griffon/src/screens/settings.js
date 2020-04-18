@@ -46,7 +46,8 @@ export default class Settings extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.Password = this.Password.bind(this);
-}
+    this.state.selected = "password";
+  }
   handleChange(event) {
 
    this.setState({
@@ -142,63 +143,75 @@ if(this.state.confirm !== this.state.new){
 
   render () {
 
-    const Topbar = () => (
-      <Navbar color="dark" dark expand="md">
-        <NavbarBrand id="brand">Settings</NavbarBrand>
-        <Nav className="mr-auto" navbar>
-          <NavItem  >
-            <NavLink  href="# "onClick={this.select} name="password">
-              Password
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="# "  onClick={this.select} name="publickeys">
-              Public Keys
-            </NavLink>
-          </NavItem>
-          <NavItem >
-            <NavLink href="# " onClick={this.select} name="recovery">
-              Recovery Phrase
-            </NavLink>
-          </NavItem>
-          <NavItem >
-            <NavLink href="# " onClick={this.select} name="addex">
-              Add Exchange
-            </NavLink>
-          </NavItem>
-          <NavItem >
-            <NavLink    href="# " onClick={this.select} name="help">
-              Help
-            </NavLink>
-          </NavItem>
-        </Nav>
-      </Navbar>
-  );
+    
 
-  let component;
-  if (this.state.selected === "publickeys") {
-    console.log(this.props)
-    component = <Keys coin={this.props.coin}
-    coins={this.props.coins}
-    handleCoinClick={this.props.handleCoinClick}/>;
-  } else if (this.state.selected === "recovery") {
-    component = <RecoveryPhrase/>;
-  }
-  else if (this.state.selected === "help") {
-    component = <Help/>;
-  } else if (this.state.selected === "addex"){
-    component = <AddEx />;
-  } else {
-    component = this.Password();
-  }
-  return (
-    <div className="wrapper">
-      <Navig/>
-      <div className="cont">
-      <Topbar/>
-      {component}
-      </div>
-    </div>
+    let component;
+    if (this.state.selected === "publickeys") {
+      component = <Keys coin={this.props.coin}
+                        coins={this.props.coins}
+                        handleCoinClick={this.props.handleCoinClick}
+                        />;
+    } else if (this.state.selected === "recovery") {
+      component = <RecoveryPhrase/>;
+    }
+    else if (this.state.selected === "help") {
+      component = <Help/>;
+    } else if (this.state.selected === "addex"){
+      component = <AddEx />;
+    } else {
+      component = this.Password();
+    }
+    return (
+        <div className="wrapper">
+          <Navig/>
+          <div className="cont">
+          <div style={{display: 'flex'}}>
+          <Button
+              name="password"
+              onClick={this.select}
+              className= {(this.state.selected === "password") ?
+                  "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
+              id='order' >
+              Change Password
+          </Button>
+
+              <Button
+                  name="publickeys"
+                  onClick={this.select}
+                  className= {(this.state.selected === "publickeys") ?
+                      "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
+                  id='order' >
+                  Keys
+              </Button>
+              <Button
+                  name="recovery"
+                  onClick={this.select}
+                  className= {(this.state.selected === "recovery") ?
+                      "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
+                  id='order' >
+                  Recovery Phrase
+              </Button>
+              <Button
+                  name="addex"
+                  onClick={this.select}
+                  className= {(this.state.selected === "addex") ?
+                      "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
+                  id='order' >
+                  Add Exchange
+              </Button>
+              <Button
+                  name="help"
+                  onClick={this.select}
+                  className= {(this.state.selected === "help") ?
+                      "exAcc nav-item notRounded active" : "exAcc nav-item notRounded"}
+                  id='order' >
+                  Help
+              </Button>
+
+          </div>
+            {component}
+          </div>
+        </div>
     );
   }
 }
