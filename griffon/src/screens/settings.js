@@ -17,6 +17,7 @@ import '../styles/settings.scss';
 
 import {
   Card,
+  Input,
   Button,
   Navbar,
   NavbarBrand,
@@ -121,17 +122,17 @@ export default class Settings extends React.Component {
               <h1>Change Password</h1>
               <div>
                 <p>Enter your current Password:</p>
-                <input type='password' id="inp" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
+                <Input type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
               </div>
               <div className={'error-message'}>{this.state.currentError}</div>
               <div>
                 <p>Enter your new Password:</p>
-                <input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
+                <Input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
               </div>
               <div className={'error-message'}>{this.state.newError}</div>
               <div>
                 <p>Confirm your new Password:</p>
-                <input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
+                <Input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
               </div>
               <div className={(isError) ? 'error-message' : 'success-message'}>
                 {this.state.confirmError}

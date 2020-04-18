@@ -50,7 +50,7 @@ export default class Keys extends React.Component {
   render () {
     return ( 
       <div>
-        <h1>Keys</h1>
+        <h1 style={{color: 'white'}}>Keys</h1>
         {this.props.coins !== null && <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>}
         <div>
                  <Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">

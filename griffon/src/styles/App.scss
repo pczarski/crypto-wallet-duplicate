@@ -36,9 +36,6 @@ html {
       width: 100%;
     }
   }
-}  
-h2 {
-  color: #f7f7f7;
 }
 .react-select__menu {
   color: black;
@@ -103,4 +100,8 @@ input{
 
 .iconPadding {
     margin-left: 5px;
+}
+.title-text {
+  color: $logo-color;
+  font-family: 'Abel';
 }

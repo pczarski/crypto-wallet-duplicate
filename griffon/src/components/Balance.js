@@ -64,8 +64,7 @@ export default class Balance extends React.Component {
     return (
     <div className="balance">
         <img id='logo' src ={Logo} alt = 'logo'></img>
-        
-        <h1 style={{fontFamily: 'Abel', color: 'turquoise'}}>Griffon</h1>
+        <h1 className="title-text">Griffon</h1>
         <div>
           <h5>
             <br/>
