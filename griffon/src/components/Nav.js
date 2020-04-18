@@ -27,20 +27,14 @@ function Nav() {
                         Exchange
                     </Link>
                 </li>
-                <li>
-                <Link className="list-group-item list-group-item-action bg-dark active" to="/orders">
-                    Add Exchange
-                    </Link>
-                </li>
                 <div className="bottomMenu">
                     <li>
                     <Link className="list-group-item list-group-item-action bg-dark active" to="/settings">
                         Settings
-                        </Link>
+                    </Link>
                     </li>
                 </div>
             </ul>
-    
     </nav>
 </div>
   );

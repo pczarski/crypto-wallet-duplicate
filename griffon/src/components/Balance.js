@@ -7,6 +7,8 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner} from "re
 
 import { roundTo2,  } from '../lib/helper';
 import {getValIn} from '../lib/backendHandler'
+import Logo from '../assets/Logo.png';
+import '../styles/balance.css';
 
 export default class Balance extends React.Component {
   
@@ -61,7 +63,8 @@ export default class Balance extends React.Component {
   render () {
     return (
     <div className="balance">
-        <h1>Griffon</h1>
+        <img id='logo' src ={Logo} alt = 'logo'></img>
+        
         <div>
           <h5>
             <br/>

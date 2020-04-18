@@ -2,7 +2,7 @@ html {
 
   body {
     height: 100%;
-    // color: #f7f7f7;
+
     .wrapper {
       height: 100vh;
       text-align: center;
@@ -15,6 +15,12 @@ html {
       width: 100%;
     }
   }
+}  
+h2 {
+  color: #f7f7f7;
+}
+.react-select__menu {
+  color: black;
 }
 .vertical-input-group .input-group:first-child {
   padding-bottom: 0;
@@ -40,6 +46,12 @@ html {
 .vertical-input-group .input-group:not(:first-child) * {
   border-top: 0;
 }
+
 #recPhase{
   margin: auto;
+}
+
+#back{
+  color:white;
+  border-radius: 10px;
 }

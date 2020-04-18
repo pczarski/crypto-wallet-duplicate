@@ -1,35 +1,24 @@
 .btn.btn-secondary{
     background-color:#464B51;
     border: 50px,solid,white;
-    text-align: center;
-    width:150px;
-    height:auto;
 }
 
 .cont{
     background-color: #464B51;
 }
 
-.react-select-container{
-    width:150px;
-    border-radius:10 ;
-    
+/* .nav-item.btn.btn-secondary{
     
 }
-
-
-/* .css-2b097c-container{
- width:150px;
- height:auto;
- 
- 
+ */
+.exAcc{
+    width:33%;
 }
-.css-g1d714-ValueContainer{
-    background-color:#464B51;
-}
-.css-1hb7zxy-IndicatorsContainer{
 
-    background-color: #464B51;
+#exchange {
+    float:left;
 }
-.css-yk16xz-control{
-} */
+
+.react-select-ex{
+    width:33%;
+}

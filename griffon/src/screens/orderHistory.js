@@ -1,9 +1,8 @@
 import React from 'react';
 import '../styles/App.scss';
-import {Link} from 'react-router-dom';
 import '../styles/OrderHistory.scss';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Button } from "reactstrap";
-import {getOrderHistory,makeOrder,getAllOrderHistory,cancelOrder} from '../lib/backendHandler.js';
+import {getOrderHistory,cancelOrder} from '../lib/backendHandler.js';
 import {Table} from 'reactstrap';
 import Nav from '../components/Nav';
 export default class OrderHistory extends React.Component {
@@ -36,7 +35,14 @@ export default class OrderHistory extends React.Component {
     }
 
   }
-  componentDidMount(){this.getOrders()}
+  componentDidMount(){
+    this.getOrders()
+    this.interval = setInterval(() => this.getOrders(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 /*
   toggleCancel() {
   this.setState(

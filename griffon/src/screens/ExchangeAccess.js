@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from 'react-router-dom';
 import { Button } from 'reactstrap';
 import SideBar from '../components/Nav.js';
 import Select from 'react-select';
@@ -14,9 +13,7 @@ import '../styles/exchangeAccess.css'
 export default class ExchangeAccess extends Component
 {
     // todo: not keeping an states, consider converting to a function component
-    constructor(props){
-        super(props);
-    }
+    
 
     // will update the main component to order history
     selectOrderHistory = () => {
@@ -66,25 +63,19 @@ export default class ExchangeAccess extends Component
             <div className="wrapper">
                 <SideBar/>
                 <div className="cont">
-                    <div className = "nav justify-content-center">
-
-                        <Button className = "nav justify-content-center nav-item" onClick={this.selectPortfolio}>Exchange</Button>
-
-                        <Select className="react-select-container" classNamePrefix="react-select"  options={exchangeOptions}
+                    <div style={{display: 'flex'}}>
+                        <Button className = "exAcc nav-item" id='exchange' onClick={this.selectPortfolio}>Exchange</Button>
+                        <Select className="react-select-ex" classNamePrefix="react-select"  options={exchangeOptions}
                                 onChange={this.props.setExchange}
                                 value={this.props.exchange}
-                               
                         />
-                            <Button onClick={this.selectOrderHistory} className="nav-item">Order History</Button>
-                       
+                        <Button onClick={this.selectOrderHistory} id='order' className="exAcc nav-item">Order History</Button>
                     </div>
-                    {mainComponent}
+                    <div className='justify-content-center'>
+                        {mainComponent}
+                    </div>
                 </div>
-
             </div>
         )
     }
-
-
-
 }

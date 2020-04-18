@@ -9,8 +9,6 @@ import Recover from './screens/recover';
 import Settings from './screens/settings';
 import Trade from './components/exchange/trade';
 import Transfer from './screens/transfer';
-import Order from './screens/order';
-import Orders from './screens/orders';
 
 import ExchangeAccess from './screens/ExchangeAccess';
 import $ from 'jquery';
@@ -292,17 +290,15 @@ export default class App extends React.Component {
                     coins={exchangeCoins}
                 />}/>
 
-              <Route path="/orders" render={
-                (props) => <Orders
-                    {...props} coin={exchangeCoin}
-                    coins={exchangeCoins}
-                />}/>
-
               <Route path="/createnew" render={(props) => <CreateNew {...props} />}/>
               <Route path="/recover" render={(props) => <Recover {...props} />}/>
-              <Route path="/settings" render={(props) => <Settings {...props} />}/>
+              <Route path="/settings" render={
+                (props) => <Settings 
+                {...props} coin={walletCoin}
+                coins={walletCoins}
+                handleCoinClick={this.updateWalletCoin}/>}
+                />
               {/*TODO: all those should be integrated in the exchange instead of being separate pages*/}
-              <Route path="/order" render={(props) => <Order {...props} />}/>
             </Switch>
           </div>
         </Router>

@@ -1,10 +1,10 @@
 import React from 'react';
-import Nav from '../Nav';
 
 import '../../styles/nav.scss';
 import '../../styles/App.scss';
 import '../../styles/bal.scss';
 import '../../styles/exchange.scss';
+
 import {Redirect} from 'react-router-dom';
 import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
 import Order from "./order";
@@ -238,7 +238,7 @@ export default class Trade extends React.Component {
             case SELL:
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
-                    marketPrice={marketPrice} label={"you will get:"}
+                    marketPrice={marketPrice} label={"You will get:"}
                     title={"Sell"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
@@ -250,7 +250,7 @@ export default class Trade extends React.Component {
             case BUY:
                 mainComponent = <Order
                     coins={this.props.coins} exchange={this.props.exchange}
-                    marketPrice={marketPrice} label={"you will need:"}
+                    marketPrice={marketPrice} label={"You will need:"}
                     title={"Buy"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
@@ -279,7 +279,7 @@ export default class Trade extends React.Component {
             default:
                 mainComponent = <Swap
                     coins={this.props.coins} exchange={this.props.exchange}
-                    marketPrice={marketPrice} label={"you will get:"}
+                    marketPrice={marketPrice} label={"You will get:"}
                     title={"Swap"} balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
                     coin2={this.props.coin2} setCoin2={this.props.setCoin2}
@@ -288,31 +288,32 @@ export default class Trade extends React.Component {
                     amount2={this.props.amount2} setAmount2={this.props.setAmount2}
                 />;
         }
-        const selectedCoin = this.props.coin;
+
         return (
-        <div className="container">
-                    <Button onClick={this.goBack} close/>
-                    <br/>
-                    <button onClick={this.goToSwap}>
-                        Swap
-                    </button>
-                    <button onClick={this.goToSell}>
-                        Sell
-                    </button>
-                    <button onClick={this.gotToBuy}>
-                        Buy
-                    </button>
-                    <button onClick={this.goToWithdraw}>
-                        withdraw
-                    </button>
-                    <button onClick={this.goToDeposit}>
-                        deposit
-                    </button>
+        <div className="cont">
+                    <Button onClick={this.goBack} close id="back"/>
+                    <div>
+                        <Button size='lg' onClick={this.goToSwap}>
+                            Swap
+                        </Button>
+                        <Button size='lg'  onClick={this.gotToBuy}>
+                            Buy
+                        </Button>
+                        <Button size='lg'  onClick={this.goToSell}>
+                            Sell
+                        </Button>
+                        <Button size='lg'  onClick={this.goToWithdraw}>
+                            Withdraw
+                        </Button>
+                        <Button size='lg'  onClick={this.goToDeposit}>
+                            Deposit
+                        </Button>
+                    </div>
                     <Form onSubmit={this.handleSubmit}>
                         {mainComponent}
-                        <button type="button" onClick={this.handleSubmit}>
+                        <Button type="button" onClick={this.handleSubmit}>
                             {getSubmit(selectedMainComponent)}
-                        </button>
+                        </Button>
                         <p className={(this.state.isError) ? 'error-message' : 'success-message'}>
                             {this.state.response}
                         </p>

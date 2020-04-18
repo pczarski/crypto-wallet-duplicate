@@ -21,7 +21,7 @@ export default function Order(props) {
 
     return(
         <div className="container">
-            {props.title}
+            <h2>{props.title}</h2>
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
                         <CurrencyBox
@@ -29,7 +29,7 @@ export default function Order(props) {
                             setCoin={props.setCoin}
                             coins={props.coins} amount={props.amount}
                             setAmount={handleAmountChange} placeholder={props.amount}
-                            label={'amount:'}
+                            label={'Amount:'}
                         />
                     </div>
                     <div className="col">

@@ -16,7 +16,7 @@ export default function Swap(props) {
 
     return(
         <div className="container">
-            {props.title}
+            <h2>{props.title}</h2>
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
                         <CurrencyBox
@@ -24,7 +24,7 @@ export default function Swap(props) {
                             setCoin={props.setCoin}
                             coins={props.coins} amount={props.amount}
                             setAmount={handleAmountChange} placeholder={props.amount}
-                            label={'you will need:'}
+                            label={'You will need:'}
                         />
                     </div>
                     <div className="col">

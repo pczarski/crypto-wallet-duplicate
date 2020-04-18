@@ -40,8 +40,8 @@ export default class Receive extends React.Component {
         <h2>Receive {this.props.curr}</h2>
         
         <CardBody>
-        <h2>{this.state.key}</h2>
         <canvas id="canvas" width="400" height="400" />
+        <h2>{this.state.key}</h2>
         </CardBody>
       </Card>
     </div>
