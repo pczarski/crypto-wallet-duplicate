@@ -5,28 +5,98 @@ import {Converter} from 'easy-currencies';
 
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Spinner} from "reactstrap";
 
+
+import Select from 'react-select';
+import {selectStyles} from "../styles/selectStyles";
+
+import GBP from "../../node_modules/cryptocurrency-icons/svg/white/gbp.svg";
+import USD from "../../node_modules/cryptocurrency-icons/svg/white/usd.svg";
+
+import {getIcon} from '../components/walletComponents/Logos';
+
 import { roundTo2,  } from '../lib/helper';
-import {getValIn} from '../lib/backendHandler'
+import {getValIn, getCurr} from '../lib/backendHandler'
 import Logo from '../assets/Logo.png';
 import '../styles/balance.css';
 
+
+
+function getCurrencyLabel(name){
+  switch (name) {
+    case 'BTC':
+      return (
+          <div>
+            <img src={getIcon(name)}/> {name}
+          </div>
+      );
+    case 'LTC':
+      return (
+          <div>
+            <img src={getIcon(name)}/> {name}
+          </div>
+      );
+    case 'DASH':
+      return (
+          <div>
+            <img src={getIcon(name)}/> {name}
+          </div>
+      );
+    case 'USDT':
+      return (
+          <div>
+            <img src={getIcon(name)}/> {name}
+          </div>
+      );
+    case 'ETH':
+      return (
+          <div>
+            <img src={getIcon(name)}/> {name}
+          </div>
+      );
+    case 'GBP':
+        return (
+            <div>
+              <img src={GBP}/> {name}
+            </div>
+        );
+    case 'USD':
+      return (
+          <div>
+            <img src={USD}/> {name}
+          </div>
+      );
+    default:
+          return null;
+
+  }
+}
+
+
 export default class Balance extends React.Component {
+  
+
   
   constructor(props) {
     super(props);    
-
-    this.toggle = this.toggle.bind(this);
-    this.select = this.select.bind(this);
     this.state = {
-      supportedCurr: ["BTC", "ETH", "LTC", "DASH", "USDT"],
-      currency: "BTC", // currency name (bitcoin, litecoin, etc. btc by default)
+      supportedCurr: [
+      {value: "BTC", label: getCurrencyLabel('BTC')},
+      {value: "LTC", label: getCurrencyLabel('LTC')},
+      {value: "DASH", label: getCurrencyLabel('DASH')},
+      {value: "USDT", label: getCurrencyLabel('USDT')},
+      {value: 'GBP', label: getCurrencyLabel('GBP')},
+      {value: 'USD', label: getCurrencyLabel('USD')},
+      ],
+      currency: "BTC",
+      obj: {value: "BTC", label: getCurrencyLabel('BTC')},
       totalBal: '0', 
-      dropdownOpen: false
     }
   }
-  
+
   componentDidMount(){
-    this.setState({totalBal: getValIn("BTC").value})
+    this.setState({
+      totalBal: getValIn("BTC").value
+    })
   }
 
   async getTotalBal (prev, curr) {
@@ -37,38 +107,30 @@ export default class Balance extends React.Component {
     )
   }
 
-  toggle(e) {
-    e.preventDefault();
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
-  select(e) {
-    const prev = this.state.currency;
-    if (e.target.innerText === "GBP" || e.target.innerText === "USD") {
-      this.setState({
-        dropdownOpen: !this.state.dropdownOpen,
-        currency: e.target.innerText,
-        totalBal: this.getTotalBal(prev, e.target.innerText)
-    });
-    } else if (!(e.target.innerText === prev)) {      
-      this.setState({
-        dropdownOpen: !this.state.dropdownOpen,
-        currency: e.target.innerText,
-        totalBal: getValIn(e.target.innerText).value
-    });}
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.currency !== this.state.currency) {
+      if (this.state.currency === "GBP" || this.state.currency === "USD") {
+        this.getTotalBal(prevState.currency, this.state.currency)
+      } else {
+        this.setState({totalBal: getValIn(this.state.currency).value})
+      }
+    }
   }
 
   render () {
+    const choose = (selectedOption) => {
+      this.setState({
+        currency: selectedOption.value,
+        obj: this.state.supportedCurr.find(a => a.value === selectedOption.value)
+      })
+
+    };
     return (
     <div className="balance">
         <img id='logo' src ={Logo} alt = 'logo'></img>
         <h1 className="title-text">Griffon</h1>
         <div>
-          <h5>
-            <br/>
-          </h5>{isNaN(this.state.totalBal) || this.state.totalBal === '0' ? 
+          {isNaN(this.state.totalBal) || this.state.totalBal === '0' ? 
             <Spinner color="light" /> :
             <p>
               {roundTo2(this.state.totalBal) + ""}
@@ -76,18 +138,15 @@ export default class Balance extends React.Component {
             }
         </div>
         <div className="currSel">
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-          <DropdownToggle caret>
-            {this.state.currency}
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[0]}</DropdownItem>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[1]}</DropdownItem>
-            <DropdownItem onClick={this.select}>{this.state.supportedCurr[2]}</DropdownItem>
-            <DropdownItem onClick={this.select}>GBP</DropdownItem>
-            <DropdownItem onClick={this.select}>USD</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <Select className ="react-select-ex currency-select" classNamePrefix="react-select"
+          options={this.state.supportedCurr}
+          onChange={choose}
+          value={this.state.obj}
+          styles={selectStyles}
+          components={{
+            IndicatorSeparator: () => null
+          }}
+        />
         </div>
     </div>
     )
