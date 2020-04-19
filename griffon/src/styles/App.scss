@@ -75,17 +75,76 @@ h2 {
 .success-message{
   color: chartreuse;
 }
+.currency-select #col{
+  padding-top:5%;
+  width:200px;
+  margin: none;
+}
+.labels{
+  $text-color: #d2d3d5;
+}
 
+.container #middle-col{
+  color: #d2d3d5;
+}
+.container #middle-col-alt{
+  padding-top:58px;
+  margin-right: 20px;
+  color: #d2d3d5;
+}
+.currency-select #col{
+  color: #d2d3d5;
+ 
+  
+}
+h2 {
+  padding-right:25px;
+}
+.container p{
+  color: #d2d3d5;
+}
+.withdraw-deposit{
+  padding-top: 30px;
+
+}
 .cont{
   background-color: $background-color;
 }
 
 .notRounded {
-  //border-radius: 0 !important;
+  padding-left: 50px;
 }
 
 .input-style {
   background-color: #464B51;
+}
+.top-bar{
+  box-shadow: 0px 1px 3px black;
+}
+.top-bar button{
+    border: none;
+    
+    
+    
+}
+#nav-btn {
+  background-color: #36393f;
+  color: #b9bbbe;
+  
+  width: 200px;
+}
+#swap{
+  display:inline;
+  padding-left: 10px;
+  
+}
+.x-close{
+  
+  margin-bottom: 30px;
+  border: solid 5px #36393f;
+  //border:hidden;
+  
+ 
 }
 
 input{

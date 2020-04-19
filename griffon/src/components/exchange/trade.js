@@ -5,6 +5,8 @@ import '../../styles/App.scss';
 import '../../styles/bal.scss';
 import '../../styles/exchange.scss';
 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {Redirect} from 'react-router-dom';
 import {COINS, SELL, BUY, WITHDRAW, DEPOSIT, SWAP} from "../../App";
 import Order from "./order";
@@ -260,7 +262,7 @@ export default class Trade extends React.Component {
                 />;
                 break;
             case WITHDRAW:
-                mainComponent = <WithdrawDeposit
+                mainComponent = <WithdrawDeposit id='withdraw-deposit'
                     coins={this.props.coins} title={"Withdraw"}
                     balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
@@ -268,7 +270,7 @@ export default class Trade extends React.Component {
                 />;
                 break;
             case DEPOSIT:
-                mainComponent = <WithdrawDeposit
+                mainComponent = <WithdrawDeposit id='withdraw-deposit'
                     coins={this.props.coins} title={"Deposit"}
                     balance={balance}
                     coin={this.props.coin} setCoin={this.props.setCoin}
@@ -290,30 +292,45 @@ export default class Trade extends React.Component {
         }
 
         return (
-        <div className="cont">
+            <div>
+             
+        <div className="container">
+        <div className ="x-close">
                     <Button onClick={this.goBack} close id="back"/>
-                    <div className='notRounded'>
-                        <Button size='lg' onClick={this.goToSwap}
+                </div>
+                    <div className ="top-bar">
+                        <div id = "swap">
+                        <Button id='nav-btn' size='lg' onClick={this.goToSwap}
                                 className={(selectedMainComponent === SWAP) ? 'active' : ''}>
                             Swap
                         </Button>
-                        <Button size='lg'  onClick={this.gotToBuy}
+                        </div>
+                        <div id = "swap">
+                        <Button id ='nav-btn' size='lg'  onClick={this.gotToBuy}
                                 className={(selectedMainComponent === BUY) ? 'active' : ''}>
                             Buy
                         </Button>
-                        <Button size='lg'  onClick={this.goToSell}
+                        </div>
+                        <div id= "swap">
+                        <Button  id= 'nav-btn'size='lg'  onClick={this.goToSell}
                                 className={(selectedMainComponent === SELL) ? 'active' : ''}>
                             Sell
                         </Button>
-                        <Button size='lg'  onClick={this.goToWithdraw}
+                        </div>
+                        <div id = "swap">
+                        <Button id = 'nav-btn'size='lg'  onClick={this.goToWithdraw}
                                 className={(selectedMainComponent === WITHDRAW) ? 'active' : ''}>
                             Withdraw
                         </Button>
-                        <Button size='lg'  onClick={this.goToDeposit}
+                        </div>
+                        <div id="swap">
+                        <Button id='nav-btn' size='lg'  onClick={this.goToDeposit}
                                 className={(selectedMainComponent === DEPOSIT) ? 'active' : ''}>
                             Deposit
                         </Button>
+                        </div>
                     </div>
+                    
                     <Form onSubmit={this.handleSubmit}>
                         {mainComponent}
                         <Button type="button" onClick={this.handleSubmit}>
@@ -323,6 +340,7 @@ export default class Trade extends React.Component {
                             {this.state.response}
                         </p>
                     </Form>
+                </div>
                 </div>
         );
     }
