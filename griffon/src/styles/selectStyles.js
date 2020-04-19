@@ -3,7 +3,7 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 color: state.isFocused ? '#f7f7f7' :'#f7f7f7',
-                backgroundColor: state.isFocused ? '#202225' : '#36393f',
+                backgroundColor: state.isFocused ? '#6f84d2' : '#36393f',
                  'text-align': 'left',
             })
         )
@@ -80,8 +80,8 @@ export const optionHoover = {
 };
 
 export const optionNormal = {
-    borderColor: '#6f84d2',
-    backgroundColor: '#36393f',
+//    borderColor: '#6f84d2',
+    backgroundColor: '#2f3136',
     color: '#6f84d2',
     //  borderWidth: 'thick',
     minWidth: '200px',

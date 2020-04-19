@@ -15,7 +15,7 @@ $table-second-colour: #36393f;
 
 
 * {
-  //border-radius: 0 !important;
+  text-decoration: none !important;
 }
 .history {
   text-align: left;
@@ -105,4 +105,8 @@ input{
 .title-text {
   color: $logo-color;
   font-family: 'Abel';
+}
+
+.background {
+  text-decoration: none;
 }

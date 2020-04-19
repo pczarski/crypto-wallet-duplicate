@@ -29,8 +29,7 @@ export default class MenuLink extends React.Component {
         if(focus) {
             return(
                 <Link
-                    size="lg"
-                    className='btn btn-primary'
+                    className="list-group-item"
                     style={optionHoover}
                     onClick={this.handleClick}
                     to={to}
@@ -40,8 +39,7 @@ export default class MenuLink extends React.Component {
         if(active) {
             return(
                 <Link
-                    size="lg"
-                    className='btn btn-primary'
+                    className="list-group-item"
                     style={optionActive}
                     onClick={this.handleClick}
                     to={to}
@@ -50,8 +48,7 @@ export default class MenuLink extends React.Component {
         }
         return (
             <Link
-                size="lg"
-                className='btn btn-primary'
+                className="list-group-item"
                 style={optionNormal}
                 onClick={this.handleClick}
                 to={to}
