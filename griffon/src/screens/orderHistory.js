@@ -265,7 +265,7 @@ export default class OrderHistory extends React.Component {
 
           <div className="currSel">
             <div className="Dropdowns">
-              <h5 className="tableInput">Exchange:</h5>
+              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%'}}>Exchange </h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                   {this.state.exchange}
@@ -275,7 +275,7 @@ export default class OrderHistory extends React.Component {
 
                 </DropdownMenu>
               </Dropdown>
-              <h5 className="tableInput">Display:</h5>
+              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%'}}>Display .</h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
                 <DropdownToggle caret>
                   {this.state.currentDisplay}

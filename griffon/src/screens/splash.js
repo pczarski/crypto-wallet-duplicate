@@ -60,6 +60,7 @@ export default class Splash extends React.Component {
             <img id='logo' src ={Logo} alt = 'logo'/>
           </div>
         <h1 className="title-text" style={{fontSize: '5em'}}>Griffon</h1>
+          <div style={{maxWidth: '800px', marginLeft: '15%'}}>
           {!this.state.firstLaunch &&
           <div className="old">
           <Form onSubmit={this.handleSubmit} id="form">
@@ -87,6 +88,7 @@ export default class Splash extends React.Component {
             </Link>
           </div>
           }
+          </div>
         </div>
        </div>
     );

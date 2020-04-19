@@ -452,3 +452,9 @@ dropdown-toggle.btn.btn-secondary {
   color:white !important;
   background-color: $background-color !important;
 }
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

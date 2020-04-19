@@ -98,6 +98,7 @@ export default class Recover extends React.Component {
             <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Set a password</ModalHeader>
             <Card className="text-center" id="norad" style={cardStyles}>
               <CardBody>
+
                 <Form className="needs-validation ">
                   <div className="vertical-input-group">
                     <div className="input-group" style={{paddingBottom: '5%'}}>
@@ -123,6 +124,8 @@ export default class Recover extends React.Component {
           <div style={{width: '100%'}}>
             <Card body className="text-center" style={cardStyles}>
               <h3 style={{paddingBottom:'4%'}}>Recover Wallet</h3>
+              <div className={'row d-flex justify-content-center'}>
+              <div style={{minWidth: '600px'}}>
               <form className="needs-validation" onSubmit={this.handleSubmit}>
                 <Input
                     type="textarea" name="seed" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange} style={{border: 'none', color: '#d2d3d5', background: '#40444b'}}/>
@@ -131,6 +134,8 @@ export default class Recover extends React.Component {
                   >Submit</button>
                 </div>
               </form>
+                </div>
+              </div>
               <span className={(this.state.feedback === 'Enter a valid seed' || this.state.feedback === 'Please confirm your passwords are written correctly.') ? 'error-message': 'success-message'}
                  style={{marginTop: '20px'}}>{this.state.feedback}</span>
             </Card>

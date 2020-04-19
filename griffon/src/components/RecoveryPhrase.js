@@ -50,60 +50,61 @@ export default class RecoveryPhrase extends React.Component {
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
     return minutes+':'+seconds;
-}
+  }
 
   render () {
 
-  const Stopwatch = () => (
-    <ReactStopwatch
-      seconds={0}
-      minutes={0}
-      hours={0}
-      autoStart={this.state.start}
-      limit="00:03:00"
+    const Stopwatch = () => (
+        <ReactStopwatch
+            seconds={0}
+            minutes={0}
+            hours={0}
+            autoStart={this.state.start}
+            limit="00:03:00"
 
-      onCallback={() => this.timerDone()}
+            onCallback={() => this.timerDone()}
 
-      render={({ seconds, minutes }) => {
-        return (
-          <div>
-            <p>
-              Time left: {this.toHHMMSS(180 - seconds - (60 * minutes)) }
-            </p>
-          </div>
-        );
-      }}
-    />
-  );
+            render={({ seconds, minutes }) => {
+              return (
+                  <div>
+                    <p>
+                      Time left: {this.toHHMMSS(180 - seconds - (60 * minutes)) }
+                    </p>
+                  </div>
+              );
+            }}
+        />
+    );
 
     return (
-      <div>
-      <Modal isOpen={this.state.modal} toggle={this.toggle}>
-        <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Warning!</ModalHeader>
-        <ModalBody style={popupStyles}>
-          Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
-          It will only display for 3 minutes before closing.
-        </ModalBody>
-        <ModalFooter style={popupHeaderStyles}>
-          <Button color="success"
-                  onClick={this.select}>Continue</Button>
-          <Button color="danger" onClick={this.toggle}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
-      <Card id="phrase" body className="text-center" style={cardStyles}>
-        <h3>Your Recovery Phrase</h3>
-        <Stopwatch/>
-        {this.state.showSeed &&
-          <b style={{paddingBottom: '7%', paddingTop: '4%'}}
-          >{this.state.seed}</b>
-        }
-        <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
-        <Button id="recPhase" className="btn-action"
-                color='secondary' block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+        <div>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+            <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Warning!</ModalHeader>
+            <ModalBody style={popupStyles}>
+              Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
+              It will only display for 3 minutes before closing.
+            </ModalBody>
+            <ModalFooter style={popupHeaderStyles}>
+              <Button color="success"
+                      onClick={this.select}>Continue</Button>
+              <Button color="danger" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
+          </Modal>
+          <Card id="phrase" body className="text-center" style={cardStyles}>
+            <h3>Your Recovery Phrase</h3>
+            <Stopwatch/>
+            {this.state.showSeed &&
+            <b style={{paddingBottom: '7%', paddingTop: '4%'}}
+            >{this.state.seed}</b>
+            }
+            <div className={'row d-flex justify-content-center'}>
+              <div style={{minWidth: '600px'}}>
+                <Button id="recPhase" className="btn-action"
+                        color='secondary' block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+              </div>
+            </div>
+          </Card>
         </div>
-      </Card>
-    </div>
-
     )
   }
 }

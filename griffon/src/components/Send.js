@@ -78,8 +78,8 @@ export default class Send extends React.Component {
     } else {
       this.setState({response: 'Insufficient amount', isError: true,})
     }
-      event.preventDefault();
-    }
+    event.preventDefault();
+  }
 
   toggle = () => {
     this.setState({tooltipOpen: !this.state.tooltipOpen})
@@ -91,35 +91,39 @@ export default class Send extends React.Component {
 
   render () {
     return (
-    <div>
-      <Card body className="text-center"
-          style={cardStyles}
-      >
-      <CardBody>
-      <Form onSubmit={this.handleSubmit}>
-        <FormGroup style={{textAlign: 'left', paddingBottom:'3%'}}>
-          <Label for="address">Address</Label>
-          <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleAddrChange} value={this.state.address} />
-        </FormGroup>
-        <FormGroup style={{textAlign: 'left'}}>
-          <Label for="amount">Amount</Label>
-          <Input type="text" name="amount" placeholder="0.00" onChange={this.handleAmChange} value={this.state.amount}/>
-        </FormGroup>
-        <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance} {this.props.curr}</span></legend>
-        <Tooltip style={{backgroundColor: '#202225'}}
-            placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>
-        Send all available currency
-      </Tooltip >
-        <Button type="submit" size='lg' className='btn-action'>Send</Button>
-      </Form>
-      </CardBody>
-        <CardText>
+        <div>
+          <Card body className="text-center"
+                style={cardStyles}
+          >
+            <CardBody>
+              <div className={'row d-flex justify-content-center'}>
+                <div style={{minWidth: '800px'}}>
+                  <Form onSubmit={this.handleSubmit}>
+                    <FormGroup style={{textAlign: 'left', paddingBottom:'3%'}}>
+                      <Label for="address">Address</Label>
+                      <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleAddrChange} value={this.state.address} />
+                    </FormGroup>
+                    <FormGroup style={{textAlign: 'left'}}>
+                      <Label for="amount">Amount</Label>
+                      <Input type="text" name="amount" placeholder="0.00" onChange={this.handleAmChange} value={this.state.amount}/>
+                    </FormGroup>
+                    <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance} {this.props.curr}</span></legend>
+                    <Tooltip style={{backgroundColor: '#202225'}}
+                             placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>
+                      Send all available currency
+                    </Tooltip >
+                    <Button type="submit" size='lg' className='btn-action'>Send</Button>
+                  </Form>
+                </div>
+              </div>
+            </CardBody>
+            <CardText>
           <span className={(this.state.isError) ? 'error-message' : 'success-message'}
           >{this.state.response}</span>
-        </CardText>
-      </Card>
-      <p></p>
-    </div>
+            </CardText>
+          </Card>
+          <p></p>
+        </div>
     )
   }
 }
