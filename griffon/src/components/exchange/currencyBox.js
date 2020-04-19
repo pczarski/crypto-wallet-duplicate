@@ -9,17 +9,18 @@ export default function CurrencyBox(props) {
         props.setAmount(e.target.value);
     };
     return(
-        <div>
+        <div className ="currency-select">
             <CurrencySelect coin={props.coin} coins={props.coins}
                 setCoin={props.setCoin}
             />
-            <div className="col">
-                <Label>{props.label}</Label>
+            <div id="col">
+                <Label className="labels">{props.label}</Label>
                 <Input
                     type="text" onChange={handleChange}
                        className="form-control bg-dark text-white" name="currency"
                        placeholder={props.placeholder}
                        value={(props.value) ? props.value : props.placeholder}
+                       
                 />
             </div>
 
