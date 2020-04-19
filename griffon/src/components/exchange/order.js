@@ -21,8 +21,10 @@ export default function Order(props) {
 
     return(
         <div className="container">
-                <div className="form-row mb-4" onClick={props.fetch}>
-                    <div className="col">
+            <div id="order-box">
+            <div className="form-row mb-4" onClick={props.fetch}>
+                <div className="col">
+                    <div id='left-currency-box'>
                         <CurrencyBox
                             coin={props.coin}
                             setCoin={props.setCoin}
@@ -31,29 +33,31 @@ export default function Order(props) {
                             label={'Amount:'}
                         />
                     </div>
-                    <div className="col">
-                        <div id ='middle-col-alt'>
-                            <Label>Price</Label>
-                            <Input type='text' className='form-control bg-dark text-white form-control'
-                                placeholder={props.marketPrice}
-                                onChange={handlePriceChange}
-                                value={props.price}
-                            />
-                        
+                </div>
+                <div className="col">
+                    <div id ='middle-col-alt'>
+                        <Label>Price</Label>
+                        <Input type='text' className='form-control bg-dark text-white form-control'
+                               placeholder={props.marketPrice}
+                               onChange={handlePriceChange}
+                               value={props.price}
+                        />
+
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
                         <p> Available: {roundTo2(props.balance) +" "+props.coin}</p>
-                        </div>
-                    </div>
-                    <div className="col">
-                        <CurrencyBox
-                            coin={props.coin2}
-                            setCoin={props.setCoin2}
-                            coins={props.coins} amount={props.amount2}
-                            setAmount={handleAmount2Change} placeholder={props.price*props.amount}
-                            label={props.label} value={props.amount2}
-                        />
                     </div>
                 </div>
+                <div className="col right-currency-box">
+                    <CurrencyBox
+                        coin={props.coin2}
+                        setCoin={props.setCoin2}
+                        coins={props.coins} amount={props.amount2}
+                        setAmount={handleAmount2Change} placeholder={props.price*props.amount}
+                        label={props.label} value={props.amount2}
+                    />
+                </div>
+            </div>
+            </div>
         </div>
     )
 }

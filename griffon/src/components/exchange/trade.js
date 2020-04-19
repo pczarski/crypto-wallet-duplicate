@@ -334,7 +334,7 @@ export default class Trade extends React.Component {
 
                     <Form onSubmit={this.handleSubmit}>
                         {mainComponent}
-                        <Button type="button" onClick={this.handleSubmit}>
+                        <Button type="button" onClick={this.handleSubmit} className='btn-action'>
                             {getSubmit(selectedMainComponent)}
                         </Button>
                         <p className={(this.state.isError) ? 'error-message' : 'success-message'}>
