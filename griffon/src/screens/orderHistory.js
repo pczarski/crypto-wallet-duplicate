@@ -264,34 +264,28 @@ export default class OrderHistory extends React.Component {
           <Nav/>
 
           <div className="currSel">
-            <div className="Dropdowns">
-              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%'}}>Exchange </h5>
+            <div className="Dropdowns" style={{display: 'inherit'}}>
+              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%', paddingTop: '5px'}}>Exchange </h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle caret>
                   {this.state.exchange}
                 </DropdownToggle>
                 <DropdownMenu styles={{backgroundColor: '#36393f'}}>
                   {this.getDropdownItems(1)}
-
                 </DropdownMenu>
               </Dropdown>
-              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%'}}>Display .</h5>
+              <h5 className="tableInput" style={{paddingLeft: '1%', paddingRight: '1%',  paddingTop: '5px'}}>Display</h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownDisplayOpen} toggle={this.toggleDisplay}>
                 <DropdownToggle caret>
                   {this.state.currentDisplay}
                 </DropdownToggle>
                 <DropdownMenu>
                   {this.getDropdownItems(2)}
-
                 </DropdownMenu>
               </Dropdown>
-              <Button className="btn btn-primary tableInput "  id="cancelBtn" size="lg" onClick={this.toCancelOrder}>Cancel Selected Orders</Button>
-            </div>
+                <Button className="btn btn-primary tableInput"  id="cancelBtn" size="lg" onClick={this.toCancelOrder} >Cancel Selected Orders</Button>
+              </div>
           </div>
-
-
-
-
             <table>
               <thead>
               <tr>
