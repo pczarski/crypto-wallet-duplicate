@@ -60,10 +60,10 @@ export default class Send extends React.Component {
   }
 
   handleSubmit(event) {
-    if (!(this.state.address.length > 0)) {
+    if (this.state.address.length <= 0) {
       this.setState({response: 'Address unsupported'})
     }
-    if (this.state.amount > 0) {
+    else if (this.state.amount > 0) {
       let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
       console.log(resp)
       this.setState({

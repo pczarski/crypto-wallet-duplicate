@@ -3,7 +3,7 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 color: state.isFocused ? '#f7f7f7' :'#f7f7f7',
-                backgroundColor: state.isFocused ? '#202225' : '#36393f',
+                backgroundColor: state.isFocused ? '#6f84d2' : '#36393f',
                  'text-align': 'left',
             })
         )
@@ -69,6 +69,28 @@ export const buttonActive = {
     backgroundColor: '#6f84d2',
     color: '#36393f',
    // borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const optionHoover = {
+    backgroundColor: '#6f84d2',
+    color: '#d2d3d5',
+    //borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const optionNormal = {
+//    borderColor: '#6f84d2',
+    backgroundColor: '#2f3136',
+    color: '#6f84d2',
+    //  borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const optionActive = {
+    backgroundColor: '#6f84d2',
+    color: '#36393f',
+    // borderWidth: 'thick',
     minWidth: '200px',
 };
 

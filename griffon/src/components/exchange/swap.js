@@ -1,7 +1,7 @@
 import React from 'react';
 import CurrencyBox from "./currencyBox";
 import {roundTo2} from "../../lib/helper";
-
+import '../../styles/App.scss'
 export default function Swap(props) {
 
     const handleAmountChange = (val) => {
@@ -29,8 +29,10 @@ export default function Swap(props) {
                     </div>
                     <div className="col">
                         <h2>⇄</h2>
+                        <div id='middle-col'>
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
                         <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
+                        </div>
                     </div>
                     <div className="col">
                         <CurrencyBox

@@ -193,12 +193,12 @@ export default class OrderHistory extends React.Component {
           /*<Table size="sm" key={i}>*/
           <tbody key={i}>
           <tr  key={element.id}  onClick={() => this.fetchDetails(element.id)}>
-            <td>{element.id}</td>
+            <td sytle={{'margin-left':'5em'}}>{element.id}</td>
             <td >{element.currency1}</td>
             <td >{element.currency2}</td>
             <td >{element.type}</td>
             <td >{element.status}</td>
-            <td >{element.data}</td>
+            <td >{element.date}</td>
             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
           </tr>
           <tr id={element.id}  className="collapse">
@@ -261,8 +261,7 @@ export default class OrderHistory extends React.Component {
     return (
         <div className="">
           <Nav/>
-          <button className="back"onClick={this.props.goBack}>X</button>
-          <div className="currSel">
+            <div className="currSel">
             <div className="Dropdowns">
               <h5 className="tableInput">Exchange:</h5>
               <Dropdown className="tableInputSelect tableInput" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
@@ -291,7 +290,7 @@ export default class OrderHistory extends React.Component {
 
 
           <div className="table">
-            <Table  size="sm" className="table table-striped table-hover table-dark history">
+            <Table   className="table table-striped table-hover table-dark history">
               <thead>
               <tr>
                 <th>ID</th>

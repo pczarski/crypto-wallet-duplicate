@@ -56,7 +56,7 @@ export default class Splash extends React.Component {
       <div className="wrapper">
         <div className="container">
         <img id='logo' src ={Logo} alt = 'logo'></img>
-        <h1 style={{fontFamily: 'Abel', color: 'white', fontSize: '5em'}}>Griffon</h1>
+        <h1 className="title-text" style={{fontSize: '5em'}}>Griffon</h1>
           {!this.state.firstLaunch &&
           <div className="old">
           <Form onSubmit={this.handleSubmit} id="form">

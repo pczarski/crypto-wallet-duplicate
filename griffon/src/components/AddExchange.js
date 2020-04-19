@@ -3,8 +3,7 @@ import React from 'react';
 import '../styles/nav.scss';
 import '../styles/App.scss';
 import '../styles/bal.scss';
-import '../styles/exchange.scss';
-import '../styles/buy.scss';
+import '../styles/settings.scss';
 
 import {Card , Button,Form, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
@@ -55,6 +54,13 @@ export default class AddExchange extends React.Component {
 
   }
   handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.address === null) {
+      this.setState({
+        response: "Enter a valid API key"
+      });
+      return
+    }
     let resp = addExchange( this.state.name, this.state.address);
     if(resp.exchangeName==="Coinbase"){
       this.setState({
@@ -65,7 +71,6 @@ export default class AddExchange extends React.Component {
         response: "Binance has been added as an Exchange"
       });
     }
-    event.preventDefault();
   }
 
   render () {
@@ -82,8 +87,8 @@ export default class AddExchange extends React.Component {
               options={this.state.exchanges}
               onChange={select} Value={this.state.name} styles={selectStyles}/>
             <Label for="address">Exchange Address</Label>
-            <Input type="text" name="address" placeholder="Enter your API Key"  onChange={this.handleInputChange} />
-          <Button >Submit</Button>
+            <Input type="text" name="address" placeholder="Enter your API Key" id="inp" onChange={this.handleInputChange} />
+          <Button className="mt-2">Submit</Button>
           <p id="addExchange">{this.state.response}</p>
         </Form>
         </Card>

@@ -21,12 +21,15 @@ export default function CurrencySelect(props) {
         return ("");
     }
     return(
-        <div style={{width:'200px'}}>
+        <div>
             <Select
                 styles={selectStyles}
                 value={selected}
                 onChange={handleChange}
                 options={options}
+                components={{
+                    IndicatorSeparator: () => null
+                }}
             />
         </div>
     )
