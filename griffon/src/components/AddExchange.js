@@ -88,6 +88,8 @@ export default class AddExchange extends React.Component {
     return (
         <div>
           <Card id="addExchange" body className="text-center " style={cardStyles}>
+          <div className={'row d-flex justify-content-center'}>
+          <div style={{minWidth: '600px'}}>
 
             <h3>Add an Exchange Account</h3>
             <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
@@ -107,6 +109,9 @@ export default class AddExchange extends React.Component {
               >{this.state.response}</p>
             </Form>
             </div>
+            
+          </div>
+          </div>
           </Card>
         </div>
     );
