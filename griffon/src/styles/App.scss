@@ -1,5 +1,6 @@
 /**color theme here: **/
 $background-color: #36393f;
+$background-secondary: #2f3136;
 $nav-color: #2f3136;
 $logo-color: #6f84d2;
 $nav-active: #393c43;
@@ -9,6 +10,8 @@ $text-color: #d2d3d5;
 $text-color2: #b9bbbe;
 $table-first-colour: #32353b;
 $table-second-colour: #36393f;
+$green: #43b581;
+$text-input-color: #40444b;
 
 //$secondary-color: #464B51;
 //$text-color: #f7f7f7;
@@ -223,4 +226,31 @@ input{
 
 .background {
   text-decoration: none;
+}
+table{
+  background-color:  #32353b;
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+  color:#b9bbbe;
+}
+tr{
+  border:none;
+}
+.header{
+  background-color:#32353b ;
+  padding:20px;
+}
+td{
+  padding:20px;
+}
+
+tr:nth-child(odd) {
+  background-color: #36393f;
+}
+
+tr:hover{
+  background-color: #40444b;
+  color:#d2d3d5;
+  
 }

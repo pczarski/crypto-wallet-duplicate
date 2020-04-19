@@ -8,7 +8,7 @@ import '../styles/settings.scss';
 import SelectCurr from '../components/common/currencySelect'
 
 import {getCurr} from '../lib/backendHandler.js';
-import {Table} from 'reactstrap';
+
 
 export default class Keys extends React.Component {
   constructor(props) {
@@ -53,19 +53,19 @@ export default class Keys extends React.Component {
         <h1 style={{color: 'white'}}>Keys</h1>
         {this.props.coins !== null && <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>}
         <div>
-                 <Table id="simple-board" size="sm" className="table table-striped table-hover table-dark">
+                 <table>
                    <thead>
                    <tr>
-                    <th>#</th>
-                    <th>Private Keys</th>
-                    <th>Public Keys</th>
-                    <th>Balance</th>
+                    <th className='header'>#</th>
+                    <th className='header'>Private Keys</th>
+                    <th className='header'>Public Keys</th>
+                    <th className='header'>Balance</th>
                    </tr>
                    </thead>
                    <tbody>
                     {this.getTable()}
                     </tbody>
-                   </Table>
+                   </table>
                 </div>
            </div>
     );

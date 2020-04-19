@@ -95,40 +95,17 @@ export const optionActive = {
     minWidth: '200px',
 };
 
-// export const selectMenuStyles = {
-//     option: (provided, state) => {
-//         return(
-//             Object.assign({}, provided, {
-//                 color: state.isFocused ? '#464B51' :'#f7f7f7',
-//                 'text-align': 'left',
-//             })
-//         )
-//     },
-//     menu: (provided, state) => {
-//         return(
-//             Object.assign({}, provided, {
-//                 backgroundColor: '#464B51',
-//                 background: 'solid',
-//             })
-//         )
-//     },
-//     control: (provided, state) => {
-//         return(
-//             Object.assign({}, provided, {
-//                 backgroundColor: '#464B51',
-//                 borderColor: '#616161',
-//                 border: '0',
-//                 borderOpacity: '80%',
-//                 background: 'solid',
-//                 'min-height': '300px',
-//             })
-//         )
-//     },
-//     singleValue: (provided, state) => {
-//         return(
-//             Object.assign({}, provided, {
-//                 color: '#f7f7f7',
-//             })
-//         )
-//     },
-// };
+export const cardStyles = {
+    backgroundColor: '#32353b',
+    color: '#d2d3d5',
+};
+
+export const popupStyles = {
+  backgroundColor: '#2f3136',
+    color: '#b9bbbe',
+};
+
+export const popupHeaderStyles = {
+    backgroundColor: '#202225',
+    color: '#b9bbbe',
+};

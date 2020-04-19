@@ -4,6 +4,7 @@ import {getCurr} from '../lib/backendHandler'
 import QRCode from 'qrcode';
 
 import {Card, CardBody} from 'reactstrap';
+import {cardStyles} from "../styles/selectStyles";
 
 export default class Receive extends React.Component {
   
@@ -36,7 +37,7 @@ export default class Receive extends React.Component {
     return (
     <div className="container">
       
-      <Card body className="text-center bg-dark text-white ">
+      <Card body className="text-center" style={cardStyles}>
         <h2>Receive {this.props.curr}</h2>
         
         <CardBody>

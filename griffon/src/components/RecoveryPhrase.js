@@ -5,6 +5,7 @@ import ReactStopwatch from 'react-stopwatch';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter,Card } from 'reactstrap';
 
 import {getRequest} from '../lib/backendHandler'
+import {cardStyles, popupHeaderStyles, popupStyles} from "../styles/selectStyles";
 
 
 export default class RecoveryPhrase extends React.Component {
@@ -77,18 +78,21 @@ export default class RecoveryPhrase extends React.Component {
 
     return (
       <div>
-      <Modal isOpen={this.state.modal} toggle={this.toggle} >
-        <ModalHeader toggle={this.toggle} style={{color: "black"}}>Warning!</ModalHeader>
-        <ModalBody style={{color: "black"}}>
+      <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Warning!</ModalHeader>
+        <ModalBody style={popupStyles}>
           Your seed phrase is the list of words which store all of the information needed to recover your crypto from the blockchain. Anyone who discovers the phrase would be able to steal your funds. You should take the safety of your recovery phrase very seriously.
           It will only display for 3 minutes before requiring authentification again.
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={this.select}>Continue</Button>
+        <ModalFooter style={popupHeaderStyles}>
+          <Button style={{
+            color:"#43b581", backgroundColor: '#40444b', borderWidth:'0'
+          }}
+                  onClick={this.select}>Continue</Button>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
-        <Card id="phrase" body className="text-center bg-dark text-white ">
+        <Card id="phrase" body className="text-center" style={cardStyles}>
       <h1>Your Recovery Phrase</h1>
       <Stopwatch/>
       {this.state.showSeed &&
