@@ -123,10 +123,10 @@ export default class CreateNew extends React.Component {
               <Form className="needs-validation " onSubmit={this.handleSubmit}>
                 <div className="vertical-input-group">
                 <div className="input-group">
-                  <Input valid={this.state.pval} type="password" name="pass" id="password" placeholder="Password" value={this.state.pass} onChange={this.handleChange} className="form-control"/>
+                  <Input valid={this.state.pval} type="password" name="pass" id="inp" placeholder="Password" value={this.state.pass} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <div className="input-group"></div>
-                  <Input type="password" name="repeat" id="password" placeholder="Repeat password" value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
+                  <Input type="password" name="repeat" id="inp" placeholder="Repeat password" value={this.state.repeat} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>{this.state.feedback}</CardText>
                 <Button type="submit" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>

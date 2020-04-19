@@ -36,14 +36,15 @@ export default class Splash extends React.Component {
     this.setState({password: e.target.value})
   }
   handleSubmit(event) {
-    if (localStorage.getItem('pass') === document.getElementById("password").value) {
+    
+    event.preventDefault();
+    if (localStorage.getItem('pass') === document.getElementById("inp").value) {
       this.setState({redirToWall: true})
     }
     else {
       this.setState({redirToWall: false, incor: true})
     }
     
-    event.preventDefault();
   }
   
   render () {
@@ -61,7 +62,7 @@ export default class Splash extends React.Component {
           <div className="old">
           <Form onSubmit={this.handleSubmit} id="form">
             <FormGroup>
-              <Input value={this.state.password} onChange={this.handleChange} invalid={this.state.incor} type="password" name="password" id="password" placeholder="Enter your password" />
+              <Input value={this.state.password} onChange={this.handleChange} invalid={this.state.incor} style={{height: '5vh'}} type="password" name="password" id="inp" placeholder="Enter your password" />
               <FormFeedback tooltip>Password incorrect!</FormFeedback><p></p>
               <Button type="submit" color="primary" size="lg">Open wallet</Button>
                 <Link to="/recover">

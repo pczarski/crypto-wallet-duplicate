@@ -101,16 +101,16 @@ export default class Recover extends React.Component {
               <Form className="needs-validation ">
                 <div className="vertical-input-group">
                 <div className="input-group">
-                  <Input valid={this.state.pval} type="password" name="pass" id="password" placeholder="Password" value={this.state.pass} onChange={this.handleChange} className="form-control"/>
+                  <Input valid={this.state.pval} type="password" name="pass" id="inp" placeholder="Password" style={{height: '5vh'}} value={this.state.pass} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <div className="input-group"></div>
-                  <Input type="password" name="repeat" id="password" placeholder="Repeat password" value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
+                  <Input type="password" name="repeat" id="inp " placeholder="Repeat password" style={{height: '5vh'}} value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>{this.state.response}</CardText>
               </Form>
             </CardBody>
           </Card>
-        <ModalFooter style={popupHeaderStyles}>
+        <ModalFooter style={popupHeaderStyles}> 
           <Button color="success"
                   onClick={this.checkMatch}>Continue</Button>
           <Button color="danger" onClick={this.toggle}>Cancel</Button>
@@ -120,7 +120,7 @@ export default class Recover extends React.Component {
       <Card body className="text-center" style={cardStyles}>
         <h1>Recover Wallet</h1>
         <form className="needs-validation" onSubmit={this.handleSubmit}>
-          <Input type="textarea" name="seed" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange}/>
+          <Input type="textarea" name="seed" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange} style={{border: 'none', color: '#d2d3d5', background: '#40444b'}}/>
             <button type="submit" className="mt-3 btn btn-primary">Submit</button>
         </form>
         <p style={{marginTop: '20px'}}>{this.state.feedback}</p>
