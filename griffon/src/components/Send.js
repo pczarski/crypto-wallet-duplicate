@@ -19,7 +19,8 @@ export default class Send extends React.Component {
       amount: '',
       address: '',
       response: '',
-      tooltipOpen: false
+      tooltipOpen: false,
+      isError: false,
     };
 
     this.handleAddrChange = this.handleAddrChange.bind(this);
@@ -62,24 +63,27 @@ export default class Send extends React.Component {
 
   handleSubmit(event) {
     if (this.state.address.length <= 0) {
-      this.setState({response: 'Address unsupported'})
+      this.setState({response: 'Address unsupported', isError: true,})
     }
     else if (this.state.amount > 0) {
-      let resp = sendCurr(this.props.curr, this.state.amount, this.state.address).response
-      console.log(resp)
+      const req = sendCurr(this.props.curr, this.state.amount, this.state.address);
+      let resp = req.response;
+      const id = req.id;
+      console.log(resp);
       this.setState({
         balance: getBalance(this.props.curr),
-        response: resp
+        response: resp,
+        isError: (id <= 0),
       });
     } else {
-      this.setState({response: 'Insufficient amount'})
+      this.setState({response: 'Insufficient amount', isError: true,})
     }
       event.preventDefault();
     }
 
   toggle = () => {
     this.setState({tooltipOpen: !this.state.tooltipOpen})
-  }
+  };
 
   setSendAsAvail () {
     this.setState({amount: this.state.balance})
@@ -93,11 +97,11 @@ export default class Send extends React.Component {
       >
       <CardBody>
       <Form onSubmit={this.handleSubmit}>
-        <FormGroup>
+        <FormGroup style={{textAlign: 'left', paddingBottom:'3%'}}>
           <Label for="address">Address</Label>
           <Input type="text" name="address" id="exampleEmail" placeholder="Address or domain" onChange={this.handleAddrChange} value={this.state.address} />
         </FormGroup>
-        <FormGroup>
+        <FormGroup style={{textAlign: 'left'}}>
           <Label for="amount">Amount</Label>
           <Input type="text" name="amount" placeholder="0.00" onChange={this.handleAmChange} value={this.state.amount}/>
         </FormGroup>
@@ -109,7 +113,10 @@ export default class Send extends React.Component {
         <Button type="submit" size='lg' className='btn-action'>Send</Button>
       </Form>
       </CardBody>
-      <CardText>{this.state.response}</CardText>
+        <CardText>
+          <p className={(this.state.isError) ? 'error-message' : 'success-message'}
+          >{this.state.response}</p>
+        </CardText>
       </Card>
       <p></p>
     </div>

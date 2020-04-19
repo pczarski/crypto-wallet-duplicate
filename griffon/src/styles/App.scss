@@ -420,6 +420,10 @@ tr:hover{
 .react-select__control {
   color: #d2d3d5 !important;
 }
+
+.form-control {
+  border-width: 0 !important;
+}
 .form-control:focus {
   box-shadow: 0 0 0 0.1rem $text-color2 !important
 }
