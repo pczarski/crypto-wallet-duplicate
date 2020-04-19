@@ -197,7 +197,8 @@ export default class OrderHistory extends React.Component {
             <td >{element.currency1}</td>
             <td >{element.currency2}</td>
             <td >{element.type}</td>
-            <td >{element.status}</td>
+            <td className={getColor(element.status)}
+            >{element.status}</td>
             <td >{element.date}</td>
             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
           </tr>
@@ -269,7 +270,7 @@ export default class OrderHistory extends React.Component {
                 <DropdownToggle caret>
                   {this.state.exchange}
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu styles={{backgroundColor: '#36393f'}}>
                   {this.getDropdownItems(1)}
 
                 </DropdownMenu>
@@ -311,4 +312,13 @@ export default class OrderHistory extends React.Component {
 
     );
   }
+}
+
+function getColor(type) {
+    if(type === "IN_PROGRESS" || type === "NEW") {
+      return 'success-message';
+    }
+    if(type === "CANCELED") {
+      return 'error-message';
+    } return '';
 }

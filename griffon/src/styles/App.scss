@@ -112,7 +112,7 @@ html {
 }
 .currency-select #col{
   color: #d2d3d5;
- text-align: left;
+  text-align: left;
 }
 
 .settings-button {
@@ -167,20 +167,20 @@ h2 {
   background-color: $logo-color;
   color: $background-color;
   width: 200px;
-//  border-radius: 0;
+  //  border-radius: 0;
 }
 
 #swap{
   display:inline;
   padding-left: 2px;
-  
+
 }
 
 #swap-first{
   display:inline;
 }
 .x-close{
-  
+
   margin-bottom: 40px;
   //border: solid 5px #36393f;
   //border:hidden;
@@ -199,7 +199,7 @@ h2 {
 }
 
 #order-box {
-    min-width: 950px;
+  min-width: 950px;
 }
 
 input{
@@ -250,8 +250,8 @@ input{
 }
 
 #brand{
-    color: #adadad;
-    font-size: 2em;
+  color: #adadad;
+  font-size: 2em;
 }
 #Guidelines{
   text-align: center;
@@ -259,7 +259,7 @@ input{
 // end of settings css
 
 .iconPadding {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 .title-text {
   color: $logo-color;
@@ -294,7 +294,7 @@ tr:nth-child(odd) {
 tr:hover{
   background-color: #40444b;
   color:#d2d3d5;
-  
+
 }
 
 #addex {
@@ -380,6 +380,12 @@ tr:hover{
   border-color: $table-first-colour;
 }
 //////////////////////////////
+.btn-action {
+  color: $text-color;
+  background-color: $text-input-color;
+  border: 0;
+}
+
 .btn.btn-secondary.btn-action {
   color:$text-color;
   background-color: $text-input-color;
@@ -404,7 +410,7 @@ tr:hover{
 }
 
 .css-1qltswz-singleValue:hover {
-   color: #d2d3d5 !important;
+  color: #d2d3d5 !important;
 }
 
 .react-select__control.css-111xrt1-control:hover{
@@ -424,4 +430,40 @@ tr:hover{
 
 .passField{
   padding-top: 3%
+}
+
+.dropdown-menu.show {
+  background-color: $table-first-colour;
+  color: $text-color2 !important;
+}
+
+dropdown-toggle.btn.btn-secondary {
+  color:$text-color;
+  background-color: $text-input-color;
+  border-color: $text-input-color;
+}
+
+.dropdown-toggle.btn.btn-secondary:hover {
+   color:white;
+   background-color: $table-first-colour;
+   border-color: $table-first-colour;
+ }
+
+.dropdown-toggle.btn.btn-secondary:active {
+  color:white;
+  background-color: $table-first-colour !important;
+  border-color: $table-first-colour !important;
+}
+.dropdown-toggle.btn.btn-secondary:focus {
+  color:white !important;
+  background-color: $table-first-colour !important;
+  border-color: $table-first-colour !important;
+}
+.dropdown-item {
+  color:$text-color !important;
+}
+
+.dropdown-item:hover {
+  color:white !important;
+  background-color: $background-color !important;
 }
