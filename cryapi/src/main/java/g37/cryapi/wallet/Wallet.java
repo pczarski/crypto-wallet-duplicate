@@ -29,11 +29,9 @@ public class Wallet {
 		//todo make coin factory instead and loop through the enum to follow better practises
 	private void setUpCurrencies(boolean isToSet){
 		currencyInWallets = new ArrayList<>();
-		currencyInWallets.add(new Bitcoin(isToSet));
-		currencyInWallets.add(new Ethereum(isToSet));
-		currencyInWallets.add(new Litecoin(isToSet));
-		currencyInWallets.add(new Tether(isToSet));
-		currencyInWallets.add(new Dash(isToSet));
+		for(CryptoCurrency currency: CryptoCurrency.values()){
+			currencyInWallets.add(CurrencyInWalletFactory.makeCurrencyInWallet(currency, isToSet));
+		}
 	}
 
 	private void recoverCurrencies() {

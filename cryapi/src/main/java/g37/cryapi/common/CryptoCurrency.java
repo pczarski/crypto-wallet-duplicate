@@ -5,7 +5,8 @@ public enum CryptoCurrency {
 	DASH("Dash"),
 	ETH("Ethereun"),
 	LTC("Litecoin"),
-	USDT("Thether");
+	USDT("Thether"),
+	BCH("Bitcoin Cash");
 
 	private final String name;
 
