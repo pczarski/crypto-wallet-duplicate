@@ -126,7 +126,7 @@ export default class Settings extends React.Component {
     return (
         <div>
           <Card id="pword" body className="text-center" style={cardStyles}>
-            <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
+            <div style={{maxWidth:'600px', marginLeft:'35%',marginRight:'25%', paddingTop:'3%'}}>
             <form onSubmit={this.handleSubmit}>
               <h3>Change Password</h3>
               <div style={{textAlign: 'left'}}>
