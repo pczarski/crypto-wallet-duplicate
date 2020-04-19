@@ -131,7 +131,9 @@ h2 {
   background-color: #464B51;
 }
 .top-bar{
-  box-shadow: 0px 1px 3px black;
+  background-color: $background-color;
+  margin-bottom: 3%;
+  //box-shadow: 0px 1px 3px black;
 }
 .top-bar button{
     border: none;
@@ -140,20 +142,39 @@ h2 {
     
 }
 #nav-btn {
-  background-color: #36393f;
-  color: #b9bbbe;
-  
+  background-color: $background-color;
+  color: $logo-color;
   width: 200px;
+  border-radius: 0;
 }
+
+#nav-btn:hover {
+  background-color: $background-color;
+  color: $text-color;
+  width: 200px;
+  border-radius: 0;
+}
+
+#nav-btn.active {
+  background-color: $logo-color;
+  color: $background-color;
+  width: 200px;
+  border-radius: 0;
+}
+
 #swap{
   display:inline;
-  padding-left: 10px;
+  padding-left: 2px;
   
+}
+
+#swap-first{
+  display:inline;
 }
 .x-close{
   
-  margin-bottom: 30px;
-  border: solid 5px #36393f;
+  margin-bottom: 40px;
+  //border: solid 5px #36393f;
   //border:hidden;
   
  

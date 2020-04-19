@@ -75,7 +75,7 @@ export default class ExchangeAccess extends Component
                                  'paddingTop':'32px',
                              }}
                     >
-                        <div style={{width: '200px'}}>
+                        <div style={{width: '200px', marginLeft: '1%'}}>
                             <Select className ="react-select-ex" classNamePrefix="react-select"
                                     options={exchangeOptions}
                                     onChange={this.props.setExchange}

@@ -16,7 +16,6 @@ export default function Swap(props) {
 
     return(
         <div className="container">
-            <h2>{props.title}</h2>
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
                         <CurrencyBox
