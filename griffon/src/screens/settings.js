@@ -125,24 +125,25 @@ export default class Settings extends React.Component {
     const isError = this.state.isError;
     return (
         <div>
-          <Card id="pword" body className="text-center" style={cardStyles}>
-            <div style={{maxWidth:'600px', marginLeft:'35%',marginRight:'25%', paddingTop:'3%'}}>
+          <Card body className="justify-content-center" style={cardStyles}>
+          <div className={'row d-flex justify-content-center'} >
+            <div style={{maxWidth:'600px', paddingTop:'3%',}}>
             <form onSubmit={this.handleSubmit}>
               <h3>Change Password</h3>
               <div style={{textAlign: 'left'}}>
                 <div className="passField">
                   <p>Enter your current Password:</p>
-                  <Input type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
+                  <Input style={{minWidth: '600px'}} type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
                 </div>
                 <div className={'error-message'}>{this.state.currentError}</div>
                 <div className="passField">
                   <p>Enter your new Password:</p>
-                  <Input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
+                  <Input style={{minWidth: '600px'}} type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
                 </div>
                 <div className={'error-message'}>{this.state.newError}</div>
                 <div className="passField">
                   <p>Confirm your new Password:</p>
-                  <Input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
+                  <Input style={{minWidth: '600px'}} type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
                 </div>
               </div>
               <div className={(isError) ? 'error-message' : 'success-message'}>
@@ -152,6 +153,8 @@ export default class Settings extends React.Component {
                 <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>
               </div>
             </form>
+            </div>
+            
             </div>
           </Card>
         </div>
