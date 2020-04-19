@@ -14,7 +14,7 @@ import WithdrawDeposit from "./withdrawDeposit";
 
 import $ from "jquery";
 import Swap from "./swap";
-import {getCoinByCode} from "../../lib/helper";
+import {getCoinByCode, roundTo2} from "../../lib/helper";
 import {Form, Button, Card, CardBody} from 'reactstrap';
 import {cardStyles} from "../../styles/selectStyles";
 
@@ -236,6 +236,9 @@ export default class Trade extends React.Component {
         const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
         const balance = getCoinByCode(this.props.coin, this.props.coins).balance;
+        const balance2 = getCoinByCode(this.props.coin2, this.props.coins).balance;
+        const balance3 = (this.props.walletCoins) ?
+            getCoinByCode(this.props.coin2, this.props.walletCoins).balance : "";
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
@@ -248,6 +251,7 @@ export default class Trade extends React.Component {
                     price={price} setPrice={this.props.setPrice}
                     amount={this.props.amount} setAmount={this.props.setAmount}
                     amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                    available={roundTo2(balance)+" "+this.props.coin}
                 />;
                 break;
             case BUY:
@@ -260,6 +264,7 @@ export default class Trade extends React.Component {
                     price={price} setPrice={this.props.setPrice}
                     amount={this.props.amount} setAmount={this.props.setAmount}
                     amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                    available={roundTo2(balance2)+" "+this.props.coin2}
                 />;
                 break;
             case WITHDRAW:
@@ -273,7 +278,7 @@ export default class Trade extends React.Component {
             case DEPOSIT:
                 mainComponent = <WithdrawDeposit id='withdraw-deposit'
                                                  coins={this.props.coins} title={"Deposit"}
-                                                 balance={balance}
+                                                 balance={balance3}
                                                  coin={this.props.coin} setCoin={this.props.setCoin}
                                                  setAmount={this.props.setAmount} amount={this.props.amount}
                 />;

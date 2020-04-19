@@ -56,6 +56,7 @@ export default class ExchangeAccess extends Component
                                        setMarketPrice={this.props.setMarketPrice}
                                        amount={this.props.amount} setAmount={this.props.setAmount}
                                        amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                                       walletCoins={this.props.walletCoins}
             />
         } else {
             mainComponent = <OrderHistory goBack={this.selectPortfolio}
