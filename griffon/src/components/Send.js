@@ -114,8 +114,8 @@ export default class Send extends React.Component {
       </Form>
       </CardBody>
         <CardText>
-          <p className={(this.state.isError) ? 'error-message' : 'success-message'}
-          >{this.state.response}</p>
+          <span className={(this.state.isError) ? 'error-message' : 'success-message'}
+          >{this.state.response}</span>
         </CardText>
       </Card>
       <p></p>

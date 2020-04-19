@@ -129,11 +129,10 @@ export default class CreateNew extends React.Component {
                   <Input type="password" name="repeat" id="inp" placeholder="Repeat password" value={this.state.repeat} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>
-                  {console.log(this.state.feedback)}
                   {this.state.feedback.length === 0 && <p> Password must be atleast 8 characters long, and contain atleast 1 capital letter.</p>}
-                  <p className='error-message' style={{color: '#f04747'}}>
+                  <span className='error-message' style={{color: '#f04747'}}>
                   {this.state.feedback}
-                  </p>
+                  </span>
                 </CardText>
                 <Button type="submit" className="btn btn-primary btn-action" onClick={this.handleClick}>Create new wallet</Button>
               </Form>

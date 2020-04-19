@@ -34,7 +34,7 @@ export default class Coins extends Component
                     <td>
                         <img style={{paddingRight: '20px'}} id="" src={coin.icon} alt={coin.name}/>{coin.name}
                     </td>
-                    <td>{coin.balance} {coin.code}</td>
+                    <td>{roundTo2(coin.balance)} {coin.code}</td>
                     <td>$ {coin.price}</td>
                     <td className={(change24 >= 0) ? 'success-message' : 'error-message'}> {getPlus(change24)+get24changeFormat(change24)}%</td>
                     <td>{coin.currentPublicKey}</td>
