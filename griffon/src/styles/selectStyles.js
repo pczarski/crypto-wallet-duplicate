@@ -97,7 +97,7 @@ export const optionActive = {
 
 export const cardStyles = {
     backgroundColor: '#32353b',
-    color: '#d2d3d5',
+    color: '#b9bbbe',
 };
 
 export const popupStyles = {
