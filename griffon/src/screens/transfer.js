@@ -87,7 +87,7 @@ export default class Transfer extends React.Component {
                        'paddingTop':'32px',
                      }}
             >
-              <div style={{width: '200px'}}>
+              <div style={{width: '200px', marginLeft: '1%'}}>
                 <CurrSel className ="react-select-ex" classNamePrefix="react-select"
                          coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>
               </div>

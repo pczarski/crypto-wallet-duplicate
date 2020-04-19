@@ -16,9 +16,10 @@ export default function Swap(props) {
 
     return(
         <div className="container">
-            <h2>{props.title}</h2>
+            <div id="order-box">
                 <div className="form-row mb-4" onClick={props.fetch}>
                     <div className="col">
+                        <div id='left-currency-swap-box'>
                         <CurrencyBox
                             coin={props.coin}
                             setCoin={props.setCoin}
@@ -26,6 +27,7 @@ export default function Swap(props) {
                             setAmount={handleAmountChange} placeholder={props.amount}
                             label={'You will need:'}
                         />
+                        </div>
                     </div>
                     <div className="col">
                         <h2>⇄</h2>
@@ -44,6 +46,7 @@ export default function Swap(props) {
                         />
                     </div>
                 </div>
+            </div>
         </div>
     )
 }

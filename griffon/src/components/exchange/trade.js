@@ -15,7 +15,8 @@ import WithdrawDeposit from "./withdrawDeposit";
 import $ from "jquery";
 import Swap from "./swap";
 import {getCoinByCode} from "../../lib/helper";
-import {Form, Button} from 'reactstrap';
+import {Form, Button, Card, CardBody} from 'reactstrap';
+import {cardStyles} from "../../styles/selectStyles";
 
 function getSubmit(option) {
     switch (option) {
@@ -61,19 +62,19 @@ export default class Trade extends React.Component {
 
 
     handleOrderError = (error) => {
-      if(error.status === 400){
-          this.setState({
-              response: "Insufficient balance",
-              isError: true,
-          });
-          this.props.setAmount(0.0);
-          this.props.setAmount2(0.0);
-      } else {
-          this.setState({
-              response: "Couldn't place order",
-              isError: true,
-          });
-      }
+        if(error.status === 400){
+            this.setState({
+                response: "Insufficient balance",
+                isError: true,
+            });
+            this.props.setAmount(0.0);
+            this.props.setAmount2(0.0);
+        } else {
+            this.setState({
+                response: "Couldn't place order",
+                isError: true,
+            });
+        }
     };
 
     handleSubmit = (e) => {
@@ -263,18 +264,18 @@ export default class Trade extends React.Component {
                 break;
             case WITHDRAW:
                 mainComponent = <WithdrawDeposit id='withdraw-deposit'
-                    coins={this.props.coins} title={"Withdraw"}
-                    balance={balance}
-                    coin={this.props.coin} setCoin={this.props.setCoin}
-                    setAmount={this.props.setAmount} amount={this.props.amount}
+                                                 coins={this.props.coins} title={"Withdraw"}
+                                                 balance={balance}
+                                                 coin={this.props.coin} setCoin={this.props.setCoin}
+                                                 setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
                 break;
             case DEPOSIT:
                 mainComponent = <WithdrawDeposit id='withdraw-deposit'
-                    coins={this.props.coins} title={"Deposit"}
-                    balance={balance}
-                    coin={this.props.coin} setCoin={this.props.setCoin}
-                    setAmount={this.props.setAmount} amount={this.props.amount}
+                                                 coins={this.props.coins} title={"Deposit"}
+                                                 balance={balance}
+                                                 coin={this.props.coin} setCoin={this.props.setCoin}
+                                                 setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
 
                 break;
@@ -292,56 +293,57 @@ export default class Trade extends React.Component {
         }
 
         return (
-            <div>
-             
-        <div className="container">
-        <div className ="x-close">
-                    <Button onClick={this.goBack} close id="back"/>
-                </div>
+            <div style={{marginTop: '2%'}}>
+            <Card style={cardStyles}>
+                <CardBody>
+                    <div className ="x-close">
+                        <Button onClick={this.goBack} close id="back"/>
+                    </div>
                     <div className ="top-bar">
-                        <div id = "swap">
-                        <Button id='nav-btn' size='lg' onClick={this.goToSwap}
-                                className={(selectedMainComponent === SWAP) ? 'active' : ''}>
-                            Swap
-                        </Button>
+                        <div id = "swap-first">
+                            <Button id='nav-btn' size='lg' onClick={this.goToSwap}
+                                    className={(selectedMainComponent === SWAP) ? 'active' : ''}>
+                                Swap
+                            </Button>
                         </div>
                         <div id = "swap">
-                        <Button id ='nav-btn' size='lg'  onClick={this.gotToBuy}
-                                className={(selectedMainComponent === BUY) ? 'active' : ''}>
-                            Buy
-                        </Button>
+                            <Button id ='nav-btn' size='lg'  onClick={this.gotToBuy}
+                                    className={(selectedMainComponent === BUY) ? 'active' : ''}>
+                                Buy
+                            </Button>
                         </div>
                         <div id= "swap">
-                        <Button  id= 'nav-btn'size='lg'  onClick={this.goToSell}
-                                className={(selectedMainComponent === SELL) ? 'active' : ''}>
-                            Sell
-                        </Button>
+                            <Button  id= 'nav-btn'size='lg'  onClick={this.goToSell}
+                                     className={(selectedMainComponent === SELL) ? 'active' : ''}>
+                                Sell
+                            </Button>
                         </div>
                         <div id = "swap">
-                        <Button id = 'nav-btn'size='lg'  onClick={this.goToWithdraw}
-                                className={(selectedMainComponent === WITHDRAW) ? 'active' : ''}>
-                            Withdraw
-                        </Button>
+                            <Button id = 'nav-btn'size='lg'  onClick={this.goToWithdraw}
+                                    className={(selectedMainComponent === WITHDRAW) ? 'active' : ''}>
+                                Withdraw
+                            </Button>
                         </div>
                         <div id="swap">
-                        <Button id='nav-btn' size='lg'  onClick={this.goToDeposit}
-                                className={(selectedMainComponent === DEPOSIT) ? 'active' : ''}>
-                            Deposit
-                        </Button>
+                            <Button id='nav-btn' size='lg'  onClick={this.goToDeposit}
+                                    className={(selectedMainComponent === DEPOSIT) ? 'active' : ''}>
+                                Deposit
+                            </Button>
                         </div>
                     </div>
-                    
+
                     <Form onSubmit={this.handleSubmit}>
                         {mainComponent}
-                        <Button type="button" onClick={this.handleSubmit}>
+                        <Button type="button" onClick={this.handleSubmit} className='btn-action'>
                             {getSubmit(selectedMainComponent)}
                         </Button>
                         <p className={(this.state.isError) ? 'error-message' : 'success-message'}>
                             {this.state.response}
                         </p>
                     </Form>
-                </div>
-                </div>
+                </CardBody>
+            </Card>
+            </div>
         );
     }
 }

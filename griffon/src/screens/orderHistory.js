@@ -198,7 +198,7 @@ export default class OrderHistory extends React.Component {
             <td >{element.currency2}</td>
             <td >{element.type}</td>
             <td >{element.status}</td>
-            <td >{element.data}</td>
+            <td >{element.date}</td>
             {element.status === "COMPLETE"||element.status === "CANCELED"?<td><input type="checkbox" disabled={true} /></td> :<td><input type="checkbox" onChange={this.handleInputChange} name={element.id} /></td>}
           </tr>
           <tr id={element.id}  className="collapse">
@@ -261,7 +261,7 @@ export default class OrderHistory extends React.Component {
     return (
         <div className="">
           <Nav/>
-          
+
           <div className="currSel">
             <div className="Dropdowns">
               <h5 className="tableInput">Exchange:</h5>
@@ -290,7 +290,7 @@ export default class OrderHistory extends React.Component {
 
 
 
-         
+
             <table>
               <thead>
               <tr>
@@ -307,7 +307,7 @@ export default class OrderHistory extends React.Component {
             </table>
           </div>
 
-      
+
 
     );
   }
