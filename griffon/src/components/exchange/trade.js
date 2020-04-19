@@ -300,7 +300,7 @@ export default class Trade extends React.Component {
                         <Button onClick={this.goBack} close id="back"/>
                     </div>
                     <div className ="top-bar">
-                        <div id = "swap">
+                        <div id = "swap-first">
                             <Button id='nav-btn' size='lg' onClick={this.goToSwap}
                                     className={(selectedMainComponent === SWAP) ? 'active' : ''}>
                                 Swap

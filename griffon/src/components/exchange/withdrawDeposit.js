@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function WithdrawDeposit(props) {
     return(
         <div className="container">
-            <h2>{props.title} {props.coin}</h2>
             <div className ="withdraw-deposit d-flex justify-content-center">
             <CurrencyBox 
                 coin={props.coin}
