@@ -9,9 +9,7 @@ import Receive from '../components/Receive';
 import Send from '../components/Send';
 import Nav from '../components/Nav';
 import { Redirect } from 'react-router-dom';
-import Select from "react-select";
 import MenuButton from "../components/common/menuButton";
-import {PORTFOLIO} from "../App";
 
 export default class Transfer extends React.Component {
   constructor(props) {
@@ -49,11 +47,6 @@ export default class Transfer extends React.Component {
       });
     }
   };
-
-//   goTo1 = () => {
-//     this.handleClick({c})
-// };
-
 
   render () {
     if(this.props.coins == null || this.state.redirToWall === true){

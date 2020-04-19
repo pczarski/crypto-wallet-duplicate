@@ -160,3 +160,7 @@ export function getValIn (curr) {
     req.send(null);
     return JSON.parse(req.response);
 }
+
+export function get24Change() {
+
+}
