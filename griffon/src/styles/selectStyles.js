@@ -72,6 +72,28 @@ export const buttonActive = {
     minWidth: '200px',
 };
 
+export const optionHoover = {
+    backgroundColor: '#6f84d2',
+    color: '#d2d3d5',
+    //borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const optionNormal = {
+    borderColor: '#6f84d2',
+    backgroundColor: '#36393f',
+    color: '#6f84d2',
+    //  borderWidth: 'thick',
+    minWidth: '200px',
+};
+
+export const optionActive = {
+    backgroundColor: '#6f84d2',
+    color: '#36393f',
+    // borderWidth: 'thick',
+    minWidth: '200px',
+};
+
 // export const selectMenuStyles = {
 //     option: (provided, state) => {
 //         return(
