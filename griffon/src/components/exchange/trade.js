@@ -37,6 +37,7 @@ export default class Trade extends React.Component {
         this.state = {
             response: "",
             isError: false,
+            walletCoins: this.props.walletCoins,
         }
     }
 
@@ -51,13 +52,28 @@ export default class Trade extends React.Component {
     };
 
     updateWithdrawDepositResponse = (data) => {
-        console.log(data);
         this.setState({
             response: "success!",
             isError: false,
         });
         this.props.setAmount(0.0);
         this.props.setAmount2(0.0);
+    };
+
+    fetchWalletCoins = () => {
+        const url = "http://localhost:8080/all-coins";
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateWalletCoins,
+        });
+    };
+
+    updateWalletCoins = (data) => {
+        this.setState({
+            walletCoins: data,
+        });
     };
 
 
@@ -211,7 +227,7 @@ export default class Trade extends React.Component {
         this.props.setMainComponent(DEPOSIT);
         this.setState({
             response:"",
-        })
+        }, this.fetchWalletCoins)
     };
 
     fetchPriceIn = () => {
@@ -232,13 +248,14 @@ export default class Trade extends React.Component {
             // we shouldn't be here
             return(<Redirect to='/ExchangeAccess'/>);
         }
+        const walletCoins = this.state.walletCoins;
         const marketPrice = this.props.marketPrice;
         const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
         const balance = getCoinByCode(this.props.coin, this.props.coins).balance;
         const balance2 = getCoinByCode(this.props.coin2, this.props.coins).balance;
-        const balance3 = (this.props.walletCoins) ?
-            getCoinByCode(this.props.coin2, this.props.walletCoins).balance : "";
+        const balance3 = (walletCoins) ?
+            getCoinByCode(this.props.coin, walletCoins).balance : "";
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
@@ -318,7 +335,7 @@ export default class Trade extends React.Component {
                             </Button>
                         </div>
                         <div id= "swap">
-                            <Button  id= 'nav-btn'size='lg'  onClick={this.goToSell}
+                            <Button  id= 'nav-btn' size='lg'  onClick={this.goToSell}
                                      className={(selectedMainComponent === SELL) ? 'active' : ''}>
                                 Sell
                             </Button>

@@ -180,7 +180,7 @@ export default class App extends React.Component {
   updateSelectedInPortfolio = (option) => {
     this.setState({
       selectedInPortfolio: option,
-    });
+    }, this.fetchWalletCoins);
   };
 
   updateSelectedInTrade = (option) => {
