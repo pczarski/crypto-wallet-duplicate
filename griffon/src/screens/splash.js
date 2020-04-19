@@ -56,7 +56,9 @@ export default class Splash extends React.Component {
     return (
       <div className="wrapper">
         <div className="container">
-        <img id='logo' src ={Logo} alt = 'logo'></img>
+          <div style={{paddingTop:'5%'}}>
+            <img id='logo' src ={Logo} alt = 'logo'/>
+          </div>
         <h1 className="title-text" style={{fontSize: '5em'}}>Griffon</h1>
           {!this.state.firstLaunch &&
           <div className="old">

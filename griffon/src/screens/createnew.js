@@ -74,7 +74,7 @@ export default class CreateNew extends React.Component {
       this.setState({feedback: "Password cannot contain symbols."})
       return false
     } else if ((password.search(reg) === 0)) {
-      this.setState({feedback: ""})
+      this.setState({feedback: ""});
       return true
     }
   }
@@ -122,20 +122,24 @@ export default class CreateNew extends React.Component {
             <CardBody>
               <Form className="needs-validation " onSubmit={this.handleSubmit}>
                 <div className="vertical-input-group">
-                <div className="input-group">
+                <div className="input-group" style={{paddingBottom:"4%"}}>
                   <Input valid={this.state.pval} type="password" name="pass" id="inp" placeholder="Password" value={this.state.pass} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <div className="input-group"></div>
                   <Input type="password" name="repeat" id="inp" placeholder="Repeat password" value={this.state.repeat} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
-                <CardText>{this.state.feedback}</CardText>
-                <Button type="submit" className="btn btn-primary" onClick={this.handleClick}>Create new wallet</Button>
+                <CardText>
+                  <p className='error-message' style={{color: '#f04747'}}>
+                  {this.state.feedback}
+                  </p>
+                </CardText>
+                <Button type="submit" className="btn btn-primary btn-action" onClick={this.handleClick}>Create new wallet</Button>
               </Form>
             </CardBody>
           </Card>
           <div className='d-flex flex-row justify-content-around mt-5'>
             <Link to="/">
-              <Button type="button" className="btn btn-primary gbackbutton ">Go back</Button>
+              <Button type="button" className="btn btn-primary gbackbutton btn-action">Go back</Button>
             </Link>
           </div>
         </div>
