@@ -71,7 +71,7 @@ export default class Recover extends React.Component {
       this.setState({walletMade: true})
       this.toggle()
     } else {
-      this.setState({feedback: "Please confirm your passwords are written correctly."})
+      this.setState({response: "Please confirm your passwords are written correctly."})
     }
   }
   handleSubmit(e) {
@@ -120,7 +120,7 @@ export default class Recover extends React.Component {
               <Button color="danger" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Modal>
-          <div className="container">
+          <div style={{width: '100%'}}>
             <Card body className="text-center" style={cardStyles}>
               <h3 style={{paddingBottom:'4%'}}>Recover Wallet</h3>
               <form className="needs-validation" onSubmit={this.handleSubmit}>

@@ -28,7 +28,7 @@ export default class CreateNew extends React.Component {
       pval: null,
       pinval: null,
       redirToWall: false,
-      feedback: 'Password must be atleast 8 characters long, and contain atleast 1 capital letter.'
+      feedback: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -116,9 +116,9 @@ export default class CreateNew extends React.Component {
     return (
       <div className="wrapper">
         <Confirm />
-        <div className="container">
+        <div style={{width: '100%'}}>
           <Card body className="text-center" style={cardStyles}>
-            <h1>Create new Wallet</h1>
+            <h3>Create new Wallet</h3>
             <CardBody>
               <Form className="needs-validation " onSubmit={this.handleSubmit}>
                 <div className="vertical-input-group">
@@ -129,6 +129,8 @@ export default class CreateNew extends React.Component {
                   <Input type="password" name="repeat" id="inp" placeholder="Repeat password" value={this.state.repeat} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>
+                  {console.log(this.state.feedback)}
+                  {this.state.feedback.length === 0 && <p> Password must be atleast 8 characters long, and contain atleast 1 capital letter.</p>}
                   <p className='error-message' style={{color: '#f04747'}}>
                   {this.state.feedback}
                   </p>
