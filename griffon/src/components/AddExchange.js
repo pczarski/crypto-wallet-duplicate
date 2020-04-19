@@ -82,7 +82,7 @@ export default class AddExchange extends React.Component {
       })
   };
     return (
-      <div className="container">
+      <div>
       <Card id="addExchange" body className="text-center " style={cardStyles}>
         
       <h1>Add Exchange</h1>
