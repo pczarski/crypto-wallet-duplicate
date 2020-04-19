@@ -29,7 +29,7 @@ function getExchangeLabel(name){
           </div>
       );
     default:
-          return null;
+      return null;
 
   }
 }
@@ -41,7 +41,8 @@ export default class AddExchange extends React.Component {
       address:null,
       name: "Binance",
       obj: {value: "Binance", label: getExchangeLabel("Binance")},
-      response: ""
+      response: "",
+      isError: false,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -58,18 +59,21 @@ export default class AddExchange extends React.Component {
     event.preventDefault();
     if (this.state.address === null) {
       this.setState({
-        response: "Enter a valid API key"
+        response: "Enter a valid API key.",
+        isError: true,
       });
       return
     }
     let resp = addExchange( this.state.name, this.state.address);
     if(resp.exchangeName==="Coinbase"){
       this.setState({
-        response: "Coinbase has been added as an Exchange"
+        response: "Coinbase account added successfully.",
+        isError: false,
       });
     }else if(resp.exchangeName==="Binance"){
       this.setState({
-        response: "Binance has been added as an Exchange"
+        response: "Binance account added successfully.",
+        isError: false,
       });
     }
   }
@@ -80,23 +84,29 @@ export default class AddExchange extends React.Component {
         name: selectedOption.value,
         obj: this.state.exchanges.find(a => a.value === selectedOption.value)
       })
-  };
+    };
     return (
-      <div>
-      <Card id="addExchange" body className="text-center " style={cardStyles}>
-        
-      <h1>Add Exchange</h1>
-        <Form onSubmit={this.handleSubmit}>
-          <Select className="react-select-container" id='addex'classNamePrefix="react-select"  
-              options={this.state.exchanges}
-              onChange={select} value={this.state.obj} styles={selectStyles}/>
-            <Label for="address">Exchange Address</Label>
-            <Input type="text" name="address" placeholder="Enter your API Key" id="inp" onChange={this.handleInputChange} />
-          <Button className="mt-2">Submit</Button>
-          <p id="addExchange">{this.state.response}</p>
-        </Form>
-        </Card>
-      </div>
+        <div>
+          <Card id="addExchange" body className="text-center " style={cardStyles}>
+
+            <h3>Add an Exchange Account</h3>
+            <Form onSubmit={this.handleSubmit}>
+              <div style={{textAlign: "left"}}>
+                <div style={{maxWidth: '200px', paddingBottom: '2%'}}>
+                  <Select className="react-select-container" id='addex' classNamePrefix="react-select"
+                          options={this.state.exchanges}
+                          onChange={select} value={this.state.obj} styles={selectStyles}/>
+                </div>
+                <Label for="address">API Key</Label>
+              </div>
+              <Input type="text" name="address" placeholder="Enter your API Key" id="inp" onChange={this.handleInputChange} />
+              <Button className="mt-2">Submit</Button>
+              <p id="addExchange"
+              className={(this.state.isError) ? 'error-message' : 'success-message'}
+              >{this.state.response}</p>
+            </Form>
+          </Card>
+        </div>
     );
   }
 }

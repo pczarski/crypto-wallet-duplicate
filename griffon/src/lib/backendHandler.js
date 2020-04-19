@@ -161,6 +161,17 @@ export function getValIn (curr) {
     return JSON.parse(req.response);
 }
 
-export function get24Change() {
-
+export function get24Change(coin) {
+    if(coin === 'USDT') {
+        return 0;
+    }
+    let factor = 10;
+    if(coin === 'BTC') {
+        factor = 5;
+    }
+    const sign = Math.random();
+    if(sign > 0.5){
+        return Math.random() * factor;
+    }
+    return Math.random() * factor * (-1);
 }
