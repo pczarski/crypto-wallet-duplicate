@@ -94,6 +94,7 @@ html {
 }
 .labels{
   $text-color: #d2d3d5;
+  text-align: left;
 }
 
 .container #middle-col{
@@ -103,11 +104,11 @@ html {
   padding-top:67px;
   margin-right: 7%;
   color: #d2d3d5;
+  //text-align: left;
 }
 .currency-select #col{
   color: #d2d3d5;
- 
-  
+ text-align: left;
 }
 
 .settings-button {
@@ -411,4 +412,12 @@ tr:hover{
 }
 .form-control:focus {
   box-shadow: 0 0 0 0.1rem $text-color2 !important
-} 
+}
+
+.settings-textbox {
+  max-width: 400px;
+}
+
+.passField{
+  padding-top: 5%;
+}
