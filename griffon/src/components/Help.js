@@ -12,6 +12,7 @@ export default class Help extends React.Component {
       <div>
         <Card id="help" body style={cardStyles}>
         <h3 style={{textAlign: 'center', paddingBottom:'2%'}}> Security Guidelines </h3>
+            <div style={{maxWidth: '600px', marginLeft: '25%'}}>
         <p>Using our app provides an extra layer of security, as it is a desktop app which can be accessed while offline.
            This means that we do not know anything about your password, 12-word recovery phrase, private keys, or even your public addresses.
            With the power of controlling your own bank, comes the added responsibility of protecting your bank. The following procedures will teach you how to protect your new “crypto-bank” and strengthen your security profile. As you wouldn’t want your actual bank to be a place where anyone could just walk in and take whatever they want, you shouldn’t let your wallet and computer be like that either:  </p>
@@ -20,7 +21,7 @@ export default class Help extends React.Component {
           <p>&#8226;  Print your recovery phrases on your home printer</p>
           <p>&#8226;  Keep your recovery phrase in a safe and reliable place, where only you know</p>
           <p>&#8226;  Make sure your password is unique, i.e. Unlike any of your other passwords, contains atleast 8 characters, use a range of cases, numbers and special characters.</p>
-
+            </div>
         </Card>
       </div>
     );

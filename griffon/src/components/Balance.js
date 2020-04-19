@@ -126,15 +126,18 @@ export default class Balance extends React.Component {
 
     };
     return (
-    <div className="balance">
+    <div className="balance" style={{textAlign: 'center'}}>
         <img id='logo' src ={Logo} alt = 'logo'></img>
         <h1 className="title-text">Griffon</h1>
         <div>
           {isNaN(this.state.totalBal) || this.state.totalBal === '0' ? 
             <Spinner color="light" /> :
+              <div style={{borderRadius: "80%",
+                  backgroundColor: '#36393f', opacity: '50%', textAlign:'center'}}>
             <p>
               {roundTo2(this.state.totalBal) + ""}
             </p>
+              </div>
             }
         </div>
         <div className="currSel">
