@@ -45,6 +45,7 @@ export const selectStyles = {
         return(
             Object.assign({}, provided, {
                 minWidth: '200px',
+                maxWidth: '200px'
             })
         )
     },
