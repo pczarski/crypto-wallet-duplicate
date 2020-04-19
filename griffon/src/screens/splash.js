@@ -38,7 +38,7 @@ export default class Splash extends React.Component {
   handleSubmit(event) {
     
     event.preventDefault();
-    if (localStorage.getItem('pass') === document.getElementById("inp").value) {
+    if (localStorage.getItem('pass') === document.getElementById("inp").value && document.getElementById("inp").value.length > 0) {
       this.setState({redirToWall: true})
     }
     else {

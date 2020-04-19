@@ -7,6 +7,12 @@ import tetherLogo from "../../../node_modules/cryptocurrency-icons/svg/color/usd
 
 import bitcoinCashLogo from "../../../node_modules/cryptocurrency-icons/svg/color/bch.svg";
 import etcLogo from "../../../node_modules/cryptocurrency-icons/svg/color/etc.svg";
+import repLogo from "../../../node_modules/cryptocurrency-icons/svg/color/rep.svg";
+import xrpLogo from "../../../node_modules/cryptocurrency-icons/svg/color/xrp.svg";
+import Ox from "../../../node_modules/cryptocurrency-icons/svg/color/0xbtc.svg";
+import ZcashLogo from "../../../node_modules/cryptocurrency-icons/svg/color/zec.svg";
+import daiLogo from "../../../node_modules/cryptocurrency-icons/svg/color/dai.svg";
+import kncLogo from "../../../node_modules/cryptocurrency-icons/svg/color/knc.svg";
 
 
 //contains the logos for each coin as an array. If you wish to access it from another file then just use "{Logos[i].logo}" component where i is the index of the logo you want to refer to
@@ -46,6 +52,18 @@ export function getIcon(coin_symbol) {
             return bitcoinCashLogo;
         case "ETC":
             return etcLogo;
+        case "REP":
+            return repLogo;
+        case "XRP":
+            return xrpLogo;
+        case "Ox":
+            return Ox;
+        case "Zcash":
+            return ZcashLogo;
+        case "DAI":
+            return daiLogo;
+        case "KNC":
+            return kncLogo;
         default:
             return null;
     }

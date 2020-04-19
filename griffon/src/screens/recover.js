@@ -64,7 +64,7 @@ export default class Recover extends React.Component {
   }
   checkMatch() {
     console.log(this.state)
-    if (this.state.pass === this.state.repeat) {
+    if (this.state.pass === this.state.repeat  && document.getElementById("inp").value.length > 0) {
       localStorage.setItem('pass', this.state.repeat)
       const wallet = makeWallet(this.state.seed)
       console.log(wallet)

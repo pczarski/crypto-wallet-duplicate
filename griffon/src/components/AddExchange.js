@@ -92,7 +92,7 @@ export default class AddExchange extends React.Component {
           <div style={{minWidth: '600px'}}>
 
             <h3>Add an Exchange Account</h3>
-            <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
+            <div style={{maxWidth:'600px', paddingTop:'5%'}}>
             <Form onSubmit={this.handleSubmit}>
               <div style={{textAlign: "left"}}>
                 <div style={{maxWidth: '200px', paddingBottom: '2%'}}>
