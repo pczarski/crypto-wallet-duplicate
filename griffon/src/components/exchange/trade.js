@@ -96,14 +96,14 @@ export default class Trade extends React.Component {
         e.preventDefault();
         if(this.props.amount <= 0){
             this.setState({
-                response: "Specify an amount grater than 0",
+                response: "specify an amount grater than 0",
                 isError: true,
             });
             return;
         }
         if(this.props.price <= 0){
             this.setState({
-                response: "Specify a price grater than 0",
+                response: "specify a price grater than 0",
                 isError: true,
             });
             return;
