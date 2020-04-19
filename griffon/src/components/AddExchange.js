@@ -9,7 +9,7 @@ import {Card , Button,Form, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
 import Select from 'react-select';
-import {selectStyles} from "../styles/selectStyles";
+import {selectStyles, cardStyles} from "../styles/selectStyles";
 
 import BinanceIcon from '../assets/binance.png';
 import CoinbaseIcon from '../assets/coinbase.png';
@@ -83,7 +83,7 @@ export default class AddExchange extends React.Component {
   };
     return (
       <div className="container">
-      <Card id="addExchange" body className="text-center bg-dark text-white ">
+      <Card id="addExchange" body className="text-center " style={cardStyles}>
         
       <h1>Add Exchange</h1>
         <Form onSubmit={this.handleSubmit}>

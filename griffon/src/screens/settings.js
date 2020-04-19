@@ -26,6 +26,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
+import { cardStyles } from '../styles/selectStyles';
 
 const initialState ={
   current:"",
@@ -124,7 +125,7 @@ export default class Settings extends React.Component {
     const isError = this.state.isError;
     return (
         <div>
-          <Card id="pword" body className="text-center bg-dark text-white ">
+          <Card id="pword" body className="text-center" style={cardStyles}>
             <form onSubmit={this.handleSubmit}>
               <h1>Change Password</h1>
               <div>
