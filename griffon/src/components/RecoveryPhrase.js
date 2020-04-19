@@ -96,7 +96,8 @@ export default class RecoveryPhrase extends React.Component {
       {this.state.showSeed &&
         <b>{this.state.seed}</b>
       }
-      <Button id="recPhase" className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+      <Button id="recPhase" className="btn-action"
+              color='secondary' block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
       </Card>
     </div>
 

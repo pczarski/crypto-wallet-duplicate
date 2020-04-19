@@ -63,7 +63,7 @@ export default class Splash extends React.Component {
             <FormGroup>
               <Input value={this.state.password} onChange={this.handleChange} invalid={this.state.incor} type="password" name="password" id="password" placeholder="Enter your password" />
               <FormFeedback tooltip>Password incorrect!</FormFeedback><p></p>
-              <Button type="submit" color="primary" size="lg" className="btn btn-primary">Open wallet</Button>
+              <Button type="submit" color="primary" size="lg">Open wallet</Button>
                 <Link to="/recover">
                   <Button size="lg" >Recover wallet from seed phrase</Button>
                 </Link>

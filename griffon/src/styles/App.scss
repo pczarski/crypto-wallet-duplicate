@@ -256,7 +256,8 @@ tr:hover{
   
 }
 
-/* overwrite react buttons */
+/* overwrite react-strap */
+
 .btn.btn-success:hover {
   color:$text-color;
   background-color: $green;
@@ -278,4 +279,76 @@ tr:hover{
   color:$red;
   background-color: $nav-secondary;
   border-color: $red;
+}
+
+.btn.btn-primary {
+  color:$logo-color;
+  background-color: $background-color;
+  border-color: $logo-color;
+}
+
+.btn.btn-primary:hover {
+  color:$text-color;
+  background-color: $logo-color;
+  border-color: $logo-color;
+}
+
+.btn.btn-secondary.btn-lg {
+  color:$text-color;
+  background-color: $text-input-color;
+  border-color: $text-input-color;
+}
+
+.btn.btn-secondary.btn-lg:hover {
+  color:white;
+  background-color: $table-first-colour;
+  border-color: $table-first-colour;
+}
+
+.btn.btn-info {
+  color:$text-color;
+  background-color: $text-input-color;
+  border-color: $text-input-color;
+}
+
+.btn.btn-info:hover {
+  color:white;
+  background-color: $background-color;
+  border-color: $background-color;
+}
+
+.btn.btn-info:active {
+  color:white;
+  background-color: $background-color;
+  border-color: $background-color;
+}
+
+.btn.btn-secondary {
+  color:$text-color;
+  background-color: $text-input-color;
+  border-color: $text-input-color;
+}
+
+.btn.btn-secondary:hover {
+  color:white;
+  background-color: $table-first-colour;
+  border-color: $table-first-colour;
+}
+//////////////////////////////
+.btn.btn-secondary.btn-action {
+  color:$text-color;
+  background-color: $text-input-color;
+  border:0;
+}
+
+.btn.btn-secondary.btn-action:hover {
+  color:white;
+  background-color: $background-color;
+  border:0;
+}
+
+.btn.btn-secondary.btn-action:active {
+  color:white;
+  background-color: $background-color;
+  border:0;
 }

@@ -26,21 +26,21 @@ export default class MenuLink extends React.Component {
         const focus = this.state.focus;
         const active = this.props.active;
         const to = (this.props.to) ? this.props.to : null;
-        if(focus) {
-            return(
-                <Link
-                    className="list-group-item"
-                    style={optionHoover}
-                    onClick={this.handleClick}
-                    to={to}
-                >{text}</Link>
-            );
-        }
         if(active) {
             return(
                 <Link
                     className="list-group-item"
                     style={optionActive}
+                    onClick={this.handleClick}
+                    to={to}
+                >{text}</Link>
+            );
+        }
+        if(focus) {
+            return(
+                <Link
+                    className="list-group-item"
+                    style={optionHoover}
                     onClick={this.handleClick}
                     to={to}
                 >{text}</Link>
