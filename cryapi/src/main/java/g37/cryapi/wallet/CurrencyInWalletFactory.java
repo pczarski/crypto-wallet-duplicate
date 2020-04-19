@@ -24,20 +24,8 @@ public class CurrencyInWalletFactory {
                 return new BitcoinCash(isToSet);
             } case ETC:{
                 return new EthereumClassic(isToSet);
-            } case REP:{
-                return new Augur(isToSet);
-            } case XRP:{
+            }  case XRP:{
                 return new Ripple(isToSet);
-            } case ZEC:{
-                return new Zcash(isToSet);
-            } case ZRX:{
-                return new Ox(isToSet);
-            } case KNC:{
-                return new KyberNetwork(isToSet);
-            } case DAI:{
-                return new Dai(isToSet);
-            } case BAT:{
-                return new BasicAttentionToken(isToSet);
             }
             default:{
                 throw new IllegalArgumentException();
@@ -45,3 +33,24 @@ public class CurrencyInWalletFactory {
         }
     }
 }
+
+//            case ZEC:{
+//                return new Zcash(isToSet);
+//            }
+//            case ZRX:{
+//                return new Ox(isToSet);
+//            }
+
+//            case BAT:{
+//                return new BasicAttentionToken(isToSet);
+//            }
+// case REP:{
+//                return new Augur(isToSet);
+//            }
+
+//            case DAI:{
+//                return new Dai(isToSet);
+//            }
+//case KNC:{
+//                return new KyberNetwork(isToSet);
+//            }

@@ -7,14 +7,8 @@ public enum CryptoCurrency {
 	LTC("Litecoin"),
 	USDT("Thether"),
 	BCH("Bitcoin Cash"),
-	REP("Augur"),
 	ETC("Ethereum Classic"),
-	XRP("Ripple"),
-	ZRX("0x"),
-	ZEC("Zcash"),
-	DAI("Dai"),
-	BAT("Basic Attention Token"),
-	KNC("Kyber Network");
+	XRP("Ripple");
 
 	private final String name;
 
@@ -26,3 +20,10 @@ public enum CryptoCurrency {
 		this.name = name;
 	}
 }
+
+//	ZRX("0x"),
+//	ZEC("Zcash"),
+//	BAT("Basic Attention Token"),
+//	REP("Augur"),
+//
+//	KNC("Kyber Network");
