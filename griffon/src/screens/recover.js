@@ -131,8 +131,8 @@ export default class Recover extends React.Component {
                   >Submit</button>
                 </div>
               </form>
-              <p className={(this.state.feedback === 'Enter a valid seed' || this.state.feedback === 'Please confirm your passwords are written correctly.') ? 'error-message': 'success-message'}
-                 style={{marginTop: '20px'}}>{this.state.feedback}</p>
+              <span className={(this.state.feedback === 'Enter a valid seed' || this.state.feedback === 'Please confirm your passwords are written correctly.') ? 'error-message': 'success-message'}
+                 style={{marginTop: '20px'}}>{this.state.feedback}</span>
             </Card>
             <div className='d-flex flex-row justify-content-around mt-5'>
               <Link to="/">

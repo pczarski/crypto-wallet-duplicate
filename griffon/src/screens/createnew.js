@@ -129,9 +129,9 @@ export default class CreateNew extends React.Component {
                   <Input type="password" name="repeat" id="inp" placeholder="Repeat password" value={this.state.repeat} style={{height: '5vh'}} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>
-                  <p className='error-message' style={{color: '#f04747'}}>
+                  <span className='error-message' style={{color: '#f04747'}}>
                   {this.state.feedback}
-                  </p>
+                  </span>
                 </CardText>
                 <Button type="submit" className="btn btn-primary btn-action" onClick={this.handleClick}>Create new wallet</Button>
               </Form>
