@@ -32,8 +32,11 @@ export default function Swap(props) {
                     <div className="col">
                         <h2>⇄</h2>
                         <div id='middle-col'>
-                        1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
-                        <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
+                            <div style={{textAlign: 'left', marginLeft:"30%"}}>
+                                1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
+                                <p> available: {roundTo2(props.balance) +" "+props.coin}</p>
+                            </div>
+
                         </div>
                     </div>
                     <div className="col">

@@ -128,22 +128,24 @@ export default class Settings extends React.Component {
           <Card id="pword" body className="text-center" style={cardStyles}>
             <form onSubmit={this.handleSubmit}>
               <h1>Change Password</h1>
-              <div>
-                <p>Enter your current Password:</p>
-                <Input type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
-              </div>
-              <div className={'error-message'}>{this.state.currentError}</div>
-              <div>
-                <p>Enter your new Password:</p>
-                <Input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
-              </div>
-              <div className={'error-message'}>{this.state.newError}</div>
-              <div>
-                <p>Confirm your new Password:</p>
-                <Input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
-              </div>
-              <div className={(isError) ? 'error-message' : 'success-message'}>
-                {this.state.confirmError}
+              <div style={{textAlign: 'left'}}>
+                <div className="passField">
+                  <p>Enter your current Password:</p>
+                  <Input type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
+                </div>
+                <div className={'error-message'}>{this.state.currentError}</div>
+                <div>
+                  <p>Enter your new Password:</p>
+                  <Input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
+                </div>
+                <div className={'error-message'}>{this.state.newError}</div>
+                <div>
+                  <p>Confirm your new Password:</p>
+                  <Input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
+                </div>
+                <div className={(isError) ? 'error-message' : 'success-message'}>
+                  {this.state.confirmError}
+                </div>
               </div>
               <div className="password">
                 <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>
@@ -182,8 +184,8 @@ export default class Settings extends React.Component {
 
     if (this.state.selected === "publickeys") {
       component = <Keys coin={this.props.coin}
-      coins={this.props.coins}
-      handleCoinClick={this.props.handleCoinClick}
+                        coins={this.props.coins}
+                        handleCoinClick={this.props.handleCoinClick}
       />;
     } else if (this.state.selected === "recovery") {
       component = <RecoveryPhrase/>;
@@ -198,56 +200,56 @@ export default class Settings extends React.Component {
     }
 
     return (
-      <div className="wrapper">
-      <Navig/>
-      <div className="cont">
-      <div style={{display: 'flex', 'paddingTop':'32px',}}>
-        <div className='settings-button'>
-          <MenuButton
-          text={'Change Password'}
-          name="password" className="helo"
-          active={(this.state.selected === "password") ? "password": null}
-          onClick={this.selectPass}
-          />
+        <div className="wrapper">
+          <Navig/>
+          <div className="cont">
+            <div style={{display: 'flex', 'paddingTop':'32px',}}>
+              <div className='settings-button'>
+                <MenuButton
+                    text={'Change Password'}
+                    name="password" className="helo"
+                    active={(this.state.selected === "password") ? "password": null}
+                    onClick={this.selectPass}
+                />
+              </div>
+              <div className='settings-button'>
+                <MenuButton
+                    text={'Keys'}
+                    name="publickeys" className="setting"
+                    active={(this.state.selected === "publickeys") ? "publickeys": null}
+                    onClick={this.selectKeys}
+                />
+              </div>
+              <div className='settings-button'>
+                <MenuButton
+                    text={'Recovery Phrase'}
+                    name="recovery"
+                    active={(this.state.selected === "recovery") ? "recovery": null}
+                    onClick={this.selectRec}
+                />
+              </div>
+              <div className='settings-button'>
+                <MenuButton
+                    text={'Add Exchange'}
+                    name="addex"
+                    active={(this.state.selected === "addex") ? "addex": null}
+                    onClick={this.selectAdd}
+                />
+              </div>
+              <div className='settings-button'>
+                <MenuButton
+                    text={'Help'}
+                    name="help"
+                    active={(this.state.selected === "help") ? "help": null}
+                    onClick={this.selectHelp}
+                />
+              </div>
+            </div>
+            <div className='justify-content-center cont' style={{'paddingTop':'32px',}}>
+              {component}
+            </div>
+          </div>
         </div>
-        <div className='settings-button'>
-          <MenuButton
-          text={'Keys'}
-          name="publickeys" className="setting"
-          active={(this.state.selected === "publickeys") ? "publickeys": null}
-          onClick={this.selectKeys}
-          />
-        </div>
-        <div className='settings-button'>
-          <MenuButton
-          text={'Recovery Phrase'}
-          name="recovery"
-          active={(this.state.selected === "recovery") ? "recovery": null}
-          onClick={this.selectRec}
-          />
-        </div>
-        <div className='settings-button'>
-          <MenuButton
-          text={'Add Exchange'}
-          name="addex"
-          active={(this.state.selected === "addex") ? "addex": null}
-          onClick={this.selectAdd}
-          />
-        </div>
-        <div className='settings-button'>
-          <MenuButton
-          text={'Help'}
-          name="help"
-          active={(this.state.selected === "help") ? "help": null}
-          onClick={this.selectHelp}
-          />
-        </div>
-      </div>
-      <div className='justify-content-center cont' style={{'paddingTop':'32px',}}>
-      {component}
-      </div>
-      </div>
-      </div>
     );
   }
 }

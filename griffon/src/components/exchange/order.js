@@ -37,13 +37,14 @@ export default function Order(props) {
                 <div className="col">
                     <div id ='middle-col-alt'>
                         <Label>Price</Label>
-                        <Input type='text' className='form-control bg-dark text-white form-control'
+                        <Input type='text' className='form-control form-control'
                                placeholder={props.marketPrice}
                                onChange={handlePriceChange}
                                value={props.price} id="inp"
                         />
 
-                        1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}
+                        <p style={{paddingTop: '5%'}}
+                        > 1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2} </p>
                         <p> Available: {props.available}</p>
                     </div>
                 </div>
