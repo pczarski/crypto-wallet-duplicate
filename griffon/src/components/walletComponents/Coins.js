@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../styles/coin.css';
 
 // used to render headers
 const headers = ["search...", "name", "balance", "address", "price"];
@@ -16,7 +17,7 @@ export default class Coins extends Component
     }
     renderTableHeader(){
         return headers.map((key,index)=> {
-            return <th scope= "col" key={index}>{key.toUpperCase()}</th>
+            return <th className='header' scope= "col" key={index}>{key.toUpperCase()}</th>
         })
     };
 
@@ -45,7 +46,8 @@ export default class Coins extends Component
     render(){
         return (
             <div>
-                <table className= "table table-striped table-hover table-dark">
+                <table className= "tabld">
+                    
                     <thead>
                     <tr>{this.renderTableHeader()}</tr>
                     </thead>
