@@ -36,7 +36,7 @@ export default class Coins extends Component
                     </td>
                     <td>{coin.balance} {coin.code}</td>
                     <td>$ {coin.price}</td>
-                    <td className={(change24 >= 0) ? 'success-message' : 'error-message'}> {get24changeFormat(change24)}%</td>
+                    <td className={(change24 >= 0) ? 'success-message' : 'error-message'}> {getPlus(change24)+get24changeFormat(change24)}%</td>
                     <td>{coin.currentPublicKey}</td>
                 </tr>
             );
@@ -63,7 +63,11 @@ export default class Coins extends Component
             </div>
         )
     }
+}
 
-
-
+function getPlus(n) {
+   if(n>=0){
+       return '+';
+   }
+   return '';
 }
