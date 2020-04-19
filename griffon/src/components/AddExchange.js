@@ -90,6 +90,7 @@ export default class AddExchange extends React.Component {
           <Card id="addExchange" body className="text-center " style={cardStyles}>
 
             <h3>Add an Exchange Account</h3>
+            <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
             <Form onSubmit={this.handleSubmit}>
               <div style={{textAlign: "left"}}>
                 <div style={{maxWidth: '200px', paddingBottom: '2%'}}>
@@ -105,6 +106,7 @@ export default class AddExchange extends React.Component {
               className={(this.state.isError) ? 'error-message' : 'success-message'}
               >{this.state.response}</p>
             </Form>
+            </div>
           </Card>
         </div>
     );

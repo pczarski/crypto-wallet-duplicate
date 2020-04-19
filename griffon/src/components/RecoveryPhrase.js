@@ -97,8 +97,10 @@ export default class RecoveryPhrase extends React.Component {
           <b style={{paddingBottom: '7%', paddingTop: '4%'}}
           >{this.state.seed}</b>
         }
+        <div style={{maxWidth:'600px', marginLeft:'25%', paddingTop:'5%'}}>
         <Button id="recPhase" className="btn-action"
                 color='secondary' block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+        </div>
       </Card>
     </div>
 
