@@ -168,6 +168,8 @@ export default class App extends React.Component {
     }, this.fetchPriceIn);
   };
 
+
+
   // updates the exchange main component
   setExchangeMainComponent = (option) => {
     this.setState({
@@ -178,7 +180,7 @@ export default class App extends React.Component {
   updateSelectedInPortfolio = (option) => {
     this.setState({
       selectedInPortfolio: option,
-    });
+    }, this.fetchWalletCoins);
   };
 
   updateSelectedInTrade = (option) => {
@@ -281,6 +283,7 @@ export default class App extends React.Component {
                       setMarketPrice={this.setMarketPrice}
                       amount={amount} setAmount={this.setAmount}
                       amount2={amount2} setAmount2={this.setAmount2}
+                      walletCoins={walletCoins}
                   />}/>
 
               <Route path="/exchange" render={

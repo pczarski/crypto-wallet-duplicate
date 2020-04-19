@@ -23,6 +23,7 @@ export default function Portfolio(props) {
                                marketPrice={props.marketPrice}
                                amount={props.amount} setAmount={props.setAmount}
                                amount2={props.amount2} setAmount2={props.setAmount2}
+                               walletCoins={props.walletCoins}
         />
     }
 

@@ -14,7 +14,7 @@ import WithdrawDeposit from "./withdrawDeposit";
 
 import $ from "jquery";
 import Swap from "./swap";
-import {getCoinByCode} from "../../lib/helper";
+import {getCoinByCode, roundTo2} from "../../lib/helper";
 import {Form, Button, Card, CardBody} from 'reactstrap';
 import {cardStyles} from "../../styles/selectStyles";
 
@@ -37,6 +37,7 @@ export default class Trade extends React.Component {
         this.state = {
             response: "",
             isError: false,
+            walletCoins: this.props.walletCoins,
         }
     }
 
@@ -51,13 +52,28 @@ export default class Trade extends React.Component {
     };
 
     updateWithdrawDepositResponse = (data) => {
-        console.log(data);
         this.setState({
             response: "success!",
             isError: false,
         });
         this.props.setAmount(0.0);
         this.props.setAmount2(0.0);
+    };
+
+    fetchWalletCoins = () => {
+        const url = "http://localhost:8080/all-coins";
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: this.updateWalletCoins,
+        });
+    };
+
+    updateWalletCoins = (data) => {
+        this.setState({
+            walletCoins: data,
+        });
     };
 
 
@@ -211,7 +227,7 @@ export default class Trade extends React.Component {
         this.props.setMainComponent(DEPOSIT);
         this.setState({
             response:"",
-        })
+        }, this.fetchWalletCoins)
     };
 
     fetchPriceIn = () => {
@@ -232,10 +248,14 @@ export default class Trade extends React.Component {
             // we shouldn't be here
             return(<Redirect to='/ExchangeAccess'/>);
         }
+        const walletCoins = this.state.walletCoins;
         const marketPrice = this.props.marketPrice;
         const price = this.props.price;
         const selectedMainComponent = this.props.mainComponent;
         const balance = getCoinByCode(this.props.coin, this.props.coins).balance;
+        const balance2 = getCoinByCode(this.props.coin2, this.props.coins).balance;
+        const balance3 = (walletCoins) ?
+            getCoinByCode(this.props.coin, walletCoins).balance : "";
         let mainComponent;
         switch (selectedMainComponent) {
             case SELL:
@@ -248,6 +268,7 @@ export default class Trade extends React.Component {
                     price={price} setPrice={this.props.setPrice}
                     amount={this.props.amount} setAmount={this.props.setAmount}
                     amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                    available={roundTo2(balance)+" "+this.props.coin}
                 />;
                 break;
             case BUY:
@@ -260,6 +281,7 @@ export default class Trade extends React.Component {
                     price={price} setPrice={this.props.setPrice}
                     amount={this.props.amount} setAmount={this.props.setAmount}
                     amount2={this.props.amount2} setAmount2={this.props.setAmount2}
+                    available={roundTo2(balance2)+" "+this.props.coin2}
                 />;
                 break;
             case WITHDRAW:
@@ -273,7 +295,7 @@ export default class Trade extends React.Component {
             case DEPOSIT:
                 mainComponent = <WithdrawDeposit id='withdraw-deposit'
                                                  coins={this.props.coins} title={"Deposit"}
-                                                 balance={balance}
+                                                 balance={balance3}
                                                  coin={this.props.coin} setCoin={this.props.setCoin}
                                                  setAmount={this.props.setAmount} amount={this.props.amount}
                 />;
@@ -313,7 +335,7 @@ export default class Trade extends React.Component {
                             </Button>
                         </div>
                         <div id= "swap">
-                            <Button  id= 'nav-btn'size='lg'  onClick={this.goToSell}
+                            <Button  id= 'nav-btn' size='lg'  onClick={this.goToSell}
                                      className={(selectedMainComponent === SELL) ? 'active' : ''}>
                                 Sell
                             </Button>
