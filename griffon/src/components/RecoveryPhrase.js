@@ -91,10 +91,11 @@ export default class RecoveryPhrase extends React.Component {
         </ModalFooter>
       </Modal>
       <Card id="phrase" body className="text-center" style={cardStyles}>
-        <h1>Your Recovery Phrase</h1>
+        <h3>Your Recovery Phrase</h3>
         <Stopwatch/>
         {this.state.showSeed &&
-          <b>{this.state.seed}</b>
+          <b style={{paddingBottom: '7%', paddingTop: '4%'}}
+          >{this.state.seed}</b>
         }
         <Button id="recPhase" className="btn-action"
                 color='secondary' block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>

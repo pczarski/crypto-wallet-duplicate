@@ -127,25 +127,25 @@ export default class Settings extends React.Component {
         <div>
           <Card id="pword" body className="text-center" style={cardStyles}>
             <form onSubmit={this.handleSubmit}>
-              <h1>Change Password</h1>
+              <h3>Change Password</h3>
               <div style={{textAlign: 'left'}}>
                 <div className="passField">
                   <p>Enter your current Password:</p>
                   <Input type='password' id="inp" className="input-style" name="current" placeholder="Current password" value={this.state.current} onChange={this.handleChange}/>
                 </div>
                 <div className={'error-message'}>{this.state.currentError}</div>
-                <div>
+                <div className="passField">
                   <p>Enter your new Password:</p>
                   <Input type='password' id="inp" name="new" placeholder="New password" value={this.state.new} onChange={this.handleChange}/>
                 </div>
                 <div className={'error-message'}>{this.state.newError}</div>
-                <div>
+                <div className="passField">
                   <p>Confirm your new Password:</p>
                   <Input type='password' id="inp" name="confirm" placeholder="Confirm password" value={this.state.confirm} onChange={this.handleChange}/>
                 </div>
-                <div className={(isError) ? 'error-message' : 'success-message'}>
-                  {this.state.confirmError}
-                </div>
+              </div>
+              <div className={(isError) ? 'error-message' : 'success-message'}>
+                {this.state.confirmError}
               </div>
               <div className="password">
                 <Button type="submit" size="md" className="btn btn-primary">Change Password</Button>

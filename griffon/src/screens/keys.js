@@ -34,12 +34,14 @@ export default class Keys extends React.Component {
 
   getTable(){
     return Object.keys(this.state.keyPairs).map((item, i) => {
+        const balance = this.state.keyPairs[item].balance;
         return (
           <tr key={i}>
             <td>{item}</td>
             <td>{this.state.keyPairs[item].publicKey}</td>
             <td>{this.state.keyPairs[item].privateKey}</td>
-            <td>{this.state.keyPairs[item].balance}</td>
+            <td className={!(balance > 0.001) ? '' : 'success-message'}
+            >{this.state.keyPairs[item].balance}</td>
           </tr>
           )
         });
@@ -50,7 +52,7 @@ export default class Keys extends React.Component {
   render () {
     return ( 
       <div>
-        <h1 style={{color: '#b9bbbe'}}>Keys</h1>
+        <h3 style={{color: '#b9bbbe', paddingBottom: '2%'}}>Your Keys</h3>
         {this.props.coins !== null && <SelectCurr coin={this.props.coin} coins={this.props.coins} setCoin={this.props.handleCoinClick}/>}
         <div>
                  <table>
