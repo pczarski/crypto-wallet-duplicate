@@ -42,7 +42,6 @@ export default class Trade extends React.Component {
     }
 
     updateOrderResponse = (data) => {
-        console.log(data);
         this.setState({
             response: "order placed with id " + data.id,
             isError: false,
@@ -95,6 +94,20 @@ export default class Trade extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        if(this.props.amount <= 0){
+            this.setState({
+                response: "Specify an amount grater than 0",
+                isError: true,
+            });
+            return;
+        }
+        if(this.props.price <= 0){
+            this.setState({
+                response: "Specify a price grater than 0",
+                isError: true,
+            });
+            return;
+        }
         switch (this.props.mainComponent) {
             case SWAP:
                 this.placeSwapOrder();
@@ -341,7 +354,7 @@ export default class Trade extends React.Component {
                             </Button>
                         </div>
                         <div id = "swap">
-                            <Button id = 'nav-btn'size='lg'  onClick={this.goToWithdraw}
+                            <Button id = 'nav-btn' size='lg'  onClick={this.goToWithdraw}
                                     className={(selectedMainComponent === WITHDRAW) ? 'active' : ''}>
                                 Withdraw
                             </Button>
