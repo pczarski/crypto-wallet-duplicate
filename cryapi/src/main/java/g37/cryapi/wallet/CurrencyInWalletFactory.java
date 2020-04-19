@@ -22,6 +22,14 @@ public class CurrencyInWalletFactory {
             }
             case BCH:{
                 return new BitcoinCash(isToSet);
+            } case ETC:{
+                return new EthereumClassic(isToSet);
+            } case REP:{
+                return new Augur(isToSet);
+            } case XRP:{
+                return new Ripple(isToSet);
+            } case ZEC:{
+                return new Zcash(isToSet);
             }
             default:{
                 throw new IllegalArgumentException();
