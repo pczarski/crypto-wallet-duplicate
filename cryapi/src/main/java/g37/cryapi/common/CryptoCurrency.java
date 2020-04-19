@@ -10,7 +10,11 @@ public enum CryptoCurrency {
 	REP("Augur"),
 	ETC("Ethereum Classic"),
 	XRP("Ripple"),
-	ZEC("Zcash");
+	ZRX("0x"),
+	ZEC("Zcash"),
+	DAI("Dai"),
+	BAT("Basic Attention Token"),
+	KNC("Kyber Network");
 
 	private final String name;
 

@@ -30,6 +30,14 @@ public class CurrencyInWalletFactory {
                 return new Ripple(isToSet);
             } case ZEC:{
                 return new Zcash(isToSet);
+            } case ZRX:{
+                return new Ox(isToSet);
+            } case KNC:{
+                return new KyberNetwork(isToSet);
+            } case DAI:{
+                return new Dai(isToSet);
+            } case BAT:{
+                return new BasicAttentionToken(isToSet);
             }
             default:{
                 throw new IllegalArgumentException();
