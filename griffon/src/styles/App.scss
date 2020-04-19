@@ -11,6 +11,7 @@ $text-color2: #b9bbbe;
 $table-first-colour: #32353b;
 $table-second-colour: #36393f;
 $green: #43b581;
+$red: #f04747;
 $text-input-color: #40444b;
 
 //$secondary-color: #464B51;
@@ -253,4 +254,28 @@ tr:hover{
   background-color: #40444b;
   color:#d2d3d5;
   
+}
+
+/* overwrite react buttons */
+.btn.btn-success:hover {
+  color:$text-color;
+  background-color: $green;
+  border-color: $green;
+}
+
+.btn.btn-success {
+  color:$green;
+  background-color: $nav-secondary;
+  border-color: $green;
+}
+
+.btn.btn-danger:hover {
+  color:$text-color;
+  background-color: $red;
+  border-color: $red;
+}
+.btn.btn-danger {
+  color:$red;
+  background-color: $nav-secondary;
+  border-color: $red;
 }

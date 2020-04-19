@@ -85,11 +85,9 @@ export default class RecoveryPhrase extends React.Component {
           It will only display for 3 minutes before requiring authentification again.
         </ModalBody>
         <ModalFooter style={popupHeaderStyles}>
-          <Button style={{
-            color:"#43b581", backgroundColor: '#40444b', borderWidth:'0'
-          }}
+          <Button color="success"
                   onClick={this.select}>Continue</Button>
-          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          <Button color="danger" onClick={this.toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
         <Card id="phrase" body className="text-center" style={cardStyles}>
@@ -98,7 +96,7 @@ export default class RecoveryPhrase extends React.Component {
       {this.state.showSeed &&
         <b>{this.state.seed}</b>
       }
-      <Button id="recPhase"className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
+      <Button id="recPhase" className="btn btn-primary" size="lg" block onClick={this.toggle}>{this.state.showSeed ? 'Hide Phrase' : 'View Recovery Phrase'}</Button>
       </Card>
     </div>
 

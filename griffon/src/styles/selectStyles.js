@@ -4,7 +4,7 @@ export const selectStyles = {
             Object.assign({}, provided, {
                 color: state.isFocused ? '#d2d3d5' : '#6f84d2',
                 backgroundColor: state.isFocused ? '#6f84d2' : '#36393f',
-                 'text-align': 'left',
+                 textAlign: 'left',
             })
         )
     },
@@ -23,7 +23,7 @@ export const selectStyles = {
                 borderColor: '#6f84d2',
                 //'borderWidth': 'thick',
                 background: 'solid',
-                'minHeight': '48px',
+                minHeight: '48px',
             })
         )
     },
