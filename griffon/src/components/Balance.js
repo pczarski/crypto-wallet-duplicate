@@ -138,7 +138,7 @@ export default class Balance extends React.Component {
             }
         </div>
         <div className="currSel">
-        <Select className ="react-select-ex currency-select" classNamePrefix="react-select"
+        <Select className ="react-select-ex currency-selector" classNamePrefix="react-select"
           options={this.state.supportedCurr}
           onChange={choose}
           value={this.state.obj}
