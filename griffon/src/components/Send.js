@@ -4,6 +4,7 @@ import '../styles/App.scss';
 import { Button, Form, FormGroup, Label, Input, Tooltip, Card, CardBody, CardText} from 'reactstrap';
 
 import {sendCurr, getBalance} from '../lib/backendHandler';
+import {cardStyles} from "../styles/selectStyles";
 
 // TO DO:
 // VALIDATION, can't be empty
@@ -87,7 +88,9 @@ export default class Send extends React.Component {
   render () {
     return (
     <div className="container">
-      <Card body className="text-center bg-dark text-white ">
+      <Card body className="text-center"
+          style={cardStyles}
+      >
       <h2>Send {this.props.curr}</h2>
       <CardBody>
       <Form onSubmit={this.handleSubmit}>
