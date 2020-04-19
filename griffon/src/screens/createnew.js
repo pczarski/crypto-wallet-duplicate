@@ -7,7 +7,10 @@ import {
   Card, CardBody, Button, Form, Input, CardText,  Modal, ModalHeader, ModalBody, ModalFooter 
 } from 'reactstrap';
 
+
 import {makeWallet} from "../lib/backendHandler.js"
+
+import {cardStyles, popupHeaderStyles, popupStyles} from "../styles/selectStyles";
 
 
 export default class CreateNew extends React.Component {
@@ -29,7 +32,6 @@ export default class CreateNew extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(makeWallet(''))
   }
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -37,7 +39,6 @@ export default class CreateNew extends React.Component {
       this.setState({pval: this.passwordValidation()});
     }
   }
-    // TO DO: MODAL TO SHOW SEED PHRASE, THEN CONTINUE, // SET PASSWORD FIRST, REPEAT TWICE
 
   async handleSubmit(e) {
     e.preventDefault();
@@ -96,18 +97,17 @@ export default class CreateNew extends React.Component {
 
   render () {
   if (this.state.redirToWall === true) {
-    
     return <Redirect to='/wallet' />
   }
   const Confirm = () => (
   <Modal isOpen={this.state.modal} toggle={this.toggle} className='name'>
-    <ModalHeader toggle={this.toggle}>Your seed phrase</ModalHeader>
-    <ModalBody>
+    <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Your seed phrase</ModalHeader>
+    <ModalBody style={popupStyles}>
     Please write down your 12-word seed phrase and keep the copy in a secure place.
     <br/>
     <b>{this.state.seed}</b>
     </ModalBody>
-    <ModalFooter>
+    <ModalFooter style={popupHeaderStyles}>
       <Button color="primary" onClick={this.select}>Continue</Button>
       <Button color="secondary" onClick={this.toggle}>Cancel</Button>
     </ModalFooter>
@@ -117,8 +117,8 @@ export default class CreateNew extends React.Component {
       <div className="wrapper">
         <Confirm />
         <div className="container">
-          <h1>Create new Wallet</h1>
-          <Card body className="text-center bg-dark text-light">
+          <Card body className="text-center" style={cardStyles}>
+            <h1>Create new Wallet</h1>
             <CardBody>
               <Form className="needs-validation " onSubmit={this.handleSubmit}>
                 <div className="vertical-input-group">
@@ -133,9 +133,9 @@ export default class CreateNew extends React.Component {
               </Form>
             </CardBody>
           </Card>
-          <div className='d-flex flex-row justify-content-around'>
+          <div className='d-flex flex-row justify-content-around mt-5'>
             <Link to="/">
-              <Button type="button" className="btn btn-primary gbackbutton">Go back</Button>
+              <Button type="button" className="btn btn-primary gbackbutton ">Go back</Button>
             </Link>
           </div>
         </div>

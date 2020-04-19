@@ -77,10 +77,10 @@ export default class Splash extends React.Component {
           {this.state.firstLaunch && 
           <div className="new">
             <Link to="/createnew">
-              <Button type="button" color="primary" size="lg" className="btn btn-primary">Create a new wallet</Button>
+              <Button type="button" color="primary" size="lg" className="mr-5 btn btn-primary">Create a new wallet</Button>
             </Link>
             <Link to="/recover">
-              <Button type="button" size="lg">Recover wallet from seed phrase</Button>
+              <Button type="button" className="btn btn-primary" size="lg">Recover wallet from seed phrase</Button>
             </Link>
           </div>
           }

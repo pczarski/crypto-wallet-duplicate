@@ -35,7 +35,7 @@ export default class Receive extends React.Component {
   render () {
 
     return (
-    <div className="container">
+    <div>
       
       <Card body className="text-center" style={cardStyles}>
         <h2>Receive {this.props.curr}</h2>

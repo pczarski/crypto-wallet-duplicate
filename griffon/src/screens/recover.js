@@ -3,10 +3,10 @@ import '../styles/App.scss';
 import {Link, Redirect} from 'react-router-dom';
 
 import {makeWallet} from "../lib/backendHandler.js";
-// import {hashPassword, verifyPassword} from "../lib/hash.js"
 
-import {Input} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, Input, CardBody, Form, CardText } from 'reactstrap';
 
+import {cardStyles, popupHeaderStyles, popupStyles} from "../styles/selectStyles";
 // to fix :
 // , recover wallet, validation, check 12 words
 // some css 
@@ -15,36 +15,121 @@ export default class Recover extends React.Component {
     super(props);
     this.state = {
       seed: '',
-      walletMade: false
+      walletMade: false,
+      feedback: '',
+      response: '',
+      modal: false,
+      pass: '',
+      repeat: '',
+      pval: null,
+      pinval: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkMatch = this.checkMatch.bind(this);
   }
   handleChange(e) {
-    this.setState({seed: e.target.value});
+    this.setState({[e.target.name]: e.target.value});
+    if (e.target.name === 'pass') {
+      this.setState({pval: this.passwordValidation()});
+    }
+    console.log(this.state)
+  }
+  passwordValidation() {
+    let password = this.state.pass
+    let reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+    // console.log)
+    if (password.length < 6) {
+      this.setState({response: "Password must be atleast 8 characters long."})
+      return false
+    } else if (password.length > 50) {
+      this.setState({response: "Password must be shorter than 50 characters long."})
+      return false
+    } else if (password.search(/\d/) === -1) {
+      this.setState({response: "Password must contain atleast 1 number."});
+      return false
+    } else if (password.search(/[a-z]/) === -1) {
+      this.setState({response: "Password must be atleast 1 lowercase character."})
+      return false
+    } else if (password.search(/[A-Z]/) === -1) {
+      this.setState({response: "Password must be atleast 1 uppercase character."})
+      return false
+    } else if (password.search(/[-!$%^&*()_+|~=`{}[\]:";'<>?,./]/) !== -1) {
+      this.setState({response: "Password cannot contain symbols."})
+      return false
+    } else if ((password.search(reg) === 0)) {
+      this.setState({response: ""})
+      return true
+    }
+  }
+  checkMatch() {
+    console.log(this.state)
+      if (this.state.pass === this.state.repeat) {
+        localStorage.setItem('pass', this.state.repeat)
+        const wallet = makeWallet(this.state.seed)
+        console.log(wallet)
+        this.setState({walletMade: true})
+        this.toggle()
+      } else {
+        this.setState({feedback: "Please confirm your passwords are written correctly."})
+      }
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.seed !== '') {
+      this.setState({modal: true});
+    }
+    else {
+      this.setState({feedback: 'Enter a valid seed'})
+    }
   }
 
-  async handleSubmit(e) {
-    e.preventDefault();
-    const wallet = await makeWallet(this.state.seed)
-    console.log(wallet)
-    this.setState({walletMade: true})
+  toggle = () => {
+    this.setState({modal: !this.state.modal})
   }
   render () {
     if (this.state.walletMade === true) {
     return <Redirect to='/wallet' />
   }
   return (
+    
     <div className="wrapper">
+      <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <ModalHeader toggle={this.toggle} style={popupHeaderStyles}>Set a password</ModalHeader>
+        <Card className="text-center" id="norad" style={cardStyles}>
+            <CardBody>
+              <Form className="needs-validation ">
+                <div className="vertical-input-group">
+                <div className="input-group">
+                  <Input valid={this.state.pval} type="password" name="pass" id="password" placeholder="Password" value={this.state.pass} onChange={this.handleChange} className="form-control"/>
+                </div>
+                <div className="input-group"></div>
+                  <Input type="password" name="repeat" id="password" placeholder="Repeat password" value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
+                </div>
+                <CardText>{this.state.response}</CardText>
+              </Form>
+            </CardBody>
+          </Card>
+        <ModalFooter style={popupHeaderStyles}>
+          <Button color="success"
+                  onClick={this.checkMatch}>Continue</Button>
+          <Button color="danger" onClick={this.toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
       <div className="container">
-        <h1>recover Wallet</h1>
+      <Card body className="text-center" style={cardStyles}>
+        <h1>Recover Wallet</h1>
         <form className="needs-validation" onSubmit={this.handleSubmit}>
-          <Input type="textarea" name="text" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange}/>
-            <button type="submit" className="btn btn-primary">Submit</button>
+          <Input type="textarea" name="seed" id="seed" placeholder="Enter your 12-word recovery phrase"  value={this.state.seed} onChange={this.handleChange}/>
+            <button type="submit" className="mt-3 btn btn-primary">Submit</button>
         </form>
-        <Link to="/">
-          <button type="button" className="btn btn-primary">Go back</button>
-        </Link>
+        <p style={{marginTop: '20px'}}>{this.state.feedback}</p>
+        </Card>
+        <div className='d-flex flex-row justify-content-around mt-5'>
+          <Link to="/">
+            <Button type="button" className="btn btn-primary gbackbutton ">Go back</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

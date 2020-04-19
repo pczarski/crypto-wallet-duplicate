@@ -87,7 +87,7 @@ export default class Send extends React.Component {
 
   render () {
     return (
-    <div className="container">
+    <div>
       <Card body className="text-center"
           style={cardStyles}
       >
