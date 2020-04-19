@@ -97,6 +97,7 @@ export const optionActive = {
 
 export const cardStyles = {
     backgroundColor: '#32353b',
+    border: 0,
     color: '#b9bbbe',
 };
 
