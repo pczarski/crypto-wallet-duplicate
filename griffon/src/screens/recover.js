@@ -104,7 +104,7 @@ export default class Recover extends React.Component {
                   <Input valid={this.state.pval} type="password" name="pass" id="inp" placeholder="Password" style={{height: '5vh'}} value={this.state.pass} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <div className="input-group"></div>
-                  <Input type="password" name="repeat" id="inp " placeholder="Repeat password" style={{height: '5vh'}} value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
+                  <Input type="password" name="repeat" id="inp" placeholder="Repeat password" style={{height: '5vh'}} value={this.state.repeat} onChange={this.handleChange} className="form-control"/>
                 </div>
                 <CardText>{this.state.response}</CardText>
               </Form>
