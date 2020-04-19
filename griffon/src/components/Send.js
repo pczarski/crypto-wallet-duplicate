@@ -91,7 +91,6 @@ export default class Send extends React.Component {
       <Card body className="text-center"
           style={cardStyles}
       >
-      <h2>Send {this.props.curr}</h2>
       <CardBody>
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
@@ -102,11 +101,12 @@ export default class Send extends React.Component {
           <Label for="amount">Amount</Label>
           <Input type="text" name="amount" placeholder="0.00" onChange={this.handleAmChange} value={this.state.amount}/>
         </FormGroup>
-        <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance}</span></legend>
-        <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>
+        <legend>Available: <span id="allAvailable" onClick={this.setSendAsAvail}>{this.state.balance} {this.props.curr}</span></legend>
+        <Tooltip style={{backgroundColor: '#202225'}}
+            placement="right" isOpen={this.state.tooltipOpen} target="allAvailable" toggle={this.toggle}>
         Send all available currency
-      </Tooltip>
-        <Button type="submit">Submit</Button>
+      </Tooltip >
+        <Button type="submit" size='lg' className='btn-action'>Send</Button>
       </Form>
       </CardBody>
       <CardText>{this.state.response}</CardText>
