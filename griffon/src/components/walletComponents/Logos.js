@@ -4,6 +4,10 @@ import dashLogo from "../../../node_modules/cryptocurrency-icons/svg/color/dash.
 import liteLogo from "../../../node_modules/cryptocurrency-icons/svg/color/ltc.svg";
 import bitcoinLogo from "../../../node_modules/cryptocurrency-icons/svg/color/btc.svg";
 import tetherLogo from "../../../node_modules/cryptocurrency-icons/svg/color/usdt.svg";
+
+
+import bitcoinCashLogo from "../../../node_modules/cryptocurrency-icons/svg/color/bch.svg";
+
 //contains the logos for each coin as an array. If you wish to access it from another file then just use "{Logos[i].logo}" component where i is the index of the logo you want to refer to
 export default[
     {
@@ -37,6 +41,8 @@ export function getIcon(coin_symbol) {
             return liteLogo;
         case "DASH":
             return dashLogo;
+        case "BCH":
+            return bitcoinCashLogo;
         default:
             return null;
     }
