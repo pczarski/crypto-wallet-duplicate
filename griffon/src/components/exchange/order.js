@@ -40,7 +40,7 @@ export default function Order(props) {
                         <Input type='text' className='form-control bg-dark text-white form-control'
                                placeholder={props.marketPrice}
                                onChange={handlePriceChange}
-                               value={props.price}
+                               value={props.price} id="inp"
                         />
 
                         1 {props.coin} = {roundTo2(props.marketPrice)} {props.coin2}

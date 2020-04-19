@@ -1,9 +1,10 @@
 export function roundTo2(val) {
     if (val > 0.001) {
         return(Math.floor(val * 100) / 100 ) }
-    else {
-        return val.toPrecision(4);
+    else if (val < 0.001) {
+        return Number.parseFloat(val).toPrecision(4);
     }
+    else return null
 }
 
 export function getCoinByCode(code, coins) {

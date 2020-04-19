@@ -9,7 +9,7 @@ import {Card , Button,Form, Label, Input } from "reactstrap";
 import { addExchange} from '../lib/backendHandler';
 
 import Select from 'react-select';
-import {selectStyles} from "../styles/selectStyles";
+import {selectStyles, cardStyles} from "../styles/selectStyles";
 
 import BinanceIcon from '../assets/binance.png';
 import CoinbaseIcon from '../assets/coinbase.png';
@@ -40,6 +40,7 @@ export default class AddExchange extends React.Component {
       exchanges: [{value: "Binance", label: getExchangeLabel("Binance")}, {value: "Coinbase", label: getExchangeLabel("Coinbase")}],
       address:null,
       name: "Binance",
+      obj: {value: "Binance", label: getExchangeLabel("Binance")},
       response: ""
     };
 
@@ -75,17 +76,20 @@ export default class AddExchange extends React.Component {
 
   render () {
     const select = (selectedOption) => {
-      this.setState({name: selectedOption.value})
+      this.setState({
+        name: selectedOption.value,
+        obj: this.state.exchanges.find(a => a.value === selectedOption.value)
+      })
   };
     return (
-      <div className="container">
-      <Card id="addExchange" body className="text-center bg-dark text-white ">
+      <div>
+      <Card id="addExchange" body className="text-center " style={cardStyles}>
         
       <h1>Add Exchange</h1>
         <Form onSubmit={this.handleSubmit}>
           <Select className="react-select-container" id='addex'classNamePrefix="react-select"  
               options={this.state.exchanges}
-              onChange={select} Value={this.state.name} styles={selectStyles}/>
+              onChange={select} value={this.state.obj} styles={selectStyles}/>
             <Label for="address">Exchange Address</Label>
             <Input type="text" name="address" placeholder="Enter your API Key" id="inp" onChange={this.handleInputChange} />
           <Button className="mt-2">Submit</Button>

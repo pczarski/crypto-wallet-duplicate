@@ -109,6 +109,11 @@ html {
  
   
 }
+
+.settings-button {
+  margin: auto;
+}
+
 h2 {
   padding-right:25px;
 }
@@ -225,20 +230,17 @@ input{
 #pword{
   margin: auto;
   margin-top: 1em;
-  width:40%
 }
 #phrase{
   margin: auto;
   margin-top: 1em;
-  width:40%;
 
 }
 #help{
   margin: auto;
   margin-top: 1em;
-  width:60%;
   height: 100%;
-  font-size: 1.5em;
+  font-size: 1em;
   text-align: left;
 }
 
@@ -407,3 +409,6 @@ tr:hover{
 .react-select__control {
   color: #d2d3d5 !important;
 }
+.form-control:focus {
+  box-shadow: 0 0 0 0.1rem $text-color2 !important
+} 
