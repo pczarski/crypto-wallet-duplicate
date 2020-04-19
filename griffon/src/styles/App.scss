@@ -397,3 +397,6 @@ tr:hover{
   border-top: none !important;
   border-radius: 0 !important;
 }
+.form-control:focus {
+  box-shadow: 0 0 0 0.1rem $text-color2 !important
+} 
