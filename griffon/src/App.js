@@ -135,7 +135,6 @@ export default class App extends React.Component {
 
   // will update the exchangeCoins to selected exchange coins
   fetchExchangeCoins = () => {
-    console.log(this.state.exchangeAccess);
     const exchangeName = this.state.exchangeAccess.value;
     const url = "http://localhost:8080/exchange-currencies?exchange="+exchangeName;
     $.ajax({

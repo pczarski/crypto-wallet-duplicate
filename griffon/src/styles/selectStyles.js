@@ -2,7 +2,7 @@ export const selectStyles = {
     option: (provided, state) => {
         return(
             Object.assign({}, provided, {
-                color: state.isFocused ? '#f7f7f7' :'#f7f7f7',
+                color: state.isFocused ? '#d2d3d5' : '#6f84d2',
                 backgroundColor: state.isFocused ? '#6f84d2' : '#36393f',
                  'text-align': 'left',
             })
@@ -30,7 +30,7 @@ export const selectStyles = {
     singleValue: (provided, state) => {
         return(
             Object.assign({}, provided, {
-                color:'#6f84d2',
+                color: '#6f84d2',
             })
         )
     },
