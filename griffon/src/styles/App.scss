@@ -257,6 +257,10 @@ tr:hover{
   
 }
 
+#addex {
+  max-width: none;
+}
+
 /* overwrite react-strap */
 
 .btn.btn-success:hover {
@@ -352,4 +356,9 @@ tr:hover{
   color:white;
   background-color: $background-color;
   border:0;
+}
+.modal-header, .modal-footer {
+  border-bottom: none !important;
+  border-top: none !important;
+  border-radius: 0 !important;
 }

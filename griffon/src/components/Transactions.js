@@ -30,15 +30,15 @@ export default class Transactions extends React.Component {
 
     return (
     <div>
-    <Table >
+    <table className="tabld" >
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Destination Address</th>
-          <th>Origin Address</th>
-          <th>Time</th>
-          <th>Amount</th>
-          <th>Type</th>
+          <th className='header' >ID</th>
+          <th className='header' >DESTINATION ADDRESS</th>
+          <th className='header' >ORIGIN ADDRESS</th>
+          <th className='header' >TIME</th>
+          <th className='header' >AMOUNT</th>
+          <th className='header' >TYPE</th>
         </tr>
       </thead>
       <tbody>
@@ -53,12 +53,12 @@ export default class Transactions extends React.Component {
             <td>{this.state.records[item].originAddress}</td>
             <td>{this.state.records[item].time}</td>
             <td>{this.state.records[item].transactionAmount}</td>
-            <td style={(type === "SEND") ? {color:'#ffca28'} : {color: '#9ccc65'}
+            <td style={(type === "SEND") ? {color:'#f04747'} : {color: '#43b581'}
             }
             >{this.state.records[item].type}</td>
         </tr>)})}
       </tbody>
-    </Table>
+    </table>
     </div>
     )
   }

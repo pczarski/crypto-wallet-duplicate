@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/coin.css';
 
 // used to render headers
-const headers = ["search...", "name", "balance", "address", "price"];
+const headers = [ "name", "balance", "address", "price"];
 
 export default class Coins extends Component
 {
@@ -28,8 +28,9 @@ export default class Coins extends Component
         return this.props.coins.map((coin) => {
             return (
                 <tr key = {coin.code} onClick={() => this.props.coinClick(coin.code)}>
-                    <th scope ="row"><img src={coin.icon} alt={coin.name}/></th>
-                    <td>{coin.name}</td>
+                    <td>
+                        <img style={{paddingRight: '20px'}} id="" src={coin.icon} alt={coin.name}/>{coin.name}
+                    </td>
                     <td>{coin.balance} {coin.code}</td>
                     <td>{coin.currentPublicKey}</td>
                     <td>{coin.price}</td>

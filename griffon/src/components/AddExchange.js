@@ -83,7 +83,7 @@ export default class AddExchange extends React.Component {
         
       <h1>Add Exchange</h1>
         <Form onSubmit={this.handleSubmit}>
-          <Select className="react-select-container" classNamePrefix="react-select"  
+          <Select className="react-select-container" id='addex'classNamePrefix="react-select"  
               options={this.state.exchanges}
               onChange={select} Value={this.state.name} styles={selectStyles}/>
             <Label for="address">Exchange Address</Label>
