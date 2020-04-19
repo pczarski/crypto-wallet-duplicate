@@ -37,6 +37,7 @@ html {
       width: 100%;
     }
   }
+
 }
 .react-select__menu {
   color: black;
@@ -158,6 +159,60 @@ input{
   background-color: #464B51;
 }
 
+//settings page
+#form1{
+  margin-top: 1em;
+  background:#242424;
+  color:#adadad;
+}
+#addExchange{
+  margin-top: 1em;
+}
+.password{
+  margin-top: 1em;
+
+}
+#inp{
+  padding: 0px 10px;
+  height: 3.5vh;
+  font-family: 'Open Sans', sans-serif;
+  border: 0;
+  transition: all 250ms ease-in-out;
+}
+
+.rules {
+  float: left;
+  display:inline-grid;
+}
+#pword{
+  margin: auto;
+  margin-top: 1em;
+  width:40%
+}
+#phrase{
+  margin: auto;
+  margin-top: 1em;
+  width:40%;
+
+}
+#help{
+  margin: auto;
+  margin-top: 1em;
+  width:60%;
+  height: 100%;
+  font-size: 1.5em;
+  text-align: left;
+}
+
+#brand{
+    color: #adadad;
+    font-size: 2em;
+}
+#Guidelines{
+  text-align: center;
+}
+// end of settings css
+
 .iconPadding {
     margin-left: 5px;
 }
@@ -169,8 +224,6 @@ input{
 .background {
   text-decoration: none;
 }
-
-
 table{
   background-color:  #32353b;
   text-align: left;
