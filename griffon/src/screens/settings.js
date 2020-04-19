@@ -6,6 +6,7 @@ import AddEx from '../components/AddExchange';
 
 import Keys from '../screens/keys';
 import Help from '../components/Help';
+import MenuButton from "../components/common/menuButton";
 
 import '../styles/nav.scss';
 import '../styles/App.scss';
@@ -33,19 +34,25 @@ const initialState ={
   currentError:null,
   newError:null,
   confirmError:null,
-  selected: null,
+  selected: "password",
   isError: false, // used for conditional rendering of the feedback message
+  mainComponent:null,
+  component:null,
+
 };
 
 export default class Settings extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state=initialState;
     this.select = this.select.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.Password = this.Password.bind(this);
+
+
   }
   handleChange(event) {
 
@@ -146,47 +153,37 @@ export default class Settings extends React.Component {
     );
   }
 
+
+  // ALL USED FOR MENUBUTTON COMPONENT
+  selectPass = (event) => {
+    this.setState({selected:"password"})
+
+  };
+  selectRec = (event) => {
+    this.setState({selected:"recovery"})
+
+  };
+  selectKeys = (event) => {
+    this.setState({selected:"publickeys"})
+
+  };selectAdd = (event) => {
+    this.setState({selected:"addex"})
+
+  };selectHelp = (event) => {
+    this.setState({selected:"help"})
+
+  };
+
+
   render () {
 
-    const Topbar = () => (
-        <Navbar color="dark" dark expand="md">
-          <NavbarBrand id="brand">Settings</NavbarBrand>
-          <Nav className="mr-auto" navbar>
-            <NavItem  >
-              <NavLink  href="# " onClick={this.select} name="password">
-                Password
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="# "  onClick={this.select} name="publickeys">
-                Keys
-              </NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink href="# " onClick={this.select} name="recovery">
-                Recovery Phrase
-              </NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink href="# " onClick={this.select} name="addex">
-                Add Exchange
-              </NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink    href="# " onClick={this.select} name="help">
-                Help
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-    );
+    var component;
 
-    let component;
     if (this.state.selected === "publickeys") {
       component = <Keys coin={this.props.coin}
-                        coins={this.props.coins}
-                        handleCoinClick={this.props.handleCoinClick}
-                        />;
+      coins={this.props.coins}
+      handleCoinClick={this.props.handleCoinClick}
+      />;
     } else if (this.state.selected === "recovery") {
       component = <RecoveryPhrase/>;
     }
@@ -196,15 +193,53 @@ export default class Settings extends React.Component {
       component = <AddEx />;
     } else {
       component = this.Password();
+
     }
+
     return (
-        <div className="wrapper">
-          <Navig/>
-          <div className="cont">
-            <Topbar/>
-            {component}
-          </div>
-        </div>
+      <div className="wrapper">
+      <Navig/>
+      <div className="cont">
+      <div style={{display: 'flex', 'paddingTop':'32px',}}>
+      <MenuButton
+      text={'Change Password'}
+      name="password"
+      active={(this.state.selected === "password") ? "password": null}
+      onClick={this.selectPass}
+      />
+      <MenuButton
+      text={'Keys'}
+      name="publickeys"
+      active={(this.state.selected === "publickeys") ? "publickeys": null}
+      onClick={this.selectKeys}
+      />
+      <MenuButton
+      text={'Recovery Phrase'}
+      name="recovery"
+      active={(this.state.selected === "recovery") ? "recovery": null}
+      onClick={this.selectRec}
+      />
+      <MenuButton
+      text={'Add Exchange'}
+      name="addex"
+      active={(this.state.selected === "addex") ? "addex": null}
+      onClick={this.selectAdd}
+      />
+      <MenuButton
+      text={'Help'}
+      name="help"
+      active={(this.state.selected === "help") ? "help": null}
+      onClick={this.selectHelp}
+      />
+
+
+      </div>
+      <div className='justify-content-center cont' style={{'paddingTop':'32px',}}>
+      {component}
+
+      </div>
+      </div>
+      </div>
     );
   }
 }
