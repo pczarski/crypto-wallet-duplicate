@@ -1,0 +1,37 @@
+
+.expand{
+  opacity:1
+}
+.collapse{
+  visibility: collapse
+}
+
+.Dropdowns{
+   display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+h5{color:grey}
+
+.tableInput{
+  display:inline-flex;
+  vertical-align: middle;
+  float:left;
+  margin: 5px 10px 5px 0;
+}
+
+#cancelBtn{
+  float:right;
+  margin-left: auto;
+}
+
+.table{
+  color: #adadad;
+   border: none;
+}

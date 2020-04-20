@@ -2,6 +2,7 @@ package g37.cryapi.exchange;
 // JUST A MARKER TO SEE CHANGES
 import g37.cryapi.common.CryptoCurrency;
 //import org.springframework.http.ResponseEntity;
+import g37.cryapi.lib.KeyGenerator;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
@@ -11,13 +12,13 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.coinbase.com/v2/prices/";
 
-    public CurrencyInCoinbase(CryptoCurrency name) {
-        super(name);
+    public CurrencyInCoinbase(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     @Override
     public String getCurrentPublicKey() {
-        return this.getName().getName() + "_TEST_KEY_XX";
+        return KeyGenerator.generateKey(16).toString()+ "_"+"Coinbase";
     }
 
     @Override
@@ -33,6 +34,10 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
     // JUST A MARKER TO SEE CHANGES
     @Override
     public void updateMarketPrice() {
+        if(this.getName() == CryptoCurrency.USDT) {
+            this.setMarketPrice(1.01);
+            return;
+        }
         try {
             RestTemplate restTemplate = this.getRestTemplate();
 //            ResponseEntity<String> response = restTemplate.getForEntity(PRICE_URL_BASE + this.getName() + "-USD/spot", String.class);

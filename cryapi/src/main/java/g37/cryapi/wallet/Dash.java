@@ -7,9 +7,11 @@ public class Dash extends CurrencyInWallet {
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
-    public Dash() {
-        super(privLen, pubLen, CryptoCurrency.DASH);
-        this.addTestReceive(9, 10);
+    public Dash(boolean isToSet) {
+        super(privLen, pubLen, CryptoCurrency.DASH, isToSet);
+        if(this.isToSet()) {
+            this.addTestReceive(12, 30);
+        }
     }
 
     @Override

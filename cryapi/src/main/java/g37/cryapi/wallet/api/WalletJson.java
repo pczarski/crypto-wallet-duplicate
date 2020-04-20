@@ -1,6 +1,8 @@
 package g37.cryapi.wallet.api;
 
-public class WalletJson {
+import java.io.Serializable;
+
+public class WalletJson implements Serializable {
     private final String seedPhrase;
 
     public WalletJson(String seedPhrase) {

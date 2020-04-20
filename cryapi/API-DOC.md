@@ -29,6 +29,11 @@
 
 
 ## Getting currency:
+
+### Get all currency:
+    accessed through: http://localhost:8080/all-coins
+##### Reply: array of currencies in wallet
+
 #### successful:
 ##### Example Call:
     http://localhost:8080/currency?name=BTC
@@ -42,8 +47,22 @@
     http://localhost:8080/currency?name={any unsoppurted name}
 ##### Example reply:
     {"name":"Invalid name","price":-1.0,"balance":-1.0,"keyPairs":null}
+    
+## get value in
+    http://localhost:8080/price-in?base=BTC&in=ETH
+    
+    respnse
+    
+    {"response":"BTC in ETH","value":43.48870962813579}
 
-
+## get total wallet value in
+##### if not specified, in=BTC
+    http://localhost:8080/total-balance?in=USDT
+    
+    response:
+    
+    {"response":"Total balance in USDT","value":1243210.8439695442}
+    
 ## Sending coins:
 #### successful:
 ##### Example Call:
@@ -90,7 +109,7 @@
 #### call
     http://localhost:8080/exchange-currency?exchange=Binance&currency=BTC
 #### response: 
-    {"name":"Bitcoin","exchangeName":"Binance","publicAddress":"Bitcoin_TEST_KEY_XX","balance":100.0,"marketValue":0.0}
+    {"name":"Bitcoin","code":"BTC","exchangeName":"Binance","currentPublicKey":"Bitcoin_TEST_KEY_XX","balance":100.0,"price":6779.76}
 
 ## Withdraw from an exchange to the wallet
 
@@ -98,6 +117,11 @@
     http://localhost:8080/withdraw?exchange=Binance&currency=BTC&amount=2.5
 #### response: 
     {"response":"success","id":1}
+    
+### get all currency from exchange
+    http://localhost:8080/exchange-currencies?exchange=Binance
+    
+    -returns an array of currencies in exchange
 
 ## Deposit from the wallet to an exchange
 
@@ -108,6 +132,22 @@
     {"response":"success","id":1}
 
 ####
+
+## Get exchange value in another currency
+
+#### call
+    http://localhost:8080/exchange-price-in?exchange=Binance&base=BTC&in=ETH
+    
+    resonpnse:
+    
+    {"response":"BTC in ETH","value":43.5464204842362}
+    
+## Get total exchange balance
+    http://localhost:8080/exchange-total-balance?exchange=Binance&in=BTC
+    
+    response:
+    
+    {"response":"Binance total balance in BTC","value":104.01884516446508}
 
 ## Make Orders
 
@@ -131,6 +171,10 @@
     
 ## get order history:
 #### all history:
+    http://localhost:8080/all-orders
+    
+    response:
+    
     [{"id":1,"exchange":"Binance","currency1":"BTC","currency2":"DASH","initialAmount":10.0,"amountComplete":10.0,"unitPrice":10.0,"type":"Buy","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:14 BST 2020"},{"id":2,"exchange":"Binance","currency1":"LTC","currency2":"ETH","initialAmount":20.0,"amountComplete":20.0,"unitPrice":3.2,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:22 BST 2020"},{"id":4,"exchange":"Coinbase","currency1":"DASH","currency2":"ETH","initialAmount":15.0,"amountComplete":15.0,"unitPrice":0.4366547219974569,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:46:30 BST 2020"},{"id":5,"exchange":"Coinbase","currency1":"DASH","currency2":"ETH","initialAmount":4.0,"amountComplete":4.0,"unitPrice":0.43705889158856875,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:46:36 BST 2020"}]
    
 #### by exchange:
@@ -138,3 +182,8 @@
     
 ##### ex. reply:
     [{"id":1,"exchange":"Binance","currency1":"BTC","currency2":"DASH","initialAmount":10.0,"amountComplete":10.0,"unitPrice":10.0,"type":"Buy","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:14 BST 2020"},{"id":2,"exchange":"Binance","currency1":"LTC","currency2":"ETH","initialAmount":20.0,"amountComplete":20.0,"unitPrice":3.2,"type":"Sell","status":"COMPLETE","percentComplete":100.0,"date":"Wed Apr 08 22:45:22 BST 2020"}]
+    
+## Cancel Order
+    http://localhost:8080/cancel?exchange=Binance&id=1
+    
+    return: the order that was cancelled

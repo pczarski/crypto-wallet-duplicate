@@ -2,7 +2,9 @@ import React from 'react';
 import '../styles/App.scss';
 import {getCurr} from '../lib/backendHandler'
 import QRCode from 'qrcode';
-import {  Button } from "reactstrap";
+
+import {Card, CardBody} from 'reactstrap';
+import {cardStyles} from "../styles/selectStyles";
 
 export default class Receive extends React.Component {
   
@@ -34,9 +36,15 @@ export default class Receive extends React.Component {
 
     return (
     <div>
-      <h2>Receive {this.props.curr}</h2>
-      <h2>{this.state.key}</h2>
-      <canvas id="canvas" width="400" height="400" />
+      
+      <Card body className="text-center" style={cardStyles}>
+        <h2>Receive {this.props.curr}</h2>
+        
+        <CardBody>
+        <canvas id="canvas" width="400" height="400" />
+        <h2>{this.state.key}</h2>
+        </CardBody>
+      </Card>
     </div>
     )
   }

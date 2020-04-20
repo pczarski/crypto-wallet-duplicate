@@ -7,9 +7,11 @@ public class Litecoin extends CurrencyInWallet {
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
-    public Litecoin() {
-        super(privLen, pubLen, CryptoCurrency.LTC);
-        this.addTestReceive(3, 20);
+    public Litecoin(boolean isToSet) {
+        super(privLen, pubLen, CryptoCurrency.LTC, isToSet);
+        if(isToSet()){
+            this.addTestReceive(3, 500);
+        }
     }
 
     @Override

@@ -1,0 +1,20 @@
+.btn.btn-secondary{
+    background-color:#464B51;
+    border: 50px,solid,white;
+}
+
+/* .nav-item.btn.btn-secondary{
+    
+}
+ */
+.exAcc{
+    width:33%;
+}
+
+#exchange {
+    float:left;
+}
+
+.react-select-ex{
+    width:33%;
+}

@@ -6,10 +6,11 @@ import org.springframework.web.client.RestTemplate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-public abstract class CurrencyInWallet extends Currency {
+public abstract class CurrencyInWallet extends Currency implements Serializable {
 
 	private static final String PRICE_BASE_URL = "https://api.coinbase.com/v2/prices/";
 
@@ -27,20 +28,32 @@ public abstract class CurrencyInWallet extends Currency {
 
 	private Double price;
 
-	// TODO: temporary variable for prototype
-	protected int isSet;
+	// for prototype testing
+	private boolean isToSet;
 
-	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name) {
+	public CurrencyInWallet(int privLen, int pubLen, CryptoCurrency name, boolean isToSet) {
 		super(name);
 		this.privLen = privLen;
 		this.pubLen = pubLen;
 		this.keyPairs = new ArrayList<>();
-		this.generateKeys();
 		this.restTemplate = new RestTemplate();
 		this.updatePrice();
+		this.isToSet = isToSet;
+		if(isToSet){
+			this.generateKeys();
+		}
+	}
 
-		//todo: temporary
-		this.isSet = 0;
+	public void setKeyPairs(List<KeyPair> keyPairs){
+		this.keyPairs.addAll(keyPairs);
+	}
+
+	public boolean isToSet() {
+		return isToSet;
+	}
+
+	public void setIsToSet(boolean toSet) {
+		isToSet = toSet;
 	}
 
 	private void generateKeys(){
@@ -145,6 +158,14 @@ public abstract class CurrencyInWallet extends Currency {
 				));
 	}
 
+	public KeyPair[] keyPairsToArray(){
+		KeyPair[] out = new KeyPair[this.keyPairs.size()];
+		for(int i = 0; i < out.length; i++){
+			out[i] = this.keyPairs.get(i);
+		}
+		return out;
+	}
+
 
 	//todo: temporary function that adds random transactions
 	protected void addTestReceive(int nAddresses, double factor) {
@@ -161,6 +182,10 @@ public abstract class CurrencyInWallet extends Currency {
 		KeyPair pair = this.keyPairs.get(0);
 		pair.setAmount(pair.getAmount() + amount);
 		this.addReceiveRecord(pair, origin, amount);
+	}
+
+	public double getPriceIn(CurrencyInWallet currencyIn) {
+		return this.getPrice() / currencyIn.getPrice();
 	}
 
 }// JUST A MARKER TO SEE CHANGES

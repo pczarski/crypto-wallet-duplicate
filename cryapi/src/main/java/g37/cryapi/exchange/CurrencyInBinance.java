@@ -1,6 +1,7 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.lib.KeyGenerator;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
@@ -13,8 +14,8 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     private static final String PRICE_URL_BASE = "https://api.binance.com/api/v3/ticker/price?symbol=";
 
-    public CurrencyInBinance(CryptoCurrency name) {
-        super(name);
+    public CurrencyInBinance(CryptoCurrency name, ExchangeAccess exchangeAccess) {
+        super(name, exchangeAccess);
     }
 
     private void SetupSymbolList() {
@@ -23,8 +24,8 @@ public class CurrencyInBinance extends CurrencyInExchange {
     }
 
     @Override
-    public String getCurrentPublicKey() {
-        return this.getName().getName() + "_TEST_KEY_XX";
+    public String getCurrentPublicKey() { ;
+        return KeyGenerator.generateKey(16).toString() + "_"+"Binance";
     }
 
     @Override
@@ -39,11 +40,15 @@ public class CurrencyInBinance extends CurrencyInExchange {
 
     @Override
     public void updateMarketPrice() {
+        if(this.getName() == CryptoCurrency.USDT) {
+            this.setMarketPrice(1.01);
+            return;
+        }
         try {
             RestTemplate restTemplate = this.getRestTemplate();
             String url = PRICE_URL_BASE + this.getName()+"USDT";
             MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
-            System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
+            //System.out.println(marketPrice.getPrice() + marketPrice.getSymbol());
             this.setMarketPrice(marketPrice.getPrice());
 
         } catch (Exception e) {
@@ -61,25 +66,34 @@ public class CurrencyInBinance extends CurrencyInExchange {
         if(this.getName().getName().equals(currencyIn.getName())) {
             return 1.0;
         }
-        RestTemplate restTemplate = this.getRestTemplate();
-        String url;
-
-        if (this.getName() == CryptoCurrency.BTC) {
-            url = PRICE_URL_BASE + currencyIn.toString() + "BTC";
-            MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
-            return 1.0 / marketPrice.getPrice();
-        } else {
-            url = PRICE_URL_BASE + this.getName() + "BTC";
-            System.out.println(url);
-            MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
-            if (currencyIn == CryptoCurrency.BTC) {
-                return marketPrice.getPrice();
-            } else {
-                url = PRICE_URL_BASE + currencyIn.toString() + "BTC";
-                MarketPriceBinance currencyInMarketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
-                return marketPrice.getPrice() / currencyInMarketPrice.getPrice();
-            }
+        if (currencyIn == CryptoCurrency.USDT) {
+            return this.getMarketPrice();
         }
+        CurrencyInExchange inCurrency = ExchangeHandler.getInstance().getExchange(ExchangeName.Binance).getCurrencyInExchange(currencyIn);
+        inCurrency.updateMarketPrice();
+        double inCurrencyPrice = inCurrency.getMarketPrice();
+        this.updateMarketPrice();
+        return this.getMarketPrice() / inCurrencyPrice;
+
+//        RestTemplate restTemplate = this.getRestTemplate();
+//        String url;
+//
+//        if (this.getName() == CryptoCurrency.BTC) {
+//            url = PRICE_URL_BASE + currencyIn.toString() + "BTC";
+//            MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
+//            return 1.0 / marketPrice.getPrice();
+//        } else {
+//            url = PRICE_URL_BASE + this.getName() + "BTC";
+//            System.out.println(url);
+//            MarketPriceBinance marketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
+//            if (currencyIn == CryptoCurrency.BTC) {
+//                return marketPrice.getPrice();
+//            } else {
+//                url = PRICE_URL_BASE + currencyIn.toString() + "BTC";
+//                MarketPriceBinance currencyInMarketPrice = restTemplate.getForObject(url, MarketPriceBinance.class);
+//                return marketPrice.getPrice() / currencyInMarketPrice.getPrice();
+//            }
+//        }
     }
 }
 // https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT

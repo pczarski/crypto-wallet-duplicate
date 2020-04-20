@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/index.css';
+import './assets/abel-regular.ttf'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -2,11 +2,13 @@ package g37.cryapi.common;
 //test change
 public enum CryptoCurrency {
 	BTC("Bitcoin"),
-	DASH("Dash"),
-	DOGE("Doge"),
 	ETH("Ethereun"),
+	DASH("Dash"),
 	LTC("Litecoin"),
-	USDT("Thether");
+	USDT("Thether"),
+	BCH("Bitcoin Cash"),
+	ETC("Ethereum Classic"),
+	XRP("Ripple");
 
 	private final String name;
 
@@ -18,3 +20,10 @@ public enum CryptoCurrency {
 		this.name = name;
 	}
 }
+
+//	ZRX("0x"),
+//	ZEC("Zcash"),
+//	BAT("Basic Attention Token"),
+//	REP("Augur"),
+//
+//	KNC("Kyber Network");

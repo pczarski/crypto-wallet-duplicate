@@ -1,14 +1,12 @@
-const electron = require('electron');   
+const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-// const keytar = require('keytar')
 const path = require('path');
 const url = require('url');
 
-const {ipcMain} = electron;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,12 +15,12 @@ let mainWindow;
 function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 1366, 
+        width: 1450,
         height: 768,
         name: "griffon"
     });
 
-
+    // mainWindow.setMenu(null);
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
             pathname: path.join(__dirname, '/../build/index.html'),
@@ -31,9 +29,9 @@ function createWindow() {
         });
     mainWindow.loadURL(startUrl);
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
- 
+
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
         // Dereference the window object, usually you would store windows
@@ -42,24 +40,6 @@ function createWindow() {
         mainWindow = null
     })
 }
-
-ipcMain.on('asynchronous-message', (event, arg) => {
-    console.log(arg) // prints "ping"
-    mainWindow.webContents.send('asynchronous-reply', 'pong')
-  })
-  
-//   ipcMain.on('synchronous-message', (event, arg) => {
-//     console.log(arg) // prints "ping"
-//     event.returnValue = 'pong'
-//   })
-
-// ipcMain.on('get-password', (event, user) => {
-//     event.returnValue = keytar.getPassword('ServiceName', user);
-// });
-
-// ipcMain.on('set-password', (event, user, pass) => {
-//     event.returnValue = keytar.replacePassword('ServiceName', user, pass);
-// });
 
 
 // This method will be called when Electron has finished
