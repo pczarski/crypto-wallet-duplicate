@@ -2,6 +2,7 @@ package g37.cryapi.exchange;
 // JUST A MARKER TO SEE CHANGES
 import g37.cryapi.common.CryptoCurrency;
 //import org.springframework.http.ResponseEntity;
+import g37.cryapi.lib.KeyGenerator;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
@@ -17,7 +18,7 @@ public class CurrencyInCoinbase extends CurrencyInExchange {
 
     @Override
     public String getCurrentPublicKey() {
-        return this.getName().getName() + "_TEST_KEY_"+"Coinbase";
+        return KeyGenerator.generateKey(16).toString()+ "_"+"Coinbase";
     }
 
     @Override

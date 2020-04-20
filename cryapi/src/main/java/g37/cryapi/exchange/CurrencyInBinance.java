@@ -1,6 +1,7 @@
 package g37.cryapi.exchange;
 
 import g37.cryapi.common.CryptoCurrency;
+import g37.cryapi.lib.KeyGenerator;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
@@ -23,8 +24,8 @@ public class CurrencyInBinance extends CurrencyInExchange {
     }
 
     @Override
-    public String getCurrentPublicKey() {
-        return this.getName().getName() + "_TEST_KEY_"+"Binance";
+    public String getCurrentPublicKey() { ;
+        return KeyGenerator.generateKey(16).toString() + "_"+"Binance";
     }
 
     @Override
