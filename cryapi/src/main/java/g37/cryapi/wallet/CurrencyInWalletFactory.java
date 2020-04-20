@@ -26,7 +26,16 @@ public class CurrencyInWalletFactory {
                 return new EthereumClassic(isToSet);
             }  case XRP:{
                 return new Ripple(isToSet);
-            }
+            } case ATOM:
+                return new Cosmos(isToSet);
+            case EOS:
+                return new Eos(isToSet);
+            case LINK:
+                return new Chainlink(isToSet);
+            case ZEC:
+                return new Zcash(isToSet);
+            case ZRX:
+                return new Ox(isToSet);
             default:{
                 throw new IllegalArgumentException();
             }

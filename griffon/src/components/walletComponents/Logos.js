@@ -9,10 +9,13 @@ import bitcoinCashLogo from "../../../node_modules/cryptocurrency-icons/svg/colo
 import etcLogo from "../../../node_modules/cryptocurrency-icons/svg/color/etc.svg";
 import repLogo from "../../../node_modules/cryptocurrency-icons/svg/color/rep.svg";
 import xrpLogo from "../../../node_modules/cryptocurrency-icons/svg/color/xrp.svg";
-import Ox from "../../../node_modules/cryptocurrency-icons/svg/color/0xbtc.svg";
+import Ox from "../../../node_modules/cryptocurrency-icons/svg/color/zrx.svg";
 import ZcashLogo from "../../../node_modules/cryptocurrency-icons/svg/color/zec.svg";
 import daiLogo from "../../../node_modules/cryptocurrency-icons/svg/color/dai.svg";
 import kncLogo from "../../../node_modules/cryptocurrency-icons/svg/color/knc.svg";
+import atomLogo from "../../../node_modules/cryptocurrency-icons/svg/color/atom.svg";
+import EOS from "../../../node_modules/cryptocurrency-icons/svg/color/eos.svg";
+import LINK from "../../../node_modules/cryptocurrency-icons/svg/color/link.svg";
 
 
 //contains the logos for each coin as an array. If you wish to access it from another file then just use "{Logos[i].logo}" component where i is the index of the logo you want to refer to
@@ -56,14 +59,20 @@ export function getIcon(coin_symbol) {
             return repLogo;
         case "XRP":
             return xrpLogo;
-        case "Ox":
+        case "ZRX":
             return Ox;
-        case "Zcash":
+        case "ZEC":
             return ZcashLogo;
         case "DAI":
             return daiLogo;
         case "KNC":
             return kncLogo;
+        case "ATOM":
+            return atomLogo;
+        case "EOS":
+            return EOS;
+        case "LINK":
+            return LINK;
         default:
             return null;
     }

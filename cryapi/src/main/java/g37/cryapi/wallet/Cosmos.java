@@ -2,14 +2,14 @@ package g37.cryapi.wallet;
 
 import g37.cryapi.common.CryptoCurrency;
 
-public class Zcash extends CurrencyInWallet {
+public class Cosmos extends CurrencyInWallet {
     private static final int privLen = 24;
     private static final int pubLen = 33;
 
-    public Zcash(boolean isToSet) {
-        super(privLen, pubLen, CryptoCurrency.ZEC, isToSet);
+    public Cosmos(boolean isToSet) {
+        super(privLen, pubLen, CryptoCurrency.ATOM, isToSet);
         if(this.isToSet()) {
-            this.addTestReceive(8, 4);
+            this.addTestReceive(16, 2);
         }
     }
 

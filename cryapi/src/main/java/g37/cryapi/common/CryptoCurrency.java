@@ -7,8 +7,13 @@ public enum CryptoCurrency {
 	LTC("Litecoin"),
 	USDT("Thether"),
 	BCH("Bitcoin Cash"),
+	EOS("EOS"),
 	ETC("Ethereum Classic"),
-	XRP("Ripple");
+	ATOM("Cosmos"),
+	XRP("Ripple"),
+	ZEC("Zcash"),
+	ZRX("0x"),
+	LINK("Chainlink");
 
 	private final String name;
 
